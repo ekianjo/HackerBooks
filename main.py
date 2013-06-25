@@ -2,6 +2,7 @@
 #first: window with tree like list of all books and directory to download the books to.  
 #clicking on book name shows info about book + cover with 2 buttons: download / back to list
 #download triggers wget event and launches zenity script to show progress. 
+#after download the book should appear in a different way in the list to be launched directly from the app for reading.
 
 
 #!/usr/bin/python
