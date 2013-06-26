@@ -356,10 +356,10 @@ class InfoBooks(gtk.Window):
             if books[0]==mainwindow.caca: return books[5]
 
     def downloadbook(self,widget):
-        if os.getcwd().split('\\')[-1]!="BOOKS":
+        #if os.getcwd().split('\\')[-1]!="BOOKS":
         #if not os.path.exists("BOOKS"):
-            os.makedirs("BOOKS")
-            os.chdir("BOOKS")
+        #    os.makedirs("BOOKS")
+        #os.chdir("BOOKS")
             
         #try:
         #    os.mkdir("BOOKS")
@@ -385,7 +385,9 @@ class HackerBooks(gtk.Window):
     def __init__(self):
         super(HackerBooks, self).__init__()
         
-        self.set_size_request(450, 250)
+        self.create_directory()
+
+        self.set_size_request(600, 400)
         self.set_position(gtk.WIN_POS_CENTER)
         
         self.connect("destroy", gtk.main_quit)
@@ -415,6 +417,13 @@ class HackerBooks(gtk.Window):
 
         self.add(vbox)
         self.show_all()
+
+    def create_directory(self):
+    	if os.path.isdir("BOOKS")==False:
+    		os.makedirs("BOOKS")
+
+    	os.chdir("BOOKS")
+
 
     def create_model(self):
         store = gtk.ListStore(str, str, str, str)
