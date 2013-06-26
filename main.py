@@ -126,33 +126,31 @@ class InfoBooks(gtk.Window):
     def __init__(self):
         super(InfoBooks,self).__init__()
 
+        #set info window size attributes
         self.set_size_request(600,400)
         self.set_position(gtk.WIN_POS_CENTER)
         self.set_border_width(8)
-
-        self.connect("destroy",self.close_window)
         self.set_title("Book Information")
 
+        #connect the close window function
+        self.connect("destroy",self.close_window)
 
-
+        #layout of the contents
         table = gtk.Table(8, 4, False)
         table.set_col_spacings(10)
-
-        title = gtk.Label("Description")
-
+        
+        #title of the text field
+        title = gtk.Label("Book Description")
         halign = gtk.Alignment(0, 0, 0, 0)
         halign.add(title)
         
         table.attach(halign, 0, 1, 0, 1, gtk.FILL, gtk.FILL, 0, 0);
 
+        #get information to put into the text field. Textbuffer is the object that goes in textview field.
         textbuffer = gtk.TextBuffer()
-        
-
-        #self.book=self.findbookinfo()
-        #print self.book
-
         textbuffer.set_text(self.findbookinfo())
-
+        
+        #set properties for the textview object.
         wins = gtk.TextView(buffer=textbuffer)
         wins.set_wrap_mode(gtk.WRAP_WORD)
         wins.set_editable(False)
@@ -160,20 +158,25 @@ class InfoBooks(gtk.Window):
         wins.set_cursor_visible(False)
         table.attach(wins, 0, 2, 1, 3, gtk.FILL | gtk.EXPAND, gtk.FILL | gtk.EXPAND, 1, 1)
 
+        #Download button attributes and connection
         download = gtk.Button("Download")
         download.set_size_request(50, 30)
         table.attach(download, 3, 4, 1, 2, gtk.FILL, gtk.SHRINK, 1, 1)
         download.connect_object("clicked", self.downloadbook, None)
 
+        #Close button attributes and connection to signals
         valign = gtk.Alignment(0, 0, 0, 0)
         close = gtk.Button("Close")
         close.set_size_request(70, 30)
-
         valign.add(close)
         table.set_row_spacing(1, 3)
         table.attach(valign, 3, 4, 2, 3, gtk.FILL, gtk.FILL | gtk.EXPAND, 1, 1)
         close.connect_object("clicked", self.close_window, None)
-
+        
+        
+        #HELP button and OK button to be replaced by "read" and "delete"
+        #TODO: CREATE A DEF FOR READ AND A DEF FOR DELETE
+        #Help button attributes - missing connection right now
         halign2 = gtk.Alignment(0, 1, 0, 0)
         help = gtk.Button("Help")
         help.set_size_request(70, 30)
@@ -181,43 +184,51 @@ class InfoBooks(gtk.Window):
         table.set_row_spacing(3, 6)
         table.attach(halign2, 0, 1, 4, 5, gtk.FILL, gtk.FILL, 0, 0)
         
+        #OK button attributes - missing connection right now
         ok = gtk.Button("OK")
         ok.set_size_request(70, 30)
         table.attach(ok, 3, 4, 4, 5, gtk.FILL, gtk.FILL, 0, 0);
-                          
+        
+        #add the finalized table layout to the window
         self.add(table)
 
+        #display all
         self.show_all()
 
     def close_window(self, widget):
         self.destroy()
 
-
     def findbookinfo(self):
         for books in hackerbooks:
+            #returns the description of the book
             if books[0]==mainwindow.caca: return books[5]
 
     def downloadbook(self,widget):
-        
         if os.getcwd().split('\\')[-1]!="BOOKS":
-        
         #if not os.path.exists("BOOKS"):
             os.makedirs("BOOKS")
             os.chdir("BOOKS")
-        
-        
+            
         #try:
         #    os.mkdir("BOOKS")
         #except:
         #    os.chdir("BOOKS")
         
         for books in hackerbooks:
+            #select the right book that is to download
             if books[0]==mainwindow.caca: 
                 print books[4]
-                urllib.urlretrieve(books[4],books[0]+".pdf")
+                try:
+                    #downloads the book and renames it to the full name and adds pdf extension
+                    #TODO: ADD PROGRESS BAR
+                    #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
+                    urllib.urlretrieve(books[4],books[0]+".pdf")
+                    print "Download finished"
+                    #TODO: CONFIRM THE FILE IS DOWNLOADED AND CONFIRM SIZE.
+                    #TODO: CHANGE PROPERTIES SO THAT ONE CAN LAUNCH THE PDF TO READ OR THE HTML FILE, AND MAKE THE DOWNLOAD BUTTON GREY
+                except:
+                    print "Download did not work"
 
-
-        print "download finished"
 
     
 class HackerBooks(gtk.Window): 
@@ -229,10 +240,11 @@ class HackerBooks(gtk.Window):
         
         self.connect("destroy", gtk.main_quit)
         self.set_title("Hacker Books")
-        self.caca="yooo"
+        #self.caca="yooo"
 
         vbox = gtk.VBox(False, 8)
         
+        #sw is a scrolled window
         sw = gtk.ScrolledWindow()
         sw.set_shadow_type(gtk.SHADOW_ETCHED_IN)
         sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -266,21 +278,25 @@ class HackerBooks(gtk.Window):
 
     def create_columns(self, treeView):
     
+        #display Ttitle
         rendererText = gtk.CellRendererText()
         column = gtk.TreeViewColumn("Title", rendererText, text=0)
         column.set_sort_column_id(0)    
         treeView.append_column(column)
         
+        #display topic
         rendererText = gtk.CellRendererText()
-        column = gtk.TreeViewColumn("Language", rendererText, text=1)
+        column = gtk.TreeViewColumn("Subject", rendererText, text=1)
         column.set_sort_column_id(1)
         treeView.append_column(column)
 
+        #display author
         rendererText = gtk.CellRendererText()
         column = gtk.TreeViewColumn("Author", rendererText, text=2)
         column.set_sort_column_id(2)
         treeView.append_column(column)
 
+        #display format
         rendererText = gtk.CellRendererText()
         column = gtk.TreeViewColumn("Format", rendererText, text=3)
         column.set_sort_column_id(3)
@@ -290,10 +306,13 @@ class HackerBooks(gtk.Window):
     def on_activated(self, widget, row, col):
         
         model = widget.get_model()
-        text = model[row][0] + ", " + model[row][1] + ", " + model[row][2]
-        self.statusbar.push(0, text)
+        #text = model[row][0] + ", " + model[row][1] + ", " + model[row][2]
+        #self.statusbar.push(0, text)
+        
+        #stores the info about the book selected
         mainwindow.caca=model[row][0]
-        print mainwindow.caca
+        
+        #print mainwindow.caca
         InfoBooks()
 
 
