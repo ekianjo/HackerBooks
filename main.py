@@ -39,7 +39,7 @@ The Linux Command Line takes you from your very first terminal keystrokes to wri
 
 In addition to that practical knowledge, author William Shotts reveals the philosophy behind these tools and the rich heritage that your desktop Linux machine has inherited from Unix supercomputers of yore.
 '''        ),
-('Clever Algorithms','Metaheuristics','Jason Browlee','pdf','http://www.lulu.com/shop/jason-brownlee/clever-algorithms-nature-inspired-programming-recipes/ebook/product-17386095.html'),
+('Clever Algorithms','Metaheuristics','Jason Browlee','pdf','http://www.lulu.com/shop/jason-brownlee/clever-algorithms-nature-inspired-programming-recipes/ebook/product-17386095.html','to insert here'),
 ('Think Stats','Statistics','Allen B. Downey','pdf','http://greenteapress.com/thinkstats/thinkstats.pdf'),
 ("Street-Fighting Mathematics",'Problem Solving','Sanjoy Mahajan','pdf','https://mitpress.mit.edu/sites/default/files/titles/content/9780262514293_Creative_Commons_Edition.pdf','''
     In problem solving, as in street fighting, rules are for fools: do whatever works—don't just stand there! Yet we often fear an unjustified leap even though it may land us on a correct result. Traditional mathematics teaching is largely about solving exactly stated problems exactly, yet life often hands us partly defined problems needing only moderately accurate solutions. This engaging book is an antidote to the rigor mortis brought on by too much mathematical rigor, teaching us how to guess answers without needing a proof or an exact calculation.
@@ -282,7 +282,12 @@ class InfoBooks(gtk.Window):
         self.set_size_request(600,400)
         self.set_position(gtk.WIN_POS_CENTER)
         self.set_border_width(8)
-        self.set_title("Book Information")
+        self.set_title(mainwindow.caca+" : Book Information")
+
+        #check if book was already downloaded or not
+        if self.check_book_exists():
+        	print "book exists"
+
 
         #connect the close window function
         self.connect("destroy",self.close_window)
@@ -311,10 +316,11 @@ class InfoBooks(gtk.Window):
         table.attach(wins, 0, 2, 1, 3, gtk.FILL | gtk.EXPAND, gtk.FILL | gtk.EXPAND, 1, 1)
 
         #Download button attributes and connection
-        download = gtk.Button("Download")
-        download.set_size_request(50, 30)
-        table.attach(download, 3, 4, 1, 2, gtk.FILL, gtk.SHRINK, 1, 1)
-        download.connect_object("clicked", self.downloadbook, None)
+        if not self.check_book_exists():
+	        download = gtk.Button("Download")
+	        download.set_size_request(50, 30)
+	        table.attach(download, 3, 4, 1, 2, gtk.FILL, gtk.SHRINK, 1, 1)
+	        download.connect_object("clicked", self.downloadbook, None)
 
         #Close button attributes and connection to signals
         valign = gtk.Alignment(0, 0, 0, 0)
@@ -337,7 +343,7 @@ class InfoBooks(gtk.Window):
         table.attach(halign2, 0, 1, 4, 5, gtk.FILL, gtk.FILL, 0, 0)
         
         #OK button attributes - missing connection right now
-        ok = gtk.Button("OK")
+        ok = gtk.Button("Read")
         ok.set_size_request(70, 30)
         table.attach(ok, 3, 4, 4, 5, gtk.FILL, gtk.FILL, 0, 0);
         
@@ -351,9 +357,19 @@ class InfoBooks(gtk.Window):
         self.destroy()
 
     def findbookinfo(self):
-        for books in hackerbooks:
-            #returns the description of the book
-            if books[0]==mainwindow.caca: return books[5]
+        try:
+	        for books in hackerbooks:
+	            #returns the description of the book
+	            if books[0]==mainwindow.caca: return books[5]
+        except:
+        	return ""
+
+    def check_book_exists(self):
+    	bookname = mainwindow.caca+".pdf"
+    	if os.path.isfile(bookname):
+    		return True
+    	else:
+    		return False
 
     def downloadbook(self,widget):
         #if os.getcwd().split('\\')[-1]!="BOOKS":
