@@ -157,10 +157,18 @@ class InfoBooks(gtk.Window):
             if books[0]==mainwindow.caca: return books[5]
 
     def downloadbook(self,widget):
-        try:
-            os.mkdir("BOOKS")
-        except:
+        
+        if os.getcwd().split('\\')[-1]!="BOOKS":
+        
+        #if not os.path.exists("BOOKS"):
+            os.makedirs("BOOKS")
             os.chdir("BOOKS")
+        
+        
+        #try:
+        #    os.mkdir("BOOKS")
+        #except:
+        #    os.chdir("BOOKS")
         
         for books in hackerbooks:
             if books[0]==mainwindow.caca: 
