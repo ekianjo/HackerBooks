@@ -1,16 +1,23 @@
 #encoding: utf-8
-#overview
-#first: window with tree like list of all books and directory to download the books to.  
-#clicking on book name shows info about book + cover with 2 buttons: download / back to list
-#download triggers wget event and launches zenity script to show progress. 
-#after download the book should appear in a different way in the list to be launched directly from the app for reading.
-
-
 #!/usr/bin/python
+
+#TO DO FOR FIRST RELEASE
+#FIX BUTTONS (DELETE, READ and GREY OUT)
+#ADD BOOK LICENSE INFORMATION
+#MAKE 'ABOUT' BUTTON
+#ALLOW READING OF DOCUMENTS : PDF (EVINCE), 
+#DETECT ONLINE CONNECTION OR NOT BEFORE DOWNLOADING AND SEND WARNING
+
+#----- SECOND RELEASE
+#ALLOW READING OF HTML at least (reader tbc)
+#PROGRESS DOWNLOAD BAR
+#ADD MORE BOOKS
+#ALLOW USAGE OF XOURNAL TO OPEN PDFs
+#SEND STATS TO SERVER
+#ALLOW FAVORITES
 
 import gtk
 import urllib, os
-
 
 hackerbooks = [('Pro Git', 'Git', 'Scott Chacon','pdf','https://github.s3.amazonaws.com/media/progit.en.pdf',
 '''Git is the version control system developed by Linus Torvalds for Linux kernel development. 
@@ -114,12 +121,6 @@ The essay's central thesis is Raymond's proposition that "given enough eyeballs,
 More than 20 writers from the mobile community share their know-how, across more than 250 pages, in dealing with topics such as accessibility in mobile apps, LBS, mobile analytics, prototyping, cross-platform development, native development, mobile web and app marketing. This project was initiated in 2009 and we have since published a number of updated versions. As of today, we have distributed over 50,000 hardcopies. The 12th, and latest, edition was published in February 2013.''')
 
     ]
-
-
-
-
-
-
 
 
 class InfoBooks(gtk.Window):
@@ -228,8 +229,6 @@ class InfoBooks(gtk.Window):
                     #TODO: CHANGE PROPERTIES SO THAT ONE CAN LAUNCH THE PDF TO READ OR THE HTML FILE, AND MAKE THE DOWNLOAD BUTTON GREY
                 except:
                     print "Download did not work"
-
-
     
 class HackerBooks(gtk.Window): 
     def __init__(self):
@@ -266,7 +265,6 @@ class HackerBooks(gtk.Window):
         self.add(vbox)
         self.show_all()
 
-
     def create_model(self):
         store = gtk.ListStore(str, str, str, str)
 
@@ -274,7 +272,6 @@ class HackerBooks(gtk.Window):
             store.append([books[0], books[1], books[2],books[3]])
 
         return store
-
 
     def create_columns(self, treeView):
     
@@ -302,7 +299,6 @@ class HackerBooks(gtk.Window):
         column.set_sort_column_id(3)
         treeView.append_column(column)
 
-
     def on_activated(self, widget, row, col):
         
         model = widget.get_model()
@@ -314,8 +310,6 @@ class HackerBooks(gtk.Window):
         
         #print mainwindow.caca
         InfoBooks()
-
-
 
 mainwindow=HackerBooks()
 gtk.main()
