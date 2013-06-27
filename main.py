@@ -188,6 +188,38 @@ Hone your skills. Sharpen your knowledge of the tools and techniques that make P
     ]
 
 
+
+
+class AlertWindow(gtk.Window):
+	def __init__(self):
+		super(AlertWindow,self).__init__()
+		self.set_size_request(300,200)
+		self.set_position(gtk.WIN_POS_CENTER)
+		self.set_border_width(8)
+		self.set_title("Information")
+
+		self.table = gtk.Table(2, 2, True)
+		info = gtk.Button("Information")
+		info.connect("clicked", self.on_info)
+
+		self.table.attach(info, 0, 1, 0, 1)
+		self.add(self.table)
+
+		self.show_all()
+
+	def on_info(self,widget):
+		md = gtk.MessageDialog(self, 
+            gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, 
+            gtk.BUTTONS_CLOSE, "Download completed")
+		md.run()
+		md.destroy()
+
+		
+
+
+	def autrechose(self):
+		pass
+
 class InfoBooks(gtk.Window):
     def __init__(self):
         super(InfoBooks,self).__init__()
@@ -272,18 +304,22 @@ class InfoBooks(gtk.Window):
 
     def open_book(self, widget):
     	try:
-	    	command="evince "+mainwindow.caca+".pdf"
+    		#need to separate the arguments in an array to give arguments instead of a single command!!
+	    	command=["evince", "{0}.pdf".format(mainwindow.caca)]
+	    	print command
     		subprocess.Popen(command)
+    		
 	except:
 		print "reading did not work"
 
-    def check_internet():
+    def check_internet(self):
 	try:
-	        response=urllib2.urlopen('http://74.125.113.99',timeout=1)
+	        response=urllib2.urlopen('http://www.google.com',timeout=2)
 	        print "you are connected"
 	        return True
-	except urllib2.URLError as err: pass
-	    	return False
+	except urllib2.URLError as err: 
+			pass
+			return False
 
     def close_window(self, widget):
         self.destroy()
@@ -314,7 +350,7 @@ class InfoBooks(gtk.Window):
         #except:
         #    os.chdir("BOOKS")
         
-        if check_internet():
+        if self.check_internet():
 	        
 	        for books in hackerbooks:
 	            #select the right book that is to download
@@ -324,8 +360,16 @@ class InfoBooks(gtk.Window):
 	                    #downloads the book and renames it to the full name and adds pdf extension
 	                    #TODO: ADD PROGRESS BAR
 	                    #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
+	                    md = gtk.MessageDialog(self, 
+            gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, 
+            gtk.BUTTONS_CLOSE, "Download Completed")
+	                    
 	                    urllib.urlretrieve(books[4],books[0]+".pdf")
+	                    
 	                    print "Download finished"
+	                    md.run()
+	                    md.destroy()
+	                    
 	                    #TODO: CONFIRM THE FILE IS DOWNLOADED AND CONFIRM SIZE.
 	                    #TODO: CHANGE PROPERTIES SO THAT ONE CAN LAUNCH THE PDF TO READ OR THE HTML FILE, AND MAKE THE DOWNLOAD BUTTON GREY
 	                except:
@@ -422,6 +466,8 @@ class HackerBooks(gtk.Window):
         
         #print mainwindow.caca
         InfoBooks()
+
+
 
 mainwindow=HackerBooks()
 gtk.main()
