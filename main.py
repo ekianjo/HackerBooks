@@ -2,16 +2,16 @@
 #!/usr/bin/python
 
 #TO DO FOR FIRST RELEASE 0.1 CODENAME LUPIN
-#ADD BOOK LICENSE INFORMATION
+
 #MAKE 'ABOUT' BUTTON 
 #ALLOW READING OF DOCUMENTS : PDF (EVINCE), -- DONE (need to check if works on Pandora)
 #DETECT ONLINE CONNECTION OR NOT BEFORE DOWNLOADING AND SEND WARNING --ONGOING
 #SEPARATE BOOK DATA FILE FROM MAIN PROGRAM
-#CREATE SEPARATATE MESSAGE WINDOW FOR ERRORS OR DOWNLOADING MESSAGES --ONGOING
 #NEED TO IDENTIFY IF RUNNING ON DESKTOP OR SOME OTHER SYSTEM (PANDORA) -- IDEA : check cat/proc
 
 #----- SECOND RELEASE 
 #NEED TO ADD SCROLLABLE WINDOW CONTAINER FOR THE TEXTVIEW. IF NOT CANNOT SEE ALL TEXT.
+#ADD BOOK LICENSE INFORMATION
 #ALLOW READING OF HTML at least (reader tbc)
 #PROGRESS DOWNLOAD BAR
 #ADD MORE BOOKS
@@ -280,6 +280,7 @@ class InfoBooks(gtk.Window):
         if self.check_book_exists()==False:
 			self.delete.set_sensitive(False)
         self.delete.set_size_request(70, 30)
+        self.delete.connect_object("clicked", self.delete_book, None)
         halign2.add(self.delete)
         
         table.set_row_spacing(3, 6)
@@ -300,7 +301,21 @@ class InfoBooks(gtk.Window):
         self.show_all()
 
     def delete_book(self,widget):
-    	pass
+    	filename=mainwindow.caca+".pdf"
+    	try:
+	    	os.remove(filename)
+	    	print "book was deleted"
+	    	md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You just deleted the book.")
+	    	md.run()
+	    	md.destroy()
+	    	self.readbtn.set_sensitive(False)
+	    	self.download.set_sensitive(True)
+	    	self.delete.set_sensitive(False)
+
+    	except:
+    		print "File was not deleted"
+
+    	
 	#check if book exists first
 
     def open_book(self, widget):
