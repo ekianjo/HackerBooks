@@ -5,9 +5,11 @@
 #FIX BUTTONS (DELETE, READ and GREY OUT)
 #ADD BOOK LICENSE INFORMATION
 #MAKE 'ABOUT' BUTTON
-#ALLOW READING OF DOCUMENTS : PDF (EVINCE), 
-#DETECT ONLINE CONNECTION OR NOT BEFORE DOWNLOADING AND SEND WARNING
+#ALLOW READING OF DOCUMENTS : PDF (EVINCE), -- ONGOING
+#DETECT ONLINE CONNECTION OR NOT BEFORE DOWNLOADING AND SEND WARNING --ONGOING
 #SEPARATE BOOK DATA FILE FROM MAIN PROGRAM
+#CREATE SEPARATATE MESSAGE WINDOW FOR ERRORS OR DOWNLOADING MESSAGES
+#NEED TO IDENTIFY IF RUNNING ON DESKTOP OR SOME OTHER SYSTEM (PANDORA)
 
 #----- SECOND RELEASE
 #ALLOW READING OF HTML at least (reader tbc)
@@ -16,9 +18,11 @@
 #ALLOW USAGE OF XOURNAL TO OPEN PDFs
 #SEND STATS TO SERVER
 #ALLOW FAVORITES
+#REPORT DOWNLOAD ERRORS
 
-import gtk
-import urllib, os
+import gtk #for interface
+import urllib, urllib2, os #os for file system operations, urllib for downloading
+import subprocess #needed to launch separate application
 
 hackerbooks = [('Pro Git', 'Git', 'Scott Chacon','pdf','https://github.s3.amazonaws.com/media/progit.en.pdf',
 '''Git is the version control system developed by Linus Torvalds for Linux kernel development. 
@@ -342,16 +346,32 @@ class InfoBooks(gtk.Window):
         table.set_row_spacing(3, 6)
         table.attach(halign2, 0, 1, 4, 5, gtk.FILL, gtk.FILL, 0, 0)
         
-        #OK button attributes - missing connection right now
-        ok = gtk.Button("Read")
-        ok.set_size_request(70, 30)
-        table.attach(ok, 3, 4, 4, 5, gtk.FILL, gtk.FILL, 0, 0);
+        #read button attributes - missing connection right now
+        readbtn = gtk.Button("Read")
+        readbtn.set_size_request(70, 30)
+        table.attach(readbtn, 3, 4, 4, 5, gtk.FILL, gtk.FILL, 0, 0);
+        readbtn.connect_object("clicked", self.open_book, None)
         
         #add the finalized table layout to the window
         self.add(table)
 
         #display all
         self.show_all()
+
+    def open_book(self, widget):
+    	try:
+	    	command="evince "+mainwindow.caca+".pdf"
+    		subprocess.Popen(command)
+	except:
+		print "reading did not work"
+
+    def check_internet():
+	try:
+	        response=urllib2.urlopen('http://74.125.113.99',timeout=1)
+	        print "you are connected"
+	        return True
+	except urllib2.URLError as err: pass
+	    	return False
 
     def close_window(self, widget):
         self.destroy()
@@ -382,20 +402,24 @@ class InfoBooks(gtk.Window):
         #except:
         #    os.chdir("BOOKS")
         
-        for books in hackerbooks:
-            #select the right book that is to download
-            if books[0]==mainwindow.caca: 
-                print books[4]
-                try:
-                    #downloads the book and renames it to the full name and adds pdf extension
-                    #TODO: ADD PROGRESS BAR
-                    #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
-                    urllib.urlretrieve(books[4],books[0]+".pdf")
-                    print "Download finished"
-                    #TODO: CONFIRM THE FILE IS DOWNLOADED AND CONFIRM SIZE.
-                    #TODO: CHANGE PROPERTIES SO THAT ONE CAN LAUNCH THE PDF TO READ OR THE HTML FILE, AND MAKE THE DOWNLOAD BUTTON GREY
-                except:
-                    print "Download did not work"
+        if check_internet():
+	        
+	        for books in hackerbooks:
+	            #select the right book that is to download
+	            if books[0]==mainwindow.caca: 
+	                print books[4]
+	                try:
+	                    #downloads the book and renames it to the full name and adds pdf extension
+	                    #TODO: ADD PROGRESS BAR
+	                    #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
+	                    urllib.urlretrieve(books[4],books[0]+".pdf")
+	                    print "Download finished"
+	                    #TODO: CONFIRM THE FILE IS DOWNLOADED AND CONFIRM SIZE.
+	                    #TODO: CHANGE PROPERTIES SO THAT ONE CAN LAUNCH THE PDF TO READ OR THE HTML FILE, AND MAKE THE DOWNLOAD BUTTON GREY
+	                except:
+	                    print "Download did not work"
+    	else:
+    		print "you are offline"
     
 class HackerBooks(gtk.Window): 
     def __init__(self):
