@@ -1,25 +1,26 @@
 #encoding: utf-8
 #!/usr/bin/python
 
-#TO DO FOR FIRST RELEASE
-#FIX BUTTONS (DELETE, READ and GREY OUT)
+#TO DO FOR FIRST RELEASE 0.1 CODENAME LUPIN
+#FIX BUTTONS (DELETE, READ and GREY OUT) - ONGOING
 #ADD BOOK LICENSE INFORMATION
-#MAKE 'ABOUT' BUTTON
+#MAKE 'ABOUT' BUTTON 
 #ALLOW READING OF DOCUMENTS : PDF (EVINCE), -- ONGOING
 #DETECT ONLINE CONNECTION OR NOT BEFORE DOWNLOADING AND SEND WARNING --ONGOING
 #SEPARATE BOOK DATA FILE FROM MAIN PROGRAM
 #CREATE SEPARATATE MESSAGE WINDOW FOR ERRORS OR DOWNLOADING MESSAGES
-#NEED TO IDENTIFY IF RUNNING ON DESKTOP OR SOME OTHER SYSTEM (PANDORA)
+#NEED TO IDENTIFY IF RUNNING ON DESKTOP OR SOME OTHER SYSTEM (PANDORA) -- IDEA : check cat/proc
 #NEED TO ADD SCROLLABLE WINDOW CONTAINER FOR THE TEXTVIEW. IF NOT CANNOT SEE ALL TEXT.
+#CALL MESSAGE WINDOW, KILL PREVIOUS INFO BOOK WINDOW, THEN REDISPLAY BOOK INFO AGAIN ?
 
-#----- SECOND RELEASE
+#----- SECOND RELEASE 
 #ALLOW READING OF HTML at least (reader tbc)
 #PROGRESS DOWNLOAD BAR
 #ADD MORE BOOKS
 #ALLOW USAGE OF XOURNAL TO OPEN PDFs
 #SEND STATS TO SERVER
 #ALLOW FAVORITES
-#REPORT DOWNLOAD ERRORS
+#REPORT DOWNLOAD ERRORS TO SERVER
 
 import gtk #for interface
 import urllib, urllib2, os #os for file system operations, urllib for downloading
@@ -293,7 +294,6 @@ class InfoBooks(gtk.Window):
         if self.check_book_exists():
         	print "book exists"
 
-
         #connect the close window function
         self.connect("destroy",self.close_window)
 
@@ -305,7 +305,6 @@ class InfoBooks(gtk.Window):
         title = gtk.Label("Book Description")
         halign = gtk.Alignment(0, 0, 0, 0)
         halign.add(title)
-        
         table.attach(halign, 0, 1, 0, 1, gtk.FILL, gtk.FILL, 0, 0);
 
         #get information to put into the text field. Textbuffer is the object that goes in textview field.
@@ -336,14 +335,14 @@ class InfoBooks(gtk.Window):
         table.attach(valign, 3, 4, 2, 3, gtk.FILL, gtk.FILL | gtk.EXPAND, 1, 1)
         close.connect_object("clicked", self.close_window, None)
         
-        
         #HELP button and OK button to be replaced by "read" and "delete"
         #TODO: CREATE A DEF FOR READ AND A DEF FOR DELETE
-        #Help button attributes - missing connection right now
+        #Delete button attributes - missing connection right now
+        #make sure this button only appears if the book is downloaded. 
         halign2 = gtk.Alignment(0, 1, 0, 0)
-        help = gtk.Button("Help")
-        help.set_size_request(70, 30)
-        halign2.add(help)
+        delete = gtk.Button("Delete")
+        delete.set_size_request(70, 30)
+        halign2.add(delete)
         table.set_row_spacing(3, 6)
         table.attach(halign2, 0, 1, 4, 5, gtk.FILL, gtk.FILL, 0, 0)
         
@@ -358,6 +357,10 @@ class InfoBooks(gtk.Window):
 
         #display all
         self.show_all()
+
+    def delete_book(self,widget):
+    	pass
+	#check if book exists first
 
     def open_book(self, widget):
     	try:
