@@ -48,7 +48,7 @@ In addition to that practical knowledge, author William Shotts reveals the philo
 ('Clever Algorithms','Metaheuristics','Jason Browlee','pdf','http://www.lulu.com/shop/jason-brownlee/clever-algorithms-nature-inspired-programming-recipes/ebook/product-17386095.html','to insert here'),
 ('Think Stats','Statistics','Allen B. Downey','pdf','http://greenteapress.com/thinkstats/thinkstats.pdf'),
 ("Street-Fighting Mathematics",'Problem Solving','Sanjoy Mahajan','pdf','https://mitpress.mit.edu/sites/default/files/titles/content/9780262514293_Creative_Commons_Edition.pdf','''
-    In problem solving, as in street fighting, rules are for fools: do whatever works—don't just stand there! Yet we often fear an unjustified leap even though it may land us on a correct result. Traditional mathematics teaching is largely about solving exactly stated problems exactly, yet life often hands us partly defined problems needing only moderately accurate solutions. This engaging book is an antidote to the rigor mortis brought on by too much mathematical rigor, teaching us how to guess answers without needing a proof or an exact calculation.
+In problem solving, as in street fighting, rules are for fools: do whatever works—don't just stand there! Yet we often fear an unjustified leap even though it may land us on a correct result. Traditional mathematics teaching is largely about solving exactly stated problems exactly, yet life often hands us partly defined problems needing only moderately accurate solutions. This engaging book is an antidote to the rigor mortis brought on by too much mathematical rigor, teaching us how to guess answers without needing a proof or an exact calculation.
 
 In Street-Fighting Mathematics, Sanjoy Mahajan builds, sharpens, and demonstrates tools for educated guessing and down-and-dirty, opportunistic problem solving across diverse fields of knowledge—from mathematics to management. Mahajan describes six tools: dimensional analysis, easy cases, lumping, picture proofs, successive approximation, and reasoning by analogy. Illustrating each tool with numerous examples, he carefully separates the tool—the general principle—from the particular application so that the reader can most easily grasp the tool itself to use on problems of particular interest.
 
@@ -73,28 +73,21 @@ If you're a developer already experienced with programming for the GNU/Linux sys
 ('Ruby Best Practices','Ruby','Gregory Brown','pdf','http://majesticseacreature.com/rbp-book/pdfs/rbp_1-0.pdf',
 '''In 1993, when Ruby was born, Ruby had nothing. No user base except for me and a few close friends. No tradition. No idioms except for a few inherited from Perl, though I regretted most of them afterward.
 
-But the language forms the community. The community nourishes the culture. In the last decade, users increased—hundreds of thousands of programmers fell in love with Ruby. They put great effort into the language and its community. Projects were born.
-Idioms tailored for Ruby were invented and introduced. Ruby was influenced by Lisp and other functional programming languages. Ruby formed relationships between technologies and methodologies such as test-driven development and duck typing.
+But the language forms the community. The community nourishes the culture. In the last decade, users increased—hundreds of thousands of programmers fell in love with Ruby. They put great effort into the language and its community. Projects were born. Idioms tailored for Ruby were invented and introduced. Ruby was influenced by Lisp and other functional programming languages. Ruby formed relationships between technologies and methodologies such as test-driven development and duck typing.
 
-This book introduces a map of best practices of the language as of 2009. I’ve known Greg Brown for years, and he is an experienced Ruby developer who has contributed a lot of projects to the language, such as Ruport and Prawn. I am glad he compiled his
-knowledge into this book.
+This book introduces a map of best practices of the language as of 2009. I’ve known Greg Brown for years, and he is an experienced Ruby developer who has contributed a lot of projects to the language, such as Ruport and Prawn. I am glad he compiled his knowledge into this book.
 
 His insights will help you become a better Ruby programmer.'''),
 ('Introduction to Machine Learning','Machine Learning','Alex Smola','pdf','http://alex.smola.org/drafts/thebook.pdf',
-'''Over the past two decades Machine Learning has become one of the main-
-stays of information technology and with that, a rather central, albeit usually
-hidden, part of our life. With the ever increasing amounts of data becoming
-available there is good reason to believe that smart data analysis will become
-even more pervasive as a necessary ingredient for technological progress.'''),
+'''Over the past two decades Machine Learning has become one of the main-stays of information technology and with that, a rather central, albeit usually hidden, part of our life. With the ever increasing amounts of data becoming
+available there is good reason to believe that smart data analysis will become even more pervasive as a necessary ingredient for technological progress.'''),
 ('Dive Into Python 3','Python','Mark Pilgrim','pdf','https://github.com/downloads/diveintomark/diveintopython3/dive-into-python3.pdf','Dive Into Python 3 covers Python 3 and its differences from Python 2. Compared to Dive Into Python, it’s about 20% revised and 80% new material.'),
 ('Building Skills in Python','Python','Steven F. Lott','pdf','http://www.itmaybeahack.com/book/python-2.6/latex/BuildingSkillsinPython.pdf',
 '''How do you learn Python? By doing a series of exercises, each of which adds a single new feature of the language. This 450+ page book has 42 chapters that will help you build Python programming skills through a series of exercises. This book includes six projects from straight-forward to sophisticated that will help solidify your Python skills.
 
 The 2.6 edition was significantly revised and expanded to cover Python 2.6 and some elements of Python 3.1. Many chapters have been updated, reorganized and added since the 2.5 edition.
 
-The current release has benefitted from a great deal of support from readers who sent detailed lists of errors and suggestions.
-
-Professional programmers who need to learn Python are this book’s primary audience. We provide specific help for you in a number of ways.
+The current release has benefitted from a great deal of support from readers who sent detailed lists of errors and suggestions. Professional programmers who need to learn Python are this book’s primary audience. We provide specific help for you in a number of ways.
 
 Since Python is simple, we can address newbie programmers who don’t have deep experience in a number of other languages. We will call out some details in specific newbie sections. Experienced programmers can skip these sections.
 Since Python has a large number of sophisticated built-in data structures, we address these separately and fully. An understanding of these structures can simplify complex programs.
@@ -109,10 +102,8 @@ When I teach computer science courses, I want to cover important concepts in add
 One of the reasons why I like Python is that it provides a really nice balance between the practical and the conceptual. Since Python is interpreted, beginners can pick up the language and start doing neat things almost immediately without getting lost in the problems of compilation and linking. Furthermore, Python comes with a large library of modules that can be used to do all sorts of tasks ranging from web-programming to graphics. Having such a practical focus is a great way to engage students and it allows them to complete significant projects. However, Python can also serve as an excellent foundation for introducing important computer science concepts. Since Python fully supports procedures and classes, students can be gradually introduced to topics such as procedural abstraction, data structures, and object-oriented programming — all of which are applicable to later courses on Java or C++. Python even borrows a number of features from functional programming languages and can be used to introduce concepts that would be covered in more detail in courses on Scheme and Lisp.
 '''),
 ('Functional C','C','Pieter Hartel','pdf','http://eprints.eemcs.utwente.nl/1077/02/book.pdf',
-'''The Computer Science Departments of many universities teach a functional lan-guage as the rst programming language. Using a functional language with itshigh level of abstraction helps to emphasize the principles of programming. Func-tional programming is only one of the paradigms with which a student should be acquainted. Imperative, Concurrent, Object-Oriented, and Logic programming
-are also important. Depending on the problem to be solved, one of the paradigms will be chosen as the most natural paradigm for that problem.
-This book is the course material to teach a second paradigm: imperative pro-gramming, using C as the programming language. The book has been written so that it builds on the knowledge that the students have acquired during their rst course on functional programming, using SML. The prerequisite of this book is that the principles of programming are already understood; this book does not
-specically aim to teach `problem solving' or `programming'.'''),
+'''The Computer Science Departments of many universities teach a functional lan-guage as the rst programming language. Using a functional language with itshigh level of abstraction helps to emphasize the principles of programming. Func-tional programming is only one of the paradigms with which a student should be acquainted. Imperative, Concurrent, Object-Oriented, and Logic programming are also important. Depending on the problem to be solved, one of the paradigms will be chosen as the most natural paradigm for that problem.
+This book is the course material to teach a second paradigm: imperative pro-gramming, using C as the programming language. The book has been written so that it builds on the knowledge that the students have acquired during their rst course on functional programming, using SML. The prerequisite of this book is that the principles of programming are already understood; this book does not specically aim to teach `problem solving' or `programming'.'''),
 ('The Cathedral and the Bazaar','Open Source','Eric S. Raymond','pdf',
 '''The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary (abbreviated CatB) is an essay by Eric S. Raymond on software engineering methods, based on his observations of the Linux kernel development process and his experiences managing an open source project, fetchmail. It examines the struggle between top-down and bottom-up design. It was first presented by the author at the Linux Kongress on May 27, 1997 in Würzburg and was published as part of a book of the same name in 1999. The illustration on the cover of the book is a 1913 painting by Liubov Popova titled "Composition with Figures" and belongs to the collection of the State Tretyakov Gallery.
 The essay contrasts two different free software development models:
@@ -127,141 +118,62 @@ The essay's central thesis is Raymond's proposition that "given enough eyeballs,
 
 More than 20 writers from the mobile community share their know-how, across more than 250 pages, in dealing with topics such as accessibility in mobile apps, LBS, mobile analytics, prototyping, cross-platform development, native development, mobile web and app marketing. This project was initiated in 2009 and we have since published a number of updated versions. As of today, we have distributed over 50,000 hardcopies. The 12th, and latest, edition was published in February 2013.''')
 ,('Getting Started with Open Source Development','Open Source','Rachna Kapur (more)','pdf','http://public.dhe.ibm.com/software/dw/db2/express-c/wiki/Getting_started_with_open_source_development_p2.pdf',
-'''Keeping your skills current in today's world is becoming increasingly challenging. There are 
-too many new technologies being developed, and little time to learn them all. The DB2® 
-on Campus Book Series has been developed to minimize the time and effort required to 
-learn many of these new technologies.
+'''Keeping your skills current in today's world is becoming increasingly challenging. There are too many new technologies being developed, and little time to learn them all. The DB2® on Campus Book Series has been developed to minimize the time and effort required to learn many of these new technologies.
+
 Who should read this book?
-This book is a good starting point for beginners to the open source world. It is specially 
-written to equip students, and open source enthusiasts with the norms and best practices 
-of open source. You should read this book if you want to:
+This book is a good starting point for beginners to the open source world. It is specially written to equip students, and open source enthusiasts with the norms and best practices of open source. You should read this book if you want to:
  Educate yourself on the objectives of open source
  Understand open source software licensing requirements 
  Get an introduction to the norms followed in the open source world
  Join the open source movement and begin contributing. 
+
 How is this book structured?
-The first chapters of this book discuss the history of open source software development 
-and its licensing requirements. It then talks about how organizations use open source as 
-their business model. Chapter 4 introduces the reader to the tools used in the development 
-of an open source project. Chapters 5 and 6 take the reader into more details about how to
-contribute to an existing open source project. Chapter 7 provides a case study where you 
-practice contributing to an open source project. Chapter 8 goes a bit deeper describing the 
-Technology Explorer for IBM DB2, an open source project hosted at sourceForge.net; it 
-also summarizes and revisits some of the concepts discussed in the previous chapters.
-Exercises are provided with most chapters. There are also review questions in each
-chapter to help you learn the material; answers to review questions are included in 
-Appendix A.
+The first chapters of this book discuss the history of open source software development and its licensing requirements. It then talks about how organizations use open source as their business model. Chapter 4 introduces the reader to the tools used in the development of an open source project. Chapters 5 and 6 take the reader into more details about how to
+contribute to an existing open source project. Chapter 7 provides a case study where you practice contributing to an open source project. Chapter 8 goes a bit deeper describing the Technology Explorer for IBM DB2, an open source project hosted at sourceForge.net; it also summarizes and revisits some of the concepts discussed in the previous chapters.
+Exercises are provided with most chapters. There are also review questions in each chapter to help you learn the material; answers to review questions are included in Appendix A.
+
 A book for the community 
-This book was created by the community; a community consisting of university professors, 
-students, and professionals (including IBM employees). The online version of this book is 
-released to the community at no-charge. Numerous members of the community from 
-around the world have participated in developing this book, which will also be translated to 
-several languages by the community. If you would like to provide feedback, contribute new 
-material, improve existing material, or help with translating this book to another language, 
-please send an email of your planned contribution to db2univ@ca.ibm.com with the subject 
-“Getting started with open source development book feedback”''')
+This book was created by the community; a community consisting of university professors, students, and professionals (including IBM employees). The online version of this book is released to the community at no-charge. Numerous members of the community from around the world have participated in developing this book, which will also be translated to 
+several languages by the community. If you would like to provide feedback, contribute new material, improve existing material, or help with translating this book to another language, please send an email of your planned contribution to db2univ@ca.ibm.com with the subject “Getting started with open source development book feedback”''')
 ,('Programming from the Ground Up','Assembly','Jonathan Bartlett','pdf','http://ftp.twaren.net/Unix/NonGNU//pgubook/ProgrammingGroundUp-1-0-booksize.pdf',
-'''Most introductory books on programming frustrate me to no end. At the end of
-them you can still ask "how does the computer really work?" and not have a good
-answer. They tend to pass over topics that are difﬁcult even though they are
-important. I will take you through the difﬁcult issues because that is the only way
-to move on to masterful programming. My goal is to take you from knowing
-nothing about programming to understanding how to think, write, and learn like a
-programmer. You won’t know everything, but you will have a background for how
-everything ﬁts together. At the end of this book, you should be able to do the
-following:
+'''Most introductory books on programming frustrate me to no end. At the end of them you can still ask "how does the computer really work?" and not have a good answer. They tend to pass over topics that are difﬁcult even though they are
+important. I will take you through the difﬁcult issues because that is the only way to move on to masterful programming. My goal is to take you from knowing nothing about programming to understanding how to think, write, and learn like a
+programmer. You won’t know everything, but you will have a background for how everything ﬁts together. At the end of this book, you should be able to do the following:
 • Understand how a program works and interacts with other programs
 • Read other people’s programs and learn how they work
 • Learn new programming languages quickly
 • Learn advanced concepts in computer science quickly
-I will not teach you everything. Computer science is a massive ﬁeld, especially
-when you combine the theory with the practice of computer programming.
-However, I will attempt to get you started on the foundations so you can easily go
-wherever you want afterwards.
-There is somewhat of a chicken and egg problem in teaching programming,
-especially assembly language. There is a lot to learn - it’s almost too much to learn
-almost at once, but each piece depends on all the others. Therefore, you must be
-patient with yourself and the computer while learning to program. If you don’t
-understand something the ﬁrst time, reread it. If you still don’t understand it, it is
-sometimes best to take it by faith and come back to it later. Often after more
-exposure to programming the ideas will make more sense. Don’t get discouraged.
-It’s a long climb, but very worthwhile.'''),
+I will not teach you everything. Computer science is a massive ﬁeld, especially when you combine the theory with the practice of computer programming. However, I will attempt to get you started on the foundations so you can easily go
+wherever you want afterwards. There is somewhat of a chicken and egg problem in teaching programming, especially assembly language. There is a lot to learn - it’s almost too much to learn almost at once, but each piece depends on all the others. Therefore, you must be patient with yourself and the computer while learning to program. If you don’t
+understand something the ﬁrst time, reread it. If you still don’t understand it, it is sometimes best to take it by faith and come back to it later. Often after more exposure to programming the ideas will make more sense. Don’t get discouraged. It’s a long climb, but very worthwhile.'''),
 ('BashGuide','Bash','Lhunath','pdf','http://folk.ntnu.no/geirha/bashguide.pdf',
-'''This guide aims to aid people interested in learning to work with BASH1
-. It aspires to teach good practice techniques for using
-BASH, and writing simple scripts.
-This guide is targeted at beginning users. It assumes no advanced knowledge -- just the ability to login to a Unix-like
-system and open a command-line (terminal) interface. It will help if you know how to use a text editor; we will not be
-covering editors, nor do we endorse any particular editor choice. Familiarity with the fundamental Unix tool set, or with other
-programming languages or programming concepts, is not required, but those who have such knowledge may understand some
-of the examples more quickly.
-If something is unclear to you, you are invited to report this (usehttp://mywiki.wooledge.org/BashGuideFeedback,
-or the #bash channel on irc.freenode.org) so that it may be clariﬁed in this document for future readers.
-You are invited to contribute to the development of this document by extending it or correcting invalid or incomplete
-information.'''),
+'''This guide aims to aid people interested in learning to work with BASH1. It aspires to teach good practice techniques for using BASH, and writing simple scripts. This guide is targeted at beginning users. It assumes no advanced knowledge -- just the ability to login to a Unix-like system and open a command-line (terminal) interface. It will help if you know how to use a text editor; we will not be covering editors, nor do we endorse any particular editor choice.
+
+Familiarity with the fundamental Unix tool set, or with other programming languages or programming concepts, is not required, but those who have such knowledge may understand some of the examples more quickly. If something is unclear to you, you are invited to report this (usehttp://mywiki.wooledge.org/BashGuideFeedback, or the #bash channel on irc.freenode.org) so that it may be clariﬁed in this document for future readers. You are invited to contribute to the development of this document by extending it or correcting invalid or incomplete information.'''),
 ('Essential C','C','Nick Parlante','pdf','http://cslibrary.stanford.edu/101/EssentialC.pdf',
-'''This Stanford CS Education document tries to summarize all the basic features of the C
-language. The coverage is pretty quick, so it is most appropriate as review or for someone
-with some programming background in another language. Topics include variables, int
-types, floating point types, promotion, truncation, operators, control structures (if, while,
-for), functions, value parameters, reference parameters, structs, pointers, arrays, the preprocessor, and the standard C library functions.''')
+'''This Stanford CS Education document tries to summarize all the basic features of the C language. The coverage is pretty quick, so it is most appropriate as review or for someone with some programming background in another language. Topics include variables, int types, floating point types, promotion, truncation, operators, control structures (if, while, for), functions, value parameters, reference parameters, structs, pointers, arrays, the preprocessor, and the standard C library functions.''')
 ,('An Introduction to Programming in Emacs Lisp', 'Emacs', 'Robert J. Chassell','pdf','https://www.gnu.org/software/emacs/emacs-lisp-intro/emacs-lisp-intro.pdf',
-'''Most of the GNU Emacs integrated environment is written in the programming
-language called Emacs Lisp. The code written in this programming language is the
-software—the sets of instructions—that tell the computer what to do when you give
-it commands. Emacs is designed so that you can write new code in Emacs Lisp and
-easily install it as an extension to the editor.
-(GNU Emacs is sometimes called an “extensible editor”, but it does much more
-than provide editing capabilities. It is better to refer to Emacs as an “extensible
-computing environment”. However, that phrase is quite a mouthful. It is easier to
-refer to Emacs simply as an editor. Moreover, everything you do in Emacs—find
-the Mayan date and phases of the moon, simplify polynomials, debug code, manage
-files, read letters, write books—all these activities are kinds of editing in the most
-general sense of the word.)
-Although Emacs Lisp is usually thought of in association only with Emacs, it is
-a full computer programming language. You can use Emacs Lisp as you would any
-other programming language.
-Perhaps you want to understand programming; perhaps you want to extend
-Emacs; or perhaps you want to become a programmer. This introduction to Emacs
-Lisp is designed to get you started: to guide you in learning the fundamentals of
-programming, and more importantly, to show you how you can teach yourself to go
-further.'''),
+'''Most of the GNU Emacs integrated environment is written in the programming language called Emacs Lisp. The code written in this programming language is the software—the sets of instructions—that tell the computer what to do when you give it commands. Emacs is designed so that you can write new code in Emacs Lisp and easily install it as an extension to the editor. (GNU Emacs is sometimes called an “extensible editor”, but it does much more than provide editing capabilities. It is better to refer to Emacs as an “extensible computing environment”. However, that phrase is quite a mouthful. It is easier to refer to Emacs simply as an editor. Moreover, everything you do in Emacs—find the Mayan date and phases of the moon, simplify polynomials, debug code, manage files, read letters, write books—all these activities are kinds of editing in the most general sense of the word.)
+
+Although Emacs Lisp is usually thought of in association only with Emacs, it is a full computer programming language. You can use Emacs Lisp as you would any other programming language. Perhaps you want to understand programming; perhaps you want to extend Emacs; or perhaps you want to become a programmer. This introduction to Emacs Lisp is designed to get you started: to guide you in learning the fundamentals of programming, and more importantly, to show you how you can teach yourself to go further.'''),
 ('The Not So Short Introduction to LaTeX','LaTeX','Tobias Oetiker (more)','pdf','http://tobi.oetiker.ch/lshort/lshort.pdf',
-'''LATEX is a typesetting system that is very suitable for producing scientiﬁc
-and mathematical documents of high typographical quality. It is also suitable
-for producing all sorts of other documents, from simple letters to complete
+'''LATEX is a typesetting system that is very suitable for producing scientiﬁc and mathematical documents of high typographical quality. It is also suitable for producing all sorts of other documents, from simple letters to complete
 books. LATEX uses TEX [2] as its formatting engine.
-This short introduction describes LATEX 2ε and should be suﬃcient for
-most applications of LATEX. Refer to [1, 3] for a complete description of the
-LATEX system.
+
+This short introduction describes LATEX 2ε and should be suﬃcient for most applications of LATEX. Refer to [1, 3] for a complete description of the LATEX system.
 This introduction is split into 6 chapters:
 
-Chapter 1 tells you about the basic structure of LATEX 2ε documents. You
-will also learn a bit about the history of LATEX. After reading this
-chapter, you should have a rough understanding how LATEX works.
+Chapter 1 tells you about the basic structure of LATEX 2ε documents. You will also learn a bit about the history of LATEX. After reading this chapter, you should have a rough understanding how LATEX works.
 
-Chapter 2 goes into the details of typesetting your documents. It explains
-most of the essential LATEX commands and environments. After reading
-this chapter, you will be able to write your ﬁrst documents.
+Chapter 2 goes into the details of typesetting your documents. It explains most of the essential LATEX commands and environments. After reading this chapter, you will be able to write your ﬁrst documents.
 
-Chapter 3 explains how to typeset formulae with LATEX. Many examples
-demonstrate how to use one of LATEX’s main strengths. At the end
-of the chapter are tables listing all mathematical symbols available in
-LATEX.
+Chapter 3 explains how to typeset formulae with LATEX. Many examples demonstrate how to use one of LATEX’s main strengths. At the end of the chapter are tables listing all mathematical symbols available in LATEX.
 
-Chapter 4 explains indexes, bibliography generation and inclusion of EPS
-graphics. It introduces creation of PDF documents with pdfLATEX and
-presents some handy extension packages.
+Chapter 4 explains indexes, bibliography generation and inclusion of EPS graphics. It introduces creation of PDF documents with pdfLATEX and presents some handy extension packages.
 
-Chapter 5 shows how to use LATEX for creating graphics. Instead of drawing
-a picture with some graphics program, saving it to a ﬁle and then
-including it into LATEX, you describe the picture and have LATEX draw
-it for you.
+Chapter 5 shows how to use LATEX for creating graphics. Instead of drawing a picture with some graphics program, saving it to a ﬁle and then including it into LATEX, you describe the picture and have LATEX draw it for you.
 
-Chapter 6 contains some potentially dangerous information about how to
-alter the standard document layout produced by LATEX. It will tell you
-how to change things such that the beautiful output of LATEX turns
-ugly or stunning, depending on your abilities.'''),
+Chapter 6 contains some potentially dangerous information about how to alter the standard document layout produced by LATEX. It will tell you how to change things such that the beautiful output of LATEX turns ugly or stunning, depending on your abilities.'''),
 ('Modern Perl','Perl','Chromatic','pdf','http://www.onyxneon.com/books/modern_perl/modern_perl_a4.pdf',
 '''In 1987, Perl 1.0 changed the world. In the decades since then, the language has grown from a simple tool for system administration somewhere between shell scripting and C programming to a powerful, general purpose language steeped in a rich heritage.
 
@@ -269,13 +181,9 @@ Even so, most Perl 5 programs in the world take far too little advantage of the 
 
 They solve difficult problems with speed and elegance. They take advantage of the CPAN and its unparalleled library of reusable code. They get things done.
 
-This productivity can be yours, whether you've dabbled with Perl for a decade or someone just handed you this book and said "Fix this code by Friday."
+This productivity can be yours, whether you've dabbled with Perl for a decade or someone just handed you this book and said "Fix this code by Friday." Modern Perl is suitable for programmers of every level. It's more than a Perl tutorial—only Modern Perl focuses on Perl 5.12 and 5.14, to demonstrate the latest and most effective time-saving features. Only Modern Perl explains how and why the language works, to let you unlock the full power of Perl.
 
-Modern Perl is suitable for programmers of every level. It's more than a Perl tutorial—only Modern Perl focuses on Perl 5.12 and 5.14, to demonstrate the latest and most effective time-saving features. Only Modern Perl explains how and why the language works, to let you unlock the full power of Perl.
-
-Hone your skills. Sharpen your knowledge of the tools and techniques that make Perl so effective. Master everything Perl has to offer.
-
-When you have to solve a problem now, reach for Perl. When you have to solve a problem right, reach for Modern Perl.''')
+Hone your skills. Sharpen your knowledge of the tools and techniques that make Perl so effective. Master everything Perl has to offer. When you have to solve a problem now, reach for Perl. When you have to solve a problem right, reach for Modern Perl.''')
 
     ]
 
