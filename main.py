@@ -293,9 +293,7 @@ class InfoBooks(gtk.Window):
         table.attach(valign, 3, 4, 2, 3, gtk.FILL, gtk.FILL | gtk.EXPAND, 1, 1)
         close.connect_object("clicked", self.close_window, None)
         
-        #HELP button and OK button to be replaced by "read" and "delete"
-        #TODO: CREATE A DEF FOR READ AND A DEF FOR DELETE
-        #Delete button attributes - missing connection right now
+        # "delete"
         #make sure this button only appears if the book is downloaded. 
         halign2 = gtk.Alignment(0, 1, 0, 0)
         self.delete = gtk.Button("Delete")
@@ -308,7 +306,7 @@ class InfoBooks(gtk.Window):
         table.set_row_spacing(3, 6)
         table.attach(halign2, 0, 1, 4, 5, gtk.FILL, gtk.FILL, 0, 0)
         
-        #read button attributes - missing connection right now
+        #read button attributes 
         self.readbtn = gtk.Button("Read")
         if self.check_book_exists()==False:
 		    self.readbtn.set_sensitive(False)
@@ -347,16 +345,16 @@ class InfoBooks(gtk.Window):
 	    	print command
     		subprocess.Popen(command)
     		
-	except:
-		print "reading did not work"
+        except:
+			print "reading did not work"
 
     def check_internet(self):
-	try:
-	        response=urllib2.urlopen('http://www.google.com',timeout=2)
+		try:
+			response=urllib2.urlopen('http://www.google.com',timeout=2)
+			print "you are connected"
+			return True
 
-	        print "you are connected"
-	        return True
-	except urllib2.URLError as err: 
+		except urllib2.URLError as err: 
 
 			md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You are Offline - Please Connect.")
 			md.run()
@@ -402,9 +400,7 @@ class InfoBooks(gtk.Window):
 	                    #downloads the book and renames it to the full name and adds pdf extension
 	                    #TODO: ADD PROGRESS BAR
 	                    #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
-	                    md = gtk.MessageDialog(self, 
-            gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, 
-            gtk.BUTTONS_CLOSE, "Download Completed")
+	                    md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "Download Completed")
 	                    
 	                    urllib.urlretrieve(books[4],books[0]+".pdf")
 	                    
