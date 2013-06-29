@@ -110,14 +110,7 @@ One of the reasons why I like Python is that it provides a really nice balance b
 '''
 The Computer Science Departments of many universities teach a functional language as the first programming language. Using a functional language with its high level of abstraction helps to emphasize the principles of programming. Func-tional programming is only one of the paradigms with which a student should be acquainted. Imperative, Concurrent, Object-Oriented, and Logic programming are also important. Depending on the problem to be solved, one of the paradigms will be chosen as the most natural paradigm for that problem.
 This book is the course material to teach a second paradigm: imperative programming, using C as the programming language. The book has been written so that it builds on the knowledge that the students have acquired during their rst course on functional programming, using SML. The prerequisite of this book is that the principles of programming are already understood; this book does not specically aim to teach `problem solving' or `programming'.'''),
-('The Cathedral and the Bazaar','Open Source','Eric S. Raymond','pdf',
-'''
-The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary (abbreviated CatB) is an essay by Eric S. Raymond on software engineering methods, based on his observations of the Linux kernel development process and his experiences managing an open source project, fetchmail. It examines the struggle between top-down and bottom-up design. It was first presented by the author at the Linux Kongress on May 27, 1997 in Würzburg and was published as part of a book of the same name in 1999. The illustration on the cover of the book is a 1913 painting by Liubov Popova titled "Composition with Figures" and belongs to the collection of the State Tretyakov Gallery.
-The essay contrasts two different free software development models:
-- The Cathedral model, in which source code is available with each software release, but code developed between releases is restricted to an exclusive group of software developers. GNU Emacs and GCC are presented as examples.
-- The Bazaar model, in which the code is developed over the Internet in view of the public. Raymond credits Linus Torvalds, leader of the Linux kernel project, as the inventor of this process. Raymond also provides anecdotal accounts of his own implementation of this model for the Fetchmail project.
-The essay's central thesis is Raymond's proposition that "given enough eyeballs, all bugs are shallow" (which he terms Linus's Law): the more widely available the source code is for public testing, scrutiny, and experimentation, the more rapidly all forms of bugs will be discovered. In contrast, Raymond claims that an inordinate amount of time and energy must be spent hunting for bugs in the Cathedral model, since the working version of the code is available only to a few developers.
-'''),
+
 ('Mastering Node','NodeJS','TJ Holowaychuk','pdf','http://github.com/visionmedia/masteringnode/raw/master/book.pdf',
 '''Mastering node is an open source eBook by node hackers for node hackers. I started this as a side project and realized that I don't have time :) so go nuts, download it, build it, fork it, extend it and share it. If you come up with something you wish to contribute back, send me a pull request.'''),
 ('''Mobile Developer's Guide to the Galaxy''','Mobile Development', 'Robert Virkus (more)', 'pdf', 'http://www.enough.de/fileadmin/uploads/dev_guide_pdfs/Guide_12thEdition_WEB.pdf',
@@ -170,9 +163,25 @@ Even so, most Perl 5 programs in the world take far too little advantage of the 
 
 They solve difficult problems with speed and elegance. They take advantage of the CPAN and its unparalleled library of reusable code. They get things done.
 
-This productivity can be yours, whether you've dabbled with Perl for a decade or someone just handed you this book and said "Fix this code by Friday." Modern Perl is suitable for programmers of every level. It's more than a Perl tutorial—only Modern Perl focuses on Perl 5.12 and 5.14, to demonstrate the latest and most effective time-saving features. Only Modern Perl explains how and why the language works, to let you unlock the full power of Perl.
+This productivity can be yours, whether you've dabbled with Perl for a decade or someone just handed you this book and said "Fix this code by Friday." Modern Perl is suitable for programmers of every level. It's more than a Perl tutorial—only Modern Perl focuses on Perl 5.12 and 5.14, to demonstrate the latest and most effective time-saving features. Only Modern Perl explains how and why the language works, to let you unlock the full power of Perl. When you have to solve a problem now, reach for Perl. When you have to solve a problem right, reach for Modern Perl.''')
 
-Hone your skills. Sharpen your knowledge of the tools and techniques that make Perl so effective. Master everything Perl has to offer. When you have to solve a problem now, reach for Perl. When you have to solve a problem right, reach for Modern Perl.''')
+, ("Mining of Massive Datasets","Big Data","Anand Rajaraman (more)","pdf",'http://infolab.stanford.edu/~ullman/mmds/book.pdf',
+	'''
+At the highest level of description, this book is about data mining. However, it focuses on data mining of very large amounts of data, that is, data so large it does not fit in main memory. 
+Because of the emphasis on size, many of our examples are about the Web or data derived from the Web. Further, the book takes an algorithmic point of view: data mining is about applying algorithms to data, rather than using data to "train" a machine-learning engine of some sort.''')
+, ('How Computers Work','Computing','Roger Young','pdf','http://www.fastchip.net/howcomputerswork/bookbpdf.pdf',
+	'''
+Computers are the most complex machines that have ever been created. Very few people really know how they work. This book will tell you how they work and no technical knowledge is required. It explains the operation of a simple, but fully functional, computer in complete detail. The simple computer described consists mainly of a processor and main memory. Relays, which are explained, are used in the circuitry instead of transistors for simplicity. This book does not cover peripherals like modems, mice, disk drives, or monitors.
+
+Did you ever wonder what a bit, a pixel, a latch, a word (of memory), a data bus, an address bus, a memory, a register, a processor, a timing diagram, a clock (of a processor), an instruction, or machine code is? Though most explanations of how computers work are a lot of analogies or require a background in electrical engineering, this book will tell you precisely what each of them is and how each of them works without requiring any previous knowledge of computers or electronics. 
+''')
+
+, ('How to Write Parallel Programs','Parallel Programming','Nicholas Carriero (more)','pdf','http://lindaspaces.com/book/book.pdf',
+	'''
+This book is the raw material for a hands-on, "workshop" type course for undergraduates or graduate students in parallel programming. It can also serves as the core of a more conventional course; and it might profitably be read (we hope and believe) by any professional or researcher who needs an up-to-date synthesis of this fast-growing, fast-changing and fast-maturing field.
+
+The programming examples and exercises use C-Linda (Linda is a registered trademark of Scientific Computing Associates.); C-Linda running on a parallel machine or a network is the ideal lab environment for the workshop course we've described. A C-Linda simulator running on a standard workstation is an adequate environment. Relying on some other parallel language or programming system is perfectly okay as well. The called-for translations between the book and the lab environment might be slightly painful (particularly if the non-Linda parallel language you choose is any variant of the ubiquitous message-passing or remote-procedure-call models), but these translation exercises are always illuminating, and anyway, they build character.''')
+
 
     ]
 
