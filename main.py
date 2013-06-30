@@ -185,6 +185,102 @@ Did you ever wonder what a bit, a pixel, a latch, a word (of memory), a data bus
 This book is the raw material for a hands-on, "workshop" type course for undergraduates or graduate students in parallel programming. It can also serves as the core of a more conventional course; and it might profitably be read (we hope and believe) by any professional or researcher who needs an up-to-date synthesis of this fast-growing, fast-changing and fast-maturing field.
 
 The programming examples and exercises use C-Linda (Linda is a registered trademark of Scientific Computing Associates.); C-Linda running on a parallel machine or a network is the ideal lab environment for the workshop course we've described. A C-Linda simulator running on a standard workstation is an adequate environment. Relying on some other parallel language or programming system is perfectly okay as well. The called-for translations between the book and the lab environment might be slightly painful (particularly if the non-Linda parallel language you choose is any variant of the ubiquitous message-passing or remote-procedure-call models), but these translation exercises are always illuminating, and anyway, they build character.''')
+,('Beautiful Code, Compelling Evidence','Haskell','Jeff Heard','pdf','http://vis.renci.org/jeff/wp-content/uploads/2009/01/beautifulcode.pdf',
+'''
+This is a tutorial I presented at ICFP last year on visualization and graphics in Haskell.  
+It talks at length about why functional programming is a good idea for graphics, and then presents the basic tools that exist today.
+'''),
+('Version Control by Example','Version Control','Eric Sink','pdf','http://www.ericsink.com/vcbe/vcbe_a4_lo.pdf',
+'''
+This book uses practical examples to explain version control with both centralized and decentralized systems.  Topics covered include:
+
+• Basic version control commands and concepts
+• Introduction to Distributed Version Control Systems (DVCS)
+• Advanced branching workflows
+• Strengths and weaknesses of DVCS vs. centralized tools
+• Best practices
+• How distributed version control works under the hood
+
+Featuring these open source version control tools:
+
+• Apache Subversion
+• Mercurial
+• Git
+• Veracity
+
+'''),
+('Learning Statistics with R','R','Daniel Navarro','pdf','http://health.adelaide.edu.au/psychology/ccs/docs/lsr/lsr-0.3.pdf',
+'''
+Since 2011 I (Dan) have been teaching an introductory statistics class for psychology students, using the R statistical package as the primary tool. 
+Because I was a little unhappy with the textbooks available at the time, I started writing my own. The book is still a work in progress, but it has reached a "first draft" stage, at 542 pages. 
+'''
+)
+
+,('Smooth CoffeeScript','CoffeeScript','E. Hoigaard','pdf','http://autotelicum.github.io/Smooth-CoffeeScript/Smooth%20CoffeeScript%20Web%20Optimized.pdf',
+'''
+Smooth CoffeeScript is a book about CoffeeScript and programming. Start with programming fundamentals, learn about functional programming with Underscore and problem solving, study object orientation and modularity. It covers client/server web apps with Canvas and WebSockets.
+
+No previous programming knowledge is required. CoffeeScript lets you write web oriented applications simply and elegantly. It is closely related to JavaScript but without its quirky corners. 
+'''),
+('Text Algorithms','Text Processing','Maxime Crochemore','pdf','http://igm.univ-mlv.fr/~mac/REC/text-algorithms.pdf',
+'''
+One of the simplest and natural types of information representation is by means of written texts. Data to be processed often does not decompose into independent records. This type of data is characterized by the fact that it can be written down as a long sequence of characters. Such linear sequence is called a text. The texts are central in "word processing" systems, which provide facilities for the manipulation of texts. Such systems usually process objects which are quite large. For example, this book contains probably more than a million characters. Text algorithms occur in many areas of science and information processing. Many text editors and programming languages have facilities for processing texts. In biology, text algorithms arise in the study of molecular sequences. The complexity of text algorithms is also one of the central and most studied problems in theoretical computer science. It could be said that it is the domain where the practice and theory are very close together.
+
+'''	),
+('Producing Open Source Software','Open Source','Karl Fogel','pdf','http://producingoss.com/en/producingoss.pdf',
+'''
+At parties, people no longer give me a blank stare when I tell them I write free software. "Oh, yes, open source—like Linux?" they say. I nod eagerly in agreement. "Yes, exactly! That's what I do." It's nice not to be completely fringe anymore. In the past, the next question was usually fairly predictable: "How do you make money doing that?" To answer, I'd summarize the economics of open source: that there are organizations in whose interest it is to have certain software exist, but that they don't need to sell copies, they just want to make sure the software is available and maintained, as a tool instead of a commodity.
+
+Lately, however, the next question has not always been about money. The business case for open source software is no longer so mysterious, and many non-programmers already understand—or at least are not surprised—that there are people employed at it full time. Instead, the question I have been hearing more and more often is "Oh, how does that work?"
+
+I didn't have a satisfactory answer ready, and the harder I tried to come up with one, the more I realized how complex a topic it really is. Running a free software project is not exactly like running a business (imagine having to constantly negotiate the nature of your product with a group of volunteers, most of whom you've never met!). Nor, for various reasons, is it exactly like running a traditional non-profit organization, nor a government. 
+'''	),
+('Making Games with Python & Pygame','Python / Pygame', 'Al Sweigart','pdf','http://inventwithpython.com/makinggames.pdf',
+'''
+“Making Games with Python & Pygame” covers the Pygame library with the source code for 11 games. “Making Games” was written as a sequel for the same age range as “Invent with Python”. Once you have an understanding of the basics of Python programming, you can now expand your abilities using the Pygame library to make games with graphics, animation, and sound.
+
+The book features the source code to 11 games. The games are clones of classics such as Nibbles, Tetris, Simon, Bejeweled, Othello, Connect Four, Flood It, and others.
+'''),
+('''Beej's Guide to C Programming''','C','''Brian 'Beej' Hall''','pdf','http://beej.us/guide/bgc/output/print/bgc_A4.pdf',
+'''
+The bad news is that if you're a beginner in this whole thing, all C code you see looks obfuscated! The good news is, it's not going to be that way for long.
+What we'll try to do over the course of this guide is lead you from complete and utter sheer lost confusion on to the sort of enlightened bliss that can only be obtained though pure C programming. Right on.
+
+As with most Beej's Guides, this one tries to cater to people who are just starting on the topic. That's you! If that's not you for whatever reason the best I can hope to provide is some pastey entertainment for your reading pleasure. The only thing I can reasonably promise is that this guide won't end on a cliffhanger...or will it?
+
+'''
+ ),
+('The New C Standard','C','Derek M. Jones','pdf','http://www.coding-guidelines.com/cbook/cbook1_2.pdf',
+'''
+This book contains a detailed analysis of the International Standard for the C language, excluding the library from a number of perspectives. The organization of the material is unusual in that it is based on the actual text of the published C Standard. The unit of discussion is the individual sentences from the C
+Standard (2043 of them). 
+
+Readers are assumed to have more than a passing familiarity with C.
+
+'''
+),
+('Think Bayes','Bayesian Statistics','Allen B. Downey','pdf','http://www.greenteapress.com/thinkbayes/thinkbayes.pdf',
+'''
+Think Bayes is an introduction to Bayesian statistics using computational methods. This version of the book is a rough draft. I am making this draft available for comments, but it comes with the warning that it is probably full of errors. 
+'''	),
+('Free Software, Free Society','Freedom','Richard Stallman','pdf','http://www.gnu.org/doc/fsfs-ii-2.pdf',
+'''
+This book collects the writing of Richard Stallman in a manner that will make its subtlety and power clear. The essays span a wide range, from copyright to the history of the free software movement. They include many arguments not well known, and among these, an especially insightful account of the changed circumstances that render copyright in the digital world suspect. They will serve as a resource for those who seek to understand the thought of this most powerful man--powerful in his ideas, his passion, and his integrity, even if powerless in every other way. They will inspire other who would take these ideas, and build upon them.
+'''),
+('The Future of Ideas','Internet','Lawrence Lessig','pdf','http://web.archive.org/web/20110716220221/http://www.the-future-of-ideas.com/download/lessig_FOI.pdf',
+'''
+The Internet revolution has come. Some say it has gone. What was responsible for its birth? Who is responsible for its demise? In The Future of Ideas, Lawrence Lessig explains how the Internet revolution has produced a counterrevolution of devastating power and effect. The explosion of innovation we have seen in the environment of the Internet was not conjured from some new, previously unimagined technological magic; instead, it came from an ideal as old as the nation. Creativity flourished there because the Internet protected an innovation commons. The Internet's very design built a neutral platform upon which the widest range of creators could experiment. The legal architecture surrounding it protected this free space so that culture and information, the ideas of our era, could flow freely and inspire an unprecedented breadth of expression. But this structural design is changing, both legally and technically.
+
+This shift will destroy the opportunities for creativity and innovation that the Internet originally engendered. The cultural dinosaurs of our recent past are moving to quickly remake cyberspace so that they can better protect their interests against the future. Powerful conglomerates are swiftly using both law and technology to "tame" the Internet, transforming it from an open forum for ideas into nothing more than cable television on speed. 
+'''),
+('Learning Go','Go','Miek Gieben','pdf','http://www.miek.nl/files/go/20130612-go.pdf',
+'''
+This is an introduction to the Go language from Google. Its aim is to provide a guide to this new and innovative language.
+
+The intended audience of this book is people who are familiar with programming and know some programming languages, be it C[3], C++[23], Perl[5], Java[16], Erlang[4], Scala[17] or Haskell[1]. This is not a book that teaches you how to program, this is a book that just teaches you how to use Go.
+
+As with learning new things, probably the best way to do this is to discover it for yourself by creating your own programs. Each chapter therefore includes a number of exercises (and answers) to acquaint you with the language.
+''')
 
 
     ]
