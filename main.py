@@ -422,6 +422,10 @@ class HackerBooks(gtk.Window):
         super(HackerBooks, self).__init__()
         
         self.create_directory()
+        
+        #if displaymode is 0, show all, 1, show downloaded only
+        self.displaymode=0
+
 
         self.set_size_request(750, 400)
         self.set_position(gtk.WIN_POS_CENTER)
@@ -431,6 +435,45 @@ class HackerBooks(gtk.Window):
         #self.caca="yooo"
 
         vbox = gtk.VBox(False, 8)
+
+        #Definition of menu bar
+        mb=gtk.MenuBar()
+        filemenu=gtk.Menu()
+        filem=gtk.MenuItem("File")
+        filem.set_submenu(filemenu)
+
+        #about menu
+        aboutmenu=gtk.Menu()
+        aboutm=gtk.MenuItem("About")
+        aboutm.set_submenu(aboutmenu)
+        version=gtk.MenuItem("Version")
+        version.connect("activate",self.about_this_application)
+        aboutmenu.append(version)
+
+
+        #Show menu
+        showmenu=gtk.Menu()
+        showm=gtk.MenuItem("Display")
+        showm.set_submenu(showmenu)
+        showall=gtk.MenuItem("Show All Books")
+        showall.connect("activate",self.all_books)
+        showmenu.append(showall)
+        showgotbooks=gtk.MenuItem('Show Downloaded Books')
+        showgotbooks.connect("activate",self.downloaded_books_only)
+        showmenu.append(showgotbooks)
+
+        #File menu
+        exit=gtk.MenuItem('Exit')
+        exit.connect("activate",gtk.main_quit)
+        filemenu.append(exit)
+
+        #adding it back in the menu together
+        mb.append(filem)
+        mb.append(showm)
+        mb.append(aboutm)
+
+        #packs the vbox
+        vbox.pack_start(mb,False,False)
         
         #sw is a scrolled window
         sw = gtk.ScrolledWindow()
@@ -439,20 +482,47 @@ class HackerBooks(gtk.Window):
         
         vbox.pack_start(sw, True, True, 0)
 
-        store = self.create_model()
+        self.store = self.create_model()
 
-        treeView = gtk.TreeView(store)
-        treeView.connect("row-activated", self.on_activated)
-        treeView.set_rules_hint(True)
-        sw.add(treeView)
+        self.treeView = gtk.TreeView(self.store)
+        self.treeView.connect("row-activated", self.on_activated)
+        self.treeView.set_rules_hint(True)
+        sw.add(self.treeView)
 
-        self.create_columns(treeView)
+        self.create_columns(self.treeView)
         self.statusbar = gtk.Statusbar()
         
+        #packs the statusbar
         vbox.pack_start(self.statusbar, False, False, 0)
 
+        #add the vbox in the window
         self.add(vbox)
         self.show_all()
+
+
+    def about_this_application(self,widget):
+
+        aboutthis = gtk.AboutDialog()
+        aboutthis.set_program_name("HackerBooks")
+        aboutthis.set_version("0.1.1")
+        aboutthis.set_copyright("(c) Ekianjo 2013")
+        aboutthis.set_comments("HackerBooks is a small application to download and manage free books about Programming and Computer Science")
+        aboutthis.set_website("https://github.com/ekianjo/HackerBooks")
+        aboutthis.set_logo(gtk.gdk.pixbuf_new_from_file("../icon.png"))
+        aboutthis.run()
+        aboutthis.destroy()
+
+    def all_books(self,widget):
+
+    	#displaymode is now all books.
+    	self.displaymode=0
+    	self.treeView.set_model(self.create_model())
+
+    def downloaded_books_only(self,widget):
+
+    	#ensure that the displaymode is now set to only downloaded books.
+    	self.displaymode=1
+    	self.treeView.set_model(self.create_model())
 
     def create_directory(self):
     	if os.path.isdir("BOOKS")==False:
@@ -462,12 +532,17 @@ class HackerBooks(gtk.Window):
 
 
     def create_model(self):
-        store = gtk.ListStore(str, str, str, str)
+        self.store = gtk.ListStore(str, str, str, str)
 
         for books in hackerbooks:
-            store.append([books[0], books[1], books[2],books[3]])
-
-        return store
+        	if self.displaymode==1:
+        		bookname=books[0]+".pdf"
+        		if os.path.isfile(bookname):
+        			print bookname
+	        		self.store.append([books[0], books[1], books[2],books[3]])
+	        else:
+	        	self.store.append([books[0], books[1], books[2],books[3]])
+        return self.store
 
     def create_columns(self, treeView):
     
