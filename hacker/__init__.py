@@ -260,5 +260,60 @@ This is an introduction to the Go language from Google. Its aim is to provide a 
 The intended audience of this book is people who are familiar with programming and know some programming languages, be it C[3], C++[23], Perl[5], Java[16], Erlang[4], Scala[17] or Haskell[1]. This is not a book that teaches you how to program, this is a book that just teaches you how to use Go.
 
 As with learning new things, probably the best way to do this is to discover it for yourself by creating your own programs. Each chapter therefore includes a number of exercises (and answers) to acquaint you with the language.
-''')
+'''),
+('Data Structures & Algorithms Analysis in C++','C++','Clifford A. Schaffer','pdf','http://people.cs.vt.edu/~shaffer/Book/C++3e20130328.pdf',
+'''
+We study data structures so that we can learn to write more efficient programs. But why must programs be efficient when new computers are faster every year?
+The reason is that our ambitions grow with our capabilities. Instead of rendering efficiency needs obsolete, the modern revolution in computing power and storage capability merely raises the efficiency stakes as we attempt more complex tasks. The quest for program efficiency need not and should not conflict with sound design and clear coding. Creating efficient programs has little to do with “program-ming tricks” but rather is based on good organization of information and good algorithms. A programmer who has not mastered the basic principles of clear design is not likely to write efficient programs. Conversely, concerns related to develop-
+ment costs and maintainability should not be used as an excuse to justify inefficient performance. Generality in design can and should be achieved without sacrificing performance, but this can only be done if the designer understands how to measure performance and does so as an integral part of the design and implementation process. 
+
+'''
+),
+('Data Structures & Algorithms Analysis in Java','Java','Clifford A. Schaffer','pdf','http://people.cs.vt.edu/~shaffer/Book/JAVA3e20130328.pdf',
+'''
+We study data structures so that we can learn to write more efficient programs. But why must programs be efficient when new computers are faster every year?
+The reason is that our ambitions grow with our capabilities. Instead of rendering efficiency needs obsolete, the modern revolution in computing power and storage capability merely raises the efficiency stakes as we attempt more complex tasks. The quest for program efficiency need not and should not conflict with sound design and clear coding. Creating efficient programs has little to do with “program-ming tricks” but rather is based on good organization of information and good algorithms. A programmer who has not mastered the basic principles of clear design is not likely to write efficient programs. Conversely, concerns related to develop-
+ment costs and maintainability should not be used as an excuse to justify inefficient performance. Generality in design can and should be achieved without sacrificing performance, but this can only be done if the designer understands how to measure performance and does so as an integral part of the design and implementation process.
+'''
+),
+('Big Fat Rails','Ruby on Rails','Mitch Guthrie','pdf','http://www.bigfatrails.com/ebooks/bigfatrails-0.7.4.beta.pdf',
+'''
+ There are many resources out there for learning Rails. I've used many myself. The reason to add one more to an already long list may seem needless at best and stupid at worst. The driving factor is simply this: The more resources available to the beginner the better chance they have to become proficient at the subject.
+
+When I'm learning something new I always find several resources to learn from. Often buying many books on the subject. Each resource provides a different point of view, teaching method, or simply a format which I learn better from. It is my intention to provide another resource that may help others better understand everything available to them. 
+'''
+	),
+('An Introduction to R','R','W.N. Venables (more)','pdf','http://cran.r-project.org/doc/manuals/R-intro.pdf',
+'''
+This introduction to R is derived from an original set of notes describing the S and SPlus environments written in 1990–2 by Bill Venables and David M. Smith when at the University of Adelaide.
+'''
+),
+('Version Control with Subversion','Subversion','Ben Collins-Sussman (more)','pdf','http://svnbook.red-bean.com/en/1.7/svn-book.pdf',
+'''
+In the world of open source software, the Concurrent Versions System (CVS) was the tool of choice for version control for many years. And rightly so. CVS was open source software itself, and its nonrestrictive modus operandi and support for networked operation allowed dozens of geographically dispersed programmers to share their work. It fit the collaborative nature of the open source world very well. CVS and its semi-chaotic development model have since become cornerstones of open source culture.
+
+But CVS was not without its flaws, and simply fixing those flaws promised to be an enormous effort. Enter Subversion. Subversion was designed to be a successor to CVS, and its originators set out to win the hearts of CVS users in two ways—by creating an open source system with a design (and “look and feel”) similar to CVS, and by attempting to avoid most of CVS's noticeable flaws. While the result wasn't—and isn't—the next great evolution in version control design, Subversion is very powerful, very usable, and very flexible.
+'''
+	),
+('Introduction to Good Usability','Usability','Peter Conradie','pdf','http://www.peterpixel.nl/projects/ebook/introduction_to_good_usability.pdf',
+'''
+Over the past year I have written a few posts about design guidelines. They have also proven to be the most successful ones. I have therefor decided to put a few of them together, add some more and bundle it as an ebook. So without much further ado, I present:
+
+'''	),
+('Using R for Data Analysis and Graphic','R','J.H. Maindonald','pdf','http://cran.r-project.org/doc/contrib/usingR.pdf',
+'''
+These notes are designed to allow individuals who have a basic grounding in statistical methodology to work through examples that demonstrate the use of R for a range of types of data manipulation, graphical presentation and statistical analysis. Books that provide a more extended commentary on the methods illustrated in these examples include Maindonald and Braun (2003).
+
+'''
+	),
+('Programming Computer Vision with Python','Computer Vision','Jan Erik Solem','pdf','http://programmingcomputervision.com/downloads/ProgrammingComputerVision_CCdraft.pdf',
+'''
+Today, images and video are everywhere. Online photo sharing sites and social networks have them in the billions. Search engines will produce images of just about any conceivable query. Practically all phones and computers come with built in cameras. It is not uncommon for people to have many gigabytes of photos and videos on their devices.
+Programming a computer and designing algorithms for understanding what is in these images is the field of computer vision. Computer vision powers applications like image search, robot navigation, medical image analysis, photo management and many more.
+
+The idea behind this book is to give an easily accessible entry point to hands-on computer vision with enough understanding of the underlying theory and algorithms to be a foundation for students, researchers and enthusiasts. The Python programming language, the language choice of this book, comes with many freely available powerful modules for handling images, mathematical computing and data mining.
+'''
+)
+
+
     ]

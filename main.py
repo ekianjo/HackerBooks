@@ -32,7 +32,7 @@ class InfoBooks(gtk.Window):
         super(InfoBooks,self).__init__()
 
         #set info window size attributes
-        self.set_size_request(600,400)
+        self.set_size_request(650,400)
         self.set_position(gtk.WIN_POS_CENTER)
         self.set_border_width(8)
         self.set_title(mainwindow.caca+" : Book Information")
@@ -85,14 +85,14 @@ class InfoBooks(gtk.Window):
         self.download = gtk.Button("Download")
         if self.check_book_exists()==True:
 			self.download.set_sensitive(False)
-        self.download.set_size_request(50, 30)
+        self.download.set_size_request(90, 40)
         table.attach(self.download, 3, 4, 1, 2, gtk.FILL, gtk.SHRINK, 1, 1)
         self.download.connect_object("clicked", self.downloadbook, None)
 
         #Close button attributes and connection to signals
         valign = gtk.Alignment(0, 0, 0, 0)
         close = gtk.Button("Close")
-        close.set_size_request(70, 30)
+        close.set_size_request(90, 40)
         valign.add(close)
         table.set_row_spacing(1, 3)
         table.attach(valign, 3, 4, 2, 3, gtk.FILL, gtk.FILL | gtk.EXPAND, 1, 1)
@@ -104,7 +104,7 @@ class InfoBooks(gtk.Window):
         self.delete = gtk.Button("Delete")
         if self.check_book_exists()==False:
 			self.delete.set_sensitive(False)
-        self.delete.set_size_request(70, 30)
+        self.delete.set_size_request(90, 40)
         self.delete.connect_object("clicked", self.delete_book, None)
         halign2.add(self.delete)
         
@@ -115,7 +115,7 @@ class InfoBooks(gtk.Window):
         self.readbtn = gtk.Button("Read")
         if self.check_book_exists()==False:
 		    self.readbtn.set_sensitive(False)
-        self.readbtn.set_size_request(70, 30)
+        self.readbtn.set_size_request(90, 40)
         table.attach(self.readbtn, 3, 4, 4, 5, gtk.FILL, gtk.FILL, 0, 0);
         self.readbtn.connect_object("clicked", self.open_book, None)
         
@@ -261,6 +261,9 @@ class HackerBooks(gtk.Window):
         showgotbooks=gtk.MenuItem('Show Downloaded Books')
         showgotbooks.connect("activate",self.downloaded_books_only)
         showmenu.append(showgotbooks)
+        showleftbooks=gtk.MenuItem('Show Books Left to Download')
+        showleftbooks.connect("activate",self.left_to_download)
+        showmenu.append(showleftbooks)
 
         #File menu
         exit=gtk.MenuItem('Exit')
@@ -323,6 +326,11 @@ class HackerBooks(gtk.Window):
     	self.displaymode=1
     	self.treeView.set_model(self.create_model())
 
+    def left_to_download(self,widget):
+        self.displaymode=2
+        self.treeView.set_model(self.create_model())
+
+
    	#creates the folder where books are saved if necessary
     def create_directory(self):
     	if os.path.isdir("BOOKS")==False:
@@ -335,12 +343,15 @@ class HackerBooks(gtk.Window):
         self.store = gtk.ListStore(str, str, str, str)
 
         for books in hackerbooks:
-        	if self.displaymode==1:
-        		bookname=books[0]+".pdf"
+            bookname=books[0]+".pdf"
+            if self.displaymode==1:
         		if os.path.isfile(bookname):
         			print bookname
 	        		self.store.append([books[0], books[1], books[2],books[3]])
-	        else:
+            elif self.displaymode==2:
+                if os.path.isfile(bookname)==False:
+                    self.store.append([books[0], books[1], books[2],books[3]])
+            else:
 	        	self.store.append([books[0], books[1], books[2],books[3]])
         return self.store
 
