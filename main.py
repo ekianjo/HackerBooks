@@ -28,9 +28,34 @@ import pango #used to determine a consistant style across the different systems.
 
 from hacker import *
 
+progressbar=0
+
+
+def myReportHook(count,blocksize,totalsize):
+    global progressbar
+    progressbar=100*(count*blocksize)/(totalsize)
+    print progressbar
+    
+
+class PBwindow(gtk.Window): 
+    def __init__(self):
+        global progressbar
+        super(PBwindow, self).__init__()
+        
+        self.set_position(gtk.WIN_POS_CENTER)
+        self.set_border_width(8)
+        self.connect("destroy", gtk.main_quit)
+        self.set_title("Progress Bar")
+        
+        label = gtk.Label(str(progressbar))
+        self.add(label)
+        self.show_all()
+
+
 
 class InfoBooks(gtk.Window):
     def __init__(self):
+        
         super(InfoBooks,self).__init__()
 
         #set info window size attributes
@@ -99,7 +124,8 @@ class InfoBooks(gtk.Window):
         table.set_row_spacing(1, 3)
         table.attach(valign, 3, 4, 2, 3, gtk.FILL, gtk.FILL | gtk.EXPAND, 1, 1)
         close.connect_object("clicked", self.close_window, None)
-        
+
+
         # "delete"
         #make sure this button only appears if the book is downloaded. 
         halign2 = gtk.Alignment(0, 1, 0, 0)
@@ -189,6 +215,10 @@ class InfoBooks(gtk.Window):
     	else:
     		return False
 
+
+
+
+
     #downloads the book
     def downloadbook(self,widget):
 
@@ -203,8 +233,9 @@ class InfoBooks(gtk.Window):
 	                    #TODO: ADD PROGRESS BAR
 	                    #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
 	                    md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "Download Completed")
-	                    
-	                    urllib.urlretrieve(books[4],books[0]+".pdf")
+
+
+	                    urllib.urlretrieve(books[4],books[0]+".pdf",reporthook=myReportHook)
 	                    
 	                    #print "Download finished"
 	                    md.run()

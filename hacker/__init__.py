@@ -320,6 +320,49 @@ This is a cheat sheet to cover most of the markups used in the Markdown markup l
 It is now widely used in several blog management systems, and readme files on github, for example. 
 '''),
 ('Algorithms Course Material','Algorithms','Jeff Erikson','pdf','http://compgeom.cs.uiuc.edu/~jeffe/teaching/algorithms/everything.pdf',
-'''This page contains all my lecture notes for the algorithms classes required for all computer science undergraduate and graduate students at the University of Illinois, Urbana-Champaign. I have taught incarnations of this course eight times: Spring 1999, Fall 2000, Spring 2001, Fall 2002, Spring 2004, Fall 2005, Fall 2006, Spring 2007, Fall 2008, Spring 2009, Spring 2010, and Fall 2010. These notes are numbered roughly in the order I use them in my undergraduate class.
-This PDF file is 814 pages long.''')
+'''
+This page contains all my lecture notes for the algorithms classes required for all computer science undergraduate and graduate students at the University of Illinois, Urbana-Champaign. I have taught incarnations of this course eight times: Spring 1999, Fall 2000, Spring 2001, Fall 2002, Spring 2004, Fall 2005, Fall 2006, Spring 2007, Fall 2008, Spring 2009, Spring 2010, and Fall 2010. These notes are numbered roughly in the order I use them in my undergraduate class.
+This PDF file is 814 pages long.'''),
+('Coding Freedom','Freedom','Gabriella Coleman','pdf','http://gabriellacoleman.org/Coleman-Coding-Freedom.pdf','''
+Who are computer hackers? What is free software? And what does the emergence of a community dedicated to the production of free and open source software–and to hacking as a technical, aesthetic, and moral project–reveal about the values of contemporary liberalism? Exploring the rise and political significance of the free and open source software (F/OSS) movement in the United States and Europe, Coding Freedom details the ethics behind hackers’ devotion to F/OSS, the social codes that guide its production, and the political struggles through which hackers question the scope and direction of copyright and patent law. In telling the story of the F/OSS movement, the book unfolds a broader narrative involving computing, the politics of access, and intellectual property.
+
+E. Gabriella Coleman tracks the ways in which hackers collaborate and examines passionate manifestos, hacker humor, free software project governance, and festive hacker conferences. Looking at the ways that hackers sustain their productive freedom, Coleman shows that these activists, driven by a commitment to their work, reformulate key ideals including free speech, transparency, and meritocracy, and refuse restrictive intellectual protections. Coleman demonstrates how hacking, so often marginalized or misunderstood, sheds light on the continuing relevance of liberalism in online collaboration.'''),
+('Free as in Freedom','Freedom','Richard Stallman','pdf','http://static.fsf.org/nosvn/faif-2.0.pdf',
+'''
+In 2002, Sam Williams wrote Free as in Freedom, a biography of Richard M. Stallman. In its epilogue, Williams expressed hope that choosing to distribute his book under the GNU Free Documentation License would enable and encourage others to share corrections and their own perspectives through modifications to his work.
+
+Free as in Freedom (2.0) is Stallman’s revision of the original biography. While preserving Williams’s viewpoint, it includes factual corrections and extensive new commentary by Stallman, as well as new prefaces by both authors written for the occasion. It is a rare kind of biography, where the reader has the benefit of both the biographer’s original words and the subject’s response.
+'''),
+('''Don't just roll the dice''','Software Pricing','Neil Davidson','pdf','http://neilgd.wpengine.com/wp-content/uploads/2011/12/dontjustrollthedice.pdf','''
+How do you price your software? Is it art, science or magic? How much attention should you pay to your competitors? This short handbook will provide you with the theory, practical advice and case studies you need to stop yourself from reaching for the dice.
+
+At Business of Software 2007 Michael Pryor held an impromptu session on how to price your software. So many people turned up, and so many people kept on arriving, that by the time they’d introduced themselves there was no time left to talk about software pricing. I’ve had similar experiences; in fact, “How do I price my software?” is probably the most common question I’m asked by software entrepreneurs and product managers. This handbook is an attempt to answer that question.” Neil Davidson, Author. About the Author Neil Davidson is co-founder and joint CEO of Red Gate Software. Red Gate was founded in 1999 and now employs some 150 people. It was Cambridge News business of the year in 2006 and has been in the Sunday Times top 100 companies to work for three years running. It was founded with no VC money and little debt. Neil is also founder of the annual Business of Software conference and runs the Business of Software social network. '''),
+('Introduction to Embedded Systems','Embedded Systems','Edward Ashford Lee (more)','pdf','http://leeseshia.org/releases/LeeSeshia_DigitalV1_08.pdf',
+'''
+This book is intended for students at the advanced undergraduate level or the introductory graduate level, and for practicing engineers and computer scientists who wish to understand the engineering principles of embedded systems. 
+
+This book strives to identify and introduce the durable intellectual ideas of embedded systems as a technology and as a subject of study. The emphasis is on modeling, design, and analysis of cyber-physical systems, which integrate computing, networking, and physical processes. This book is divided into three major parts, focused on modeling, design, and analysis.
+'''
+	),
+('Linux Kernel Crash Book','Linux','Igor Ljubuncic','pdf','https://www.dropbox.com/s/ktbz9fy7qbwsyfa/www.dedoimedo.com-crash-book.pdf','''
+“Linux Kernel Crash Book”, by Igor Ljubuncic, starts with crash tools via collection all the way to analysis, plus some extras and general tips. Linux kernel crash analysis is not an everyday topic. It is very likely a niche topic, which will interest only system administrators and professionals dabbling in the kernel. 
+
+This condition may stop you from reading the book, as you may not be either the person maintaining server boxes nor the code developer trying to debug his drivers.
+
+However, you may also consider this book as a very extensive learning lesson in what goes behind the curtains of a typical Linux system. While you may not find immediate use to the contents presented in this book, the general knowledge and problem solving methods and tools you find here should serve you universally. Come the day, come the opportunity, you will find this book of value.
+	'''),
+('The R Inferno',"R",'Patrick Burns','pdf','http://www.burns-stat.com/pages/Tutor/R_inferno.pdf',
+'''
+An essential guide to the trouble spots and oddities of R. In spite of the quirks exposed here, R is the best computing environment for most data analysis tasks. R is free, open-source, and has thousands of contributed packages. It is used in such diverse fields as ecology, finance, genomics and music. If you are using spreadsheets to understand data, switch to R. You will have safer – and ultimately, more convenient – computations.
+'''),
+('An Introduction to Programming in Go', 'Go','Caleb Doxsey','pdf','http://www.golang-book.com/assets/pdf/gobook.pdf',
+'''
+This book is a short, concise introduction to computer programming using the language Go. Designed by Google, Go is a general purpose programming language with modern features, clean syntax and a robust well-documented common library, making it an ideal language to learn as your first programming language.
+'''
+	),
+('Git Magic','Git','Ben Lynn','pdf','http://www-cs-students.stanford.edu/~blynn/gitmagic/book.pdf',
+'''
+As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities. Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs. 
+'''
+)
     ]
