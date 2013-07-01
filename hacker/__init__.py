@@ -318,7 +318,8 @@ The idea behind this book is to give an easily accessible entry point to hands-o
 '''
 This is a cheat sheet to cover most of the markups used in the Markdown markup language. 
 It is now widely used in several blog management systems, and readme files on github, for example. 
-''')
-
-
+'''),
+('Algorithms Course Material','Algorithms','Jeff Erikson','pdf','http://compgeom.cs.uiuc.edu/~jeffe/teaching/algorithms/everything.pdf',
+'''This page contains all my lecture notes for the algorithms classes required for all computer science undergraduate and graduate students at the University of Illinois, Urbana-Champaign. I have taught incarnations of this course eight times: Spring 1999, Fall 2000, Spring 2001, Fall 2002, Spring 2004, Fall 2005, Fall 2006, Spring 2007, Fall 2008, Spring 2009, Spring 2010, and Fall 2010. These notes are numbered roughly in the order I use them in my undergraduate class.
+This PDF file is 814 pages long.''')
     ]
