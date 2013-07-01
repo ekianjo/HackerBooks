@@ -12,6 +12,10 @@ This is a Python application to download books related to Programming or Compute
 All the books proposed for download are freely available (either creative commons or permissive licenses).
 Books are organized by title, category, authors.
 
+## How to run it ##
+Extremely simple. Go into the terminal and just type : python main.py 
+It should start without issue. If you face problems check the notes below regarding compatibility. 
+
 ## Usage ##
 - Select a book in the list and click/Enter it
 - You then see the description of the book in another window. You have the choice to close that window, or to download the book.
