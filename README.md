@@ -19,7 +19,7 @@ Books are organized by title, category, authors.
 - Once the book is available, you can click the "read" button to open it on your device for consultation.
 - You can also choose to delete it from your device.
 
-## Notes on Cross-Platform Compatibility ##
+### Notes on Cross-Platform Compatibility ###
 If you want to use this application, you need gtk 2+ and python 2.7+ on your system. 
 Opening a PDF uses evince, therefore you should have it installed on your system for it to work. 
 Needless to say, this is probably going to be working OK for GNU/Linux systems only. 
