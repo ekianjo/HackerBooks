@@ -313,7 +313,12 @@ Programming a computer and designing algorithms for understanding what is in the
 
 The idea behind this book is to give an easily accessible entry point to hands-on computer vision with enough understanding of the underlying theory and algorithms to be a foundation for students, researchers and enthusiasts. The Python programming language, the language choice of this book, comes with many freely available powerful modules for handling images, mathematical computing and data mining.
 '''
-)
+),
+('Markdown Cheat Sheet','MarkDown','Mark Boszko','pdf','http://stationinthemetro.com/storage/dev/Markdown_Cheat_Sheet_v1-1.pdf',
+'''
+This is a cheat sheet to cover most of the markups used in the Markdown markup language. 
+It is now widely used in several blog management systems, and readme files on github, for example. 
+''')
 
 
     ]
