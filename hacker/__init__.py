@@ -369,5 +369,32 @@ As Arthur C. Clarke observed, any sufficiently advanced technology is indistingu
 '''
 Harry Potter fanfic-in-progress, Harry Potter and the Methods of Rationality.
 '''
+),
+('TeX for the Impatient','TeX','Paul Abrahams (more)','pdf','http://mirror.ctan.org/info/impatient/book.pdf',
+'''
+TEX, a software system created by Donald E. Knuth, sets the standard for typesetting in mathematics, science, and engineering. “TEX for the Impatient” is a handbook that arose from the need to help technical writers learn TEX more quickly and once having learned it, to find fast answers to common questions. Clear, concise, and accessible, this book is organized for easy retrieval of information, thoroughly indexed, and carefully designed for learning by example.
+
+TEX for the Impatient is intended to serve scientists, mathematicians, and technical typists for whom TEX is a useful tool rather than a primary interest, as well as computer people who have a strong interest in TEX for its own sake. We also intend it to serve both newcomers to TEX and those who are already familiar with TEX. We assume that our readers are comfortable working with computers and that they want to get the information they need as quickly as possible. Our aim is to provide that information clearly, concisely, and accessibly. This book therefore provides a bright searchlight, a stout walking-stick, and detailed maps for exploring and using TEX.'''),
+('Data-Intensive Text Processing with MapReduce','MapReduce','Jimmy Lin (more)','pdf','http://www.umiacs.umd.edu/~jimmylin/MapReduce-book-final.pdf',
+'''
+MapReduce [45] is a programming model for expressing distributed computations on massive amounts of data and an execution framework for large-scale data processing on clusters of commodity servers. It was originally developed by Google and built on well-known principles in parallel and distributed processing dating back several decades. MapReduce has since enjoyed widespread adoption via an open-source implementation called Hadoop, whose development was led by Yahoo (now an Apache project). Today, a vibrant software ecosystem has sprung up around Hadoop, with significant activity in both industry and academia.
+
+This book is about scalable approaches to processing large amounts of text with MapReduce. Given this focus, it makes sense to start with the most basic question: Why? There are many answers to this question, but we focus on two. First, “big data” is a fact of the world, and therefore an issue that real-world systems must grapple with. Second, across a wide range of text processing applications, more data translates into more effective algorithms, and thus it makes sense to take advantage of the plentiful amounts of data that surround us.
+
+'''
+),
+('GNU Make Manual','GNU Make','FSF','pdf','https://www.gnu.org/software/make/manual/make.pdf',
+'''
+Official Manual for GNU Make by the Free Software Foundation
+'''
+	),
+('Basics of Compiler Design','Compilers','Torben Mogensen','pdf','http://www.diku.dk/hjemmesider/ansatte/torbenm/Basics/basics_lulu2.pdf',
+'''
+In order to reduce the complexity of designing and building computers, nearly all of these are made to execute relatively simple commands (but do so very quickly). A program for a computer must be built by combining these very simple commands into a program in what is called machine language. Since this is a tedious and error-prone process most programming is, instead, done using a high-level programming language. This language can be very different from the machine language that the computer can execute, so some means of bridging the gap is required. This is where the compiler comes in.
+
+A compiler translates (or compiles) a program written in a high-level programming language that is suitable for human programmers into the low-level machine language that is required by computers. During this process, the compiler will also attempt to spot and report obvious programmer mistakes.
+
+'''
 )
-    ]
+
+]
