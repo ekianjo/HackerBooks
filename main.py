@@ -59,7 +59,7 @@ class InfoBooks(gtk.Window):
         super(InfoBooks,self).__init__()
 
         #set info window size attributes
-        self.set_size_request(650,400)
+        self.set_size_request(696,400)
         self.set_position(gtk.WIN_POS_CENTER)
         self.set_border_width(8)
         self.set_title(mainwindow.caca+" : Book Information")
@@ -109,17 +109,17 @@ class InfoBooks(gtk.Window):
 
         #Download button attributes and connection
         
-        self.download = gtk.Button("Download")
+        self.download = gtk.Button("__Download",stock=gtk.STOCK_SAVE,use_underline=True)
         if self.check_book_exists()==True:
 			self.download.set_sensitive(False)
-        self.download.set_size_request(90, 40)
+        self.download.set_size_request(100, 40)
         table.attach(self.download, 3, 4, 1, 2, gtk.FILL, gtk.SHRINK, 1, 1)
         self.download.connect_object("clicked", self.downloadbook, None)
 
         #Close button attributes and connection to signals
         valign = gtk.Alignment(0, 0, 0, 0)
-        close = gtk.Button("Close")
-        close.set_size_request(90, 40)
+        close = gtk.Button("__Close", stock=gtk.STOCK_CLOSE,use_underline=True)
+        close.set_size_request(100, 40)
         valign.add(close)
         table.set_row_spacing(1, 3)
         table.attach(valign, 3, 4, 2, 3, gtk.FILL, gtk.FILL | gtk.EXPAND, 1, 1)
@@ -129,10 +129,10 @@ class InfoBooks(gtk.Window):
         # "delete"
         #make sure this button only appears if the book is downloaded. 
         halign2 = gtk.Alignment(0, 1, 0, 0)
-        self.delete = gtk.Button("Delete")
+        self.delete = gtk.Button("De__lete",stock=gtk.STOCK_CLEAR,use_underline=True)
         if self.check_book_exists()==False:
 			self.delete.set_sensitive(False)
-        self.delete.set_size_request(90, 40)
+        self.delete.set_size_request(100, 40)
         self.delete.connect_object("clicked", self.delete_book, None)
         halign2.add(self.delete)
         
@@ -140,10 +140,10 @@ class InfoBooks(gtk.Window):
         table.attach(halign2, 0, 1, 4, 5, gtk.FILL, gtk.FILL, 0, 0)
         
         #read button attributes 
-        self.readbtn = gtk.Button("Read")
+        self.readbtn = gtk.Button("__Read",stock=gtk.STOCK_INDEX,use_underline=True)
         if self.check_book_exists()==False:
 		    self.readbtn.set_sensitive(False)
-        self.readbtn.set_size_request(90, 40)
+        self.readbtn.set_size_request(100, 40)
         table.attach(self.readbtn, 3, 4, 4, 5, gtk.FILL, gtk.FILL, 0, 0);
         self.readbtn.connect_object("clicked", self.open_book, None)
         
