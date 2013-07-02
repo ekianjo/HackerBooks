@@ -4,54 +4,50 @@
 #FIRST RELEASE 0.1 CODENAME LUPIN ! By Ekianjo, 2013. 
 #LICENSE: GPLv3 / http://opensource.org/licenses/GPL-3.0
 
+#----- SECOND RELEASE GOALS (0.2)
+#ADD ICONS ON BUTTONS - ONGOING, TO TEST
+#PROGRESS DOWNLOAD BAR OR INDICATION - ONGOING, STILL EXPERIMENTAL
+#CHECK IF UPDATE IS AVAILABLE AT STARTUP TIME IF ONLINE - VERSION NUMBER ADDED IN SOFT, need verification now
+#NEED TO ADD SYSTEM IDENTIFICATION (PANDORA OR DESKTOP) - very basic implementation, need to confirm if it works
 
-#----- SECOND RELEASE GOALS
-#ADD BUTTON TO REPORT ISSUE WITH BOOK LINK AND SEND EMAIL
-#ADD INFO on HOW MANY BOOKS ARE DOWNLOADED AND HOW MUCH SIZE THEY TAKE AND DISPLAY IN STATUS BAR
-#NEED TO ADD SYSTEM IDENTIFICATION
-#NEED TO ADD SCROLLABLE WINDOW CONTAINER FOR THE TEXTVIEW. IF NOT CANNOT SEE ALL TEXT.
-#ADD BOOK LICENSE INFORMATION
-#ADD BOOK YEAR INFO ?
-#ALLOW READING OF HTML at least (reader tbc)
-#PROGRESS DOWNLOAD BAR
+#TO DO TO RELEASE
+#FIND IF THERE IS A FIX FOR CHECKING CONNECTION NOT ONLY ONCE
+#ADD INFO on HOW MANY BOOKS ARE DOWNLOADED AND HOW MUCH SIZE THEY TAKE AND DISPLAY IN STATUS BAR - need function to do that.
+#ADD BOOK YEAR INFO IN DATABASE
+#ADD BOOKS REQUESTED
+#COLOR BOOKS ALREADY OWNED IN CERTAIN SHADE IN "ALL" LIST
+
+#-----THIRD RELEASE GOALS (0.3)
+#ADD DOWNLOAD ALL OPTION IN MENU -> need to check free space first before each book downloaded ?
 #ADD MORE BOOKS
 #ALLOW USAGE OF XOURNAL TO OPEN PDFs
-#SEND STATS TO SERVER
+#SEND STATS TO SERVER (ANONYMOUS)
 #ALLOW FAVORITES
+#SHOW BOOKS ALREADY OPENED
 #REPORT DOWNLOAD ERRORS TO SERVER
+
+#----FOURTH RELEASE GOALS (0.4)
+#SUGGEST BOOKS TO DATABASE (QUERY) THROUGH MENU
+#UPDATE LOCAL DATABASE WITH ONLINE VERSION
+#ADD BOOK LICENSE INFORMATION ? (should be in PDF anyway...)
+#ALLOW READING OF HTML at least (reader tbc)
+
 
 import gtk #for the graphical user interface
 import urllib, urllib2, os #os for file system operations, urllib for downloading and verifying the online connection. 
 import subprocess #needed to launch separate application, in this case evince. 
 import pango #used to determine a consistant style across the different systems. 
 
+from hacker import *  #imports local database for books.
 
-from hacker import *
+progressbar=0  #initialises progress bar. Need to remove this global variable if possible. 
+versionsoft=0.13  #global version of the soft.
 
-progressbar=0
-
-
+#for progress bar (experimental)
 def myReportHook(count,blocksize,totalsize):
     global progressbar
     progressbar=100*(count*blocksize)/(totalsize)
     print progressbar
-    
-
-class PBwindow(gtk.Window): 
-    def __init__(self):
-        global progressbar
-        super(PBwindow, self).__init__()
-        
-        self.set_position(gtk.WIN_POS_CENTER)
-        self.set_border_width(8)
-        self.connect("destroy", gtk.main_quit)
-        self.set_title("Progress Bar")
-        
-        label = gtk.Label(str(progressbar))
-        self.add(label)
-        self.show_all()
-
-
 
 class InfoBooks(gtk.Window):
     def __init__(self):
@@ -215,10 +211,6 @@ class InfoBooks(gtk.Window):
     	else:
     		return False
 
-
-
-
-
     #downloads the book
     def downloadbook(self,widget):
 
@@ -253,13 +245,15 @@ class InfoBooks(gtk.Window):
 #main window start. 
 class HackerBooks(gtk.Window): 
     def __init__(self):
+    	global versionsoft
         super(HackerBooks, self).__init__()
         
-        self.create_directory()
+        self.create_directory()  #creates BOOKS directory
+        self.version=versionsoft  #documents the current version of the soft
+        self.system_check()  #confirms the environment it is running on
         
-        #if displaymode is 0, show all, 1, show downloaded only
+        #if displaymode is 0, show all, 1, show downloaded only, if 2, shows the ones left to download.
         self.displaymode=0
-
 
         self.set_size_request(750, 400)
         self.set_position(gtk.WIN_POS_CENTER)
@@ -335,11 +329,19 @@ class HackerBooks(gtk.Window):
         self.add(vbox)
         self.show_all()
 
+    def check_new_version(self):
+    	pass #to do if online at start
+
+    def system_check(self):
+    	if os.path.isdir("/proc/pandora"):
+    		print "You are running this on a Pandora handheld"
+    	else:
+    		print "You are running this on Desktop"
 
     def about_this_application(self,widget):
         aboutthis = gtk.AboutDialog()
         aboutthis.set_program_name("HackerBooks")
-        aboutthis.set_version("0.1.1")
+        aboutthis.set_version(str(versionsoft))
         aboutthis.set_copyright("(c) Ekianjo 2013")
         aboutthis.set_comments("HackerBooks is a small application to download and manage free books about Programming and Computer Science")
         aboutthis.set_website("https://github.com/ekianjo/HackerBooks")
@@ -362,7 +364,6 @@ class HackerBooks(gtk.Window):
     def left_to_download(self,widget):
         self.displaymode=2
         self.treeView.set_model(self.create_model())
-
 
    	#creates the folder where books are saved if necessary
     def create_directory(self):
