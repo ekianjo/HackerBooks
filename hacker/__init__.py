@@ -364,5 +364,10 @@ This book is a short, concise introduction to computer programming using the lan
 '''
 As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities. Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs. 
 '''
+),
+("Harry Potter and the Methods of Rationality",'Rationality','Eliezer Yudkowsky','pdf','http://hpmor.com/wordpress/wp-content/uploads/2012/03/Harry-Potter-and-the-Methods-of-Rationality.pdf',
+'''
+Harry Potter fanfic-in-progress, Harry Potter and the Methods of Rationality.
+'''
 )
     ]
