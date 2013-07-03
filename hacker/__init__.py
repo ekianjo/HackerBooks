@@ -395,6 +395,23 @@ In order to reduce the complexity of designing and building computers, nearly al
 A compiler translates (or compiles) a program written in a high-level programming language that is suitable for human programmers into the low-level machine language that is required by computers. During this process, the compiler will also attempt to spot and report obvious programmer mistakes.
 
 '''
-)
+),
+('Logic, Programming and Prolog','Prolog','Ulf Nilsson (more)','pdf','https://www.ida.liu.se/~ulfni/lpp/bok/bok.pdf',
+'''
+The main objective of both editions of this textbook is to provide a uniform account of both the foundations of logic programming and simple programming techniques in the programming language Prolog. The discussion of the foundations also facilitates a systematic survey of variants of the logic programming scheme, like constraint logic programming, deductive databases or concurrent logic programming. This book is not primarily intended to be a theoretical handbook on logic programming. Nor is it intended to be a book on advanced Prolog programming or on constraint logic programming. For each of these topics there are more suitable books around. Because of the diversity of the eld there is of course a risk that nothing substantial is said about anything. We have tried to compensate for this risk by limiting our attention to (what we think are) the most important areas of logic programming and by providing the interested reader with pointers containing suggestions for further reading.
+'''),
+('PyGTK 2.0 Tutorial','PyGTK','John Finlay','pdf','http://www.pygtk.org/dist/pygtk2-tut.pdf',
+'''
+PyGTK 2.0 is a set of Python modules which provide a Python interface to GTK+ 2.X. Throughout the rest of this document PyGTK refers to the 2.X version of PyGTK and GTK and GTK+ refer to the 2.X version of GTK+. The primary web site for PyGTK is www.pygtk.org. The primary author of PyGTK is: • James Henstridge (james@daa.com.au) who is assisted by the developers listed in the AUTHORS ﬁle in the PyGTK distribution and the PyGTK community.
+'''),
+('Python Programming', 'Python','Wikibooks','pdf','https://upload.wikimedia.org/wikipedia/commons/9/91/Python_Programming.pdf',
+'''
+Python is a high-level, structured, open-source programming language that can be used for a wide variety of programming tasks. Python was created by Gudio Van Rossum in the early 1990s, its following has grown steadily and interest is increased markedly in the last few years or so. It is named after Monty Python's Flying Circus comedy program.
 
+Python is used extensively for system administration (many vital components of Linux Distributions are written in it), also its a great language to teach programming to novice. NASA has used Python for its software systems and has adopted it as the standard scripting language for its Integrated Planning System. Python is also extensively used by Google to implement many components of its Web Crawler and Search Engine & Yahoo! for managing its discussion groups.
+'''),
+('LaTeX','LaTeX','Wikibooks','pdf','https://upload.wikimedia.org/wikipedia/commons/2/2d/LaTeX.pdf',
+'''
+This is a book from Wikibooks about LaTeX, one of the most popular Macro packages for TeX.  
+''')
 ]
