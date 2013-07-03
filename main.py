@@ -9,10 +9,10 @@
 #ADD ICONS ON BUTTONS - DONE
 #PROGRESS DOWNLOAD BAR OR INDICATION - DONE
 #ADD INFO on HOW MANY BOOKS ARE DOWNLOADED ADD INFO ON HOW MUCH SIZE THEY TAKE AND DISPLAY IN STATUS BAR - DONE
+#CHECK IF UPDATE IS AVAILABLE WHEN CHECKING VERSION IF ONLINE - VERSION NUMBER ADDED IN SOFT, need verification now
+#NEED TO ADD SYSTEM IDENTIFICATION (PANDORA OR DESKTOP) - very basic implementation, need to confirm if it works
 
 #ONGOING
-#CHECK IF UPDATE IS AVAILABLE AT STARTUP TIME IF ONLINE - VERSION NUMBER ADDED IN SOFT, need verification now
-#NEED TO ADD SYSTEM IDENTIFICATION (PANDORA OR DESKTOP) - very basic implementation, need to confirm if it works
 
 #TO DO TO RELEASE
 #FIND IF THERE IS A FIX FOR CHECKING CONNECTION NOT ONLY ONCE
@@ -187,7 +187,7 @@ class InfoBooks(gtk.Window):
 			return True
 
 		except urllib2.URLError as err: 
-
+			print err
 			md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You are Offline - Please Connect.")
 			md.run()
 			md.destroy()
@@ -353,7 +353,7 @@ class HackerBooks(gtk.Window):
         self.create_columns(self.treeView)
         self.statusbar = gtk.Statusbar()
         
-	self.check_nb_books()
+        self.check_nb_books()
 
         #packs the statusbar
         vbox.pack_start(self.statusbar, False, False, 0)
@@ -362,8 +362,32 @@ class HackerBooks(gtk.Window):
         self.add(vbox)
         self.show_all()
 
+	#checks if the internet connection is active
+    def check_internet(self):
+		try:
+			response=urllib2.urlopen('http://www.google.com',timeout=2)
+			print "you are connected"
+			return True
+
+		except urllib2.URLError as err: 
+			print err
+			return False
+
+
     def check_new_version(self):
-    	pass #to do if online at start
+		if self.check_internet():
+			try:
+				urllib.urlretrieve("https://raw.github.com/ekianjo/HackerBooks/master/version","latestversion.txt")
+				with open('latestversion.txt', 'r') as content_file:
+					content = content_file.read()
+					content=float(content[0]+content[1]+content[2]+content[3])
+					print content
+					if content==versionsoft:
+						print "you have the latest version"
+			except:
+				print "didn't work"
+		#https://raw.github.com/ekianjo/HackerBooks/master/version
+    	#to do if online at start
 
     def system_check(self):
     	if os.path.isdir("/proc/pandora"):
@@ -372,6 +396,7 @@ class HackerBooks(gtk.Window):
     		print "You are running this on Desktop"
 
     def about_this_application(self,widget):
+        self.check_new_version()
         aboutthis = gtk.AboutDialog()
         aboutthis.set_program_name("HackerBooks")
         aboutthis.set_version(str(versionsoft))
