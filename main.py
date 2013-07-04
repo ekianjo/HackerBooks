@@ -155,16 +155,21 @@ class InfoBooks(gtk.Window):
     def delete_book(self,widget):
     	filename=mainwindow.caca+".pdf"
     	try:
-	    	os.remove(filename)
-	    	print "book was deleted"
-	    	md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You just deleted the book.")
-	    	md.run()
-	    	md.destroy()
-	    	self.readbtn.set_sensitive(False)
-	    	self.download.set_sensitive(True)
-	    	self.delete.set_sensitive(False)
-                mainwindow.refresh_list()
-
+	    	dm= gtk.MessageDialog(self, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, "Do you really want to delete this book?")
+		if dm.run()==gtk.RESPONSE_YES
+			dm.destroy()
+		    	os.remove(filename)
+		    	print "book was deleted"
+		    	md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You just deleted the book.")
+		    	md.run()
+		    	md.destroy()
+		    	self.readbtn.set_sensitive(False)
+		    	self.download.set_sensitive(True)
+		    	self.delete.set_sensitive(False)
+	                mainwindow.refresh_list()
+		else:
+			dm.destroy()
+		
     	except:
     		print "File was not deleted"
 
