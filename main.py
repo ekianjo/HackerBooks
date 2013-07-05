@@ -236,13 +236,14 @@ class InfoBooks(gtk.Window):
 	                    #TODO: ADD PROGRESS BAR
 
                         #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
-	                    md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "Download Completed")
-                        
+	                    
 	                    urllib.urlretrieve(books[4],books[0]+".pdf",reporthook=self.myReportHook)
 	                    
 	                    #print "Download finished"
-	                    md.run()
-	                    md.destroy()
+	                    if mainwindow.downloadmode==0:
+							md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "Download Completed")
+							md.run()
+							md.destroy()
 			    mainwindow.refresh_list()
 	                    self.readbtn.set_sensitive(True)
 	                    self.download.set_sensitive(False)
@@ -289,6 +290,9 @@ class HackerBooks(gtk.Window):
         self.version=versionsoft  #documents the current version of the soft
         self.system_check()  #confirms the environment it is running on
         
+		#downloadmode, 0 for one by one, 1 for all at once
+        self.downloadmode=0
+		
 
         #if displaymode is 0, show all, 1, show downloaded only, if 2, shows the ones left to download.
         self.displaymode=0
@@ -307,6 +311,7 @@ class HackerBooks(gtk.Window):
         filemenu=gtk.Menu()
         filem=gtk.MenuItem("File")
         filem.set_submenu(filemenu)
+
 
         #about menu
         aboutmenu=gtk.Menu()
@@ -329,6 +334,14 @@ class HackerBooks(gtk.Window):
         showleftbooks=gtk.MenuItem('Show Books Left to Download')
         showleftbooks.connect("activate",self.left_to_download)
         showmenu.append(showleftbooks)
+        
+        #Show special menu
+        specialmenu=gtk.Menu()
+        specialm=gtk.MenuItem("Special")
+        specialm.set_submenu(specialmenu)
+        downloadall=gtk.MenuItem("Download All")
+        downloadall.connect("activate",self.download_all_books)
+        specialmenu.append(downloadall)
 
         #File menu
         exit=gtk.MenuItem('Exit')
@@ -338,6 +351,7 @@ class HackerBooks(gtk.Window):
         #adding it back in the menu together
         mb.append(filem)
         mb.append(showm)
+        mb.append(specialm)
         mb.append(aboutm)
 
         #packs the vbox
@@ -368,6 +382,36 @@ class HackerBooks(gtk.Window):
         #add the vbox in the window
         self.add(vbox)
         self.show_all()
+
+    def download_all_books(self,widget):
+		print "downloading"
+		
+		if self.check_internet():
+			
+			#confirms the user wants to move forward with it
+			dm= gtk.MessageDialog(self, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, "Do you really want to download all books? It may take a long time")
+			if dm.run()==gtk.RESPONSE_YES:
+				dm.destroy()
+				
+				#set automatic download mode
+				self.downloadmode=1
+					
+				for books in hackerbooks:
+					
+					mainwindow.caca=books[0]
+					
+					dlwd=InfoBooks()
+					if dlwd.check_book_exists()==False:
+						dlwd.downloadbook(None)
+					dlwd.destroy()
+			
+			else:
+				dm.destroy()
+				
+		#resets the download mode to normal
+		self.downloadmode=0
+		pass
+
 
 	#checks if the internet connection is active
     def check_internet(self):

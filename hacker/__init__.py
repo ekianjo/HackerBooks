@@ -446,7 +446,7 @@ This is a book from Wikibooks about LaTeX, one of the most popular Macro package
 Code v2 was written in part through a collaborative Wiki.
 '''
 ,'2006'),
-('Matters Computational','General','Jorg Arndt','pdf','http://www.jjj.de/fxt/fxtbook.pdf',
+('Matters Computational','Algorithms','Jorg Arndt','pdf','http://www.jjj.de/fxt/fxtbook.pdf',
 '''
 This is a book for the computationalist, whether a working programmer or anyone interested in methods of computation. The focus is on material that does not usually appear in textbooks on algorithms. Where necessary the underlying ideas are explained and the algorithms are given formally. It is assumed that the reader is able to understand the given source code, it is considered part of the text. We use the C++ programming language for low-level algorithms. However, only a minimal set of features beyond plain C is used, most importantly classes and templates. For material where technicalities in the C++ code would obscure the underlying ideas we use either pseudocode or, with arithmetical algorithms, the GP language. Appendix C gives an introduction to GP.
 '''
