@@ -13,6 +13,7 @@
 #ADD INFO on HOW MANY BOOKS ARE DOWNLOADED ADD INFO ON HOW MUCH SIZE THEY TAKE AND DISPLAY IN STATUS BAR - DONE
 #CHECK IF UPDATE IS AVAILABLE WHEN CHECKING VERSION IF ONLINE - VERSION NUMBER ADDED IN SOFT, need verification now
 #NEED TO ADD SYSTEM IDENTIFICATION (PANDORA OR DESKTOP) - very basic implementation, need to confirm if it works
+#ADD DOWNLOAD ALL BOOKS OPTION
 
 #ONGOING
 
@@ -20,7 +21,6 @@
 #FIND IF THERE IS A FIX FOR CHECKING CONNECTION NOT ONLY ONCE
 #ADD BOOKS REQUESTED
 #COLOR BOOKS ALREADY OWNED IN CERTAIN SHADE IN "ALL" LIST
-#ADD DOWNLOAD ALL BOOKS OPTION
 
 #-----THIRD RELEASE GOALS (0.3)
 #ADD DOWNLOAD ALL OPTION IN MENU -> need to check free space first before each book downloaded ?
@@ -37,7 +37,7 @@
 #ADD BOOK LICENSE INFORMATION ? (should be in PDF anyway...)
 #ALLOW READING OF HTML at least (reader tbc)
 
-import time
+import time #used for letting the download sleep and keep GUI active
 import gtk #for the graphical user interface
 import urllib, urllib2, os #os for file system operations, urllib for downloading and verifying the online connection. 
 import subprocess #needed to launch separate application, in this case evince. 
@@ -45,7 +45,7 @@ import pango #used to determine a consistant style across the different systems.
 
 from hacker import *  #imports local database for books.
 
-versionsoft=0.15  #global version of the soft.
+versionsoft=0.16  #global version of the soft.
 
 
 

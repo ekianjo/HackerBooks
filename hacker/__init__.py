@@ -450,6 +450,49 @@ Code v2 was written in part through a collaborative Wiki.
 '''
 This is a book for the computationalist, whether a working programmer or anyone interested in methods of computation. The focus is on material that does not usually appear in textbooks on algorithms. Where necessary the underlying ideas are explained and the algorithms are given formally. It is assumed that the reader is able to understand the given source code, it is considered part of the text. We use the C++ programming language for low-level algorithms. However, only a minimal set of features beyond plain C is used, most importantly classes and templates. For material where technicalities in the C++ code would obscure the underlying ideas we use either pseudocode or, with arithmetical algorithms, the GP language. Appendix C gives an introduction to GP.
 '''
-,'2010')
+,'2010'),
+('Linux on the Road','Linux','Werner Heuser','pdf','http://tldp.org/LDP/Mobile-Guide/Mobile-Guide.pdf',
+'''
+Though there are laptop, notebook, PDA and mobile phone related HOWTOs available already, this guide contains a concise survey of documents related to mobile computer devices. Also Linux features, such as installation methods for laptops, notebooks and PDAs as well as configurations for different (network) environments are described.
+
+Although there are some caveats, Linux is a better choice for mobile computer devices than most other operating systems. Because it supports numerous installation methods, works in many heterogenoues environments and needs smaller resources. 
+''','2011'),
+('Bash Guide for Beginners','Bash','Machtelt Garrels','pdf','http://tldp.org/LDP/Bash-Beginners-Guide/Bash-Beginners-Guide.pdf',
+'''
+The Bash Guide for Beginners gets you started with Bash scripting and bridges the gap between the Bash HOWTO and the Advanced Bash Scripting Guide. Everybody who wants to make life easier on themselves, power users and sysadmins alike, can benefit from reading this practical course. The guide contains lots of examples and exercises at the end of each chapter, demonstrating the theory and helping you practice. Bash is available on a wide variety of UNIX, Linux, MS Windows and other systems. 
+''','2011'),
+('Introduction to Linux - A Hands on Guide','Linux','Machtelt Garrels','pdf','http://tldp.org/LDP/intro-linux/intro-linux.pdf',
+'''
+This guide was created as an overview of the Linux Operating System, geared toward new users as an exploration tour and getting started guide, with exercises at the end of each chapter. For more advanced trainees it can be a desktop reference, and a collection of the base knowledge needed to proceed with system and network administration. This book contains many real life examples derived from the author's experience as a Linux system and network administrator, trainer and consultant. We hope these examples will help you to get a better understanding of the Linux system and that you feel encouraged to try out things on your own. 
+''','2008'),
+('GNU/Linux Command-Line Tools Summary','Command Line','Gareth Anderson','pdf','http://tldp.org/LDP/GNU-Linux-Tools-Summary/GNU-Linux-Tools-Summary.pdf',
+'''
+This document is an attempt to provide a summary of useful command-line tools available to a GNU/Linux based operating system, the tools listed are designed to benefit the majority of users and have being chosen at the authors discretion. This document is not a comprehensive list of every existent tool available to a GNU/Linux based system, nor does it have in-depth explanations of how things work. It is a summary which can be used to learn about and how to use many of the tools available to a GNU/Linux-based operating system. 
+''','2006'),
+('''The Linux System Administrators' Guide''','Linux','Lars Wirzenius (more)','pdf','http://tldp.org/LDP/sag/sag.pdf',
+'''
+This book cover all of the aspects of keeping the system running, handling user accounts, backups, configuration of the system, installing and upgrading software, and more. Whereas some of this information is in the Installation Guide (just to get the system off the ground) this book should be much more complete.
+''','2005'),
+('Pocket Linux Guide','Linux','David Horton','pdf','http://tldp.org/LDP/Pocket-Linux-Guide/Pocket-Linux-Guide.pdf',
+'''
+The Pocket Linux Guide is for anyone interested in learning the techniques of building a GNU/Linux system from source code. The guide is structured as a project that builds a small diskette-based GNU/Linux system called Pocket Linux. Each chapter explores a small piece of the overall system explaining how it works, why it is needed and how to build it. After completing the Pocket Linux project, readers should possess an enhanced knowledge of what makes GNU/Linux systems work as well as the confidence to explore larger, more complex source-code-only projects. 
+''','2005'),
+('Linux Dictionary','Linux','Binh Nguyen','pdf','http://tldp.org/LDP/Linux-Dictionary/Linux-Dictionary.pdf',
+'''
+A Dictionary for all elements related to GNU/Linux systems.
+''','2005'),
+('Linux from Scratch','Linux','Gerard Beekmans','pdf','http://tldp.org/LDP/lfs/LFS-BOOK-6.1.1.pdf',
+'''
+Derived from the popular Linux-From-Scratch-HOWTO, this book describes the process of creating your own Linux system from scratch from an already installed Linux distribution, using nothing but the sources of software that are needed.
+''','2005'),
+('The OpenGL Shading Language','OpenGL','John Kessenich (more)','pdf','http://www.opengl.org/registry/doc/GLSLangSpec.4.30.6.pdf',
+'''
+This document describes a programming language that is a companion to OpenGL 2.0 and higher, called The OpenGL Shading Language. The OpenGL Shading Language is part of the core OpenGL 4.3 specification.
+''','2012'),
+('The OpenGL 4.3 specification','OpenGL','Mark Segal (more)','pdf','http://www.opengl.org/registry/doc/glspec43.core.20120806.pdf',
+'''
+This document, referred to as the “OpenGL Specification” or just “Specification” hereafter, describes the OpenGL graphics system: what it is, how it acts, and what is required to implement it. We assume that the reader has at least a rudimentary understanding of computer graphics. This means familiarity with the essentials of computer graphics algorithms and terminology as well as with modern GPUs (Graphic Processing Units).
+''','2012')
+
 
 ]
