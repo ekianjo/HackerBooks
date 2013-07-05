@@ -6,8 +6,10 @@
 
 #----- SECOND RELEASE GOALS (0.2)
 #DONE
+#ADD CONFIRMATION BEFORE DELETION - DONE
 #ADD ICONS ON BUTTONS - DONE
 #PROGRESS DOWNLOAD BAR OR INDICATION - DONE
+#ADD BOOK YEAR INFO IN DATABASE
 #ADD INFO on HOW MANY BOOKS ARE DOWNLOADED ADD INFO ON HOW MUCH SIZE THEY TAKE AND DISPLAY IN STATUS BAR - DONE
 #CHECK IF UPDATE IS AVAILABLE WHEN CHECKING VERSION IF ONLINE - VERSION NUMBER ADDED IN SOFT, need verification now
 #NEED TO ADD SYSTEM IDENTIFICATION (PANDORA OR DESKTOP) - very basic implementation, need to confirm if it works
@@ -16,9 +18,9 @@
 
 #TO DO TO RELEASE
 #FIND IF THERE IS A FIX FOR CHECKING CONNECTION NOT ONLY ONCE
-#ADD BOOK YEAR INFO IN DATABASE
 #ADD BOOKS REQUESTED
 #COLOR BOOKS ALREADY OWNED IN CERTAIN SHADE IN "ALL" LIST
+#ADD DOWNLOAD ALL BOOKS OPTION
 
 #-----THIRD RELEASE GOALS (0.3)
 #ADD DOWNLOAD ALL OPTION IN MENU -> need to check free space first before each book downloaded ?
@@ -43,7 +45,7 @@ import pango #used to determine a consistant style across the different systems.
 
 from hacker import *  #imports local database for books.
 
-versionsoft=0.14  #global version of the soft.
+versionsoft=0.15  #global version of the soft.
 
 
 
@@ -156,7 +158,7 @@ class InfoBooks(gtk.Window):
     	filename=mainwindow.caca+".pdf"
     	try:
 	    	dm= gtk.MessageDialog(self, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, "Do you really want to delete this book?")
-		if dm.run()==gtk.RESPONSE_YES
+		if dm.run()==gtk.RESPONSE_YES:
 			dm.destroy()
 		    	os.remove(filename)
 		    	print "book was deleted"
@@ -476,7 +478,7 @@ class HackerBooks(gtk.Window):
 
 
     def create_model(self):
-        self.store = gtk.ListStore(str, str, str, str)
+        self.store = gtk.ListStore(str, str, str, str,str)
 
         for books in hackerbooks:
             bookname=books[0]+".pdf"
@@ -485,14 +487,16 @@ class HackerBooks(gtk.Window):
         		if os.path.isfile(bookname):
                             	
         			print bookname
-	        		self.store.append([books[0], books[1], books[2],books[3]])
+        			
+	        		self.store.append([books[0], books[1], books[2],books[3],books[6]])
             elif self.displaymode==2:
                 self.set_title("Hacker Books [Books Left to Download]")
                 if os.path.isfile(bookname)==False:
-                    self.store.append([books[0], books[1], books[2],books[3]])
+                    self.store.append([books[0], books[1], books[2],books[3],books[6]])
             else:
 			self.set_title("Hacker Books [All Books]")
-	        	self.store.append([books[0], books[1], books[2],books[3]])
+	        	self.store.append([books[0], books[1], books[2],books[3],books[6]])
+	        
         return self.store
 
     def create_columns(self, treeView):
@@ -519,6 +523,12 @@ class HackerBooks(gtk.Window):
         rendererText = gtk.CellRendererText()
         column = gtk.TreeViewColumn("Format", rendererText, text=3)
         column.set_sort_column_id(3)
+        treeView.append_column(column)
+        
+        #display year
+        rendererText = gtk.CellRendererText()
+        column = gtk.TreeViewColumn("Year", rendererText, text=4)
+        column.set_sort_column_id(4)
         treeView.append_column(column)
 
     def on_activated(self, widget, row, col):
