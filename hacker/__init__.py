@@ -438,5 +438,18 @@ Python is used extensively for system administration (many vital components of L
 ('LaTeX','LaTeX','Wikibooks','pdf','https://upload.wikimedia.org/wikipedia/commons/2/2d/LaTeX.pdf',
 '''
 This is a book from Wikibooks about LaTeX, one of the most popular Macro packages for TeX.  
-''','2013')
+''','2013'),
+('Code Version 2.0','Freedom','Lawrence Lessig','pdf','http://codev2.cc/download+remix/Lessig-Codev2.pdf',
+'''
+"This is a translation of an old book—indeed, in Internet time, it is a translation of an ancient text." That text is Lessig's "Code and Other Laws of Cyberspace." The second version of that book is "Code v2." The aim of Code v2 is to update the earlier work, making its argument more relevant to the current internet.
+
+Code v2 was written in part through a collaborative Wiki.
+'''
+,'2006'),
+('Matters Computational','General','Jorg Arndt','pdf','http://www.jjj.de/fxt/fxtbook.pdf',
+'''
+This is a book for the computationalist, whether a working programmer or anyone interested in methods of computation. The focus is on material that does not usually appear in textbooks on algorithms. Where necessary the underlying ideas are explained and the algorithms are given formally. It is assumed that the reader is able to understand the given source code, it is considered part of the text. We use the C++ programming language for low-level algorithms. However, only a minimal set of features beyond plain C is used, most importantly classes and templates. For material where technicalities in the C++ code would obscure the underlying ideas we use either pseudocode or, with arithmetical algorithms, the GP language. Appendix C gives an introduction to GP.
+'''
+,'2010')
+
 ]
