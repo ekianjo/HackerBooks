@@ -438,7 +438,11 @@ Python is used extensively for system administration (many vital components of L
 ('LaTeX','LaTeX','Wikibooks','pdf','https://upload.wikimedia.org/wikipedia/commons/2/2d/LaTeX.pdf',
 '''
 This is a book from Wikibooks about LaTeX, one of the most popular Macro packages for TeX.  
+<<<<<<< HEAD
 ''','2013'),
+=======
+'''),
+>>>>>>> e247e6c285340dae12b62b4953c1ede9f063c29e
 ('Code Version 2.0','Freedom','Lawrence Lessig','pdf','http://codev2.cc/download+remix/Lessig-Codev2.pdf',
 '''
 "This is a translation of an old book—indeed, in Internet time, it is a translation of an ancient text." That text is Lessig's "Code and Other Laws of Cyberspace." The second version of that book is "Code v2." The aim of Code v2 is to update the earlier work, making its argument more relevant to the current internet.
