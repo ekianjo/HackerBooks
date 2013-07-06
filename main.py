@@ -14,6 +14,7 @@
 #CHECK IF UPDATE IS AVAILABLE WHEN CHECKING VERSION IF ONLINE - VERSION NUMBER ADDED IN SOFT, need verification now
 #NEED TO ADD SYSTEM IDENTIFICATION (PANDORA OR DESKTOP) - very basic implementation, need to confirm if it works
 #ADD DOWNLOAD ALL BOOKS OPTION
+#ADDED DIFFERENT WINDOW SIZE FOR DESKTOP AND PANDORA VERSION
 
 #ONGOING
 
@@ -43,7 +44,12 @@ import urllib, urllib2, os #os for file system operations, urllib for downloadin
 import subprocess #needed to launch separate application, in this case evince. 
 import pango #used to determine a consistant style across the different systems. 
 
+import httplib, socket
+
+
 from hacker import *  #imports local database for books.
+
+
 
 versionsoft=0.16  #global version of the soft.
 
@@ -55,7 +61,8 @@ class InfoBooks(gtk.Window):
         super(InfoBooks,self).__init__()
 
         #set info window size attributes
-        self.set_size_request(696,400)
+        
+        self.set_size_request(mainwindow.winwidth-70,400)
         self.set_position(gtk.WIN_POS_CENTER)
         self.set_border_width(8)
         self.set_title(mainwindow.caca+" : Book Information")
@@ -193,12 +200,15 @@ class InfoBooks(gtk.Window):
 			print "you are connected"
 			return True
 
-		except urllib2.URLError as err: 
-			print err
-			md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You are Offline - Please Connect.")
-			md.run()
-			md.destroy()
-			return False
+		except urllib2.URLError as err:
+			if mainwindow.check_internet_babu()==True:
+				return True
+			else:
+				#print err
+				md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You are Offline - Please Connect.")
+				md.run()
+				md.destroy()
+				return False
 
 	#closes the info window
     def close_window(self, widget):
@@ -285,19 +295,27 @@ class HackerBooks(gtk.Window):
     	global versionsoft
         super(HackerBooks, self).__init__()
         
-	
+        
+        window=gtk.Window()
         self.create_directory()  #creates BOOKS directory
         self.version=versionsoft  #documents the current version of the soft
-        self.system_check()  #confirms the environment it is running on
-        
+                
 		#downloadmode, 0 for one by one, 1 for all at once
         self.downloadmode=0
 		
+        self.check_internet_babu()
 
         #if displaymode is 0, show all, 1, show downloaded only, if 2, shows the ones left to download.
         self.displaymode=0
 
-        self.set_size_request(750, 400)
+        if self.system_check()=="Pandora":
+            self.winwidth=750
+            self.winheight=400
+        else:
+			self.winwidth=800
+			self.winheight=window.get_screen().get_height()-200
+			
+        self.set_size_request(self.winwidth, self.winheight)
         self.set_position(gtk.WIN_POS_CENTER)
         
         self.connect("destroy", gtk.main_quit)
@@ -413,6 +431,29 @@ class HackerBooks(gtk.Window):
 		pass
 
 
+    def check_internet_babu(self):
+        test_con_url = "www.google.com" # For connection testing
+        test_con_resouce = "/intl/en/policies/privacy/" # may change in future
+        test_con = httplib.HTTPConnection(test_con_url) # create a connection
+
+        try:
+            test_con.request("GET", test_con_resouce) # do a GET request
+            response = test_con.getresponse()
+        except httplib.ResponseNotReady as e:
+            print "Improper connection state"
+            test_con.close()
+            return False
+        except socket.gaierror as e:
+            print "Not connected"
+            test_con.close()
+            return False
+        else:
+            print "Connected"
+            test_con.close()
+            return True
+
+        
+
 	#checks if the internet connection is active
     def check_internet(self):
 		try:
@@ -422,8 +463,10 @@ class HackerBooks(gtk.Window):
 
 		except urllib2.URLError as err: 
 			print err
-			return False
-
+			if self.check_internet_babu()==False:
+  			    return False
+			else:
+				return True
 
     def check_new_version(self):
 		if self.check_internet():
@@ -440,18 +483,22 @@ class HackerBooks(gtk.Window):
 		#https://raw.github.com/ekianjo/HackerBooks/master/version
     	#to do if online at start
 
+	#checking if desktop or Pandora Handheld
     def system_check(self):
     	if os.path.isdir("/proc/pandora"):
     		print "You are running this on a Pandora handheld"
+    		return "Pandora"
     	else:
     		print "You are running this on Desktop"
+    		return "Desktop"
 
+	#about application dialog. Classic stuff. 
     def about_this_application(self,widget):
         self.check_new_version()
         aboutthis = gtk.AboutDialog()
         aboutthis.set_program_name("HackerBooks")
         aboutthis.set_version(str(versionsoft))
-        aboutthis.set_copyright("(c) Ekianjo 2013")
+        aboutthis.set_copyright("Ekianjo 2013")
         aboutthis.set_comments("HackerBooks is a small application to download and manage free books about Programming and Computer Science")
         aboutthis.set_website("https://github.com/ekianjo/HackerBooks")
         aboutthis.set_logo(gtk.gdk.pixbuf_new_from_file("../icon.png"))
@@ -502,6 +549,7 @@ class HackerBooks(gtk.Window):
 	else:	
 		self.statusbar.push(0, "You have no book in your library")
 
+	#convert bytes sizes to be readable
     def convert_bytes(self,bytes):
 	    bytes = float(bytes)
 	    if bytes >= 1099511627776:

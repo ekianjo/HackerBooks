@@ -525,5 +525,17 @@ Though I am not a computer scientist by education (my Ph.D. is in a different fi
 Unlike some other textbooks, this one does not follow a top-down narrative. Rather it has the flow of a conversation, with backtracking. We will often build up programs incrementally, just as a pair of programmers would. We will include mistakes, not because I don’t know the answer, but because this is the best way for you to learn. Including mistakes makes it impossible for you to read passively: you must instead engage with the material, because you can never be sure of the veracity of what you’re reading.
 
 At the end, you’ll always get to the right answer. However, this non-linear path is more frustrating in the short term (you will often be tempted to say, “Just tell me the answer, already!”), and it makes the book a poor reference guide (you can’t open up to a random page and be sure what it says is correct). However, that feeling of frustration is the sensation of learning. I don’t know of a way around it.
-''','2012')
+''','2012'),
+('Optimizing Software in C++','C++','Agner Fog','pdf','http://www.agner.org/optimize/optimizing_cpp.pdf',
+'''
+This manual is for advanced programmers and software developers who want to make their software faster. It is assumed that the reader has a good knowledge of the C++ programming language and a basic understanding of how compilers work. The C++ language is chosen as the basis for this manual for reasons explained on page 8 below. This manual is based mainly on my study of how compilers and microprocessors work. The recommendations are based on the x86 family of microprocessors from Intel, AMD and VIA including the 64-bit versions. The x86 processors are used in the most common platforms with Windows, Linux, BSD and Mac OS X operating systems, though these operating systems can also be used with other microprocessors. Many of the advices may apply to other platforms and other compiled programming languages as well. 
+''',
+'2012'),
+('Introduction to Programming using Java','Java','David J. Eck','pdf','http://math.hws.edu/eck/cs124/downloads/javanotes6-linked.pdf',
+'''
+This book is directed mainly towards beginning programmers, although it might also be useful for experienced programmers who want to learn something about Java. It is certainly not meant to provide complete coverage of the Java language.
+
+The sixth edition requires Java 5.0 and can also be used with later versions of java. Almost all the examples in the book will work with Java 5.0, but some features from later versions of Java are also covered. You will find many Java applets on the web pages that make up this book, and most of those applets require Java 5.0 or higher to function. 
+'''
+,'2011')
 ]
