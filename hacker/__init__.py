@@ -492,7 +492,38 @@ This document describes a programming language that is a companion to OpenGL 2.0
 ('The OpenGL 4.3 specification','OpenGL','Mark Segal (more)','pdf','http://www.opengl.org/registry/doc/glspec43.core.20120806.pdf',
 '''
 This document, referred to as the “OpenGL Specification” or just “Specification” hereafter, describes the OpenGL graphics system: what it is, how it acts, and what is required to implement it. We assume that the reader has at least a rudimentary understanding of computer graphics. This means familiarity with the essentials of computer graphics algorithms and terminology as well as with modern GPUs (Graphic Processing Units).
+''','2012'),
+('Database Fundamentals', 'Databases', 'Neeraj Sharma (more)','pdf','http://public.dhe.ibm.com/software/dw/db2/express-c/wiki/Database_fundamentals.pdf',
+'''
+This book is tailored for new database enthusiasts, application developers, database administrators, and anyone with an interest in the subject and looking to get exposure such as university students and new graduates.
+
+This book is divided into chapters, starting with the basic database concepts and information models in Chapter 1. Chapter 2 covers relational data models. Chapter 3 and 4 explain conceptual modeling and relational database design. In Chapters 5, 6 and 7 the focus is geared towards SQL. Chapter 8 highlights XML data storage and retrieval via SQL and XQuery. Chapter 9 addresses database security aspects. The book then concludes with an overview of various other key technologies and relevant applications that are increasingly popular in the industry today.
+
+''',
+'2010'),
+('Introduction to Information Retrieval','Information Retrieval','Christopher D. Manning (more)','pdf','http://nlp.stanford.edu/IR-book/pdf/irbookonlinereading.pdf',
+'''
+This book is the result of a series of courses we have taught at Stanford University and at the University of Stuttgart, in a range of durations including a single quarter, one semester and two quarters. These courses were aimed at early-stage graduate students in computer science, but we have also had enrollment from upper-class computer science undergraduates, as well as students from law, medical informatics, statistics, linguistics and various engineering disciplines. 
+
+The first eight chapters of the book are devoted to the basics of information retrieval, and in particular the heart of search engines. Chapters 9–21 build on the foundation of the first eight chapters to cover a variety of more advanced topics. Chapters 13–17 give a treatment of various forms of machine learning and numerical methods in information retrieval. Chapters 16–18 consider the problem of inducing clusters of related documents from a collection. Chapters 19–21 treat the problem of web search.
+''',
+'2009'),
+('Is Parallel Programming Hard?','Parallel Programming','Paul E. McKenney','pdf','http://kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook-1c.2013.01.13a.pdf',
+'''
+The purpose of this book is to help you understand how to program shared-memory parallel machines without risking your sanity.1 By describing the algorithms and designs that have worked well in the past, we hope to help you avoid at least some of the pitfalls that have beset parallel projects. But you should think of this book as a foundation on which to build, rather than as a completed cathedral. Your mission, if you choose to accept, is to help make further progress in the exciting field of parallel programming, progress that should in time render this book obsolete. Parallel programming is not as hard as it is reputed, and it is hoped that this book makes it even easier for you.
+''',
+'2013'),
+('''Let's Build a Compiler''','Compilers','Jack W. Crenshaw','pdf','http://www.stack.nl/~marcov/compiler.pdf',
+'''
+This series of articles is a tutorial on the theory and practice of developing language parsers and compilers. Before we are finished, we will have covered every aspect of compiler construction, designed a new programming language, and built a working compiler.
+
+Though I am not a computer scientist by education (my Ph.D. is in a different field, Physics), I have been interested in compilers for many years. I have bought and tried to digest the contents of virtually every book on the subject ever written. I don’t mind telling you that it was slow going. Compiler texts are written for Computer Science majors, and are tough sledding for the rest of us. But over the years a bit of it began to seep in. What really caused it to jell was when I began to branch off on my own and begin to try things on my own computer. Now I plan to share with you what I have learned. At the end of this series you will by no means be a computer scientist, nor will you know all the esoterics of compiler theory. I intend to completely ignore the more theoretical aspects of the subject. What you WILL know is all the practical aspects that one needs to know to build a working system.
+''',
+'2012'),
+('Programming Languages: Application and Interpretation','Racket','Shriram Krishnamurthi','pdf','http://www.cs.brown.edu/courses/cs173/2012/book/book.pdf',
+'''
+Unlike some other textbooks, this one does not follow a top-down narrative. Rather it has the flow of a conversation, with backtracking. We will often build up programs incrementally, just as a pair of programmers would. We will include mistakes, not because I don’t know the answer, but because this is the best way for you to learn. Including mistakes makes it impossible for you to read passively: you must instead engage with the material, because you can never be sure of the veracity of what you’re reading.
+
+At the end, you’ll always get to the right answer. However, this non-linear path is more frustrating in the short term (you will often be tempted to say, “Just tell me the answer, already!”), and it makes the book a poor reference guide (you can’t open up to a random page and be sure what it says is correct). However, that feeling of frustration is the sensation of learning. I don’t know of a way around it.
 ''','2012')
-
-
 ]
