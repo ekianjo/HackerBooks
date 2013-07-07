@@ -279,7 +279,7 @@ class InfoBooks(gtk.Window):
 
         self.refresh_gui(0.0001,0.0001)
 
-
+    #refreshes the main windows contents so that the download progress can be updated.  
     def refresh_gui(self,delay=0.0001,wait=0.0001):
         
         time.sleep(delay)
@@ -401,6 +401,7 @@ class HackerBooks(gtk.Window):
         self.add(vbox)
         self.show_all()
 
+    #function to enable download of all books at once. it checks for books already downloaded, too.
     def download_all_books(self,widget):
 		print "downloading"
 		
@@ -431,6 +432,7 @@ class HackerBooks(gtk.Window):
 		pass
 
 
+    #another way to check for internet connection but it does not work perfectly either...
     def check_internet_babu(self):
         test_con_url = "www.google.com" # For connection testing
         test_con_resouce = "/intl/en/policies/privacy/" # may change in future
@@ -468,6 +470,7 @@ class HackerBooks(gtk.Window):
 			else:
 				return True
 
+    #version check to see if you have the latest version of the software. to upgrade...
     def check_new_version(self):
 		if self.check_internet():
 			try:
@@ -505,7 +508,7 @@ class HackerBooks(gtk.Window):
         aboutthis.run()
         aboutthis.destroy()
 
-
+    #refreshes the main window contents so that it remains updated even when you download books or delete them.
     def refresh_list(self):
         self.treeView.set_model(self.create_model())
 	self.check_nb_books()
