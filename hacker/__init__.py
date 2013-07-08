@@ -537,5 +537,25 @@ This book is directed mainly towards beginning programmers, although it might al
 
 The sixth edition requires Java 5.0 and can also be used with later versions of java. Almost all the examples in the book will work with Java 5.0, but some features from later versions of Java are also covered. You will find many Java applets on the web pages that make up this book, and most of those applets require Java 5.0 or higher to function. 
 '''
-,'2011')
+,'2011'),
+('Mathematical Logic - an Introduction','Logic','Unknown','pdf','http://www.ii.uib.no/~michal/und/i227/book/book.pdf',
+'''
+An introduction to Mathematical logic concepts with examples.
+''','2011'),
+('Operating Systems and Middleware','Middleware','Max Hailperin','pdf','https://gustavus.edu/mcs/max/os-book/osm-rev1.1.2.pdf',
+'''
+Working through this book, you will gain a general knowledge of how contemporary operating systems and middleware work and some idea why they work that way. That knowledge may be interesting in its own right, but it also has practical applications. Recall that these systems provide supporting APIs for application programmers to use. Therefore, one payoff will be that if you program applications, you will be positioned to make more effective use of the supporting APIs. Another payoff will be if you are in a role where you need to alter the configuration of an operating system or middleware product in order to tune its performance or make it best serve a particular context. Again, this one book alone won’t give you all the specific knowledge you need about any particular system, but it will give you the general background to make sense out of more specialized references. Perhaps the most significant payoff for learning the details of today’s systems in the context of the reasons behind their designs is that you will be in a better position to learn tomorrow’s systems.
+''',
+'2011'),
+('The Little Book of Semaphores','Concurrency','Allen B. Downey','pdf','http://greenteapress.com/semaphores/downey08semaphores.pdf',
+'''
+ The Little Book of Semaphores is a free (in both senses of the word) textbook that introduces the principles of synchronization for concurrent programming.
+
+In most computer science curricula, synchronization is a module in an Operating Systems class. OS textbooks present a standard set of problems with a standard set of solutions, but most students don't get a good understanding of the material or the ability to solve similar problems.
+
+The approach of this book is to identify patterns that are useful for a variety of synchronization problems and then show how they can be assembled into solutions. After each problem, the book offers a hint before showing a solution, giving students a better chance of discovering solutions on their own.
+
+The book covers the classical problems, including "Readers-writers," "Producer-consumer", and "Dining Philosophers." In addition, it collects a number of not-so-classical problems, some written by the author and some by other teachers and textbook writers. Readers are invited to create and submit new problems. 
+''','2008')
+
 ]
