@@ -556,6 +556,31 @@ In most computer science curricula, synchronization is a module in an Operating 
 The approach of this book is to identify patterns that are useful for a variety of synchronization problems and then show how they can be assembled into solutions. After each problem, the book offers a hint before showing a solution, giving students a better chance of discovering solutions on their own.
 
 The book covers the classical problems, including "Readers-writers," "Producer-consumer", and "Dining Philosophers." In addition, it collects a number of not-so-classical problems, some written by the author and some by other teachers and textbook writers. Readers are invited to create and submit new problems. 
+''','2008'),
+('On Lisp','Lisp','Paul Graham','pdf','http://lib.store.yahoo.net/lib/paulgraham/onlisp.pdf',
+'''
+Not long ago, if you asked what Lisp was for, many people would have answered “for artificial intelligence.” In fact, the association between Lisp and AI is just an accident of history. Lisp was invented by John McCarthy, who also invented the term “artificial intelligence.” His students and colleagues wrote their programs in
+Lisp, and so it began to be spoken of as an AI language. This line was taken up and repeated so often during the brief AI boom in the 1980s that it became almost an institution.
+
+Fortunately, word has begun to spread that AI is not what Lisp is all about. Recent advances in hardware and software have made Lisp commercially viable: it is now used in Gnu Emacs, the best Unix text-editor; Autocad, the industry standard desktop CAD program; and Interleaf, a leading high-end publishing program. The way Lisp is used in these programs has nothing whatever to do with AI.
+''','1993'),
+('Common Lisp Quick Reference','Lisp','Bert Burgemeister','pdf','http://clqr.boundp.org/clqr-a4-booklet-all.pdf',
+'''
+Common Lisp Quick Reference is a free booklet with short descriptions of the thousand or so symbols defined in the ANSI standard. It comes with a comprehensive index.
+
+This rather humble effort is by no means meant to rival the Common Lisp HyperSpec or any of the great introductory web resources and books. Its purpose is to give those who like a piece of dead tree in their hands a quick overview on things they know already, or some clue on what to look up elsewhere. 
+''','2012'),
+('Common Lisp','Lisp','David S. Touretzky','pdf','https://www.cs.cmu.edu/~dst/LispBook/book.pdf',
+'''
+This book is about learning to program in Lisp. Although widely known as the principal language of artificial intelligence research—one of the most advanced areas of computer science—Lisp is an excellent language for beginners. It is increasingly the language of choice in introductory programming courses due to its friendly, interactive environment, rich data structures, and powerful software tools that even a novice can master in short order.
+''','1990'),
+('Mathematica Programming','Mathematica','Leonid Shifrin','pdf','http://www.mathprogramming-intro.org/download/MathProgrammingIntro.pdf',
+'''
+When writing this book  I mostly had in mind people who want to understand Mathematica  programming, and particularly those Mathematica users who would like to make a transition from a user to a programmer, or perhaps those who already have some  limited Mathematica programming experience but want to improve their command of the system. Expert Mathematica programmers will probably find little new information in the book  - may be, the last chapter could be of some interest to them.
+
+The first part of the audience for this book  are  scientists who would like to  understand Mathematica  programming better, to take advantage of the possibilities it offers. The second part are (software) engineers who may consider Mathematica  as a tool for a prototype design. In this context, Mathematica  can serve as a tool of "experimental programming", especially useful in projects where some non-trivial computations/research have to accompany programming. 
 ''','2008')
+
+
 
 ]
