@@ -537,6 +537,16 @@ class HackerBooks(gtk.Window):
 
     	os.chdir("BOOKS")
 
+    #checks the total number of books available in the database
+    def check_total_nb_books(self):
+    	totalbooks=0
+    	
+    	for books in hackerbooks:
+    		totalbooks+=1
+    	
+    	return str(totalbooks)
+
+    #checks number of books downloaded and displays how many more are available.
     def check_nb_books(self):
 	totalbooks=0
     	totalsize=0
@@ -547,11 +557,11 @@ class HackerBooks(gtk.Window):
 			totalbooks=totalbooks+1
 	
 	if totalbooks>1:
-		self.statusbar.push(0, "You have {0} books in your library ({1})".format(totalbooks, self.convert_bytes(totalsize)))
+		self.statusbar.push(0, "You have {0} books in your library ({1}). {2} more books are available for download.".format(totalbooks, self.convert_bytes(totalsize)), self.check_total_nb_books()))
 	elif totalbooks==1:
-		self.statusbar.push(0, "You have {0} book in your library ({1})".format(totalbooks, self.convert_bytes(totalsize)))
+		self.statusbar.push(0, "You have {0} book in your library ({1}). {2} more books are available for download.".format(totalbooks, self.convert_bytes(totalsize)), self.check_total_nb_books()))
 	else:	
-		self.statusbar.push(0, "You have no book in your library")
+		self.statusbar.push(0, "You have no book in your library. {0} books are available for download.".format(self.check_total_nb_books()))
 
 	#convert bytes sizes to be readable
     def convert_bytes(self,bytes):
