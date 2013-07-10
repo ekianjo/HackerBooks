@@ -643,5 +643,18 @@ The cost of statistical computing software has precluded many universities from 
 Using R for Introductory Statistics fills this gap in the literature, making the software accessible to the introductory student. The author presents a self-contained treatment of statistical topics and the intricacies of the R software. The pacing is such that students are able to master data manipulation and exploration before diving into more advanced statistical concepts. The book treats exploratory data analysis with more attention than is typical, includes a chapter on simulation, and provides a unified approach to linear models.
 
 This text lays the foundation for further study and development in statistics using R. Appendices cover installation, graphical user interfaces, and teaching with R, as well as information on writing functions and producing graphics
-''','2002')
+''','2002'),
+('Introduction to Statistical Thinking With R','R','Benjamin Yakir','pdf','http://pluto.huji.ac.il/~msby/StatThink/IntroStat.pdf',
+'''
+Introduction to Statistical Thinking is targeted at college students who are required to learn statistics, students with little background in mathematics and often no motivation to learn more. This book uses the basic structure of generic introduction to statistics course.
+
+• Short introduction to statistics and probability
+• Data structures and variation
+• Provides numerical and graphical tools for presenting and summarizing the distribution of data
+• Fundamentals of probability: Concept of a random variable, Examples of special types of random variables, Normal random variable, Sampling distribution and presents the Central Limit Theorem and the Law of Large Numbers
+• Discussion of statistical inference. It provides an overview of the topics that are presented in the subsequent chapter.
+• Basic tools of statistical inference, namely point estimation, estimation with a confidence interval, and the testing of statistical hypothesis
+• Discusses inference that involve the comparison of two measurements
+• Analysis of two case studies
+''','2011')
 ]
