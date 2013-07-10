@@ -579,8 +579,33 @@ This book is about learning to program in Lisp. Although widely known as the pri
 When writing this book  I mostly had in mind people who want to understand Mathematica  programming, and particularly those Mathematica users who would like to make a transition from a user to a programmer, or perhaps those who already have some  limited Mathematica programming experience but want to improve their command of the system. Expert Mathematica programmers will probably find little new information in the book  - may be, the last chapter could be of some interest to them.
 
 The first part of the audience for this book  are  scientists who would like to  understand Mathematica  programming better, to take advantage of the possibilities it offers. The second part are (software) engineers who may consider Mathematica  as a tool for a prototype design. In this context, Mathematica  can serve as a tool of "experimental programming", especially useful in projects where some non-trivial computations/research have to accompany programming. 
-''','2008')
+''','2008'),
+('Humble Little Ruby Book','Ruby','Jeremy McAnally','pdf','http://www.humblelittlerubybook.com/book/hlrb.pdf',
+'''
+An up to date book on Ruby programming, written in a style described as "a beautiful display of pragmatically chunky bacon, wrapped in a nutshell." Or something like that.
 
+Mr. Neighborly's Humble Little Ruby Book covers the Ruby language from the very basics of using puts to put naughty phrases on the screen all the way to serving up your favorite web page from WEBrick or connecting to your favorite web service. Written in a conversational narrative rather than like a dry reference book, Mr. Neighborly's Humble Little Ruby Book is an easy to read, easy to follow guide to all things Ruby.
+''',
+'2006'),
+('The Poignant Guide to Ruby','Ruby','Why the Lucky Stiff','pdf','https://github.com/downloads/mislav/poignant-guide/whys-poignant-guide-to-ruby.pdf',
+'''
+Why's (poignant) Guide to Ruby is an introductory book to the Ruby programming language, written by why the lucky stiff.
 
+The book includes some wacky humour and goes off-topic on occasions. Further, the book includes jokes that are known within the Ruby community as well as cartoon characters.
 
+The contents of the book:
+
+• Kon'nichi wa, Ruby
+• A Quick (and Hopefully Painless) Ride Through Ruby (with Cartoon Foxes): basic introduction to central Ruby concepts
+• Floating Little Leaves of Code: evaluation and values, hashes and lists
+• Them What Make the Rules and Them What Live the Dream: case/when, while/until, variable scope, blocks, methods, class definitions, class attributes, objects, modules, introspection in IRB, dup, self, rbconfig module
+• Downtown: metaprogramming, regular expressions
+• When You Wish Upon a Beard: send method, new methods in existing classes
+• Heaven's Harp
+''','2009'),
+('Ruby Programming','Ruby','Wikibooks','pdf','https://upload.wikimedia.org/wikipedia/commons/e/ee/Ruby_Programming.pdf',
+'''
+Ruby is an interpreted, object-oriented programming language. Its creator, Yukihiro Matsumoto, a.k.a “Matz,” released it to the public in 1995. Its history is covered here. Its many features are listed here.
+The book is currently broken down into several sections and is intended to be read sequentially. Getting started will show how to install and get started with Ruby in your environment. Basic Ruby demonstrates the main features of the language syntax. The Ruby language section is organized like a reference to the language. Available modules covers some of the standard library. Intermediate Ruby covers a selection of slightly more advanced topics. Each section is designed to be self contained.
+''','2012')
 ]
