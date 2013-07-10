@@ -607,5 +607,25 @@ The contents of the book:
 '''
 Ruby is an interpreted, object-oriented programming language. Its creator, Yukihiro Matsumoto, a.k.a “Matz,” released it to the public in 1995. Its history is covered here. Its many features are listed here.
 The book is currently broken down into several sections and is intended to be read sequentially. Getting started will show how to install and get started with Ruby in your environment. Basic Ruby demonstrates the main features of the language syntax. The Ruby language section is organized like a reference to the language. Available modules covers some of the standard library. Intermediate Ruby covers a selection of slightly more advanced topics. Each section is designed to be self contained.
-''','2012')
+''','2012'),
+('The Haskell School of Music', 'Haskell','Paul Hudak','pdf','http://haskell.cs.yale.edu/wp-content/uploads/2013/04/HSoM1.pdf',
+'''
+This textbook (in progress) describes Euterpea, a computer music library developed in Haskell, that allows programming computer music applications both at the note level and the signal level.  The book also teaches functional programming in Haskell from scratch.  It is suitable for use in the classroom to teach functional programming, computer music principles, or both.
+''','2013'),
+('Yet Another Haskell Tutorial','Haskell','Hal Daume´ III','pdf','http://hal3.name/docs/daume02yaht.pdf',
+'''
+Yet Another Haskell Tutorial provides a complete introduction to the Haskell programming language. It assumes no knowledge of the Haskell language or familiarity with functional programming in general.
+
+Chapters cover:
+
+• Getting Started
+• Language Basics - presents the basic concepts of Haskell and the basic syntax of Haskell
+• Type Basics - uses a system of static type checking. This means that every expression in Haskell is assigned a type
+• Basic Input/Output
+• Modules - program subcomponents are divided into modules
+• Advanced Features - examines sections and infix operators, local declarations, partial application, pattern matching, guards, instance declarations, datatypes revisited, more lists, arrays, maps, layout, and the final word on lists
+• Advanced Types - type synonyms, newtypes, datatypes, classes, instances, kinds, class hierarchies, and default
+• Monads - program subcomponents are divided into modules
+• Advanced Techniques
+''','2006')
 ]
