@@ -656,5 +656,46 @@ Introduction to Statistical Thinking is targeted at college students who are req
 • Basic tools of statistical inference, namely point estimation, estimation with a confidence interval, and the testing of statistical hypothesis
 • Discusses inference that involve the comparison of two measurements
 • Analysis of two case studies
-''','2011')
+''','2011'),
+('PHP 5 Power Programming','PHP','Andi Gutsman (more)','pdf','http://ptgmedia.pearsoncmg.com/images/013147149X/downloads/013147149X_book.pdf',
+'''
+In PHP 5 Power Programming, PHP 5's co-creator and two leading PHP developers show you how to make the most of PHP 5's industrial-strength enhancements in any project, no matter how large or complex.
+
+Their unique insights and realistic examples illuminate PHP 5's new object model, powerful design patterns, improved XML Web services support, and much more. Whether you are creating web applications, extensions, packages, or shell scripts, or migrating PHP 4 code, here are high-powered solutions you will not find anywhere else.
+
+Review PHP's syntax and master its object-oriented capabilities, from properties and methods to polymorphism, interfaces, and reflection.
+''','2004'),
+('PHP Reference: Beginner to Intermediate PHP5','PHP','Mario Lurig','http://cdn.phpreferencebook.com/wp-content/uploads/2008/12/php_reference_-_beginner_to_intermediate_php5.pdf',
+'''
+PHP Reference Book: Beginner to Intermediate PHP5 is a collection of over 250 PHP functions with clear explanations in language anyone can understand, followed with as many examples as it takes to understand what the function does and how it works. One of the best PHP books to keep around as a PHP reference.
+
+This PHP reference includes numerous additional tips, the basics of PHP, MySQL query examples, regular expressions syntax, and two indexes to help you find information faster: a common language index and a function index.
+''','2008'),
+('Python Module of The Week','Python','Doug Hellmann','pdf','http://pymotw.com/2/PyMOTW-1.132.pdf',
+'''
+Python Module of the Week (PyMOTW) is a series of blog posts written by Doug Hellmann. It was started as a way to build the habit of writing something on a regular basis. The focus of the series is building a set of example code for the modules in the Python standard library.
+
+PyMOTW is a good source of documentation for Python modules.
+''','2013'),
+('Aspects of AJAX','Ajax','Matthias Hertel','pdf','http://www.mathertel.de/AJAX/AspectsOfAJAX0704.pdf',
+'''
+Asynchronous JavaScript and XML (Ajax) is a group of interrelated web development techniques used on the client-side to create asynchronous web applications. Ajax is a group of technologies.
+Aspects of AJAX is about an Ajax Framework and an Ajax Engine for JavaScript, XML, SOAP, WSDL und ASP.NET using standard Web Services on the server.
+
+Contents:
+• Asynchronous programming
+• Native AJAX programming
+• Client-Server Protocols
+• The AJAX Engine
+• JavaScript Behaviors
+• Building JavaScript enabled web controls
+• Connecting Controls
+• AJAX enabled web controls
+• Visual Effects Library
+• Some HTML and http basics
+• Listings
+• JavaScript Proxy Reference
+• DataConnections Reference
+''','2007')
+
 ]
