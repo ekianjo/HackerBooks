@@ -732,7 +732,13 @@ Many of the statistical analyses encountered to date consist of a single respons
 
 The other group of problems concerns inter-relationships between variables. Again, we may be interested in lower dimension that help us visualise a given dataset. Alternatively, we may be interested to see how one group of variables is correlated with another group of variables. Finally, we may be interested in models for the interrelationships between variables.
 ''','2009'),
-('Haskell No Panic','Haskell','Conrad Barski','pdf','http://lisperati.com/haskell/hasktut.pdf','','')
+('Haskell No Panic','Haskell','Conrad Barski','pdf','http://lisperati.com/haskell/hasktut.pdf',
+'''
+There's other tutorials out there, but you'll like this one the best for sure: You can just cut and paste the code from this tutorial bit by bit, and in the process, your new program will create magically create more and more cool graphics along the way... The final program will have less than 100 lines of Haskell[1] and will organize a mass picnic in an arbitrarily-shaped public park map and will print pretty pictures showing where everyone should sit! (Here's what the final product will look like, if you're curious...)
+''',''),
+('Hacking Secret Ciphers with Python','Python',,'pdf','http://inventwithpython.com/hackingciphers.pdf',
+'''
+''','')
 
 
 ]
