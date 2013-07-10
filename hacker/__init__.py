@@ -627,5 +627,21 @@ Chapters cover:
 • Advanced Types - type synonyms, newtypes, datatypes, classes, instances, kinds, class hierarchies, and default
 • Monads - program subcomponents are divided into modules
 • Advanced Techniques
-''','2006')
+''','2006'),
+('The Undergraduate Guide to R','R','Trevor Martin','pdf','https://sites.google.com/site/undergraduateguidetor/manual-files/undergradguidetoR.pdf',
+'''
+Learning R will give you a whole new set of tools with which to manipulate, analyze, compare, and view data. R is designed primarily for use in statistics, but it is useful regardless of which scientific discipline you are pursuing. 
+
+As the data sets used in all scientific disciplines get ever larger it is becoming increasingly more critical for scientists to be knowledgeable about how to use high-level programming languages such as R, which allow for easy and intuitive use. I have titled this manual ―The Undergraduate Guide to R‖ because I want to emphasize that R is a skill that should be learned early in the modern student‘s career. Of course, however, I hope that this manual is useful to everyone who is just starting to use R, undergraduate or not. 
+
+This manual is designed so that no prior knowledge of programming is required or assumed (although rudimentary knowledge of general computer skills and statistics is a must). Thus, it may seem overly simple to many and I would highly recommend that those of you who find yourselves in this situation look at Section 12: Further Resources for more advanced manuals. 
+''','2009'),
+('Using R for Introductory Statistics','R','John Verzani','pdf','http://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf',
+'''
+The cost of statistical computing software has precluded many universities from installing these valuable computational and analytical tools. R, a powerful open-source software package, was created in response to this issue. It has enjoyed explosive growth since its introduction, owing to its coherence, flexibility, and free availability. While it is a valuable tool for students who are first learning statistics, proper introductory materials are needed for its adoption.
+
+Using R for Introductory Statistics fills this gap in the literature, making the software accessible to the introductory student. The author presents a self-contained treatment of statistical topics and the intricacies of the R software. The pacing is such that students are able to master data manipulation and exploration before diving into more advanced statistical concepts. The book treats exploratory data analysis with more attention than is typical, includes a chapter on simulation, and provides a unified approach to linear models.
+
+This text lays the foundation for further study and development in statistics using R. Appendices cover installation, graphical user interfaces, and teaching with R, as well as information on writing functions and producing graphics
+''','2002')
 ]
