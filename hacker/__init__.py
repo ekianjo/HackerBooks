@@ -736,9 +736,12 @@ The other group of problems concerns inter-relationships between variables. Agai
 '''
 There's other tutorials out there, but you'll like this one the best for sure: You can just cut and paste the code from this tutorial bit by bit, and in the process, your new program will create magically create more and more cool graphics along the way... The final program will have less than 100 lines of Haskell[1] and will organize a mass picnic in an arbitrarily-shaped public park map and will print pretty pictures showing where everyone should sit! (Here's what the final product will look like, if you're curious...)
 ''',''),
-('Hacking Secret Ciphers with Python','Python',,'pdf','http://inventwithpython.com/hackingciphers.pdf',
+('Hacking Secret Ciphers with Python','Python','Al Sweigart','pdf','http://inventwithpython.com/hackingciphers.pdf',
 '''
-''','')
-
-
+“Hacking Secret Ciphers with Python” teaches complete beginners how to program in the Python programming language. The reader not only learns about several classical ciphers, but also how to write programs that encrypt and hack these ciphers. The full source code is given and explained line-by-line for ciphers such as the Caesar cipher, transposition cipher, simple substitution cipher, multiplicative & affine ciphers, Vigenere cipher, and hacking programs for each of these ciphers. The final chapters cover public key cryptography and the modern RSA cipher.
+''','2013'),
+('Python for Informatics: Exploring Information','Python','Charles Severance','pdf','http://www.pythonlearn.com/book_006.pdf',
+'''
+The goal of this book is to provide an Informatics-oriented introduction to programming. The primary difference between a computer science approach and the Informatics approach taken in this book is a greater focus on using Python to solve data analysis problems common in the world of Informatics.
+''','2010')
 ]
