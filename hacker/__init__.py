@@ -731,6 +731,8 @@ In the mid 1980's, Larry Wall was working as a sysadmin and found that he needed
 Many of the statistical analyses encountered to date consist of a single response variable and one or more explanatory variables. In this latter case, multiple regression, we regressed a single response (dependent) variable on a number of explanatory (independent) variables. This is occasionally referred to as \multivariate regression" which is all rather unfortunate. There isn't an entirely clear "canon" of what is a multivariate technique and what isn't (one could argue that discriminant analysis involves a single dependent variable). However, we are going to consider the simultaneous analysis of a number of related variables. We may approach this in one of two ways. The rst group of problems relates to classification, where attention is focussed on individuals who are more alike.
 
 The other group of problems concerns inter-relationships between variables. Again, we may be interested in lower dimension that help us visualise a given dataset. Alternatively, we may be interested to see how one group of variables is correlated with another group of variables. Finally, we may be interested in models for the interrelationships between variables.
-''','2009')
+''','2009'),
+('Haskell No Panic','Haskell','Conrad Barski','pdf','http://lisperati.com/haskell/hasktut.pdf','','')
+
 
 ]
