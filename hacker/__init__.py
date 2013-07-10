@@ -696,6 +696,35 @@ Contents:
 • Listings
 • JavaScript Proxy Reference
 • DataConnections Reference
-''','2007')
+''','2007'),
+('The C Book','C','Mike Banahan (more)','pdf','http://publications.gbdirect.co.uk/c_book/thecbook.pdf',
+'''
+This book was written with two groups of readers in mind. Whether you are new to C and want to learn it, or already know the older version of the language but want to find out more about the new standard, we hope that you will find what follows both instructive and at times entertaining too.
+This is not a tutorial introduction to programming. The book is designed for programmers who already have some experience of using a modern high-level procedural programming language. As we explain later, C isn't really appropriate for complete beginners—though many have managed to use it—so the book will assume that its readers have already done battle with the notions of statements, variables, conditional execution, arrays, procedures (or subroutines) and so on. Instead of wasting your time by ploughing through tedious descriptions of how to add two numbers together and explaining that the symbol for multiplication is *, the book concentrates on the things that are special to C. In particular, it's the way that C is used which is emphasized.
+''','1991'),
+('Higher Order Perl','Perl','','pdf','http://hop.perl.plover.com/book/pdf/HigherOrderPerl.pdf',
+'''
+Higher-Order Perl: Transforming Programs with Programs is a book with the goal to teach Perl programmers with a strong C and Unix background how to use techniques with roots in functional programming languages like Lisp that are available in Perl as well, but less known. It is about functional programming techniques in Perl. It is about how to write functions that can modify and manufacture other functions.
+
+• Recursion and callbacks
+• Dispatch tables
+• Caching and memoization
+• Iterators
+• From recursion to iterators
+• Infinite streams
+• Higher-order functions and currying
+• Parsing
+• Declarative programming
+''','2005'),
+('Impatient Perl','Perl','Greg London','pdf','http://blob.perl.org/books/impatient-perl/iperl.pdf',
+'''
+You write code for a living, and your inherit a legacy program written in Perl. You can program in your native language in your sleep. But you don't know Perl at all, or you've only dabbled with it. Your deadline doesn't give you enough time to rewrite the legacy program in your native language, but it needs new features. You need to learn Perl, and you need to learn it NOW. "Impatient Perl" was written for you.
+
+The Impatient Introduction to Perl
+This document is for people who either want to learn Perl or are already programming in Perl and just don't have the patience to scrounge for information to learn and use Perl. This document should also find use as a handy desk reference for some of the more common perl related questions.
+
+The history of Perl in 100 words or less
+In the mid 1980's, Larry Wall was working as a sysadmin and found that he needed to do a number of common, yet oddball functions over and over again. And he didn't like any of the scripting languages that were around at the time, so he invented Perl. Version 1 was released circa 1987. A few changes have occurred between then and now. The current version of Perl has exceeded 5.8.0 and is a highly recommended upgrade.
+''','2010')
 
 ]
