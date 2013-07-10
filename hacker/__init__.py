@@ -549,7 +549,7 @@ Working through this book, you will gain a general knowledge of how contemporary
 '2011'),
 ('The Little Book of Semaphores','Concurrency','Allen B. Downey','pdf','http://greenteapress.com/semaphores/downey08semaphores.pdf',
 '''
- The Little Book of Semaphores is a free (in both senses of the word) textbook that introduces the principles of synchronization for concurrent programming.
+The Little Book of Semaphores is a free (in both senses of the word) textbook that introduces the principles of synchronization for concurrent programming.
 
 In most computer science curricula, synchronization is a module in an Operating Systems class. OS textbooks present a standard set of problems with a standard set of solutions, but most students don't get a good understanding of the material or the ability to solve similar problems.
 
@@ -612,11 +612,9 @@ The book is currently broken down into several sections and is intended to be re
 '''
 This textbook (in progress) describes Euterpea, a computer music library developed in Haskell, that allows programming computer music applications both at the note level and the signal level.  The book also teaches functional programming in Haskell from scratch.  It is suitable for use in the classroom to teach functional programming, computer music principles, or both.
 ''','2013'),
-('Yet Another Haskell Tutorial','Haskell','Hal Daume´ III','pdf','http://hal3.name/docs/daume02yaht.pdf',
+('Yet Another Haskell Tutorial','Haskell','Hal Daume III','pdf','http://hal3.name/docs/daume02yaht.pdf',
 '''
 Yet Another Haskell Tutorial provides a complete introduction to the Haskell programming language. It assumes no knowledge of the Haskell language or familiarity with functional programming in general.
-
-Chapters cover:
 
 • Getting Started
 • Language Basics - presents the basic concepts of Haskell and the basic syntax of Haskell
@@ -665,7 +663,7 @@ Their unique insights and realistic examples illuminate PHP 5's new object model
 
 Review PHP's syntax and master its object-oriented capabilities, from properties and methods to polymorphism, interfaces, and reflection.
 ''','2004'),
-('PHP Reference: Beginner to Intermediate PHP5','PHP','Mario Lurig','http://cdn.phpreferencebook.com/wp-content/uploads/2008/12/php_reference_-_beginner_to_intermediate_php5.pdf',
+('PHP Reference: Beginner to Intermediate PHP5','PHP','Mario Lurig','pdf','http://cdn.phpreferencebook.com/wp-content/uploads/2008/12/php_reference_-_beginner_to_intermediate_php5.pdf',
 '''
 PHP Reference Book: Beginner to Intermediate PHP5 is a collection of over 250 PHP functions with clear explanations in language anyone can understand, followed with as many examples as it takes to understand what the function does and how it works. One of the best PHP books to keep around as a PHP reference.
 
@@ -682,7 +680,6 @@ PyMOTW is a good source of documentation for Python modules.
 Asynchronous JavaScript and XML (Ajax) is a group of interrelated web development techniques used on the client-side to create asynchronous web applications. Ajax is a group of technologies.
 Aspects of AJAX is about an Ajax Framework and an Ajax Engine for JavaScript, XML, SOAP, WSDL und ASP.NET using standard Web Services on the server.
 
-Contents:
 • Asynchronous programming
 • Native AJAX programming
 • Client-Server Protocols
@@ -702,7 +699,7 @@ Contents:
 This book was written with two groups of readers in mind. Whether you are new to C and want to learn it, or already know the older version of the language but want to find out more about the new standard, we hope that you will find what follows both instructive and at times entertaining too.
 This is not a tutorial introduction to programming. The book is designed for programmers who already have some experience of using a modern high-level procedural programming language. As we explain later, C isn't really appropriate for complete beginners—though many have managed to use it—so the book will assume that its readers have already done battle with the notions of statements, variables, conditional execution, arrays, procedures (or subroutines) and so on. Instead of wasting your time by ploughing through tedious descriptions of how to add two numbers together and explaining that the symbol for multiplication is *, the book concentrates on the things that are special to C. In particular, it's the way that C is used which is emphasized.
 ''','1991'),
-('Higher Order Perl','Perl','','pdf','http://hop.perl.plover.com/book/pdf/HigherOrderPerl.pdf',
+('Higher Order Perl','Perl','Unknown','pdf','http://hop.perl.plover.com/book/pdf/HigherOrderPerl.pdf',
 '''
 Higher-Order Perl: Transforming Programs with Programs is a book with the goal to teach Perl programmers with a strong C and Unix background how to use techniques with roots in functional programming languages like Lisp that are available in Perl as well, but less known. It is about functional programming techniques in Perl. It is about how to write functions that can modify and manufacture other functions.
 
@@ -738,10 +735,11 @@ There's other tutorials out there, but you'll like this one the best for sure: Y
 ''',''),
 ('Hacking Secret Ciphers with Python','Python','Al Sweigart','pdf','http://inventwithpython.com/hackingciphers.pdf',
 '''
-“Hacking Secret Ciphers with Python” teaches complete beginners how to program in the Python programming language. The reader not only learns about several classical ciphers, but also how to write programs that encrypt and hack these ciphers. The full source code is given and explained line-by-line for ciphers such as the Caesar cipher, transposition cipher, simple substitution cipher, multiplicative & affine ciphers, Vigenere cipher, and hacking programs for each of these ciphers. The final chapters cover public key cryptography and the modern RSA cipher.
+'Hacking Secret Ciphers with Python' teaches complete beginners how to program in the Python programming language. The reader not only learns about several classical ciphers, but also how to write programs that encrypt and hack these ciphers. The full source code is given and explained line-by-line for ciphers such as the Caesar cipher, transposition cipher, simple substitution cipher, multiplicative & affine ciphers, Vigenere cipher, and hacking programs for each of these ciphers. The final chapters cover public key cryptography and the modern RSA cipher.
 ''','2013'),
 ('Python for Informatics: Exploring Information','Python','Charles Severance','pdf','http://www.pythonlearn.com/book_006.pdf',
 '''
 The goal of this book is to provide an Informatics-oriented introduction to programming. The primary difference between a computer science approach and the Informatics approach taken in this book is a greater focus on using Python to solve data analysis problems common in the world of Informatics.
 ''','2010')
+
 ]
