@@ -740,6 +740,22 @@ There's other tutorials out there, but you'll like this one the best for sure: Y
 ('Python for Informatics: Exploring Information','Python','Charles Severance','pdf','http://www.pythonlearn.com/book_006.pdf',
 '''
 The goal of this book is to provide an Informatics-oriented introduction to programming. The primary difference between a computer science approach and the Informatics approach taken in this book is a greater focus on using Python to solve data analysis problems common in the world of Informatics.
-''','2010')
+''','2010'),
+('Computer Science From the Bottom Up','Computer Science','Ian Wienand','pdf','http://www.bottomupcs.com/csbu.pdf',
+'''
+In a nutshell, what you are reading is intended to be a shop class for computer science. Young computer science students are taught to "drive" the computer; but where do you go to learn what is under the hood? Trying to understand the operating system is unfortunately not as easy as just opening the bonnet. The current Linux kernel runs into the millions of lines of code, add to that the other critical parts of a modern operating system (the compiler, assembler and system libraries) and your code base becomes unimaginable. 
+
+Not everyone wants to attend shop class. Most people only want to drive the car, not know how to build one from scratch. Obviously any general computing curriculum has to take this into account else it won’t be relevant to its students. So computer science is taught from the "top down"; applications, high level programming, software design and development theory, possibly data structures. Students will probably be exposed to binary, hopefully binary logic, possibly even some low level concepts such as registers, opcodes and the like at a superﬁcial level.
+
+This book aims to move in completely the opposite direction, working from operating systems fundamentals through to how those applications are complied and executed.
+''','2013'),
+('Speeding Through Haskell','Haskell','Mihai Radu Popescu','pdf','http://www.sthaskell.com/haskell-book.pdf?attredirects=0',
+'''
+Welcome to Speeding Through Haskell, home of the newest Haskell programming book. It's so new, it's not even finished yet!
+
+Haskell is an awesome programming language. It's a lot more mathematically rigorous than others, which means that programs can be proven to be correct and in most cases, if they compile, they will run just fine too. This involves new challenges, however. For instance, you can't change even a single "variable". Everything is done via recursion and other tricks. Don't worry, it'll seem very natural once you try it out.
+
+You can take a look, but keep in mind that it's a work in progress. Some things may be inaccurate; many will be incomplete. Things marked [fixme] are broken; [xref] tags indicate missing cross-references. I'm aiming for about 15-20 chapters for the finished book --- it's going to take a while.
+''','')
 
 ]
