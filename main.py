@@ -191,8 +191,34 @@ class InfoBooks(gtk.Window):
 	    	print command
     		subprocess.Popen(command)
     		
+    		#send command here to register this book as opened
+    		
         except:
 			print "reading did not work"
+
+    def register_opened_books(self):
+		#check if file exists
+		check=os.path.isfile("Reading.txt")
+		
+		
+		#create file if not
+		if check==False:
+			with open("Reading.txt","w") as handle:
+				print("bookname",file=handle)
+				
+			
+		#if file exist, check if the book is already opened.
+        if check==True:
+			
+			with open("data.txt") as f:
+			data = f.readlines()
+			for line in enumerate(data):
+			if "bookname" in line:
+				pass
+				#return the fact that it was found
+				
+		#if not yet oepened; add to the file
+		#f.open with w+
 
 	#checks if the internet connection is active
     def check_internet(self):
