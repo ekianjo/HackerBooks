@@ -15,6 +15,7 @@
 #NEED TO ADD SYSTEM IDENTIFICATION (PANDORA OR DESKTOP) - very basic implementation, need to confirm if it works
 #ADD DOWNLOAD ALL BOOKS OPTION
 #ADDED DIFFERENT WINDOW SIZE FOR DESKTOP AND PANDORA VERSION
+#ADDED OPTION TO SEE WHAT BOOKS WERE OPENED SO FAR.
 
 #ONGOING
 #change font size for desktop version and make description window a little bigger
@@ -44,16 +45,59 @@ import gtk #for the graphical user interface
 import urllib, urllib2, os #os for file system operations, urllib for downloading and verifying the online connection. 
 import subprocess #needed to launch separate application, in this case evince. 
 import pango #used to determine a consistant style across the different systems. 
-
 import httplib, socket
-
-
 from hacker import *  #imports local database for books.
 
-
-
 versionsoft=0.16  #global version of the soft.
+stillreading=[]  #captures the books already opened once at least
 
+def list_books_being_read():
+        global stillreading
+		
+        stillreading=[]
+        try:
+			if check_reading_file()==True:
+				with open("Reading.txt") as f:
+					data = f.readlines()
+					for line in data:
+						print str(line)
+						stillreading.append(str(line))
+			#print "that is "+stillreading
+        except:
+			pass
+
+def check_if_being_read(bookname):
+        global stillreading
+		
+        print "contenu de stillreading"
+        print stillreading
+        found=0
+		
+        if stillreading:
+			print "yo mannnn"
+			for books in stillreading:
+				print "les books c'est "+books
+				print "le check c'est "+bookname
+				if books==bookname+'\n':
+					print bookname+" is already opened"
+					found+=1
+				else:
+					print bookname+" was not opened until now"
+
+			if found>0:
+				return True
+			else:
+				return False
+
+        else:
+			print "list is empty"
+			return False
+
+def check_reading_file():
+        if os.path.isfile("Reading.txt"):
+			return True
+        else:
+			return False
 
 
 class InfoBooks(gtk.Window):
@@ -70,7 +114,7 @@ class InfoBooks(gtk.Window):
 
         #check if book was already downloaded or not
         if self.check_book_exists():
-        	print "book exists"
+			print "book exists"
 
         #connect the close window function
         self.connect("destroy",self.close_window)
@@ -85,15 +129,12 @@ class InfoBooks(gtk.Window):
         #halign.add(title)
         table.attach(halign, 0, 1, 0, 1, gtk.FILL, gtk.FILL, 0, 0);
 
-
-
         #get information to put into the text field. Textbuffer is the object that goes in textview field.
         textbuffer = gtk.TextBuffer()
         #textbuffer.set_text(self.findbookinfo())
         
         #set properties for the textview object.
         wins = gtk.TextView(buffer=textbuffer)
-
 
         #sets pango text attributes to define some standard style at display that does not depend on the OS settings only.
         h_tag = textbuffer.create_tag( "h", size_points=16, weight=pango.WEIGHT_BOLD) 
@@ -115,7 +156,6 @@ class InfoBooks(gtk.Window):
         table.attach(wins, 0, 2, 1, 3, gtk.FILL | gtk.EXPAND, gtk.FILL | gtk.EXPAND, 1, 1)
 
         #Download button attributes and connection
-        
         self.download = gtk.Button("_Download",stock=None,use_underline=True)
 
         if self.check_book_exists()==True:
@@ -132,7 +172,6 @@ class InfoBooks(gtk.Window):
         table.set_row_spacing(1, 3)
         table.attach(valign, 3, 4, 2, 3, gtk.FILL, gtk.FILL | gtk.EXPAND, 1, 1)
         self.close.connect_object("clicked", self.close_window, None)
-
 
         # "delete"
         #make sure this button only appears if the book is downloaded. 
@@ -190,32 +229,40 @@ class InfoBooks(gtk.Window):
 	    	command=["evince", "{0}.pdf".format(mainwindow.caca)]
 	    	print command
     		subprocess.Popen(command)
+    		self.register_opened_books(mainwindow.caca)
     		
     		#send command here to register this book as opened
     		
         except:
 			print "reading did not work"
 
-    def register_opened_books(self):
+    def register_opened_books(self,bookname):
 		#check if file exists
-		check=os.path.isfile("Reading.txt")
 		
-		
+		#print "coucou je suis la"
 		#create file if not
-		if check==False:
-			with open("Reading.txt","w") as handle:
-				print("bookname",file=handle)
+		list_books_being_read()
+		
+		if check_reading_file()==False:
+			
+			if check_if_being_read(bookname)==False:
+				f = open('Reading.txt','w')
+				f.write(bookname+'\n')
+				f.close()
+				print "created reading and added "+bookname
+				list_books_being_read()
 				
-			
+		else:
+			if check_if_being_read(bookname)==False:
+				with open('Reading.txt','a') as myfile:
+				    myfile.write(bookname+'\n')
+				    myfile.close()
+				    print "added "+bookname
+				    list_books_being_read()
+				
 		#if file exist, check if the book is already opened.
-        if check==True:
-			
-			with open("data.txt") as f:
-			data = f.readlines()
-			for line in enumerate(data):
-			if "bookname" in line:
-				pass
-				#return the fact that it was found
+
+		#return the fact that it was found
 				
 		#if not yet oepened; add to the file
 		#f.open with w+
@@ -295,7 +342,6 @@ class InfoBooks(gtk.Window):
     	else:
     		print "you are offline"
 
-
     #use the urlretrieve hooks to confirm how fast the download is progressing
     def myReportHook(self,blocks,blockSize,totalSize):
         percentage = round(float ( blocks * blockSize ) / totalSize,3)
@@ -315,7 +361,6 @@ class InfoBooks(gtk.Window):
             gtk.main_iteration_do(block=False)
             time.sleep(wait)
 
-    
 #main window start. 
 class HackerBooks(gtk.Window): 
     def __init__(self):
@@ -326,7 +371,9 @@ class HackerBooks(gtk.Window):
         window=gtk.Window()
         self.create_directory()  #creates BOOKS directory
         self.version=versionsoft  #documents the current version of the soft
-                
+        
+        list_books_being_read()
+        
 		#downloadmode, 0 for one by one, 1 for all at once
         self.downloadmode=0
 		
@@ -357,7 +404,6 @@ class HackerBooks(gtk.Window):
         filem=gtk.MenuItem("File")
         filem.set_submenu(filemenu)
 
-
         #about menu
         aboutmenu=gtk.Menu()
         aboutm=gtk.MenuItem("About")
@@ -379,6 +425,9 @@ class HackerBooks(gtk.Window):
         showleftbooks=gtk.MenuItem('Show Books Left to Download')
         showleftbooks.connect("activate",self.left_to_download)
         showmenu.append(showleftbooks)
+        showreadingbooks=gtk.MenuItem('Show Opened Books')
+        showreadingbooks.connect("activate",self.books_being_read)
+        showmenu.append(showreadingbooks)
         
         #Show special menu
         specialmenu=gtk.Menu()
@@ -481,8 +530,6 @@ class HackerBooks(gtk.Window):
             test_con.close()
             return True
 
-        
-
 	#checks if the internet connection is active
     def check_internet(self):
 		try:
@@ -556,6 +603,10 @@ class HackerBooks(gtk.Window):
         self.displaymode=2
         self.refresh_list()
 
+    def books_being_read(self,widget):
+		self.displaymode=3
+		self.refresh_list()
+
    	#creates the folder where books are saved if necessary
     def create_directory(self):
     	if os.path.isdir("BOOKS")==False:
@@ -608,7 +659,6 @@ class HackerBooks(gtk.Window):
 		size = '%.2fb' % bytes
 	    return size
 
-
     def create_model(self):
         self.store = gtk.ListStore(str, str, str, str,str)
 
@@ -625,6 +675,10 @@ class HackerBooks(gtk.Window):
                 self.set_title("Hacker Books [Books Left to Download]")
                 if os.path.isfile(bookname)==False:
                     self.store.append([books[0], books[1], books[2],books[3],books[6]])
+            elif self.displaymode==3:
+				self.set_title("Hacker Books [Books You Have Opened...]")
+				if check_if_being_read(books[0])==True:
+					self.store.append([books[0], books[1], books[2],books[3],books[6]])
             else:
 			self.set_title("Hacker Books [All Books]")
 	        	self.store.append([books[0], books[1], books[2],books[3],books[6]])
@@ -674,8 +728,6 @@ class HackerBooks(gtk.Window):
         
         #print mainwindow.caca
         InfoBooks()
-
-
 
 mainwindow=HackerBooks()
 gtk.main()
