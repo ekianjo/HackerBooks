@@ -48,7 +48,7 @@ import pango #used to determine a consistant style across the different systems.
 import httplib, socket
 from hacker import *  #imports local database for books.
 
-versionsoft=0.16  #global version of the soft.
+versionsoft=0.18  #global version of the soft.
 stillreading=[]  #captures the books already opened once at least
 
 def list_books_being_read():
