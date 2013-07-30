@@ -401,31 +401,43 @@ class HackerBooks(gtk.Window):
         #Definition of menu bar
         mb=gtk.MenuBar()
         filemenu=gtk.Menu()
-        filem=gtk.MenuItem("File")
+        filem=gtk.MenuItem("_File")
         filem.set_submenu(filemenu)
 
         #about menu
         aboutmenu=gtk.Menu()
-        aboutm=gtk.MenuItem("About")
+        aboutm=gtk.MenuItem("_About")
         aboutm.set_submenu(aboutmenu)
         version=gtk.MenuItem("Version")
         version.connect("activate",self.about_this_application)
         aboutmenu.append(version)
 
+	#add accelerators in menu
+	agr = gtk.AccelGroup() #create accelerator group
+	self.add_accel_group(agr) #add accelerator group agr
+
         #Show menu
         showmenu=gtk.Menu()
-        showm=gtk.MenuItem("Display")
+        showm=gtk.MenuItem("_Display")
         showm.set_submenu(showmenu)
         showall=gtk.MenuItem("Show All Books")
+        key, mod = gtk.accelerator_parse("<Control>A")
+        showall.add_accelerator("activate", agr, key, mod, gtk.ACCEL_VISIBLE)
         showall.connect("activate",self.all_books)
         showmenu.append(showall)
         showgotbooks=gtk.MenuItem('Show Downloaded Books')
+        key, mod = gtk.accelerator_parse("<Control>D")
+        showgotbooks.add_accelerator("activate", agr, key, mod, gtk.ACCEL_VISIBLE)
         showgotbooks.connect("activate",self.downloaded_books_only)
         showmenu.append(showgotbooks)
         showleftbooks=gtk.MenuItem('Show Books Left to Download')
+        key, mod = gtk.accelerator_parse("<Control>L")
+        showleftbooks.add_accelerator("activate", agr, key, mod, gtk.ACCEL_VISIBLE)
         showleftbooks.connect("activate",self.left_to_download)
         showmenu.append(showleftbooks)
         showreadingbooks=gtk.MenuItem('Show Opened Books')
+        key, mod = gtk.accelerator_parse("<Control>O")
+        showreadingbooks.add_accelerator("activate", agr, key, mod, gtk.ACCEL_VISIBLE)
         showreadingbooks.connect("activate",self.books_being_read)
         showmenu.append(showreadingbooks)
         
@@ -439,6 +451,8 @@ class HackerBooks(gtk.Window):
 
         #File menu
         exit=gtk.MenuItem('Exit')
+        key, mod = gtk.accelerator_parse("<Control>Q")
+        exit.add_accelerator("activate", agr, key, mod, gtk.ACCEL_VISIBLE)
         exit.connect("activate",gtk.main_quit)
         filemenu.append(exit)
 
