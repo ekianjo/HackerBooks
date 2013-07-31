@@ -766,6 +766,10 @@ This primer on economic principles brilliantly analyzes the seen and unseen cons
 Open source provides the competitive advantage in the Internet Age. According to the August Forrester Report, 56 percent of IT managers interviewed at Global 2,500 companies are already using some type of open source software in their infrastructure and another 6 percent will install it in the next two years. This revolutionary model for collaborative software development is being embraced and studied by many of the biggest players in the high-tech industry, from Sun Microsystems to IBM to Intel.
 
 The Cathedral & the Bazaar is a must for anyone who cares about the future of the computer industry or the dynamics of the information economy. Already, billions of dollars have been made and lost based on the ideas in this book. Its conclusions will be studied, debated, and implemented for years to come. According to Bob Young, "This is Eric Raymond's great contribution to the success of the open source revolution, to the adoption of Linux-based operating systems, and to the success of open source users and the companies that supply them.
-''','1999')
+''','1999'),
+('The Haskell Road to Logic, Math and Programming','Haskell','Kees Doets (more)','pdf','http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf',
+'''
+The textbook by Doets and van Eijck puts the Haskell programming language systematically to work for presenting a major piece of logic and mathematics. The reader is taken through chapters on basic logic, proof recipes, sets and lists, relations and functions, recursion and co-recursion, the number systems, polynomials and power series, ending with Cantor's infinities. The book uses Haskell for the executable and strongly typed manifestation of various mathematical notions at the level of declarative programming. The book adopts a systematic but relaxed mathematical style (definition, example, exercise, ...); the text is very pleasant to read due to a small amount of anecdotal information, and due to the fact that definitions are fluently integrated in the running text. An important goal of the book is to get the reader acquainted with reasoning about programs.
+''','2004')
 
 ]
