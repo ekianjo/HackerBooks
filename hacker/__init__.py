@@ -770,6 +770,20 @@ The Cathedral & the Bazaar is a must for anyone who cares about the future of th
 ('The Haskell Road to Logic, Math and Programming','Haskell','Kees Doets (more)','pdf','http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf',
 '''
 The textbook by Doets and van Eijck puts the Haskell programming language systematically to work for presenting a major piece of logic and mathematics. The reader is taken through chapters on basic logic, proof recipes, sets and lists, relations and functions, recursion and co-recursion, the number systems, polynomials and power series, ending with Cantor's infinities. The book uses Haskell for the executable and strongly typed manifestation of various mathematical notions at the level of declarative programming. The book adopts a systematic but relaxed mathematical style (definition, example, exercise, ...); the text is very pleasant to read due to a small amount of anecdotal information, and due to the fact that definitions are fluently integrated in the running text. An important goal of the book is to get the reader acquainted with reasoning about programs.
-''','2004')
+''','2004'),
+('Winning the Zero Moment of Truth','Marketing','Jim Lecinski','pdf','http://www.zeromomentoftruth.com/assets/files/google-zmot.pdf',
+'''
+The way we shop is changing and marketing strategies are simply not keeping pace. Whether we're shopping for corn flakes, concert tickets or a honeymoon in Paris, the Internet has changed how we decide what to buy. Today we're all digital explorers, seeking out online ratings, social media-based peer reviews, videos, and in-depth product details as we move down the path to purchase. Marketing has evolved and modern marketing strategies have to evolve with the changing shape of shopping. At Google, we call this online decision-making moment the Zero Moment of Truth -- or simply ZMOT.
+
+Winning the Zero Moment of Truth is a powerful new eBook by Jim Lecinski, Google's Managing Director of US Sales & Service and Chief ZMOT Evangelist. Jim shares how to get ahead at this critical new marketing moment, supported by exclusive market research, personal stories, and insights from C-level executives at global leaders like General Electric, Johnson & Johnson, and VivaKi.
+''','2011'),
+('The ZMOT HandBook','Marketing','Google','pdf','http://www.zeromomentoftruth.com/assets/files/ZMOT_Handbook.pdf',
+'''
+The Handbook from 2012 to read with the ZMOT book from 2011.
+''','2012'),
+('The Future of the Internet','Internet','Jonathan L. Zittrain','pdf','http://futureoftheinternet.org/files/2013/06/ZittrainTheFutureoftheInternet.pdf',
+'''
+IPods, iPhones, Xboxes, and TiVos represent the first wave of Internet-centered products that can’t be easily modified by anyone except their vendors or selected partners. These “tethered appliances” have already been used in remarkable but little-known ways: car GPS systems have been reconfigured at the demand of law enforcement to eavesdrop on the occupants at all times, and digital video recorders have been ordered to self-destruct thanks to a lawsuit against the manufacturer thousands of miles away. New Web 2.0 platforms like Google mash-ups and Facebook are rightly touted—but their applications can be similarly monitored and eliminated from a central source. As tethered appliances and applications eclipse the PC, the very nature of the Internet—its “generativity,” or innovative character—is at risk.
+''','2008')
 
 ]
