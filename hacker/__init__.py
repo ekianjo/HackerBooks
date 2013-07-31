@@ -756,6 +756,16 @@ Welcome to Speeding Through Haskell, home of the newest Haskell programming book
 Haskell is an awesome programming language. It's a lot more mathematically rigorous than others, which means that programs can be proven to be correct and in most cases, if they compile, they will run just fine too. This involves new challenges, however. For instance, you can't change even a single "variable". Everything is done via recursion and other tricks. Don't worry, it'll seem very natural once you try it out.
 
 You can take a look, but keep in mind that it's a work in progress. Some things may be inaccurate; many will be incomplete. Things marked [fixme] are broken; [xref] tags indicate missing cross-references. I'm aiming for about 15-20 chapters for the finished book --- it's going to take a while.
-''','')
+''',''),
+('Economics in One Lesson','Economics','Henry Hazlitt','pdf','https://mises.org/books/economics_in_one_lesson_hazlitt.pdf',
+'''
+This primer on economic principles brilliantly analyzes the seen and unseen consequences of political and economic actions. In the words of F.A. Hayek, there is "no other modern book from which the intelligent layman can learn so much about the basic truths of economics in so short a time.
+''','1946'),
+('The Cathedral and the Bazaar','Development','Eric Raymond', 'pdf','http://www.unterstein.net/su/docs/CathBaz.pdf',
+'''
+Open source provides the competitive advantage in the Internet Age. According to the August Forrester Report, 56 percent of IT managers interviewed at Global 2,500 companies are already using some type of open source software in their infrastructure and another 6 percent will install it in the next two years. This revolutionary model for collaborative software development is being embraced and studied by many of the biggest players in the high-tech industry, from Sun Microsystems to IBM to Intel.
+
+The Cathedral & the Bazaar is a must for anyone who cares about the future of the computer industry or the dynamics of the information economy. Already, billions of dollars have been made and lost based on the ideas in this book. Its conclusions will be studied, debated, and implemented for years to come. According to Bob Young, "This is Eric Raymond's great contribution to the success of the open source revolution, to the adoption of Linux-based operating systems, and to the success of open source users and the companies that supply them.
+''','1999')
 
 ]
