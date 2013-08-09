@@ -790,5 +790,12 @@ IPods, iPhones, Xboxes, and TiVos represent the first wave of Internet-centered 
 Hacking the Xbox begins with a few step-by-step tutorials on hardware modifications that teach basic hacking techniques as well as essential reverse-engineering skills. It progresses into a discussion of the Xbox security mechanisms and other advanced hacking topics, emphasizing the important subjects of computer security and reverse engineering. The book includes numerous practical guides, such as where to get hacking gear, soldering techniques, debugging tips, and an Xbox hardware reference guide.
 
 Hacking the Xbox confronts the social and political issues facing today's hacker, and introduces readers to the humans behind the hacks through several interviews with master hackers. It looks at the potential impact of today's legal challenges to legitimate reverse-engineering activites, whcih are further examined in a chapter contributed by Lee Tien of the Electronic Frontier Foundation (EFF) about the rights and responsibilities of hackers. The book concludes with a discussion of the latest trends and vulnerabilities in secure PC platforms.
+''','2013'),
+('Essentials of Metaheuristics','Metaheuristics','Sean Luke','pdf','http://cs.gmu.edu/~sean/book/metaheuristics/Essentials.pdf',
+'''
+This is an open set of lecture notes on metaheuristics algorithms, intended for undergraduate students, practitioners, programmers, and other non-experts. It was developed as a series of lecture notes for an undergraduate course I taught at GMU. The chapters are designed to be printable separately if necessary. As it's lecture notes, the topics are short and light on examples and theory. It's best when complementing other texts. With time, I might remedy this.
+
+What is a Metaheuristic? A common but unfortunate name for any stochastic optimization algorithm intended to be the last resort before giving up and using random or brute-force search. Such algorithms are used for problems where you don't know how to find a good solution, but if shown a candidate solution, you can give it a grade. The algorithmic family includes genetic algorithms, hill-climbing, simulated annealing, ant colony optimization, particle swarm optimization, and so on.
 ''','2013')
+
 ]
