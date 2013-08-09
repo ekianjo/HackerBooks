@@ -784,6 +784,11 @@ The Handbook from 2012 to read with the ZMOT book from 2011.
 ('The Future of the Internet','Internet','Jonathan L. Zittrain','pdf','http://futureoftheinternet.org/files/2013/06/ZittrainTheFutureoftheInternet.pdf',
 '''
 IPods, iPhones, Xboxes, and TiVos represent the first wave of Internet-centered products that can’t be easily modified by anyone except their vendors or selected partners. These “tethered appliances” have already been used in remarkable but little-known ways: car GPS systems have been reconfigured at the demand of law enforcement to eavesdrop on the occupants at all times, and digital video recorders have been ordered to self-destruct thanks to a lawsuit against the manufacturer thousands of miles away. New Web 2.0 platforms like Google mash-ups and Facebook are rightly touted—but their applications can be similarly monitored and eliminated from a central source. As tethered appliances and applications eclipse the PC, the very nature of the Internet—its “generativity,” or innovative character—is at risk.
-''','2008')
+''','2008'),
+('Hacking the Xbox','Xbox Hacking','''Andrew "bunnie" Huang''','pdf','http://bunniefoo.com/nostarch/HackingTheXbox_Free.pdf',
+'''
+Hacking the Xbox begins with a few step-by-step tutorials on hardware modifications that teach basic hacking techniques as well as essential reverse-engineering skills. It progresses into a discussion of the Xbox security mechanisms and other advanced hacking topics, emphasizing the important subjects of computer security and reverse engineering. The book includes numerous practical guides, such as where to get hacking gear, soldering techniques, debugging tips, and an Xbox hardware reference guide.
 
+Hacking the Xbox confronts the social and political issues facing today's hacker, and introduces readers to the humans behind the hacks through several interviews with master hackers. It looks at the potential impact of today's legal challenges to legitimate reverse-engineering activites, whcih are further examined in a chapter contributed by Lee Tien of the Electronic Frontier Foundation (EFF) about the rights and responsibilities of hackers. The book concludes with a discussion of the latest trends and vulnerabilities in secure PC platforms.
+''','2013')
 ]
