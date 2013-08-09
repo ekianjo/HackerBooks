@@ -796,6 +796,17 @@ Hacking the Xbox confronts the social and political issues facing today's hacker
 This is an open set of lecture notes on metaheuristics algorithms, intended for undergraduate students, practitioners, programmers, and other non-experts. It was developed as a series of lecture notes for an undergraduate course I taught at GMU. The chapters are designed to be printable separately if necessary. As it's lecture notes, the topics are short and light on examples and theory. It's best when complementing other texts. With time, I might remedy this.
 
 What is a Metaheuristic? A common but unfortunate name for any stochastic optimization algorithm intended to be the last resort before giving up and using random or brute-force search. Such algorithms are used for problems where you don't know how to find a good solution, but if shown a candidate solution, you can give it a grade. The algorithmic family includes genetic algorithms, hill-climbing, simulated annealing, ant colony optimization, particle swarm optimization, and so on.
-''','2013')
+''','2013'),
+('Mathematics for Computer Science','Computer Science','Eric Lehman (more)','pdf','http://courses.csail.mit.edu/6.042/spring12/mcs.pdf',
+'''
+This text explains how to use mathematical models and methods to analyze problems that arise in computer science. Proofs play a central role in this work because the authors share a belief with most mathematicians that proofs are essential for genuine understanding. Proofs also play a growing role in computer science; they are used to certify that software and hardware will always behave correctly, something that no amount of testing can do. Simply put, a proof is a method of establishing truth. Like beauty, “truth” sometimes depends on the eye of the beholder, and it should not be surprising that what constitutes a proof differs among ﬁelds. For example, in the judicial system, legal truth is decided by a jury based on the allowable evidence presented at trial. 
+In the business world, authoritative truth is speciﬁed by a trusted person or organization, or maybe just your boss. In ﬁelds such as physics or biology, scientiﬁc truth1 is conﬁrmed by experiment. In statistics, probable truth is established by statistical analysis of sample data. Philosophical proof involves careful exposition and persuasion typically based on a series of small, plausible arguments. 
+''','2013'),
+('The Wealth of Networks','Networks','Yochai Benkler','pdf','http://www.benkler.org/Benkler_Wealth_Of_Networks.pdf',
+'''
+Production is shifting from physical products like blue jeans, to decentralized information goods, like articles on the Internet. This gives users more power (they can publish instead of just reading), creates more opportunities for democratic participation, lowers costs for developing countries, and democratizes the creation of our culture.
+
+This book will analyze these changes by looking at what new technologies make easy, applying an individualist economic model, and examining the effects on human beings. As the state's role has largely been to support big companies, this book will largely ignore it, even though it could be used as a force for good.
+''','2006')
 
 ]
