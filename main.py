@@ -16,6 +16,7 @@
 #ADD DOWNLOAD ALL BOOKS OPTION
 #ADDED DIFFERENT WINDOW SIZE FOR DESKTOP AND PANDORA VERSION
 #ADDED OPTION TO SEE WHAT BOOKS WERE OPENED SO FAR.
+#ADDED KEYBOARDS SHORTCUTS FOR MENUS
 
 #ONGOING
 #change font size for desktop version and make description window a little bigger
@@ -48,7 +49,7 @@ import pango #used to determine a consistant style across the different systems.
 import httplib, socket
 from hacker import *  #imports local database for books.
 
-versionsoft=0.18  #global version of the soft.
+versionsoft=0.19  #global version of the soft.
 stillreading=[]  #captures the books already opened once at least
 
 def list_books_being_read():

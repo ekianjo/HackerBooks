@@ -807,6 +807,13 @@ In the business world, authoritative truth is speciﬁed by a trusted person or 
 Production is shifting from physical products like blue jeans, to decentralized information goods, like articles on the Internet. This gives users more power (they can publish instead of just reading), creates more opportunities for democratic participation, lowers costs for developing countries, and democratizes the creation of our culture.
 
 This book will analyze these changes by looking at what new technologies make easy, applying an individualist economic model, and examining the effects on human beings. As the state's role has largely been to support big companies, this book will largely ignore it, even though it could be used as a force for good.
-''','2006')
+''','2006'),
+('Open Government','Politics','Daniel Lathrop (more)','pdf','https://github.com/oreillymedia/open_government/raw/master/open_government.pdf',
+'''
+What is open government? In the most basic sense, it’s the notion that the people have the right to access the documents and proceedings of government. The idea that the public has a right to scrutinize and participate in government dates at least to the Enlightenment, and is enshrined in both the U.S. Declaration of Independence and U.S. Constitution. Its principles are recognized in virtually every democratic country on the planet. But the very meaning of the term continues to evolve. The concept of open government has been influenced—for the better—by the open source software movement, and taken on a greater focus for allowing participation in the procedures of government. Just as open source software allows users to change and contribute to the source code of their software, open government now means government where citizens not only have access to information, documents, and proceedings, but can also become participants in a meaningful way. 
+
+Open government also means improved communication and operations within the various branches and levels of government. More sharing internally can lead to greater efficiency and accountability.
+
+''','2010')
 
 ]
