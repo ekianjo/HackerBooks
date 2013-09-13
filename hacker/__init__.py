@@ -814,6 +814,13 @@ What is open government? In the most basic sense, it’s the notion that the peo
 
 Open government also means improved communication and operations within the various branches and levels of government. More sharing internally can lead to greater efficiency and accountability.
 
-''','2010')
+''','2010'),
+('Vi iMproved (VIM)','VIM','Steve Oualline','pdf','http://www.truth.sk/vim/vimbook-OPL.pdf',
+'''
+This book is especially recommended for beginners and those who use Vim for a short while and would like to learn more. The most often used commands are explained with many figures and examples. Steve has a writing style that is very easy to read. Advanced Vim users will find many hints for useful features. The more advanced items are not explained in detail though.
+At the end there is a quick reference for the most often used commands. The text was written for Vim version 5.7.
+The book has been published in April 2001. It is about 600 pages. 
+''','2001')
+
 
 ]
