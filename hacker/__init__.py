@@ -830,7 +830,11 @@ This open textbook aims to fill the gap between the open-source implementations 
 Programming Forth introduces you to modern Forth systems. In 1994 the ANS Forth standard was released and unleashed a wave of creativity among Forth compiler writers. Because the ANS standard, unlike the previous informal Forth-83 standard, avoids specifying implementation details, implementers took full advantage. The result has been what I choose to call modern Forths, which are available from a range of sources both commercial and open-source.
 
 This book concentrates on introducing people who already know some programming to ANS Forth systems. Apart from the introduction of ANS Forth itself, Programming Forth includes examples of varying sizes, exercises, some advanced topics, how to take best advantage of Forth and project management. 
-''','2011')
+''','2011'),
+('And So Forth...','Forth','J.L. Bezemer','pdf','http://ficl.sourceforge.net/pdf/Forth_Primer.pdf',
+'''
+Don’t you hate it? You’ve just got a new programming language and you’re trying to write your ﬁrst program. You want to use a certain feature (you know it’s got to be there) and you can’t ﬁnd it in the manual. I’ve had that experience many times. So in this manual you will ﬁnd many short features on all kind of topics. How to input a number from the keyboard, what a cell is, etc. 
 
-
+I hope this will enable you to get quickly on your way. If it didn’t, email me at ’hansoft@bigfoot.com’. You will not only get an answer, but you will help future Forth users as well. You can use this manual two ways. You can either just getwhat you need or work yourway through. Every section builds on the knowledge you obtained in the previous sections. All sections are grouped into levels. We advise you to use what you’ve learned after you’ve worked your way through a level. If this isn’t enough to teach you Forth you can always get a real good textbook on Forth, like "Starting Forth" by Leo Brodie. Have fun!
+''','2001')
 ]
