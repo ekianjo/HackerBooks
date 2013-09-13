@@ -820,7 +820,17 @@ Open government also means improved communication and operations within the vari
 This book is especially recommended for beginners and those who use Vim for a short while and would like to learn more. The most often used commands are explained with many figures and examples. Steve has a writing style that is very easy to read. Advanced Vim users will find many hints for useful features. The more advanced items are not explained in detail though.
 At the end there is a quick reference for the most often used commands. The text was written for Vim version 5.7.
 The book has been published in April 2001. It is about 600 pages. 
-''','2001')
+''','2001'),
+('Computer Networking: Principles, Protocols and Practice','Networking','Olivier Bonaventure (more)','pdf','http://cnp3book.info.ucl.ac.be/static/_downloads/cnp3.pdf',
+'''
+This open textbook aims to fill the gap between the open-source implementations and the open-source network specifications by providing a detailed but pedagogical description of the key principles that guide the operation of the Internet. The book is released under a creative commons licence. Such an open-source license is motivated by two reasons. The first is that we hope that this will allow many students to use the book to learn computer networks. The second is that I hope that other teachers will reuse, adapt and improve it. Time will tell if it is possible to build a community of contributors to improve and develop the book further. As a starting point, the first release contains all the material for a one-semester first upper undergraduate or a graduate networking course.
+''','2011'),
+('Programming Forth','Forth','Stephen Pelc','pdf','http://www.mpeforth.com/arena/ProgramForth.pdf',
+'''
+Programming Forth introduces you to modern Forth systems. In 1994 the ANS Forth standard was released and unleashed a wave of creativity among Forth compiler writers. Because the ANS standard, unlike the previous informal Forth-83 standard, avoids specifying implementation details, implementers took full advantage. The result has been what I choose to call modern Forths, which are available from a range of sources both commercial and open-source.
+
+This book concentrates on introducing people who already know some programming to ANS Forth systems. Apart from the introduction of ANS Forth itself, Programming Forth includes examples of varying sizes, exercises, some advanced topics, how to take best advantage of Forth and project management. 
+''','2011')
 
 
 ]
