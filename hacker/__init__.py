@@ -836,5 +836,11 @@ This book concentrates on introducing people who already know some programming t
 Don’t you hate it? You’ve just got a new programming language and you’re trying to write your ﬁrst program. You want to use a certain feature (you know it’s got to be there) and you can’t ﬁnd it in the manual. I’ve had that experience many times. So in this manual you will ﬁnd many short features on all kind of topics. How to input a number from the keyboard, what a cell is, etc. 
 
 I hope this will enable you to get quickly on your way. If it didn’t, email me at ’hansoft@bigfoot.com’. You will not only get an answer, but you will help future Forth users as well. You can use this manual two ways. You can either just getwhat you need or work yourway through. Every section builds on the knowledge you obtained in the previous sections. All sections are grouped into levels. We advise you to use what you’ve learned after you’ve worked your way through a level. If this isn’t enough to teach you Forth you can always get a real good textbook on Forth, like "Starting Forth" by Leo Brodie. Have fun!
-''','2001')
+''','2001'),
+('CIML: A Course in Machine Learning','Machine Learning','Hal Daumé III','pdf','http://ciml.info/dl/v0_8/ciml-v0_8-all.pdf',
+'''
+Machine learning is the study of algorithms that learn from data and experience. It is applied in a vast variety of application areas, from medicine to advertising, from military to pedestrian. Any area in which you need to make sense of data is a potential consumer of machine learning.
+
+CIML is a set of introductory materials that covers most major aspects of modern machine learning (supervised learning, unsupervised learning, large margin methods, probabilistic modeling, learning theory, etc.). It's focus is on broad applications with a rigorous backbone. A subset can be used for an undergraduate course; a graduate course could probably cover the entire material and then some.
+''','2012')
 ]
