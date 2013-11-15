@@ -842,5 +842,13 @@ I hope this will enable you to get quickly on your way. If it didn’t, email me
 Machine learning is the study of algorithms that learn from data and experience. It is applied in a vast variety of application areas, from medicine to advertising, from military to pedestrian. Any area in which you need to make sense of data is a potential consumer of machine learning.
 
 CIML is a set of introductory materials that covers most major aspects of modern machine learning (supervised learning, unsupervised learning, large margin methods, probabilistic modeling, learning theory, etc.). It's focus is on broad applications with a rigorous backbone. A subset can be used for an undergraduate course; a graduate course could probably cover the entire material and then some.
-''','2012')
+''','2012'),
+('Game Programming Patterns','Game Programming','Bob Nystrom','html',['all_links','http://gameprogrammingpatterns.com/'],
+'''
+There are already dozens of game programming books out there. Why write another? I’ll explain by analogy.
+
+Imagine a game codebase as a house. Graphics and sound are the appliances and fixtures: a nice chandelier, kitchen sink, big picture windows. This is the kind of stuff you can find in other books. These things matter, of course, but this book aims at something a bit more humble and fundamental: the framing. Other books can teach you about windows and fixtures, faucets and tubs. What I hope to cover in this book is the joist and the arch, plumbing and wiring — techniques that will let you build an elegant and maintainable structure out of a few simple parts. Use them to frame the house, then crack open those other books to build it out.
+
+It’s easy to underappreciate this. After all, friends won’t look at your home and say, “Wow, nice wiring!” But without it, I can guarantee they will notice when you flip the lightswitch and your beautiful chandelier doesn’t turn on.
+''')
 ]
