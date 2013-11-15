@@ -4,6 +4,7 @@
 #FIRST RELEASE 0.1 CODENAME LUPIN ! By Ekianjo, 2013. 
 #LICENSE: GPLv3 / http://opensource.org/licenses/GPL-3.0
 
+
 #----- SECOND RELEASE GOALS (0.2)
 #DONE
 #ADD CONFIRMATION BEFORE DELETION - DONE
@@ -40,6 +41,21 @@
 #UPDATE LOCAL DATABASE WITH ONLINE VERSION
 #ADD BOOK LICENSE INFORMATION ? (should be in PDF anyway...)
 #ALLOW READING OF HTML at least (reader tbc)
+
+
+####FOR HTML SUPPORT
+#add html in the file type
+#make array after the file type
+#first element of the array should be either all_links or follow_links
+#all_links will simply fetch all html contents from pages where the html files are clearly separated
+#follow_links will provide specific links to download from
+#need to create specific rule on how to store the book
+#need to add update in case new content is available
+#need to use specific browser to open the book as well -> I have half the answer from Ptitseb already...
+
+##REMINDER: Typical data structure
+#(name of book, topic, author, file type, link, description)
+
 
 import time #used for letting the download sleep and keep GUI active
 import gtk #for the graphical user interface
@@ -321,6 +337,9 @@ class InfoBooks(gtk.Window):
 	                    #TODO: ADD PROGRESS BAR
 
                         #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
+	                    
+	                    
+	                    
 	                    
 	                    urllib.urlretrieve(books[4],books[0]+".pdf",reporthook=self.myReportHook)
 	                    
