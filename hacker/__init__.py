@@ -850,5 +850,10 @@ There are already dozens of game programming books out there. Why write another?
 Imagine a game codebase as a house. Graphics and sound are the appliances and fixtures: a nice chandelier, kitchen sink, big picture windows. This is the kind of stuff you can find in other books. These things matter, of course, but this book aims at something a bit more humble and fundamental: the framing. Other books can teach you about windows and fixtures, faucets and tubs. What I hope to cover in this book is the joist and the arch, plumbing and wiring — techniques that will let you build an elegant and maintainable structure out of a few simple parts. Use them to frame the house, then crack open those other books to build it out.
 
 It’s easy to underappreciate this. After all, friends won’t look at your home and say, “Wow, nice wiring!” But without it, I can guarantee they will notice when you flip the lightswitch and your beautiful chandelier doesn’t turn on.
-''')
+'''),
+('Foundations of Databases','Databases','Serge Abiteboul (more)','pdf','http://webdam.inria.fr/Alice/pdfs/all.pdf',
+'''
+C
+omputers are now used in almost all aspects of human activity. One of their main uses is to manage information, which in some cases involves simply holding data for future retrieval and in other cases serving as the backbone for managing the life cycle of complex ﬁnancial or engineering processes. A large amount of data stored in a computer is called a database. The basic software that supports the management of this data is called a database management system (dbms). The dbms is typically accompanied by a large and evergrowing body of application software that accesses and modiﬁes the stored information. The primary focus in this book is to present part of the theory underlying the design and use of these systems.
+''','1995')
 ]
