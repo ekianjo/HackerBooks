@@ -855,5 +855,13 @@ It’s easy to underappreciate this. After all, friends won’t look at your hom
 '''
 C
 omputers are now used in almost all aspects of human activity. One of their main uses is to manage information, which in some cases involves simply holding data for future retrieval and in other cases serving as the backbone for managing the life cycle of complex ﬁnancial or engineering processes. A large amount of data stored in a computer is called a database. The basic software that supports the management of this data is called a database management system (dbms). The dbms is typically accompanied by a large and evergrowing body of application software that accesses and modiﬁes the stored information. The primary focus in this book is to present part of the theory underlying the design and use of these systems.
-''','1995')
+''','1995'),
+('The Probabiliy and Statistics Cookbook','Statistics','Matthias Vallentin','pdf','http://matthias.vallentin.net/probability-and-statistics-cookbook/cookbook-en.pdf',
+'''
+This cookbook integrates a variety of topics in probability theory and statistics. It is based on literature and in-class material from courses of the statistics department at the University of California in Berkeley but also influenced by other sources.
+''','2012'),
+('Culture & Empire: Digital Revolution','Digital Culture','Pieter Hintjens','pdf','https://github.com/cultureandempire/cultureandempire.github.io/raw/master/pdf/cande-2013-11-01.pdf',
+'''
+The whole planet is getting connected, and building vast new communities. The on-line world thinks faster, and thinks different. Smart, fast, and creative, these new communities are a real challenge to old power and old money. And old money, after its War on Drugs, and War on Terror, is now launching its War on the Internet. What is going on, and where will this lead us? Pieter Hintjens, campaigner, writer, and programmer, tells all in this vast, absorbing story of the Digital Revolution.
+''','2013')
 ]
