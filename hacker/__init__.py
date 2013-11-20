@@ -864,4 +864,8 @@ This cookbook integrates a variety of topics in probability theory and statistic
 '''
 The whole planet is getting connected, and building vast new communities. The on-line world thinks faster, and thinks different. Smart, fast, and creative, these new communities are a real challenge to old power and old money. And old money, after its War on Drugs, and War on Terror, is now launching its War on the Internet. What is going on, and where will this lead us? Pieter Hintjens, campaigner, writer, and programmer, tells all in this vast, absorbing story of the Digital Revolution.
 ''','2013')
+('R Practicals Book','R','Charles DiMaggio','http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/resources/R/practicalsBookNoAns.pdf',
+'''
+The best way to start getting comfortable with a new language is to use it. This series of exercises reviews some of the content we’ve discussed during lecture, and introduces some other basic concepts about working with data in R. It’s important that you actively type in the commands and review the results rather than just read. Try to brieﬂy answer the questions that come up along the way. Don’t worry if everything doesn’t make a lot of sense during the earlier exercises. It will. And there’s an answer key available if you become too frustrated. '''
+,'2013')
 ]
