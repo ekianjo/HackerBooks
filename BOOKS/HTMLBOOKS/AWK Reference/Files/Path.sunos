@@ -1,0 +1,63 @@
+# .path.SunOS
+# copied from .path.default, and modified
+
+if ( ! $?SYSTEM ) then
+    set SYSTEM = "`uname -s`"
+endif
+
+# Having this here would cause an infinite loop
+# Make sure it is commented out
+#if ( -f ~/.path.$SYSTEM ) then
+#    source ~/.path.$SYSTEM
+#endif
+
+# define these if .path.$SYSTEM doesn't
+
+if ( ! $?MACHINE ) then
+    set MACHINE = "`uname -m`"
+endif
+
+if ( ! $?REV ) then
+    set REV = "`uname -r`"
+endif
+
+# define the system defined paths
+if (! $?SYSPATH ) then
+  if ( "$REV" =~ 4.[012].* ) then
+    set SYSPATH  = ( /usr/ucb /usr/bin /usr/5bin /bin  /usr/etc )
+  else if (  "$REV" =~ 5.[0-6].* ) then
+    set SYSPATH = ( /opt/SUNWspro/bin /usr/ccs/bin \
+      /usr/ucb /usr/bin /usr/sbin )
+  else
+#   How did I get here?
+    set SYSPATH  = ( /usr/ucb /usr/bin /bin )
+  endif
+endif
+
+# define the places a window system's files are located
+# I could look at DISPLAY, and change this depending on 
+# the value
+
+if (! $?WINPATH ) then
+    if ( ! $?OPENWINHOME ) then
+        setenv OPENWINHOME /usr/openwin
+    endif
+    set WINPATH  = ( $OPENWINHOME/bin )
+endif
+
+# define the places where architecture-specific binaries are
+#
+if ( ! $?MYBIN ) then
+    set MYBIN = ( ~/bin ~/$SYSTEM/$REV/$MACHINE/bin  )
+endif
+
+if ( ! $?LOCALBIN ) then
+    set LOCALBIN = ( /local/bin )
+endif
+
+#set CACHEBIN = ( )
+set CACHEBIN = ( $HOME/cachebin )
+
+# If I set this, 
+#   then the variables in .path.default will be skipped
+#set TOTALPATH = ( $CACHEBIN $MYBIN $LOCALBIN $WINPATH $SYSPATH )

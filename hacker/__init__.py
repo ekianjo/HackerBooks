@@ -886,5 +886,25 @@ Scientists seek to answer questions using rigorous methods and careful observati
 3. Analyze the data.
 4. Form a conclusion.
 Statistics as a subject focuses on making stages 2-4 objective, rigorous, and efficient. That is, statistics has three primary components: How best can we collect data? How should it be analyzed? And what can we infer from the analysis?
-''','2012')
+''','2012'),
+('Git Reference','Git','GitHub Team','html','http://gitref.org/index.html',
+'''
+The Git Reference site was put together by the GitHub team.
+''',"2014"),
+('Unix/Linux tools Reference','Linux Tools','Bruce Barnett','html','http://www.grymoire.com/Unix/index.html',
+'''
+This page includes Bruce Barnett's tutorials on UNIX shell programming and various other arcane subjects of interest to wizards.
+These tutorials were originally Solaris-specific, and originally contained a lot of references to OpenWindows. Times have changed, but I hope the basic information will still be helpful. I do try to update the information. Corrections are helpful. Please be patient.
+''','2013'),
+('Advanced Bash Scripting Guide','Bash','Mendel Cooper','html','http://tldp.org/LDP/abs/html/index.html',
+'''
+This tutorial assumes no previous knowledge of scripting or programming, but progresses rapidly toward an intermediate/advanced level of instruction . . . all the while sneaking in little nuggets of UNIX® wisdom and lore. It serves as a textbook, a manual for self-study, and as a reference and source of knowledge on shell scripting techniques. The exercises and heavily-commented examples invite active reader participation, under the premise that the only way to really learn scripting is to write scripts.
+
+This book is suitable for classroom use as a general introduction to programming concepts.
+''','2012'),
+('The Command Line Crash Course','Command Line','Zed A Shaw','html','http://learncodethehardway.org/cli/book/index.html',
+'''
+This book is a quick super fast course in using the command line. It is intended to be done rapidly in about a day or two, and not meant to teach you advanced shell usage.
+''','2010')
+
 ]

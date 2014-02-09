@@ -1,0 +1,55 @@
+# .path.default modified for SunOS
+
+if ( ! $?HOSTNAME ) then
+    setenv HOSTNAME `hostname`
+endif
+
+# get host specific path, if there
+if ( -f ~/.path.$HOSTNAME ) then
+    source ~/.path.$HOSTNAME
+endif
+
+if ( ! $?SYSTEM ) then
+    set SYSTEM = "`uname -s`"
+endif
+
+# get system-specific searchpath, if there
+if ( -f ~/.path.$SYSTEM ) then
+    source ~/.path.$SYSTEM
+endif
+
+# define these if .path.$SYSTEM doesn't
+
+# define the system defined paths
+if (! $?SYSPATH ) then
+    set SYSPATH  = ( /usr/ucb /usr/bin /bin )
+endif
+
+# define the places a window system's files are located
+
+
+if (! $?WINPATH ) then
+    set WINPATH  = ( /usr/X11/bin /usr/X11R6/bin /usr/openwin/bin )
+endif
+
+# Private executables
+if ( ! $?MYBIN ) then
+    set MYBIN = ( ~/bin ~/bin/$SYSTEM )
+endif
+
+# local to machine
+if ( ! $?LOCALBIN ) then
+    set LOCALBIN = ( /local/bin /local/bin/$SYSTEM )
+endif
+
+#set CACHEBIN = ( $HOME/cachebin )
+set CACHEBIN = ( )
+
+#If TOTALPATH is defined, use it, else build it up from the pieces
+if ( $?TOTALPATH ) then
+    set path = ( $TOTALPATH )
+else
+    set path = ( $CACHEBIN $MYBIN $LOCALBIN $WINPATH $SYSPATH )
+#   set path = ( $CACHEBIN $MYBIN $LOCALBIN $WINPATH $SYSPATH . )
+
+endif

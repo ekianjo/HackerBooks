@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<title>Paths, Folders, Directories (pwd)</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/pygments.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+      <div class="twelve columns" id="header">
+          <div class="topbar">
+              <div class="global-nav">
+                  <div class="four columns" id="header-block">
+                      <p><a href="http://cli.learncodethehardway.org">The Command Line Crash Course</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p style="color: white"><a href="http://inculcate.me/school/courses/1/">Videos And PDFs For $6</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p>
+                      <a href="http://learnpythonthehardway.org">Python</a> |
+                      <a href="http://ruby.learncodethehardway.org">Ruby</a> |
+                      <a href="http://c.learncodethehardway.org">C</a> |
+                      <a href="http://sql.learncodethehardway.org">SQL</a> |
+                      <a href="http://regex.learncodethehardway.org">Regex</a> 
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <h1 class="title">Paths, Folders, Directories (pwd)</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="eleven columns">
+        <div class="section" id="do-this">
+<h1>Do This</h1>
+<p>I'm going to teach you how to read these &quot;sessions&quot; that I show you.  You don't have to
+type everything I list here, just some of the parts:</p>
+<ul class="simple">
+<li>You do <em>not</em> type in the <tt class="docutils literal">$</tt> (unix) or
+<tt class="docutils literal">&gt;</tt> (Windows).  That's just me showing you my session so you can see what
+I got.</li>
+<li>You type in the stuff after <tt class="docutils literal">$ or &gt;</tt>, then hit enter.  So if I have <tt class="docutils literal">$ pwd</tt> you type just <tt class="docutils literal">pwd</tt> and hit enter.</li>
+<li>You can then see what I have for output followed by another <tt class="docutils literal">$</tt> or <tt class="docutils literal">&gt;</tt> prompt.  That content is the output and you should see the same output.</li>
+</ul>
+<p>Let's do a simple first command so you can get the hang of this:</p>
+<div class="highlight"><pre><a name="code--ex2.sh-session-pyg.html-1"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex2.sh-session-pyg.html-2"></a><span class="go">/Users/zedshaw</span>
+<a name="code--ex2.sh-session-pyg.html-3"></a><span class="gp">$</span>
+</pre></div><div class="highlight"><pre><a name="code--ex2-win.sh-session-pyg.html-1"></a><span class="go">PS C:\Users\zed&gt; pwd</span>
+<a name="code--ex2-win.sh-session-pyg.html-2"></a>
+<a name="code--ex2-win.sh-session-pyg.html-3"></a><span class="go">Path</span>
+<a name="code--ex2-win.sh-session-pyg.html-4"></a><span class="go">----</span>
+<a name="code--ex2-win.sh-session-pyg.html-5"></a><span class="go">C:\Users\zed</span>
+<a name="code--ex2-win.sh-session-pyg.html-6"></a>
+<a name="code--ex2-win.sh-session-pyg.html-7"></a><span class="go">PS C:\Users\zed&gt;</span>
+</pre></div><div class="note">
+<p class="first admonition-title">Note</p>
+<p>In this book I need to save space so that you can focus on the important
+details of the commands.  To do this, I'm going to strip out the
+first part of the prompt (the <tt class="docutils literal">PS <span class="pre">C:\Users\zed</span></tt> above) and leave
+just the little <tt class="docutils literal">&gt;</tt> part.  This means your prompt won't look
+exactly the same, but don't worry about that.</p>
+<p>Remember that from now on I'll only have the <tt class="docutils literal">&gt;</tt> to tell you
+that's the prompt.</p>
+<p class="last">I'm doing the same thing for the Unix prompts, but Unix prompts are so
+varied that most people get used to <tt class="docutils literal">$</tt> meaning &quot;just the prompt&quot;.</p>
+</div>
+</div>
+<div class="section" id="you-learned-this">
+<h1>You Learned This</h1>
+<p>Your prompt will look different from mine.  You may have your user
+name before the <tt class="docutils literal">$</tt> and the name of your computer.  On Windows it will
+probably look different too.  The key is that you see the pattern of:</p>
+<ul class="simple">
+<li>There's a prompt.</li>
+<li>You type a command there. In this case, it's pwd.</li>
+<li>It printed something.</li>
+<li>Repeat.</li>
+</ul>
+<p>You just learned what <tt class="docutils literal">pwd</tt> does, which means &quot;print working
+directory.&quot;  What's a directory?  It's a folder.  Folder and directory are the
+same thing, and they're used interchangeably.  When you open your file browser on your
+computer to graphically find files, you are walking through folders.  Those
+folders are the exact same things as these &quot;directories&quot; we're going to work
+with.</p>
+</div>
+<div class="section" id="do-more">
+<h1>Do More</h1>
+<ul class="simple">
+<li>Type <tt class="docutils literal">pwd</tt> 20 times and each time say &quot;print working directory.&quot;</li>
+<li>Type <tt class="docutils literal">pwd</tt> 20 times and each time say &quot;print working directory.&quot;</li>
+<li>Write down the path that this command gives you.  Find it with your
+graphical file browser of choice.</li>
+<li>No, seriously, type it 20 times and say it out loud.  Sssh.  Just do it.</li>
+</ul>
+</div>
+    </div>
+
+    <div class="one columns" id="right-nav">
+        <center>
+        <p><a href="http://learncodethehardway.org/book/"><img src="images/48_structure.png"></a></p>
+        <p><a href="mailto:help@learncodethehardway.org"><img src="images/48_email.png"></a></p>
+        <p><a href="ex2.html#faq"><img src="images/48_faq.png"></a></p>
+        <p><a href="http://inculcate.me/school/courses/1/"><img src="images/48_video.png"></a></p>
+        </center>
+    </div>
+    <div class="twelve columns" id="footer">
+        <div class="four columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org">Copyright (C) 2010 Zed. A. Shaw</a>
+            </p>
+        </div>
+        <div class="four columns" id="footer-block">
+            <p>
+            </p>
+        </div>
+        <div class="three columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org/credits.html">Credits</a>
+            </p>
+        </div>
+        <div class="one columns">
+            &nbsp;
+        </div>
+    </div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+</body>
+</html>

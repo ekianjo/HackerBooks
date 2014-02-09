@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<title>The Setup</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/pygments.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+      <div class="twelve columns" id="header">
+          <div class="topbar">
+              <div class="global-nav">
+                  <div class="four columns" id="header-block">
+                      <p><a href="http://cli.learncodethehardway.org">The Command Line Crash Course</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p style="color: white"><a href="http://inculcate.me/school/courses/1/">Videos And PDFs For $6</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p>
+                      <a href="http://learnpythonthehardway.org">Python</a> |
+                      <a href="http://ruby.learncodethehardway.org">Ruby</a> |
+                      <a href="http://c.learncodethehardway.org">C</a> |
+                      <a href="http://sql.learncodethehardway.org">SQL</a> |
+                      <a href="http://regex.learncodethehardway.org">Regex</a> 
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <h1 class="title">The Setup</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="eleven columns">
+        <p>In this book you will be instructed to do three things:</p>
+<ul class="simple">
+<li>Do some things in your shell (command line, Terminal, PowerShell).</li>
+<li>Learn about what you just did.</li>
+<li>Do more on your own.</li>
+</ul>
+<p>For this first exercise you'll be expected to get your Terminal open and working so that you can do
+the rest of the book.</p>
+<div class="section" id="do-this">
+<h1>Do This</h1>
+<p>Get your terminal, shell, PowerShell working so you can access it quickly and know that it works.</p>
+<div class="section" id="mac-osx">
+<h2>Mac OSX</h2>
+<p>For Mac OSX you'll need to do this:</p>
+<ul class="simple">
+<li>Hold down COMMAND and hit the spacebar.</li>
+<li>In the top right the blue &quot;search bar&quot; will pop up.</li>
+<li>Type:  terminal</li>
+<li>Click on the Terminal application that looks kind of like a black box.</li>
+<li>This will open Terminal.</li>
+<li>You can now go to your Dock and CTRL-click to pull up the menu, then select <tt class="docutils literal"><span class="pre">Options-&gt;Keep</span></tt> In Dock.</li>
+</ul>
+<p>Now you have your Terminal open and it's in your Dock so you can get to it.</p>
+</div>
+<div class="section" id="linux">
+<h2>Linux</h2>
+<p>I'm assuming that if you have Linux then you already know how to get at your terminal.  Look through the
+menu for your window manager for anything named &quot;Shell&quot; or &quot;Terminal&quot;.</p>
+</div>
+<div class="section" id="windows">
+<h2>Windows</h2>
+<p>On Windows we're going to use PowerShell. People used to work with a program called cmd.exe, but it's not nearly as usable as PowerShell. If you have Windows 7 or later, do this:</p>
+<ul class="simple">
+<li>Click Start.</li>
+<li>In &quot;Search programs and files&quot; type: powershell</li>
+<li>Hit Enter.</li>
+</ul>
+<p>If you don't have Windows 7, you should <em>seriously</em> consider upgrading. If you
+still insist on not upgrading then you can try installing it
+<a class="reference external" href="http://learncodethehardway.org/cli/book/fromthedownloadcenter">http://www.microsoft.com/en-us/download/details.aspx?id=7217</a>
+. You are on your own, though, since I don't have Windows
+XP, but hopefully the PowerShell experience is the same.</p>
+</div>
+</div>
+<div class="section" id="you-learned-this">
+<h1>You Learned This</h1>
+<p>You learned how to get your terminal open so you can do the rest of this book.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>If you have that really smart friend who already knows Linux, ignore them when they tell you to use something
+other than bash.  I'm teaching you bash.  That's it.  They will claim that zsh will give you 30 more IQ points
+and win you millions in the stock market.  Ignore them.  Your goal is to get capable enough and at this level
+it doesn't matter which shell you use.</p>
+<p class="last">The next warning is stay off IRC or other places where &quot;hackers&quot; hang out.  They think it's funny to hand you
+commands that can destroy your computer.  The command <tt class="docutils literal">rm <span class="pre">-rf</span> /</tt> is a classic that you <em>must never type</em>.
+Just avoid them.  If you need help, make sure you get it from someone you trust and not from random idiots on the
+internet.</p>
+</div>
+</div>
+<div class="section" id="do-more">
+<h1>Do More</h1>
+<p>This exercise has a large &quot;do more&quot; part.  The other exercises are not as involved as this one, but
+I'm having you prime your brain for the rest of the book by doing some memorization.  Just trust me,
+this will make things silky smooth later on.</p>
+<div class="section" id="linux-mac-osx">
+<h2>Linux/Mac OSX</h2>
+<p>Take this list of commands and create index cards with the names on the left
+on one side, and the definitions on the other side.  Drill them every day while
+you do this book for just 15 minutes or so.</p>
+<dl class="docutils">
+<dt>pwd</dt>
+<dd>print working directory</dd>
+<dt>hostname</dt>
+<dd>my computer's network name</dd>
+<dt>mkdir</dt>
+<dd>make directory</dd>
+<dt>cd</dt>
+<dd>change directory</dd>
+<dt>ls</dt>
+<dd>list directory</dd>
+<dt>rmdir</dt>
+<dd>remove directory</dd>
+<dt>pushd</dt>
+<dd>push directory</dd>
+<dt>popd</dt>
+<dd>pop directory</dd>
+<dt>cp</dt>
+<dd>copy a file or directory</dd>
+<dt>mv</dt>
+<dd>move a file or directory</dd>
+<dt>less</dt>
+<dd>page through a file</dd>
+<dt>cat</dt>
+<dd>print the whole file</dd>
+<dt>xargs</dt>
+<dd>execute arguments</dd>
+<dt>find</dt>
+<dd>find files</dd>
+<dt>grep</dt>
+<dd>find things inside files</dd>
+<dt>man</dt>
+<dd>read a manual page</dd>
+<dt>apropos</dt>
+<dd>find what man page is appropriate</dd>
+<dt>env</dt>
+<dd>look at your environment</dd>
+<dt>echo</dt>
+<dd>print some arguments</dd>
+<dt>export</dt>
+<dd>export/set a new environment variable</dd>
+<dt>exit</dt>
+<dd>exit the shell</dd>
+<dt>sudo</dt>
+<dd>DANGER! become super user root DANGER!</dd>
+<dt>chmod</dt>
+<dd>change permission modifiers</dd>
+<dt>chown</dt>
+<dd>change ownership</dd>
+</dl>
+</div>
+<div class="section" id="id1">
+<h2>Windows</h2>
+<p>If you're using Windows then here's your list of commands:</p>
+<dl class="docutils">
+<dt>pwd</dt>
+<dd>print working directory</dd>
+<dt>hostname</dt>
+<dd>my computer's network name</dd>
+<dt>mkdir</dt>
+<dd>make directory</dd>
+<dt>cd</dt>
+<dd>change directory</dd>
+<dt>ls</dt>
+<dd>list directory</dd>
+<dt>rmdir</dt>
+<dd>remove directory</dd>
+<dt>pushd</dt>
+<dd>push directory</dd>
+<dt>popd</dt>
+<dd>pop directory</dd>
+<dt>cp</dt>
+<dd>copy a file or directory</dd>
+<dt>robocopy</dt>
+<dd>robust copy</dd>
+<dt>mv</dt>
+<dd>move a file or directory</dd>
+<dt>more</dt>
+<dd>page through a file</dd>
+<dt>type</dt>
+<dd>print the whole file</dd>
+<dt>forfiles</dt>
+<dd>run a command on lots of files</dd>
+<dt>dir -r</dt>
+<dd>find files</dd>
+<dt>select-string</dt>
+<dd>find things inside files</dd>
+<dt>help</dt>
+<dd>read a manual page</dd>
+<dt>helpctr</dt>
+<dd>find what man page is appropriate</dd>
+<dt>echo</dt>
+<dd>print some arguments</dd>
+<dt>set</dt>
+<dd>export/set a new environment variable</dd>
+<dt>exit</dt>
+<dd>exit the shell</dd>
+<dt>runas</dt>
+<dd>DANGER! become super user root DANGER!</dd>
+<dt>attrib</dt>
+<dd>change permission modifiers</dd>
+<dt>iCACLS</dt>
+<dd>change ownership</dd>
+</dl>
+<p>Drill, drill, drill! Drill until you can say these phrases right away when you
+see that word.  Then drill the inverse, so that you read the phrase and know
+what command will do that.  You're building your vocabulary by doing this, but
+don't spend so much time you go nuts and get bored.</p>
+</div>
+</div>
+    </div>
+
+    <div class="one columns" id="right-nav">
+        <center>
+        <p><a href="http://learncodethehardway.org/book/"><img src="images/48_structure.png"></a></p>
+        <p><a href="mailto:help@learncodethehardway.org"><img src="images/48_email.png"></a></p>
+        <p><a href="ex1.html#faq"><img src="images/48_faq.png"></a></p>
+        <p><a href="http://inculcate.me/school/courses/1/"><img src="images/48_video.png"></a></p>
+        </center>
+    </div>
+    <div class="twelve columns" id="footer">
+        <div class="four columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org">Copyright (C) 2010 Zed. A. Shaw</a>
+            </p>
+        </div>
+        <div class="four columns" id="footer-block">
+            <p>
+            </p>
+        </div>
+        <div class="three columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org/credits.html">Credits</a>
+            </p>
+        </div>
+        <div class="one columns">
+            &nbsp;
+        </div>
+    </div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+</body>
+</html>

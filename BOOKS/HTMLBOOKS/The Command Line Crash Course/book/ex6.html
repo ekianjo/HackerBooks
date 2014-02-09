@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<title>List Directory (ls)</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/pygments.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+      <div class="twelve columns" id="header">
+          <div class="topbar">
+              <div class="global-nav">
+                  <div class="four columns" id="header-block">
+                      <p><a href="http://cli.learncodethehardway.org">The Command Line Crash Course</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p style="color: white"><a href="http://inculcate.me/school/courses/1/">Videos And PDFs For $6</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p>
+                      <a href="http://learnpythonthehardway.org">Python</a> |
+                      <a href="http://ruby.learncodethehardway.org">Ruby</a> |
+                      <a href="http://c.learncodethehardway.org">C</a> |
+                      <a href="http://sql.learncodethehardway.org">SQL</a> |
+                      <a href="http://regex.learncodethehardway.org">Regex</a> 
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <h1 class="title">List Directory (ls)</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="eleven columns">
+        <div class="section" id="do-this">
+<h1>Do This</h1>
+<p>Before you start, make sure you <tt class="docutils literal">cd</tt> back to the directory above temp.
+If you have no idea where you are, use <tt class="docutils literal">pwd</tt> to figure it out and then
+move there.</p>
+<div class="highlight"><pre><a name="code--ex6.sh-session-pyg.html-1"></a><span class="gp">$</span> <span class="nb">cd </span>temp
+<a name="code--ex6.sh-session-pyg.html-2"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-3"></a><span class="go">stuff</span>
+<a name="code--ex6.sh-session-pyg.html-4"></a><span class="gp">$</span> <span class="nb">cd </span>stuff
+<a name="code--ex6.sh-session-pyg.html-5"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-6"></a><span class="go">things</span>
+<a name="code--ex6.sh-session-pyg.html-7"></a><span class="gp">$</span> <span class="nb">cd </span>things
+<a name="code--ex6.sh-session-pyg.html-8"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-9"></a><span class="go">frank</span>
+<a name="code--ex6.sh-session-pyg.html-10"></a><span class="gp">$</span> <span class="nb">cd </span>frank
+<a name="code--ex6.sh-session-pyg.html-11"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-12"></a><span class="go">joe</span>
+<a name="code--ex6.sh-session-pyg.html-13"></a><span class="gp">$</span> <span class="nb">cd </span>joe
+<a name="code--ex6.sh-session-pyg.html-14"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-15"></a><span class="go">alex</span>
+<a name="code--ex6.sh-session-pyg.html-16"></a><span class="gp">$</span> <span class="nb">cd </span>alex
+<a name="code--ex6.sh-session-pyg.html-17"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-18"></a><span class="gp">$</span> <span class="nb">cd </span>john
+<a name="code--ex6.sh-session-pyg.html-19"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-20"></a><span class="gp">$</span> <span class="nb">cd</span> ..
+<a name="code--ex6.sh-session-pyg.html-21"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-22"></a><span class="go">john</span>
+<a name="code--ex6.sh-session-pyg.html-23"></a><span class="gp">$</span> <span class="nb">cd</span> ../../../
+<a name="code--ex6.sh-session-pyg.html-24"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-25"></a><span class="go">frank</span>
+<a name="code--ex6.sh-session-pyg.html-26"></a><span class="gp">$</span> <span class="nb">cd</span> ../../
+<a name="code--ex6.sh-session-pyg.html-27"></a><span class="gp">$</span> ls
+<a name="code--ex6.sh-session-pyg.html-28"></a><span class="go">stuff</span>
+<a name="code--ex6.sh-session-pyg.html-29"></a><span class="gp">$</span>
+</pre></div><div class="highlight"><pre><a name="code--ex6-win.sh-session-pyg.html-1"></a><span class="gp">&gt;</span> <span class="nb">cd </span>temp
+<a name="code--ex6-win.sh-session-pyg.html-2"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-3"></a>
+<a name="code--ex6-win.sh-session-pyg.html-4"></a>
+<a name="code--ex6-win.sh-session-pyg.html-5"></a><span class="go">    Directory: C:\Users\zed\temp</span>
+<a name="code--ex6-win.sh-session-pyg.html-6"></a>
+<a name="code--ex6-win.sh-session-pyg.html-7"></a>
+<a name="code--ex6-win.sh-session-pyg.html-8"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-9"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-10"></a><span class="go">d----        12/17/2011   9:03 AM            stuff</span>
+<a name="code--ex6-win.sh-session-pyg.html-11"></a>
+<a name="code--ex6-win.sh-session-pyg.html-12"></a>
+<a name="code--ex6-win.sh-session-pyg.html-13"></a><span class="gp">&gt;</span> <span class="nb">cd </span>stuff
+<a name="code--ex6-win.sh-session-pyg.html-14"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-15"></a>
+<a name="code--ex6-win.sh-session-pyg.html-16"></a>
+<a name="code--ex6-win.sh-session-pyg.html-17"></a><span class="go">    Directory: C:\Users\zed\temp\stuff</span>
+<a name="code--ex6-win.sh-session-pyg.html-18"></a>
+<a name="code--ex6-win.sh-session-pyg.html-19"></a>
+<a name="code--ex6-win.sh-session-pyg.html-20"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-21"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-22"></a><span class="go">d----        12/17/2011   9:03 AM            things</span>
+<a name="code--ex6-win.sh-session-pyg.html-23"></a>
+<a name="code--ex6-win.sh-session-pyg.html-24"></a>
+<a name="code--ex6-win.sh-session-pyg.html-25"></a><span class="gp">&gt;</span> <span class="nb">cd </span>things
+<a name="code--ex6-win.sh-session-pyg.html-26"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-27"></a>
+<a name="code--ex6-win.sh-session-pyg.html-28"></a>
+<a name="code--ex6-win.sh-session-pyg.html-29"></a><span class="go">    Directory: C:\Users\zed\temp\stuff\things</span>
+<a name="code--ex6-win.sh-session-pyg.html-30"></a>
+<a name="code--ex6-win.sh-session-pyg.html-31"></a>
+<a name="code--ex6-win.sh-session-pyg.html-32"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-33"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-34"></a><span class="go">d----        12/17/2011   9:03 AM            frank</span>
+<a name="code--ex6-win.sh-session-pyg.html-35"></a>
+<a name="code--ex6-win.sh-session-pyg.html-36"></a>
+<a name="code--ex6-win.sh-session-pyg.html-37"></a><span class="gp">&gt;</span> <span class="nb">cd </span>frank
+<a name="code--ex6-win.sh-session-pyg.html-38"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-39"></a>
+<a name="code--ex6-win.sh-session-pyg.html-40"></a>
+<a name="code--ex6-win.sh-session-pyg.html-41"></a><span class="go">    Directory: C:\Users\zed\temp\stuff\things\frank</span>
+<a name="code--ex6-win.sh-session-pyg.html-42"></a>
+<a name="code--ex6-win.sh-session-pyg.html-43"></a>
+<a name="code--ex6-win.sh-session-pyg.html-44"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-45"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-46"></a><span class="go">d----        12/17/2011   9:03 AM            joe</span>
+<a name="code--ex6-win.sh-session-pyg.html-47"></a>
+<a name="code--ex6-win.sh-session-pyg.html-48"></a>
+<a name="code--ex6-win.sh-session-pyg.html-49"></a><span class="gp">&gt;</span> <span class="nb">cd </span>joe
+<a name="code--ex6-win.sh-session-pyg.html-50"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-51"></a>
+<a name="code--ex6-win.sh-session-pyg.html-52"></a>
+<a name="code--ex6-win.sh-session-pyg.html-53"></a><span class="go">    Directory: C:\Users\zed\temp\stuff\things\frank\joe</span>
+<a name="code--ex6-win.sh-session-pyg.html-54"></a>
+<a name="code--ex6-win.sh-session-pyg.html-55"></a>
+<a name="code--ex6-win.sh-session-pyg.html-56"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-57"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-58"></a><span class="go">d----        12/17/2011   9:03 AM            alex</span>
+<a name="code--ex6-win.sh-session-pyg.html-59"></a>
+<a name="code--ex6-win.sh-session-pyg.html-60"></a>
+<a name="code--ex6-win.sh-session-pyg.html-61"></a><span class="gp">&gt;</span> <span class="nb">cd </span>alex
+<a name="code--ex6-win.sh-session-pyg.html-62"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-63"></a>
+<a name="code--ex6-win.sh-session-pyg.html-64"></a>
+<a name="code--ex6-win.sh-session-pyg.html-65"></a><span class="go">    Directory: C:\Users\zed\temp\stuff\things\frank\joe\alex</span>
+<a name="code--ex6-win.sh-session-pyg.html-66"></a>
+<a name="code--ex6-win.sh-session-pyg.html-67"></a>
+<a name="code--ex6-win.sh-session-pyg.html-68"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-69"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-70"></a><span class="go">d----        12/17/2011   9:03 AM            john</span>
+<a name="code--ex6-win.sh-session-pyg.html-71"></a>
+<a name="code--ex6-win.sh-session-pyg.html-72"></a>
+<a name="code--ex6-win.sh-session-pyg.html-73"></a><span class="gp">&gt;</span> <span class="nb">cd </span>john
+<a name="code--ex6-win.sh-session-pyg.html-74"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-75"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex6-win.sh-session-pyg.html-76"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-77"></a>
+<a name="code--ex6-win.sh-session-pyg.html-78"></a>
+<a name="code--ex6-win.sh-session-pyg.html-79"></a><span class="go">    Directory: C:\Users\zed\temp\stuff\things\frank\joe\alex</span>
+<a name="code--ex6-win.sh-session-pyg.html-80"></a>
+<a name="code--ex6-win.sh-session-pyg.html-81"></a>
+<a name="code--ex6-win.sh-session-pyg.html-82"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-83"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-84"></a><span class="go">d----        12/17/2011   9:03 AM            john</span>
+<a name="code--ex6-win.sh-session-pyg.html-85"></a>
+<a name="code--ex6-win.sh-session-pyg.html-86"></a>
+<a name="code--ex6-win.sh-session-pyg.html-87"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex6-win.sh-session-pyg.html-88"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-89"></a>
+<a name="code--ex6-win.sh-session-pyg.html-90"></a>
+<a name="code--ex6-win.sh-session-pyg.html-91"></a><span class="go">    Directory: C:\Users\zed\temp\stuff\things\frank\joe</span>
+<a name="code--ex6-win.sh-session-pyg.html-92"></a>
+<a name="code--ex6-win.sh-session-pyg.html-93"></a>
+<a name="code--ex6-win.sh-session-pyg.html-94"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-95"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-96"></a><span class="go">d----        12/17/2011   9:03 AM            alex</span>
+<a name="code--ex6-win.sh-session-pyg.html-97"></a>
+<a name="code--ex6-win.sh-session-pyg.html-98"></a>
+<a name="code--ex6-win.sh-session-pyg.html-99"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ../../..
+<a name="code--ex6-win.sh-session-pyg.html-100"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-101"></a>
+<a name="code--ex6-win.sh-session-pyg.html-102"></a>
+<a name="code--ex6-win.sh-session-pyg.html-103"></a><span class="go">    Directory: C:\Users\zed\temp\stuff</span>
+<a name="code--ex6-win.sh-session-pyg.html-104"></a>
+<a name="code--ex6-win.sh-session-pyg.html-105"></a>
+<a name="code--ex6-win.sh-session-pyg.html-106"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-107"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-108"></a><span class="go">d----        12/17/2011   9:03 AM            things</span>
+<a name="code--ex6-win.sh-session-pyg.html-109"></a>
+<a name="code--ex6-win.sh-session-pyg.html-110"></a>
+<a name="code--ex6-win.sh-session-pyg.html-111"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex6-win.sh-session-pyg.html-112"></a><span class="gp">&gt;</span> ls
+<a name="code--ex6-win.sh-session-pyg.html-113"></a>
+<a name="code--ex6-win.sh-session-pyg.html-114"></a>
+<a name="code--ex6-win.sh-session-pyg.html-115"></a><span class="go">    Directory: C:\Users\zed\temp</span>
+<a name="code--ex6-win.sh-session-pyg.html-116"></a>
+<a name="code--ex6-win.sh-session-pyg.html-117"></a>
+<a name="code--ex6-win.sh-session-pyg.html-118"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex6-win.sh-session-pyg.html-119"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex6-win.sh-session-pyg.html-120"></a><span class="go">d----        12/17/2011   9:03 AM            stuff</span>
+<a name="code--ex6-win.sh-session-pyg.html-121"></a>
+<a name="code--ex6-win.sh-session-pyg.html-122"></a>
+<a name="code--ex6-win.sh-session-pyg.html-123"></a><span class="gp">&gt;</span>
+</pre></div></div>
+<div class="section" id="you-learned-this">
+<h1>You Learned This</h1>
+<p>The <tt class="docutils literal">ls</tt> command lists out the contents of the directory you
+are currently in.  You can see me use <tt class="docutils literal">cd</tt> to change into different
+directories and then list what's in them so I know which directory to go to next.</p>
+<p>There are a lot of options for the ls command, but you'll learn how to get
+help on those later when we cover the <tt class="docutils literal">help</tt> command.</p>
+</div>
+<div class="section" id="do-more">
+<h1>Do More</h1>
+<ul class="simple">
+<li><em>Type every one of these commands in!</em> You have to actually type these
+to learn them.  Just reading them is <em>not</em> good enough.  I'll stop yelling
+now.</li>
+<li>On Unix, try the <tt class="docutils literal">ls <span class="pre">-lR</span></tt> command while you're in <tt class="docutils literal">temp</tt>.</li>
+<li>On Windows do the same thing with <tt class="docutils literal">dir <span class="pre">-R</span></tt>.</li>
+<li>Use <tt class="docutils literal">cd</tt> to get to other directories on your computer then use <tt class="docutils literal">ls</tt> to see what's in them.</li>
+<li>Update your notebook with new questions.  I know you probably have some, because I'm
+not covering everything about this command.</li>
+<li>Remember that if you get lost, then use <tt class="docutils literal">ls</tt> and <tt class="docutils literal">pwd</tt> to figure out where you are, then go to where you need to be with <tt class="docutils literal">cd</tt>.</li>
+</ul>
+</div>
+    </div>
+
+    <div class="one columns" id="right-nav">
+        <center>
+        <p><a href="http://learncodethehardway.org/book/"><img src="images/48_structure.png"></a></p>
+        <p><a href="mailto:help@learncodethehardway.org"><img src="images/48_email.png"></a></p>
+        <p><a href="ex6.html#faq"><img src="images/48_faq.png"></a></p>
+        <p><a href="http://inculcate.me/school/courses/1/"><img src="images/48_video.png"></a></p>
+        </center>
+    </div>
+    <div class="twelve columns" id="footer">
+        <div class="four columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org">Copyright (C) 2010 Zed. A. Shaw</a>
+            </p>
+        </div>
+        <div class="four columns" id="footer-block">
+            <p>
+            </p>
+        </div>
+        <div class="three columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org/credits.html">Credits</a>
+            </p>
+        </div>
+        <div class="one columns">
+            &nbsp;
+        </div>
+    </div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+</body>
+</html>

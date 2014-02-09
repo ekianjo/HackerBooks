@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<title>Change Directory (cd)</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/pygments.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+      <div class="twelve columns" id="header">
+          <div class="topbar">
+              <div class="global-nav">
+                  <div class="four columns" id="header-block">
+                      <p><a href="http://cli.learncodethehardway.org">The Command Line Crash Course</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p style="color: white"><a href="http://inculcate.me/school/courses/1/">Videos And PDFs For $6</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p>
+                      <a href="http://learnpythonthehardway.org">Python</a> |
+                      <a href="http://ruby.learncodethehardway.org">Ruby</a> |
+                      <a href="http://c.learncodethehardway.org">C</a> |
+                      <a href="http://sql.learncodethehardway.org">SQL</a> |
+                      <a href="http://regex.learncodethehardway.org">Regex</a> 
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <h1 class="title">Change Directory (cd)</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="eleven columns">
+        <div class="section" id="do-this">
+<h1>Do This</h1>
+<p>I'm going to give you the instructions for these sessions one more time:</p>
+<ul class="simple">
+<li>You do <em>not</em> type in the <tt class="docutils literal">$</tt> (unix) or <tt class="docutils literal">&gt;</tt> (Windows).</li>
+<li>You type in the stuff after this, then hit enter.  If I have <tt class="docutils literal">$ cd temp</tt> you just type <tt class="docutils literal">cd temp</tt> and hit enter.</li>
+<li>The output comes after you hit enter, followed by another <tt class="docutils literal">$</tt> or <tt class="docutils literal">&gt;</tt> prompt.</li>
+</ul>
+<div class="highlight"><pre><a name="code--ex5.sh-session-pyg.html-1"></a><span class="gp">$</span> <span class="nb">cd </span>temp
+<a name="code--ex5.sh-session-pyg.html-2"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-3"></a><span class="go">~/temp</span>
+<a name="code--ex5.sh-session-pyg.html-4"></a><span class="gp">$</span> <span class="nb">cd </span>stuff
+<a name="code--ex5.sh-session-pyg.html-5"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-6"></a><span class="go">~/temp/stuff</span>
+<a name="code--ex5.sh-session-pyg.html-7"></a><span class="gp">$</span> <span class="nb">cd </span>things
+<a name="code--ex5.sh-session-pyg.html-8"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-9"></a><span class="go">~/temp/stuff/things</span>
+<a name="code--ex5.sh-session-pyg.html-10"></a><span class="gp">$</span> <span class="nb">cd </span>frank/
+<a name="code--ex5.sh-session-pyg.html-11"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-12"></a><span class="go">~/temp/stuff/things/frank</span>
+<a name="code--ex5.sh-session-pyg.html-13"></a><span class="gp">$</span> <span class="nb">cd </span>joe/
+<a name="code--ex5.sh-session-pyg.html-14"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-15"></a><span class="go">~/temp/stuff/things/frank/joe</span>
+<a name="code--ex5.sh-session-pyg.html-16"></a><span class="gp">$</span> <span class="nb">cd </span>alex/
+<a name="code--ex5.sh-session-pyg.html-17"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-18"></a><span class="go">~/temp/stuff/things/frank/joe/alex</span>
+<a name="code--ex5.sh-session-pyg.html-19"></a><span class="gp">$</span> <span class="nb">cd </span>john/
+<a name="code--ex5.sh-session-pyg.html-20"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-21"></a><span class="go">~/temp/stuff/things/frank/joe/alex/john</span>
+<a name="code--ex5.sh-session-pyg.html-22"></a><span class="gp">$</span> <span class="nb">cd</span> ..
+<a name="code--ex5.sh-session-pyg.html-23"></a><span class="gp">$</span> <span class="nb">cd</span> ..
+<a name="code--ex5.sh-session-pyg.html-24"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-25"></a><span class="go">~/temp/stuff/things/frank/joe</span>
+<a name="code--ex5.sh-session-pyg.html-26"></a><span class="gp">$</span> <span class="nb">cd</span> ..
+<a name="code--ex5.sh-session-pyg.html-27"></a><span class="gp">$</span> <span class="nb">cd</span> ..
+<a name="code--ex5.sh-session-pyg.html-28"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-29"></a><span class="go">~/temp/stuff/things</span>
+<a name="code--ex5.sh-session-pyg.html-30"></a><span class="gp">$</span> <span class="nb">cd</span> ../../..
+<a name="code--ex5.sh-session-pyg.html-31"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-32"></a><span class="go">~/</span>
+<a name="code--ex5.sh-session-pyg.html-33"></a><span class="gp">$</span> <span class="nb">cd </span>temp/stuff/things/frank/joe/alex/john
+<a name="code--ex5.sh-session-pyg.html-34"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-35"></a><span class="go">~/temp/stuff/things/frank/joe/alex/john</span>
+<a name="code--ex5.sh-session-pyg.html-36"></a><span class="gp">$</span> <span class="nb">cd</span> ../../../../../../../
+<a name="code--ex5.sh-session-pyg.html-37"></a><span class="gp">$</span> <span class="nb">pwd</span>
+<a name="code--ex5.sh-session-pyg.html-38"></a><span class="go">~/</span>
+<a name="code--ex5.sh-session-pyg.html-39"></a><span class="gp">$</span>
+</pre></div><div class="highlight"><pre><a name="code--ex5-win.sh-session-pyg.html-1"></a><span class="gp">&gt;</span> <span class="nb">cd </span>temp
+<a name="code--ex5-win.sh-session-pyg.html-2"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-3"></a>
+<a name="code--ex5-win.sh-session-pyg.html-4"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-5"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-6"></a><span class="go">C:\Users\zed\temp</span>
+<a name="code--ex5-win.sh-session-pyg.html-7"></a>
+<a name="code--ex5-win.sh-session-pyg.html-8"></a>
+<a name="code--ex5-win.sh-session-pyg.html-9"></a><span class="gp">&gt;</span> <span class="nb">cd </span>stuff
+<a name="code--ex5-win.sh-session-pyg.html-10"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-11"></a>
+<a name="code--ex5-win.sh-session-pyg.html-12"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-13"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-14"></a><span class="go">C:\Users\zed\temp\stuff</span>
+<a name="code--ex5-win.sh-session-pyg.html-15"></a>
+<a name="code--ex5-win.sh-session-pyg.html-16"></a>
+<a name="code--ex5-win.sh-session-pyg.html-17"></a><span class="gp">&gt;</span> <span class="nb">cd </span>things
+<a name="code--ex5-win.sh-session-pyg.html-18"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-19"></a>
+<a name="code--ex5-win.sh-session-pyg.html-20"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-21"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-22"></a><span class="go">C:\Users\zed\temp\stuff\things</span>
+<a name="code--ex5-win.sh-session-pyg.html-23"></a>
+<a name="code--ex5-win.sh-session-pyg.html-24"></a>
+<a name="code--ex5-win.sh-session-pyg.html-25"></a><span class="gp">&gt;</span> <span class="nb">cd </span>frank
+<a name="code--ex5-win.sh-session-pyg.html-26"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-27"></a>
+<a name="code--ex5-win.sh-session-pyg.html-28"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-29"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-30"></a><span class="go">C:\Users\zed\temp\stuff\things\frank</span>
+<a name="code--ex5-win.sh-session-pyg.html-31"></a>
+<a name="code--ex5-win.sh-session-pyg.html-32"></a>
+<a name="code--ex5-win.sh-session-pyg.html-33"></a><span class="gp">&gt;</span> <span class="nb">cd </span>joe
+<a name="code--ex5-win.sh-session-pyg.html-34"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-35"></a>
+<a name="code--ex5-win.sh-session-pyg.html-36"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-37"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-38"></a><span class="go">C:\Users\zed\temp\stuff\things\frank\joe</span>
+<a name="code--ex5-win.sh-session-pyg.html-39"></a>
+<a name="code--ex5-win.sh-session-pyg.html-40"></a>
+<a name="code--ex5-win.sh-session-pyg.html-41"></a><span class="gp">&gt;</span> <span class="nb">cd </span>alex
+<a name="code--ex5-win.sh-session-pyg.html-42"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-43"></a>
+<a name="code--ex5-win.sh-session-pyg.html-44"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-45"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-46"></a><span class="go">C:\Users\zed\temp\stuff\things\frank\joe\alex</span>
+<a name="code--ex5-win.sh-session-pyg.html-47"></a>
+<a name="code--ex5-win.sh-session-pyg.html-48"></a>
+<a name="code--ex5-win.sh-session-pyg.html-49"></a><span class="gp">&gt;</span> <span class="nb">cd </span>john
+<a name="code--ex5-win.sh-session-pyg.html-50"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-51"></a>
+<a name="code--ex5-win.sh-session-pyg.html-52"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-53"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-54"></a><span class="go">C:\Users\zed\temp\stuff\things\frank\joe\alex\john</span>
+<a name="code--ex5-win.sh-session-pyg.html-55"></a>
+<a name="code--ex5-win.sh-session-pyg.html-56"></a>
+<a name="code--ex5-win.sh-session-pyg.html-57"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex5-win.sh-session-pyg.html-58"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex5-win.sh-session-pyg.html-59"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex5-win.sh-session-pyg.html-60"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-61"></a>
+<a name="code--ex5-win.sh-session-pyg.html-62"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-63"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-64"></a><span class="go">C:\Users\zed\temp\stuff\things\frank</span>
+<a name="code--ex5-win.sh-session-pyg.html-65"></a>
+<a name="code--ex5-win.sh-session-pyg.html-66"></a>
+<a name="code--ex5-win.sh-session-pyg.html-67"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ../..
+<a name="code--ex5-win.sh-session-pyg.html-68"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-69"></a>
+<a name="code--ex5-win.sh-session-pyg.html-70"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-71"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-72"></a><span class="go">C:\Users\zed\temp\stuff</span>
+<a name="code--ex5-win.sh-session-pyg.html-73"></a>
+<a name="code--ex5-win.sh-session-pyg.html-74"></a>
+<a name="code--ex5-win.sh-session-pyg.html-75"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex5-win.sh-session-pyg.html-76"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex5-win.sh-session-pyg.html-77"></a><span class="gp">&gt;</span> <span class="nb">cd </span>temp/stuff/things/frank/joe/alex/john
+<a name="code--ex5-win.sh-session-pyg.html-78"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ../../../../../../../
+<a name="code--ex5-win.sh-session-pyg.html-79"></a><span class="gp">&gt;</span> <span class="nb">pwd</span>
+<a name="code--ex5-win.sh-session-pyg.html-80"></a>
+<a name="code--ex5-win.sh-session-pyg.html-81"></a><span class="go">Path</span>
+<a name="code--ex5-win.sh-session-pyg.html-82"></a><span class="go">----</span>
+<a name="code--ex5-win.sh-session-pyg.html-83"></a><span class="go">C:\Users\zed</span>
+<a name="code--ex5-win.sh-session-pyg.html-84"></a>
+<a name="code--ex5-win.sh-session-pyg.html-85"></a>
+<a name="code--ex5-win.sh-session-pyg.html-86"></a><span class="gp">&gt;</span>
+</pre></div></div>
+<div class="section" id="you-learned-this">
+<h1>You Learned This</h1>
+<p>You made all these directories in the last exercise, and now you're just moving around inside them with the
+<tt class="docutils literal">cd</tt> command.  In my session above I also use <tt class="docutils literal">pwd</tt> to check
+where I am, so remember not to type the output that <tt class="docutils literal">pwd</tt> prints.
+For example, on line 3 you see <tt class="docutils literal">~/temp</tt> but that's the output of <tt class="docutils literal">pwd</tt>
+from the prompt above it.  <em>Do not type this in</em>.</p>
+<p>You should also see how I use the <tt class="docutils literal">..</tt> to move &quot;up&quot; in the tree and path.</p>
+</div>
+<div class="section" id="do-more">
+<h1>Do More</h1>
+<p>A very important part of learning to the use command line interface (CLI) on a computer with a
+graphical user interface (GUI) is figuring out how they work together.  When I started using
+computers there was no &quot;GUI&quot; and you did everything with the DOS prompt (the CLI).  Later, when
+computers became powerful enough that everyone could have graphics, it was simple for me
+to match CLI directories with GUI windows and folders.</p>
+<p>Most people today, however, have no comprehension of the CLI, paths, and directories.
+In fact, it's very difficult to teach it to them and the only way to learn about the
+connection is for you to constantly work with the CLI until one day it clicks that
+things you do in the GUI will show up in the CLI.</p>
+<p>The way you do this is by spending some time finding directories with your GUI file browser,
+and then going to them with your CLI.  This is what you'll do next.</p>
+<ul class="simple">
+<li>cd to the <tt class="docutils literal">joe</tt> directory with one command.</li>
+<li>cd back to <tt class="docutils literal">temp</tt> with one command, but not further above that.</li>
+<li>Find out how to cd to your &quot;home directory&quot; with one command.</li>
+<li>cd to your Documents directory, then find it with your GUI file browser (Finder, Windows Explorer, etc.).</li>
+<li>cd to your Downloads directory, then find it with your file browser.</li>
+<li>Find another directory with your file browser, then cd to it.</li>
+<li>Remember when you put quotes around a directory with spaces in it?  You
+can do that with any command. For example, if you have a directory <tt class="docutils literal">I Have Fun</tt>, then you can do:  <tt class="docutils literal">cd &quot;I Have Fun&quot;</tt></li>
+</ul>
+</div>
+    </div>
+
+    <div class="one columns" id="right-nav">
+        <center>
+        <p><a href="http://learncodethehardway.org/book/"><img src="images/48_structure.png"></a></p>
+        <p><a href="mailto:help@learncodethehardway.org"><img src="images/48_email.png"></a></p>
+        <p><a href="ex5.html#faq"><img src="images/48_faq.png"></a></p>
+        <p><a href="http://inculcate.me/school/courses/1/"><img src="images/48_video.png"></a></p>
+        </center>
+    </div>
+    <div class="twelve columns" id="footer">
+        <div class="four columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org">Copyright (C) 2010 Zed. A. Shaw</a>
+            </p>
+        </div>
+        <div class="four columns" id="footer-block">
+            <p>
+            </p>
+        </div>
+        <div class="three columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org/credits.html">Credits</a>
+            </p>
+        </div>
+        <div class="one columns">
+            &nbsp;
+        </div>
+    </div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+</body>
+</html>

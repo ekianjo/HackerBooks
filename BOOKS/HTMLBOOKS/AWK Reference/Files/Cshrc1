@@ -1,0 +1,31 @@
+# Sample .cshrc file
+# Bruce Barnett 
+# This part is executed on the following occasions:
+#	1. "rsh machine command"
+#	2. "csh scriptname"
+#	3. All scripts that start with #!/bin/csh (without -f)	
+# Read the minimum .cshrc file, if there
+
+if ( -f ~/.cshrc.min ) source ~/.cshrc.min
+
+# if run as a script, then $?prompt == 0
+# if run as a remote shell, then $?prompt == 0 && $?term == 0
+# if $USER is not defined, then "~" doesn't have the proper value
+#     so bail out in this case
+
+if ( ! ( $?USER && $?prompt && $?TERM )) exit
+
+# This is an interactive shell
+
+#---Local variables
+# examples:
+#     set noclobber
+#     set myvariable = "value"
+#     set mylist = ( a b c d e f g)
+
+
+#----aliases
+if ( -f ~/.aliases ) source ~/.aliases
+
+#----Searchpath
+if ( -f ~/.path ) source ~/.path

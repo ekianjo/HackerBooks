@@ -1,0 +1,4939 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html><head><title>
+Csh
+
+
+</title>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script><!-- Place this tag in your head or just before your close body tag -->
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META NAME="Description" CONTENT="Csh Tutorial"  >
+<META NAME="Keywords" CONTENT="csh, c-shell, tutorial, unix, shell scripts, regular expressions, tr" >
+<META name="Author" content="Bruce Barnett">
+<link href="myCSS.css" rel="stylesheet" type="text/css"> 
+</head><body>
+<!-- INCLUDE Navigation -->
+<div id="navigation">
+<img src="grymoire.jpg" alt="grymoire" width="240" height="80">
+<h2>Grymoire<br> Navigation</h2>
+
+<ul>
+<li><a href = "index.html">Unix/Linux</a>
+<ul>
+<li><a href = "Quote.html">Quotes</a></li>
+<li><a href = "Sh.html">Bourne Shell</a></li>
+<li><a href = "Csh.html">C Shell</a></li>
+<li><a href = "Permissions.html">File Permissions</a></li>
+<li><a href = "Regular.html">Regular Expressions</a></li>
+<li><a href = "Grep.html">grep</a></li>
+<li><a href = "Awk.html">awk</a></li>
+<li><a href = "sed.html">sed</a></li>
+<li><a href = "Find.html">find</a></li>
+<li><a href = "Tar.html">tar</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/Security/index.html">Security</a>
+<ul>
+<li><a href = "http://www.grymoire.com/Security/IPv6.html">IPv6</a></li>
+<li><a href = "http://www.grymoire.com/Security/Wireless.html">Wireless</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/Spam/index.html">spam</a></li>
+<li><a href = "http://www.grymoire.com/Deception/index.html">Deception</a></li>
+<li><a href = "http://www.grymoire.com/Postscript/index.html">PostScript</a>
+<ul>
+<li><a href = "http://www.grymoire.com/Postscript/Halftones.html">Halftones</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/Privacy/index.html">Privacy</a>
+<ul>
+<li><a href = "http://www.grymoire.com/Privacy/BillOfRights.html">Bill of Rights</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/References.html">References</a>
+<ul>
+<li><a href = "CshTop10.txt">Top 10 reasons to avoid CSH</a></li>
+<li><a href = "SedChart.pdf">sed Chart (PDF)</a></li>
+<li><a href = "AwkRef.html">awk Reference (HTML)</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/magic.html">Magic                    </a></li>
+<li><a href = "http://www.grymoire.com/Search.html">Search</a></li>
+<li><a href = "http://www.grymoire.com/About.html">About</a></li>
+</ul>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Navigation -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:120px;height:600px"
+     data-ad-client="ca-pub-3246203470757260"
+     data-ad-slot="8751184583"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20908972-2']);
+  _gaq.push(['_setDomainName', 'grymoire.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</div>
+<div id="centerDoc">
+<script type="text/javascript">
+<!--
+google_ad_client = "pub-3246203470757260";
+//Ad1 728x90, created 12/24/07
+google_ad_slot = "5334774510";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<h1>Csh </h1><p>
+<p> Check out my other tutorials on the <a href="http://www.grymoire.com/Unix" title="Unix Tutorials">Unix Page</a>, and my <p>Check my <a href="http://grymoire.wordpress.com/" title="Grymoire's blog">blog</a> 
+<h2>Table of Contents</h2>
+
+<ul>
+<li><a href="Csh.html#uh-0" name="toc-uh-0">C shell problems</a>
+<li><a href="Csh.html#uh-1" name="toc-uh-1">Quoting long strings, $ and !</a>
+<li><a href="Csh.html#uh-2" name="toc-uh-2">The <i>ad hoc</i> parser</a>
+<li><a href="Csh.html#uh-3" name="toc-uh-3">Reading one line at a time</a>
+<li><a href="Csh.html#uh-4" name="toc-uh-4">File redirection</a>
+<li><a href="Csh.html#uh-5" name="toc-uh-5">Signals, Traps and child processes</a>
+<li><a href="Csh.html#uh-6" name="toc-uh-6">A time bomb</a>
+<li><a href="Csh.html#uh-7" name="toc-uh-7">Quoting C Shell Meta-Characters</a>
+<li><a href="Csh.html#uh-8" name="toc-uh-8">Using the backslash</a>
+<li><a href="Csh.html#uh-9" name="toc-uh-9">Strings in single quotation marks</a>
+<li><a href="Csh.html#uh-10" name="toc-uh-10">Strings in double quotation marks</a>
+<li><a href="Csh.html#uh-11" name="toc-uh-11">Solving special cases</a>
+<li><a href="Csh.html#uh-12" name="toc-uh-12">Passing variables inside a string</a>
+<li><a href="Csh.html#uh-13" name="toc-uh-13">C shell Globbing</a>
+<li><a href="Csh.html#uh-14" name="toc-uh-14">Globbing</a>
+<li><a href="Csh.html#uh-15" name="toc-uh-15">Match a single character</a>
+<li><a href="Csh.html#uh-16" name="toc-uh-16">Matching character sets</a>
+<li><a href="Csh.html#uh-17" name="toc-uh-17">Combining meta-characters</a>
+<li><a href="Csh.html#uh-18" name="toc-uh-18">In-line expansion</a>
+<li><a href="Csh.html#uh-19" name="toc-uh-19">Home directory expansion</a>
+<li><a href="Csh.html#uh-20" name="toc-uh-20">C Shell Variable Usage</a>
+<li><a href="Csh.html#uh-21" name="toc-uh-21">Passing arguments to a shell script</a>
+<li><a href="Csh.html#uh-22" name="toc-uh-22">Arguments generalized as array lists</a>
+<li><a href="Csh.html#uh-23" name="toc-uh-23">Clearing array lists</a>
+<li><a href="Csh.html#uh-24" name="toc-uh-24">Testing for variable existence</a>
+<li><a href="Csh.html#uh-25" name="toc-uh-25">The Shift command</a>
+<li><a href="Csh.html#uh-26" name="toc-uh-26">C Shell Flow Control</a>
+<li><a href="Csh.html#uh-27" name="toc-uh-27">Optional forms of the if command</a>
+<li><a href="Csh.html#uh-28" name="toc-uh-28">Problems with the if command</a>
+<li><a href="Csh.html#uh-29" name="toc-uh-29">The While command</a>
+<li><a href="Csh.html#uh-30" name="toc-uh-30">The Foreach command</a>
+<li><a href="Csh.html#uh-31" name="toc-uh-31">The Switch statement</a>
+<li><a href="Csh.html#uh-32" name="toc-uh-32">Complex Expressions</a>
+<li><a href="Csh.html#uh-33" name="toc-uh-33">Commands that use expressions</a>
+<li><a href="Csh.html#uh-34" name="toc-uh-34">Examples</a>
+<li><a href="Csh.html#uh-35" name="toc-uh-35">Tricky expressions to test</a>
+<li><a href="Csh.html#uh-36" name="toc-uh-36">Parenthesis in the C shell</a>
+<li><a href="Csh.html#uh-37" name="toc-uh-37">Break and continue</a>
+<li><a href="Csh.html#uh-38" name="toc-uh-38">Interactive Features of the C shell</a>
+<li><a href="Csh.html#uh-39" name="toc-uh-39">Bill Joy's Legacy</a>
+<li><a href="Csh.html#uh-40" name="toc-uh-40">C shell File Redirection</a>
+<li><a href="Csh.html#uh-41" name="toc-uh-41">The noclobber variable</a>
+<li><a href="Csh.html#uh-42" name="toc-uh-42">Safe Aliases</a>
+<li><a href="Csh.html#uh-43" name="toc-uh-43">C Shell Start-up Files</a>
+<li><a href="Csh.html#uh-44" name="toc-uh-44">The .cshrc file</a>
+<li><a href="Csh.html#uh-45" name="toc-uh-45">The .login file</a>
+<li><a href="Csh.html#uh-46" name="toc-uh-46">The .logout file</a>
+<li><a href="Csh.html#uh-47" name="toc-uh-47">What goes where?</a>
+<li><a href="Csh.html#uh-48" name="toc-uh-48">The tricky part about start-up files</a>
+<li><a href="Csh.html#uh-49" name="toc-uh-49">The C shell prompt variable</a>
+<li><a href="Csh.html#uh-50" name="toc-uh-50">The current terminal</a>
+<li><a href="Csh.html#uh-51" name="toc-uh-51">Local variables vs. Environment variables</a>
+<li><a href="Csh.html#uh-52" name="toc-uh-52">Other conditions</a>
+<li><a href="Csh.html#uh-53" name="toc-uh-53">Sample startup files</a>
+<li><a href="Csh.html#uh-54" name="toc-uh-54">C Shell Searchpath</a>
+<li><a href="Csh.html#uh-55" name="toc-uh-55">Bourne shell and C shell paths</a>
+<li><a href="Csh.html#uh-56" name="toc-uh-56">When to change searchpaths</a>
+<li><a href="Csh.html#uh-57" name="toc-uh-57">Undoing any changes</a>
+<li><a href="Csh.html#uh-58" name="toc-uh-58">Summary</a>
+<li><a href="Csh.html#uh-59" name="toc-uh-59">Sidebar</a>
+<li><a href="Csh.html#uh-60" name="toc-uh-60">Optimizing the C Shell Searchpath</a>
+<li><a href="Csh.html#uh-61" name="toc-uh-61">Programs to Optimize the Searchpath</a>
+<li><a href="Csh.html#uh-62" name="toc-uh-62">Programs to measure your efficiency</a>
+<li><a href="Csh.html#uh-63" name="toc-uh-63">Specifying system-specific searchpaths</a>
+<li><a href="Csh.html#uh-64" name="toc-uh-64">Understand directories characteristics.</a>
+<li><a href="Csh.html#uh-65" name="toc-uh-65">Define a consistent naming convention.</a>
+<li><a href="Csh.html#uh-66" name="toc-uh-66">Define a strategy.</a>
+<li><a href="Csh.html#uh-67" name="toc-uh-67">Reduce the complexity.</a>
+<li><a href="Csh.html#uh-68" name="toc-uh-68">Use local link/caching directories.</a>
+<li><a href="Csh.html#uh-69" name="toc-uh-69">Consider a local home directory</a>
+<li><a href="Csh.html#uh-70" name="toc-uh-70">Customizing your environment</a>
+<li><a href="Csh.html#uh-71" name="toc-uh-71">C Shell History - Forward into the Past</a>
+<li><a href="Csh.html#uh-72" name="toc-uh-72">Prehistoric History</a>
+<li><a href="Csh.html#uh-73" name="toc-uh-73">Enabling History</a>
+<li><a href="Csh.html#uh-74" name="toc-uh-74">Automatic History Saving</a>
+<li><a href="Csh.html#uh-75" name="toc-uh-75">Changing your prompt</a>
+<li><a href="Csh.html#uh-76" name="toc-uh-76">Repeating Past Commands</a>
+<li><a href="Csh.html#uh-77" name="toc-uh-77">Repeating older commands</a>
+<li><a href="Csh.html#uh-78" name="toc-uh-78">Appending to a previous command</a>
+<li><a href="Csh.html#uh-79" name="toc-uh-79">Using history to reuse words</a>
+<li><a href="Csh.html#uh-80" name="toc-uh-80">!* - All of the arguments</a>
+<li><a href="Csh.html#uh-81" name="toc-uh-81">!% - find the word</a>
+<li><a href="Csh.html#uh-82" name="toc-uh-82">Editing the last command</a>
+<li><a href="Csh.html#uh-83" name="toc-uh-83">Word Modifiers in History</a>
+<li><a href="Csh.html#uh-84" name="toc-uh-84">Word events</a>
+<li><a href="Csh.html#uh-85" name="toc-uh-85">Numeric word events</a>
+<li><a href="Csh.html#uh-86" name="toc-uh-86">:- - Ranges of words</a>
+<li><a href="Csh.html#uh-87" name="toc-uh-87">Events, words, arguments, aliases</a>
+<li><a href="Csh.html#uh-88" name="toc-uh-88">Variable Modifiers</a>
+<li><a href="Csh.html#uh-89" name="toc-uh-89">:p - Print modifier</a>
+<li><a href="Csh.html#uh-90" name="toc-uh-90">:s - Substitute modifier</a>
+<li><a href="Csh.html#uh-91" name="toc-uh-91">:&amp; - Repeat substitution</a>
+<li><a href="Csh.html#uh-92" name="toc-uh-92">:q - Quote modifier</a>
+<li><a href="Csh.html#uh-93" name="toc-uh-93">:x - Quotes with spaces</a>
+<li><a href="Csh.html#uh-94" name="toc-uh-94">:u and :l  - Upper and Lower Case</a>
+<li><a href="Csh.html#uh-95" name="toc-uh-95">The End of History?</a>
+<li><a href="Csh.html#uh-96" name="toc-uh-96">C shell Aliases</a>
+<li><a href="Csh.html#uh-97" name="toc-uh-97">Advantages and disadvantages of C shell aliases</a>
+<li><a href="Csh.html#uh-98" name="toc-uh-98">A file for aliases</a>
+<li><a href="Csh.html#uh-99" name="toc-uh-99">Disabling aliases</a>
+<li><a href="Csh.html#uh-100" name="toc-uh-100">Alias with pipes</a>
+<li><a href="Csh.html#uh-101" name="toc-uh-101">Arguments to aliases</a>
+<li><a href="Csh.html#uh-102" name="toc-uh-102">Redefining commands</a>
+<li><a href="Csh.html#uh-103" name="toc-uh-103">Multiple-line aliases</a>
+<li><a href="Csh.html#uh-104" name="toc-uh-104">Directories and the C shell</a>
+<li><a href="Csh.html#uh-105" name="toc-uh-105">cdpath - favorite directories</a>
+<li><a href="Csh.html#uh-106" name="toc-uh-106">Variables</a>
+<li><a href="Csh.html#uh-107" name="toc-uh-107">Specifying the current directory</a>
+<li><a href="Csh.html#uh-108" name="toc-uh-108">chdir versus cd</a>
+</ul>
+
+<p>Copyright 1994, 1995 Bruce Barnett and General Electric Company
+<p>Copyright 2001, 2013 Bruce Barnett
+<p>All rights reserved
+<p>You are allowed to print copies of this tutorial for your personal
+use, and link to this page, but you are not allowed to make electronic
+copies, or redistribute this tutorial in any form without permission.
+<p> Original version written in 1994 and published in the Sun Observer
+<blockquote><p>This section describes C Shell (CSH/TCSH) programming.
+It covers conditional testing, control loops, and other advanced techniques.
+</blockquote>
+<p>This month begins a tutorial on the bad-boy of UNIX, lowest of the low,
+the shell of last resort. Yes, I am talking
+about the C shell.
+FAQ's flame it. Experts have criticized it.
+Unfortunately, this puts UNIX novices in an awkward
+situation. 
+Many people are given the C shell as their default shell.
+They aren't familiar with it, but they have to learn
+enough to customize their environment. 
+They need help, but get criticized every time they ask a question.
+Imagine the following conversation, initiated by a posting on USENET:
+<p>Novice: How do I do XYZ using the C shell?
+<p>Expert: You shouldn't use the C shell. Use the Bourne shell.
+<p>Novice: I try to, but I get syntax errors.
+<p>Expert: That's because you are using the C shell. Use the Bourne shell.
+<p>Novice: I've now using the Bourne shell. How to I create aliases
+and do command-line editing in the Bourne shell?
+<p>Expert: You can't. use bash, ksh or tcsh.
+<p>Novice: I don't have these shells on all of the systems I use.
+What can I use?
+<p>Expert:  In that case, use the C shell.
+<p>Novice: But you told me I shouldn't use the C shell!?!
+<p>Expert: Well, if you have to, you can use the C shell. 
+It's fine for interactive sessions.
+But you shouldn't use it for scripts.
+<p>Novice: It's really confusing trying to learn two shells
+at once. I don't know either shell very well, and
+I'm trying to learn 
+<b>JUST</b> enough to customize my environment. 
+I'd rather just learn one shell at a time. 
+<p>Expert: Well, it's your funeral.
+<p>Novice: How do I do XYZ using the C shell?
+<p>Another Expert: You shouldn't be using the C shell. Use the Bourne shell.
+<p>Novice: @#%&amp;!
+<p><h1><a name="uh-0" href="Csh.html#toc-uh-0">C shell problems</a></h1><p>The C shell does have problems. 
+(See <a href="CshTop10.txt"> My top 10 reasons not to use the C shell.</a>)
+
+Some can be fixed.
+Others cannot.
+Some are unimportant now, but later on might cause grief.
+I'll mention these problems. But I'll let you decide
+if you want to continue to use the C shell, or start using the Bourne shell.
+Switching shells is difficult,
+and some may wish to do so gradually.
+If you want to use the C shell, that's fine.
+I'll show you the pitfalls, so you can intelligently decide.
+No pressure. You can switch at any time.
+But be aware that the C shell is seductive.
+It does have some advantages over the Bourne shell.
+But sometimes what seems like an advantage turns into a disadvantage later.
+Let me discuss them in detail.
+<p><h1><a name="uh-1" href="Csh.html#toc-uh-1">Quoting long strings, $ and !</a></h1><p>The first problem I faced with the C shell involved another language.
+I had a problem that required a
+<i>sed</i> or
+<i>awk</i> script.
+The C shell has a 
+"feature" that warns programmers if they forgot to
+terminate a quoted string. The following command
+will generate a warning in the C shell:
+<dl><dd>echo "This quote doesn't end<br>
+
+</dl><p>The Bourne shell would continue till the end of the script.
+This is a good feature for an interactive shell,
+as it warns you if you forgot to close a quote. But if you want to include a multi-line string, such as an  
+<i>awk</i> script inside a C shell script, you will have problems.
+You can place a backslash at the end of each line,
+but this is error prone, and also hard to read.
+Some
+<i>awk</i> constructs require a backslash at the end.
+Using them inside a C shell script would require two backslashes in a row.
+<p>There are some other strange quoting problems.
+Like the Bourne shell, the C shell has three ways to quote
+characters. You can use the single quote, double quote and backslash.
+But combine them, and find some strange combinations.
+You can put anything inside single quotes in a Bourne shell script, 
+except single quotes.
+The C shell won't let you do that. 
+You can type
+<dl><dd>echo hi!<br>
+
+</dl><p>but the following generates an error:
+<dl><dd>echo 'hi!'<br>
+
+</dl><p>You have to use a backslash if you want to do this:
+<dl><dd>echo 'hi\!'<br>
+
+</dl><p>Also, the following
+works:
+<dl><dd>echo money$<br>
+
+</dl><p>but this generates an error:
+<dl><dd>echo "money$"<br>
+
+</dl><p>But in this case you cannot even use a backslash.
+The followings an error in the C shell:
+<dl><dd>echo "money\$"<br>
+
+</dl><p>Unix shells have many special characters, and quoting them marks them as normal ASCII - telling the shell not to interpret them. And this is true with every Unix shell there is, except the C shell. In the above cases,  putting quotes around some characters 
+<i>makes</i> them special in the C shell, instead of 
+<b>preventing</b> the special interpretation.
+Strange, huh? 
+
+<p><h1><a name="uh-2" href="Csh.html#toc-uh-2">The <i>ad hoc</i> parser</a></h1><p>The second problem is subtle, but may be the next problem you
+discover.  The Bourne shell has a true syntax parser: the
+lines are scanned, and broken up into pieces. Some pieces are commands.
+Other pieces are quoted strings.  File redirection is handled the same way.
+Commands can be combined on one line, or span several lines.
+It doesn't matter.
+As an example, you can use 
+<dl><dd>if true; then echo yes; fi<br>
+
+</dl><p>or
+<dl><dd>if true<br>
+then<br>
+	echo yes<br>
+fi<br>
+
+</dl><p>The parsing of file redirection is independent of the particular command.
+<i>If</i> and
+<i>while</i> commands can get file redirection anywhere. The following
+is valid in the Bourne shell:
+<dl><dd>echo abc | while read a<br>
+do<br>
+	echo a is $a<br>
+done &gt;/tmp/f1<br>
+
+</dl><p>The same holds true for other Bourne shell commands.
+Once you learn the principles, the behavior is predictable.
+<p>The C shell does not have a true parser.
+Instead, the code executes one section for the
+<i>if</i> command, and another for the
+<i>while</i> command.
+What works for one command may not work for another.
+The 
+<i>if</i> command above cannot be done in the C shell.
+There are two file redirections, and the C shell can't do either.
+Also, in the C shell, certain words 
+<b>must</b> be the first word on the line.
+Therefore you might try something that works with one command,
+only to discover that it doesn't work on other commands.
+I've reported a lot of bugs to Sun, and to their credit, many have been fixed.
+Try the same code on other systems, however, and you might get syntax errors.
+<p>The parsing problem is also true with shell built-in commands. Combine them, and
+discover strange messages. Try the following C shell sequence:
+<dl><dd>time | echo<br>
+
+</dl><p>versus
+<dl><dd>time | /bin/echo<br>
+
+</dl><p>and notice the strange error message.
+There are other examples of this.
+These are the types of problems that sneak up on you when you 
+don't expect them.
+The Bourne shell has the
+<i>-n</i> flag, which lets you check the script for syntax errors,
+including branches you didn't take.
+You can't do this with the C shell.
+The C shell seems to act on one line at a time and
+some syntax errors may not be discovered unless they get executed.
+<p><h1><a name="uh-3" href="Csh.html#toc-uh-3">Reading one line at a time</a></h1><p>Sometimes you have to ask a person for input in the middle of a script.
+Sometimes you have to read some information from a file.
+The Bourne shell allows you to specify the source of information 
+for each command.
+Even though a script is connected to a pipe, you can ask the user for input.
+The C shell does not have this flexibility.
+It has a mechanism to get a line from standard input, but that is all it can do.
+You cannot have a C shell script get input from both a file and the terminal.
+<p><h1><a name="uh-4" href="Csh.html#toc-uh-4">File redirection</a></h1><p>With respect to file redirection, the Bourne shell
+has no limitations, while the C shell is very limited.
+With the Bourne shell, you can send standard error 
+to one place, and standard out to another file.
+You can discard standard output, but keep the error.
+You can close any file descriptor, save current ones, and restore them.
+The C shell can't do any of these steps.
+<p><h1><a name="uh-5" href="Csh.html#toc-uh-5">Signals, Traps and child processes</a></h1><p>If you want to make your script more robust, you must add
+signal processing to it. That is, your script must terminate
+gracefully when it is aborted. The C shell has limited abilities.
+You can either do nothing, ignore all signals, or trap all signals.
+It's an all or nothing situation. 
+The Bourne shell can trap particular signals, and call a special routine
+when the script exits normally.
+You can retain the process ID of a background process.
+This allows you to relay signals received to other processes under your control.
+The C shell cannot do this.
+<p><h1><a name="uh-6" href="Csh.html#toc-uh-6">A time bomb</a></h1><p>You can use the C shell for simple scripts. 
+If you don't add many new features, and only write scripts for yourself,
+the C shell may be fine for you.
+But it is a time bomb. There are many times
+I wanted to add a new feature to a C shell script, 
+and couldn't because it didn't support the idea.
+Or else I tried to port a C shell script to a different system
+and found that it didn't work the same way.
+Yes, you can use the C shell.
+Use it for as long as you want. 
+Your choice.
+<p>Tick.... Tick... Tick...
+<p><h1><a name="uh-7" href="Csh.html#toc-uh-7">Quoting C Shell Meta-Characters</a></h1><p>This is my second tutorial on the C shell. This month, I will discuss 
+quoting and meta-characters.
+<p>Like all shells, the C shell examines each line, and breaks it up into
+words.  The first word is a command, and additional words are
+arguments for the command.  The command
+<dl><dd>more *<br>
+
+</dl><p>uses a meta-character, the asterisk.
+The shell sees the asterisk, examines the current directory, and transforms 
+the single character to all of the files in the current directory.
+The
+"more" program then displays all of the files.
+There are many other meta-characters. Some are very subtle.
+Consider this meta-character example:
+<dl><dd>more a b<br>
+
+</dl><p>The meta-character? It's the space.
+In this case, the space indicates the end of one filename
+and the start of the next filename.
+The space, tab, and new-line-character are used by the C shell to 
+indicate the end of one argument, and the beginning of the next.
+(The Bourne shell allows more control, as any character can be
+specified to have this function).
+<p>These meta-characters are an integral part of UNIX. Or rather, an integral part 
+of the shell. 
+A meta-character is simply a character with
+a special meaning. 
+The file system doesn't really care about meta-characters.
+You can have a filename that contains a space, or an asterisk, or any other 
+character. Similarly, you can specify any meta-character as an argument
+to any command. Understanding which characters are meta-characters, what they 
+do, and how to prevent them from being special characters is a skill that must 
+be learned. Most learn by trial and error.  Trouble is, the C shell is trickier
+than other shells.
+<p>One way to discover these characters is to use the
+<b>echo</b> built-in command, and see which characters the C shell will echo, and which
+ones are treated special.
+Here is the list of meta-characters, and a quick description of the 
+special meaning.
+<pre>
++-----------------------------------------------------------------------+
+|		    List of C Chell Meta-Characters			|
++-----------------------------------------------------------------------+
+|Meta-character	  Meaning						|
++-----------------------------------------------------------------------+
+|newline	  End of command					|
+|space		  End of word						|
+|tab		  End of word						|
+|!		  History						|
+|#		  Comment						|
+|$		  Variable						|
+|&amp;		  End of command arguments, launch in background	|
+|(		  Start sub-shell					|
+|)		  End sub-shell						|
+|{		  Start in-line expansion				|
+|}		  End in-line expansion					|
+||		  End of command arguments, Pipe into next command	|
+|&lt;		  Input Redirection					|
+|&gt;		  Output Redirection					|
+|*		  Multi-character Filename expansion (a.k.a. globbing)	|
+|?		  Single-character Filename expansion (a.k.a. globbing) |
+|[		  Character Set Filename expansion (a.k.a. globbing)	|
+|]		  Character Set Filename expansion (a.k.a. globbing)	|
+|;		  End of command					|
+|'		  Strong quoting					|
+|"		  Weak quoting						|
+|`		  Command substitution					|
+|		  Sometimes Special					|
++-----------------------------------------------------------------------+</pre>
+
+<p>If you do not want one of these characters to be treated as a meta-character, 
+you must quote it. Another term for this is 
+<i>escape</i>, as in
+"escape the normal behavior." The Bourne shell has a predictable behavior for quoting meta-characters:
+<p><OL><li>Put a backslash before each character.
+<li>Put single quotes around all of the characters.
+<li>Put double quotes around all of the characters. 
+Exceptions: the dollar sign ($) and back-quote (`) are special, but
+a back-slash before them will escape the special connotation.
+<p>The Bourne shell has an internal flag that specifies when
+quoting occurs. It is either on or off. If quoting is on, then meta-characters 
+are escaped, and treated as normal.
+The C shell is similar, yet not identical.
+As you will see, the quoting mechanism is less predictable.
+In fact, it has some maddening exceptions,
+Let me elaborate.
+<p>
+<p></OL><h1><a name="uh-8" href="Csh.html#toc-uh-8">Using the backslash</a></h1><p>If you want to use a meta-character as an ordinary character, place
+a backslash before it. To delete a file called
+"a b" (there is a space in the filename between a and b),
+type
+<dl><dd>rm a\ b<br>
+
+</dl><p>
+<p><h1><a name="uh-9" href="Csh.html#toc-uh-9">Strings in single quotation marks</a></h1><p>The second method for quoting meta-characters is specifying a string
+that begins and ends with single quotes:
+<dl><dd>rm 'a b'<br>
+
+</dl><p>In the Bourne shell, any character in single quotes is not a meta-character.
+This is not true in the C shell. There are two exceptions: the exclamation 
+point, and new line.
+The Bourne shell allows this:
+<dl><dd>echo 'Hello!'<br>
+
+</dl><p>The C shell requires a backslash:
+<dl><dd>echo 'Hello!'<br>
+
+</dl><p>The exclamation point is a meta-character, and the C shell uses it for its
+<i>alias</i> and
+<i>history</i> features, which I will discuss later. 
+The other exception is a new-line character.
+The Bourne shell allows:
+<dl><dd>echo 'New line -&gt;<br>
+'<br>
+
+</dl><p>The C shell requires a backspace before the end-of-line:
+<dl><dd>echo 'New line -&gt;<br>
+'<br>
+
+</dl><p>A novice programmer may consider this a feature, as any command with an
+unterminated string will generate an error. However, when your programmer skills
+increase, and you want to include a multi-line 
+<i>awk</i> script
+in a shell script, the C shell becomes awkward.
+Sometimes
+<i>awk</i> needs a backslash at the end of a line, so in the C shell, you would need
+two backslashes:
+<br><br>#!/bin/csh -f<br>
+awk '{printf("%st%st%sn",<br>
+$3, $2, $1}'<br>
+
+<br>Click here to get file: <a href="Scripts/CshAwk.csh">CshAwk.csh</a><br>
+An
+<i>awk</i> script in a C shell script is extremely awkward, if you pardon my
+choice of words.
+<p><h1><a name="uh-10" href="Csh.html#toc-uh-10">Strings in double quotation marks</a></h1><p>The last quoting mechanism is a string that starts and ends with the 
+double-quote marks:
+<dl><dd>rm "a b"<br>
+
+</dl><p>This is similar to the single-quote form, but it intentionally
+escapes most meta-characters except the dollar sign and back-quote.
+This allows command substitution, and variable interpretation:
+<dl><dd>echo "I am $USER"<br>
+echo "The current directory is `pwd`"<br>
+
+</dl><p>Like the single quoted string, the exclamation point is an exception:
+<dl><dd>echo "Hello!"<br>
+
+</dl><p>I usually call the single quote the
+"strong" quote, and the double quote the
+"weak" quote.
+However, it is not so simple.
+The frustrating thing about the C shell is that inside a double-quote string,
+you cannot place a backslash before a dollar sign or back-quote to 
+escape the special meaning.
+That is, when I execute the command
+<dl><dd>echo "$HOME"<br>
+
+</dl><p>the shell echoes
+<dl><dd>/home/barnett<br>
+
+</dl><p>So the backslash only works
+<b>some</b> of the time.
+The C shell if filled with special cases. You have to learn them all.
+To make it easy for you, here is a table
+that explains all of the exceptions.
+The first column is the meta-character.
+The second column shows what is required to get the meta-character in a string
+delineated by double quotes.
+The third column corresponds to single quotes.
+The last column shows what is needed when there are no quotation marks.
+<pre>
++--------------------------------------------------------------+
+|	   Meta-character interpretation in strings	       |
++--------------------------------------------------------------+
+|Meta-character	  "..."	       '....'	    no quotation marks |
++--------------------------------------------------------------+
+|newline	  Requires &#160;  Requires &#160;  Requires 	       |
+|space		  Quoted       Quoted	    Requires 	       |
+|tab		  Quoted       Quoted	    Requires 	       |
+|!		  Requires &#160;  Requires &#160;  Requires 	       |
+|#		  Quoted       Quoted	    Requires 	       |
+|$		  Impossible   Quoted	    Requires 	       |
+|&amp;		  Quoted       Quoted	    Requires 	       |
+|(		  Quoted       Quoted	    Requires 	       |
+|)		  Quoted       Quoted	    Requires 	       |
+|{		  Quoted       Quoted	    Requires 	       |
+|}		  Quoted       Quoted	    Requires 	       |
+||		  Quoted       Quoted	    Requires 	       |
+|&lt;		  Quoted       Quoted	    Requires 	       |
+|&gt;		  Quoted       Quoted	    Requires 	       |
+|*		  Quoted       Quoted	    Requires 	       |
+|?		  Quoted       Quoted	    Requires 	       |
+|[		  Quoted       Quoted	    Requires 	       |
+|]		  Quoted       Quoted	    Requires 	       |
+|;		  Quoted       Quoted	    Requires 	       |
+|'		  Quoted       Impossible   Requires 	       |
+|"		  Impossible   Quoted	    Requires 	       |
+|`		  Impossible   Quoted	    Requires 	       |
+|		  Quoted       Quoted	    Requires 	       |
++--------------------------------------------------------------+</pre>
+The phrase
+"Quoted" means the meta-character does not have a special meaning.
+The phrase
+"Impossible" means the meta-character always has a special meaning,
+and cannot be quoted.
+The phrase
+"Requires " says that a backslash is required to escape the special meaning.
+<p>To use the table, imagine you have a file with the same name as 
+a meta-character. Suppose the filename was
+"?" (a question mark).
+You have three methods of specifying the exact filename when deleting it:
+<dl><dd>rm "?"<br>
+rm '?'<br>
+rm ?<br>
+
+</dl><p>If the file had the name
+"!" (an exclamation mark),
+then the table states you always need a backslash:
+<dl><dd>rm "!"<br>
+rm '!'<br>
+rm !<br>
+
+</dl><p>Notice that some combinations
+don't work. That is, there is no way to place a single quote
+inside a string delineated by single quotes.
+Here comes the tough question.
+Suppose you wanted to do the impossible. 
+How do you solve this problem?
+<p><h1><a name="uh-11" href="Csh.html#toc-uh-11">Solving special cases</a></h1><p>Normally, having different quotes is convenient.
+You can use one form of quote to contains the other form:
+<dl><dd>echo " ' "<br>
+echo ' " '<br>
+
+</dl><p>How can you place a quote within a quoted string, when the quote is
+the same type? The simple answer? You can't.
+But there is a simple trick that can be used for all complex cases.
+But it requires a different view of quoted strings. You see, they are not 
+really strings. Most programmers think a string is defined by the quotes 
+at the beginning and at the end. That is, you place quotes around the string, and insert
+special characters in the middle to get around any tricky conditions.
+This does not accurately describe a UNIX shell. There is no concept of
+strings in the shell. Instead, the shell has an internal flag which
+can be enabled and disabled ny the quote characters.
+The following examples are all identical:
+<dl><dd>rm "a b"<br>
+rm a" "b<br>
+rm "a "b<br>
+rm a" b"<br>
+rm "a"" ""b"<br>
+rm "a"' '"b"<br>
+
+</dl><p>In some cases, the letters
+"a" and
+"b" are quoted. In other cases, they are not, because they do not need to
+be escaped. The space, on the other hand, is always quoted in each
+example above. The secret is understanding which characters 
+<b>have</b> to be quoted, and selecting the best way to quote them.
+<p>Now suppose you want to include a double quote inside a double quote?
+You can't. But you can switch the types of quotation marks at any
+point.
+The last example switches the quotation marks from double quotes to
+single quotes. This same technique can be used to delete a file
+with a double quote in the filename. Here are fours ways to do this:
+<dl><dd>rm 'a"b'<br>
+rm a'"'b<br>
+rm a"b<br>
+rm "a"'"'"b"<br>
+
+</dl><p>Here are some other examples:
+<dl><dd>echo "The date command returns " '"' `date` '"'<br>
+echo 'Here is a single quote:' "'"<br>
+
+</dl><p>
+<p><h1><a name="uh-12" href="Csh.html#toc-uh-12">Passing variables inside a string</a></h1><p>A common question is how to pass a variable to the middle of a string.
+Suppose you wanted to write an 
+<b>AWK</b> script that printed out one column.
+To print the first column is easy:
+<dl><dd>awk '{print $1}'<br>
+
+</dl><p>But this script always prints the first column.
+To pass the column number to the script requires the same
+techniques:
+<dl><dd>awk '{print $'$1'}'<br>
+
+</dl><p>This is hard to read, and you need a certain knack to become
+accustomed to understanding it. Just scan from left to right, keeping
+track of the current quote state, and which character was used to
+enable the quote condition. After a while, it becomes easy.
+<p><h1><a name="uh-13" href="Csh.html#toc-uh-13">C shell Globbing</a></h1><p>This is my third tutorial on the C shell. This month, I will discuss 
+filename expansion, and globbing.
+<p>One of the primary functions of a shell is to provide
+an easy way to execute commands, and passing several files to the command.
+Before the shell determines which command to execute, it
+evaluates variables, and performs filename substitutions.
+This is a fancy way of saying you can abbreviate filenames.
+The Bourne shell only supports globbing.
+The C shell supports three forms of filename substitutions:
+globbing, in-line expansion, and 
+home directory expansion:
+<p><h1><a name="uh-14" href="Csh.html#toc-uh-14">Globbing</a></h1><p>The first UNIX shell was called the Mashey shell. This was before the C shell 
+and Bourne shell was written. The Mashey shell didn't have filename substitution.
+If you wanted to list every file in a directory, the shell did not support
+<dl><dd>ls *<br>
+
+</dl><p>Instead, you had to use the
+<i>glob</i> command:
+<dl><dd>ls `glob *`<br>
+
+</dl><p>Glob is a precise, scientific term that is defined as
+"a whole messa," which is not to be confused with
+"glom" which means 
+"view" or "examine."
+An example would be 
+"I wanna glom a whole messa files." The proper terminology, used by those with a doctorate in computer science,
+is of course
+"I wanna glom a globba files." And anyone with a similar doctorate will know exactly what this means.
+Try this at your next dinner party, and you too can impress the
+neighbors.
+<p>Needless to say, after creating, editing, printing, and deleting globs of 
+files day after day, someone realized that life would be easier if the shell
+did the globbing automatically. And lo, UNIX shells learned to glob.
+<p>The C shell has this feature of course. 
+The easiest way to learn how globbing works is to use the echo command:
+<dl><dd>echo *<br>
+
+</dl><p>This will echo every file in the directory. Well, not every one.
+By convention, files that start with a dot are not echoed.
+If you want to list all files, use
+<dl><dd>echo * .*<br>
+
+</dl><p>In other words, the dot must be explicitly specified.
+The slash 
+"/" must also be matched explicitly.
+Other utilities, like
+<i>find</i>, use this same convention.
+The asterisk matches everything except these two characters, and means
+"zero or more characters." Therefore
+<dl><dd>echo a* b* c*<br>
+
+</dl><p>will echo all files that start with an 
+"a," 
+"b," or
+"c." Note that the shell sorts the files in alphabetical order.
+But each expansion is sorted separately.
+If you executed
+<dl><dd>echo c* b* a*<br>
+
+</dl><p>the order would first be the files starting with c, then with b, then with a.
+Within each group, the names would be sorted.
+Also note that the shell puts all of the files on one line.
+The echo command can be used as a simple version of the
+<i>ls</i> command.
+If the
+<i>ls</i> command is given the above command, it will sort the filenames 
+<b>again</b>, so they will be in alphabetical order.
+<p>If you want, you can enable or 
+disable globbing.
+The command
+<dl><dd>set noglob<br>
+
+</dl><p>disables globbing, and
+<dl><dd>unset noglob<br>
+
+</dl><p>enables it again. 
+These two echo statements do the same thing:
+<dl><dd>set noglob<br>
+echo a* b* c*<br>
+echo 'a* b* c*'<br>
+
+</dl><p>Both echo the string
+"a* b* c*" instead of expanding to match filenames.
+<p>What happens if you type the command
+<dl><dd>echo Z*<br>
+
+</dl><p>and you have no files in your directory that start with a 
+"Z?" The Bourne shell will assume you know what you are doing, and
+echo
+"Z*" without any complaints.
+Therefore if you have a Bourne shell script, and 
+execute
+<dl><dd>myscript Z*<br>
+
+</dl><p>then the script
+<i>myscript</i> will get the argument
+"Z*" instead of a list of filenames.
+The C shell gives you a choice.
+If 
+<b>none</b> of the filename substitutions find a file, you will get an error
+that says:
+<dl><dd>No match<br>
+
+</dl><p>But if you set the
+"nonomatch" variable:
+<dl><dd>set nonomatch<br>
+
+</dl><p>then the C shell behaves like the Bourne Shell.
+<p>You should also note that the asterisk can be anywhere in a filename,
+and you can use any number of asterisks. To match files that have the
+letters a, b and c in sequence, use
+<dl><dd>echo *a*b*c*<br>
+
+</dl><p>
+<p><h1><a name="uh-15" href="Csh.html#toc-uh-15">Match a single character</a></h1><p>The meta-character
+"?" matches a single character.
+Therefore
+<dl><dd>echo ???<br>
+
+</dl><p>will match all filenames that have three letters, while
+<dl><dd>echo ???*<br>
+
+</dl><p>will match files that have three or more letters.
+<p><h1><a name="uh-16" href="Csh.html#toc-uh-16">Matching character sets</a></h1><p>You can match combination of characters, using square brackets.
+If any of the characters inside the square brackets
+match the single character in the filename, the pattern with match.
+You can also specify a range of characters using a hyphen.
+Therefore the following are equivalent:
+<dl><dd>echo a* b* c*<br>
+echo [abc]*<br>
+echo [a-c]*<br>
+
+</dl><p>To match any file that starts with a letter, you can use any of
+the following:
+<dl><dd>echo [a-zA-Z]*<br>
+echo [abcdefghijklmnopqrstuvwxyzA-Z]*<br>
+echo [ABCDEFGHIJKLMNOPQRSTUVWXYZa-z]*<br>
+echo [zyxwvutsrqponmlkjihgfedcbaA-Z]*<br>
+echo [A-Zzyxwvutsrqponmlkjihgfedcba]*<br>
+
+</dl><p>As you can see, the order doesn't matter, unless a hyphen is used.
+If you specify a range in a reverse alphabetical order,
+the results are unpredictable. The command
+<dl><dd>echo [c-a]*<br>
+
+</dl><p>will only match files that start with 
+"c" using the C shell, while the Bourne shell
+will match files that start with
+"c" or 
+"a." Use improper ranges, and the different shells give different results.
+The command
+<dl><dd>echo [c-b-a]*<br>
+
+</dl><p>will only match files that start with a
+"c" with the C shell, while the Bourne shell will match files that start
+with a, b or c.  Apparently the Bourne shell will treat strange range
+values as individual characters, while the C shell ignores bogus
+ranges, except for the starting character.
+<p><h1><a name="uh-17" href="Csh.html#toc-uh-17">Combining meta-characters</a></h1><p>You can combine these meta-characters in any order.
+Therefore it makes sense to pick filenames that 
+are easy to match with meta-characters.
+If you had ten chapters in a book, you don't want to name them
+<dl><dd>Part1.bk Part2.bk ...  Part10.bk<br>
+
+</dl><p>You see, if you specified the chapters like this:
+<dl><dd>ls Part?.bk Part10.bk <br>
+
+</dl><p>the shell would expand all of the meta-characters, and then pass this to the 
+<i>ls</i> command, which would then change the order.
+Therefore after file
+"Part1.bk" would be
+"Part10.bk" followed by
+"Part2.bk." Instead, use the names
+<dl><dd>Part01.bk Part02.bk ...Part10.bk<br>
+
+</dl><p>so the alphabetical order is always the logical order.
+This can be very useful if you have log files, and use the current
+date as part of the file name.
+<p>It is also important to note that the shell evaluates variables 
+before expanding filenames.
+So you can specify
+<dl><dd>echo $USER??.out<br>
+
+</dl><p>and the shell will first evaluate the variable
+"USER," (to 
+"barnett" in this case)
+and then perform the filename substitution, matching files like
+"barnett12.out" and finally sorting the filenames in alphabetical order.
+Then the list of filenames is passed to the 
+<i>echo</i> command.
+<p><h1><a name="uh-18" href="Csh.html#toc-uh-18">In-line expansion</a></h1><p>The C shell has a unique feature, in that it can generate patterns of 
+filenames even if they don't exist.
+The curly braces are used, and commas separate the pattern.
+Suppose you have the file
+"b0" in the current directory. The command
+<dl><dd>echo b[012]<br>
+
+</dl><p>will only echo
+<dl><dd>b0<br>
+
+</dl><p>But the command
+<dl><dd>echo b{0,1,2,3,0}<br>
+
+</dl><p>will generate
+<dl><dd>b0 b1 b2 b3 b0<br>
+
+</dl><p>Notice that the order is
+<b>not</b> sorted alphabetically.
+Also note that 
+"b0" occurs twice. If we change this to
+<dl><dd>echo [b]{0,1,2,3,0}<br>
+
+</dl><p>the output again becomes
+<dl><dd>b0<br>
+
+</dl><p>The in-line expansion comes first, and then the filename substitution
+occurs. 
+You can put meta-characters inside the curly braces. The following
+two are equivalent:
+<dl><dd>echo b* b?<br>
+echo b{*,?}<br>
+
+</dl><p>The number of characters can change within the commas.
+These two commands are equivalent:
+<dl><dd>echo A1B A22B A333B<br>
+echo A{1,22,333}B<br>
+
+</dl><p>This in-line expansion has a multiplying effect.
+The command
+<dl><dd>echo {0,1,2,3,4,5,6,7,8,9}{0,1,2,3,4,5,6,7,8,9}<br>
+
+</dl><p>will print out 100 numbers, from 00 to 99.
+The Bourne shell does not have this feature.
+<p><h1><a name="uh-19" href="Csh.html#toc-uh-19">Home directory expansion</a></h1><p>The last for of filename expansion is the
+"~" character. By itself, 
+it expands to the build-in variable
+"home." You can also provide a username. This allows you to specify
+a filename in someone's home directory, without knowing what it is:
+<dl><dd>more ~smith/.login<br>
+
+</dl><p>The C shell determines this value by examining the password file.
+<p><h1><a name="uh-20" href="Csh.html#toc-uh-20">C Shell Variable Usage</a></h1><p>An essential part of understanding the C shell is mastering variables 
+and variable lists. Setting variables are simple:
+<dl><dd>set myvariable = word<br>
+set myvariable = "a string"<br>
+
+</dl><p>The second form is necessary if spaces are needed inside the variable.
+I always put spaces around the equals sign, as the C shell seems to
+complain less with extra spaces.
+To clear a variable, set the variable to an empty string:
+<dl><dd>set myvariable = ""<br>
+
+</dl><p>to remove a variable, so it is no longer defined, use the 
+<i>unset</i> command
+<dl><dd>unset myvariable<br>
+
+</dl><p>
+<p><h1><a name="uh-21" href="Csh.html#toc-uh-21">Passing arguments to a shell script</a></h1><p>If you create your own shell script, you can pass parameters
+similar to the Bourne shell. The C shell even uses the same
+convention of $1 and $*:
+<br><br>#!/bin/csh<br>
+echo First argument is $1, second argument is $2<br>
+echo All of the arguments are $*<br>
+
+<br>Click here to get file: <a href="Scripts/Csh1.csh">Csh1.csh</a><br>
+However, there is no $# variable, which returns the number of arguments in the 
+Bourne shell. 
+<p>How can you check the number of arguments?
+The C shell has a second way of specifying
+the arguments passed to the shell script, using a predefined variable
+list, called
+"argv" The C shell borrowed this concept from the
+C programming language. Wonder why? (Hint: it is called the
+"C" shell for a reason.)
+The value $argv[1] is equivalent to $1, and $argv[2] is the same as $2.
+Furthermore, $argv[*] is equivalent to $*. The variable $#argv contains the number of 
+arguments passed to the shell:
+<br><br>#!/bin/csh<br>
+echo There are $#argv arguments<br>
+echo First argument is $argv[1], second argument is $argv[2]<br>
+echo All of the arguments are $argv[*]<br>
+
+<br>Click here to get file: <a href="Scripts/Csh2.csh">Csh2.csh</a><br>
+There is a subtle difference between $2 and $argv[2].
+If there is only one parameter,
+the line
+<dl><dd>echo Second argument is $2<br>
+
+</dl><p>will print
+<dl><dd>Second argument is<br>
+
+</dl><p>while
+<dl><dd>echo Second argument is $argv[2]<br>
+
+</dl><p>will generate an error, and print
+<dl><dd>Subscript out of range<br>
+
+</dl><p>The C shell has a mechanism to prevent this error.
+It is also used to specify a subset of the list of values:
+<dl><dd>echo All of the arguments but the first are $argv[2-$#argv]<br>
+
+</dl><p>This does not generate an error.
+With typical UNIX terseness, the above can be replaced with either of the two
+following statements:
+<dl><dd>echo All of the arguments but the first are $argv[2-*]<br>
+echo All of the arguments but the first are $argv[2-]<br>
+
+</dl><p>This is a general purpose mechanism, as any value can be used to specify the 
+range:
+<dl><dd>echo first through third arguments are $argv[1-3]<br>
+
+</dl><p>If you specify a specific range, the argument has to be there.
+That is, $argv[2] will generate an error in the second argument does not exist.
+$argv[2-] will not.
+If the first range is missing, the default is 1, or the first parameter.
+<p>Variables are allowed inside square brackets.
+<dl><dd>set first = 1<br>
+set last = $#argv<br>
+echo first argument is $argv[$first]<br>
+echo last argument is $argv[$last]<br>
+echo all of the arguments are $argv[$first-$last]<br>
+
+</dl><p>
+<p><h1><a name="uh-22" href="Csh.html#toc-uh-22">Arguments generalized as array lists</a></h1><p>As you can see, the C shell allows you to easily specify
+portions of the argument list using ranges of values.
+This can be very convenient. Apparently the author of the C shell agreed,
+because any variable can be an array list.
+The simplest way to create an array list is to use the backquote characters:
+<dl><dd>set mydate = `date`<br>
+# returns a date, like<br>
+#      Tue Jan  7 17:26:46 EST 1997<br>
+echo Month is $mydate[2], year is $mydate[$#mydate]<br>
+
+</dl><p>The Bourne shell has an array list, but only one, and it doesn't have a name.
+It is the argument list, which is set when the script is called. You can 
+change this with the
+"set" command.
+You must, however, remember to save the current values if you want to
+use them again.
+So if you need to manage several arrays, 
+and perhaps use one index to access several arrays, 
+the C shell might make the task easier.
+Yes, I realize some consider my statement blasphemous.
+Today, I'm wearing my 
+"Don't bug me because I'm using the C shell" pin, so I don't care. If you want to give me grief, read my 
+"Curse of the C shell" column three months ago.
+I'm not going to sugar coat the C shell beast.
+It's covered with warts, but it does have some convenient features.
+Just watch out for the warts. Speaking of which...
+<p>The C shell does not elegantly handle variables that contain spaces.
+There is no equivalent to the $@ variable.
+Consider this:
+<dl><dd>set a = "1 2 3"<br>
+set b = $a<br>
+
+</dl><p>Any sane person might expect that variables
+"b" and
+"a" have the same value. Surprise! This doesn't work in the C shell.
+On some versions of SunOS, the variable 
+"b" is empty.
+On other systems, you get 
+"set: syntax error." 
+<p>How can you copy an array?
+The command below should work, but doesn't:
+<dl><dd>set copy = $argv[*]<br>
+
+</dl><p>It behaves like the example above. Unpredictable.
+If you enclose the variable in double quotes, like this:
+<dl><dd>set copy = "$argv[*]"<br>
+
+</dl><p>then all of the parameters are in $copy[1], and $copy[2]
+is not defined. A slight improvement.
+The C shell has a special mechanism for specifying arrays, using parenthesis:
+<dl><dd>set copy = ( $argv[*] )<br>
+
+</dl><p>Therefore the following two statements are equivalent:
+<dl><dd>set mydate = `date`<br>
+set mydate = ( `date` )<br>
+
+</dl><p>The parenthesis is preferred for several reasons.
+The following commands do not work:
+<dl><dd>set c = $*<br>
+set c = $argv[*]<br>
+set c = a b<br>
+set c = "a" "b"<br>
+set c = `date` `date`<br>
+set c = `date` $a "b c" <br>
+
+</dl><p>Some do nothing. Some generate an error.
+Some cause a core dump. 
+Life would be dull without the C shell.
+However, adding parenthesis
+solves almost all of the problems:
+<dl><dd>set c = ( $* )<br>
+set c = ( $argv[*] )<br>
+set c = ( a b )<br>
+set c = ( "a" "b" )<br>
+set c = ( `date` `date` )<br>
+set c = ( `date` $a "b c"  )<br>
+
+</dl><p>This eliminates the unpredictable behavior.
+The only problem left is spaces inside variables. Since there is no
+$@ variable, the only way to retain spaces in an array
+is to copy each element over, one by one:
+<dl><dd>set b[1] = "$a[1]"<br>
+set b[2] = "$a[2]"<br>
+<i>etc.</i><br>
+
+</dl><p>This, by the way, uses a special for of the
+"set" command, that can modify a single array element.
+However, the array must exist first, so the code to copy
+an array is complicated, and darn ugly too.
+<p>In general, the C shell is not suited for variables that contain spaces.
+Also, if there is any possibility that an argument contains a space,
+you should use
+<dl><dd>set a = ( $argv[1] )<br>
+
+</dl><p>or 
+<dl><dd>set a = "$argv[1]"<br>
+
+</dl><p>instead of
+<dl><dd>set a = $argv[1]<br>
+
+</dl><p>Alternately, just tell anyone who uses spaces in arguments to 
+perform an impossible biological act. I've learned this from my
+colleges, who've come to the conclusion that anyone who worries about
+spaces inside arguments is someone who has way too much free time.
+I don't know anyone like that, however.
+<p><h1><a name="uh-23" href="Csh.html#toc-uh-23">Clearing array lists</a></h1><p>The command:
+<dl><dd>set a = ""<br>
+
+</dl><p>Defines variable $a[1],
+and sets it to an empty string.
+$#a is equal to 1.
+However, the command
+<dl><dd>set a = ()<br>
+
+</dl><p>empties the array, so variable $a[1]
+does not exist.
+The variable $#a is equal to 0.
+The command
+<dl><dd>unset a<br>
+
+</dl><p>removes the definition of the variable.
+<p><h1><a name="uh-24" href="Csh.html#toc-uh-24">Testing for variable existence</a></h1><p>The Bourne shell lets you refer to variables that do not exist.
+If you ask for the value, you will get an empty string.
+The C shell will give you a warning if the variable does not exist, or the 
+array element does not exist. 
+Using $1 instead of $argv[1] can help,
+as well as using ranges, like $argv[1-].
+There is another method, by using the special variable
+$?x, where x is the name of the variable.
+If the variable does not exist, it will have the value of zero.
+If the variable exists, it will have the value of one.
+You can combine this with an 
+"if" statement, which is somewhat more cumbersome than the Bourne shell technique.
+<p><h1><a name="uh-25" href="Csh.html#toc-uh-25">The Shift command</a></h1><p>The special command
+"shift" can be used to remove the first array element. It
+"pops" the first value of the stack of the argument list.
+The
+"shift" command can take an optional variable:
+<dl><dd>set a = ( a b )<br>
+shift a<br>
+# same as<br>
+#   set a = ( b )<br>
+
+</dl><p>If you listen carefully, you can hear a slight noise as each variable
+pops off the stack.
+I've suddenly realized I've been working too hard.
+I'll continue next month. Until then, take care.
+<p><h1><a name="uh-26" href="Csh.html#toc-uh-26">C Shell Flow Control</a></h1><p>
+<p>We've been talking about variables, lists, and strings.
+Time to start doing something useful with the C shell.
+Let's start with a simple 
+way to branch.
+<dl><dd>myprogram &amp;&amp; echo The program worked <br>
+
+</dl><p>If the program 
+"myprogram" has no errors, the script echoes
+"The program worked." In other words, if the program 
+"myprogram" exits with a status of zero, the
+"echo" program is executed.
+If any errors occur, the program would exit with a positive value,
+which typically indicates the error that occurred.
+To test for an error, use
+"||" instead:
+<dl><dd>myprogram || echo the program failed<br>
+
+</dl><p>These can be combined:
+<dl><dd>myprogram &amp;&amp; echo program passed | echo program failed<br>
+
+</dl><p>This can be used for many tests, 
+but there are some points to watch out for.
+If the program 
+"myprogram" generates any output, it will be sent to standard output, 
+which may not be what you want. You can capture this by 
+redirecting standard output:
+<dl><dd>myprogram &gt;/dev/null &amp;&amp; echo program passed<br>
+
+</dl><p>If the program might generate an error, you can capture this
+by using the special combination
+"&gt;&amp;." This merges standard error with standard output:
+<dl><dd>myprogram &gt;&amp; /dev/null &amp;&amp; echo program passed <br>
+
+</dl><p>This type of conditional operation can be enclosed in parenthesis
+to keep standard input flowing through the different programs.
+For instance, if you wanted to test standard input for the word
+"MATCH," and either add the word 
+"BEFORE" if the match is found, or add
+"AFTER" if no match is found, you can use the following ugly code:
+<br><br>#!/bin/csh<br>
+tee /tmp/file | <br>
+( grep MATCH /tmp/file >/dev/null && <br>
+( echo BEFORE; cat - ) || ( cat - ; echo AFTER) )<br>
+/bin/rm /tmp/file<br>
+
+<br>Click here to get file: <a href="Scripts/prog.csh">prog.csh</a><br>
+If you save this script in a file called
+"prog" and type
+<dl><dd>echo MATCH | prog<br>
+
+</dl><p>the script will echo
+<dl><dd>BEFORE<br>
+MATCH<br>
+
+</dl><p>If instead you execute
+<dl><dd>echo no | prog<br>
+
+</dl><p>the script will output
+<dl><dd>no<br>
+AFTER<br>
+
+</dl><p>The parenthesis are necessary, because
+the 
+"echo" command does not read standard input. It discards it.
+Putting parenthesis around the
+"echo" and
+"cat" commands connects the pipe to the input of both programs.
+<p>The C shell has some similarities to the Bourne shell.
+In fact, the above script could be a Bourne shell script.
+The two shells act the same in this case.
+However, early versions of the C shell had a bug.
+The meaning of
+"&amp;&amp;" and
+"||" were reversed. This was a long time ago, 
+and I think most versions of the C 
+shell have this bug fixed. Still, it may not be portable.
+The second difference between the shells is the Bourne shell
+allows the curly braces to be used as well as the parenthesis.
+The parenthesis causes an extra shell to be executed. So the script
+above requires 4 shells to be executed. The Bourne shell could do it with 
+one shell process. Still, I find it amusing that the above script
+works for both the C shell and the Bourne shell. But I don't get out much.
+<p>The second mechanism for doing tests in the C shell uses the
+"if" command. There are two formats, a short form and a long form:
+<dl><dd># first the short form<br>
+if ( <i>expression</i> ) <i>command</i><br>
+# then the long form<br>
+if ( <i>expression</i> ) then<br>
+	<i>command</i><br>
+endif<br>
+
+</dl><p>The expression is a numerical expression. If the results is zero, 
+the expression is false. If non-zero, the expression is true.
+These three statements will all output
+"yes:" 
+<dl><dd>if (1) echo yes<br>
+if (-1) echo yes<br>
+if (2) echo yes<br>
+
+</dl><p>If you want to use a program in the
+"if" statement, similar to the 
+"&amp;&amp;" test, it can be placed in back quotes. I'll use
+the long form of the 
+"if" statement:
+<dl><dd>if ( `myprogram` ) then<br>
+	echo yes<br>
+endif<br>
+
+</dl><p>In this case, the exit status of the program is not used.
+Therefore, the only output from these statements is one
+"yes," while the other commands do not print:
+<dl><dd>if (`echo`) echo no<br>
+if (`echo 0`) echo no<br>
+if (`echo ""`) echo no<br>
+# Only the next statement is true:<br>
+if (`echo 1`) echo yes<br>
+
+</dl><p>This might strike you as inconsistent, and you would be right.
+The Bourne shell uses the
+"test" program to convert numbers and strings into status.
+The 
+"&amp;&amp;" and
+"||" commands also use the status to branch, in both the C shell,
+and the Bourne shell.
+The
+"if" command does not use status. 
+Assume I created a script, called
+"myexit," that was simply this:
+<br><br>#!/bin/csh<br>
+exit $*<br>
+
+<br>Click here to get file: <a href="Scripts/myexit.csh">myexit.csh</a><br>
+The following expressions would be true:
+<dl><dd>true &amp;&amp; echo yes<br>
+myexit 0 &amp;&amp; echo yes<br>
+if (1) echo yes<br>
+
+</dl><p>This is confusing, but the trick is to remember that 
+zero is true in the exit status, while non-zero
+is true in expressions.
+There is a way to get the exit status inside an expression.
+It's not a common technique, however.
+The solution is to enclose the command inside curly braces.
+If the command within curly braces
+is successful (status of zero), then the expression is 1, or true:
+<dl><dd>if ( { myprogram } ) echo myprogram worked<br>
+
+</dl><p>However, if you try to redirect standard output, it will
+not work:
+<dl><dd>if ( { grep pattern file &gt;/dev/null } ) echo found pattern<br>
+
+</dl><p>This only tests for no errors. Most of the time people use the special
+variable
+"$?" which contains the actual error number found.
+<p><h1><a name="uh-27" href="Csh.html#toc-uh-27">Optional forms of the if command</a></h1><p>The short version of the 
+"if" command without a
+"then" statement only takes one statement.
+You cannot use parenthesis to add additional commands.
+The following statement generates an error:
+<dl><dd>if (1) (echo a;cat)  # an error<br>
+
+</dl><p>The
+"then" word must be included to allow multiple statements.
+If you have the longer form, you can optionally add
+"else" and
+"else if" commands:
+<dl><dd>if ($debug) then<br>
+	echo debug mode<br>
+else if ($verbose) then<br>
+	echo verbose mode<br>
+else<br>
+	echo "normal mode"<br>
+endif<br>
+
+</dl><p>Any number of 
+"else if" statements can be used, including none.
+<p><h1><a name="uh-28" href="Csh.html#toc-uh-28">Problems with the if command</a></h1><p>The C shell has many problems with the
+"if" command, that the Bourne shell does not have.
+At first, the C shell seems adequate, but 
+when you try to accomplish something difficult, it
+may not work.
+I've already mentioned:
+<dl><dd>if (1) (echo a;cat)  # an error<br>
+
+</dl><p>The solution is to use the long form, with the
+"then" word.
+<p>Suppose you wanted to optionally empty
+a file, removing all contents.
+You might try the following:
+<dl><dd>if ($empty) echo "" &gt;file<br>
+
+</dl><p>However, this does not work as expected. The file redirection is
+started before the command is executed, and before the value
+of the variable is determined. Therefore the command always
+empties the file. The solution is again, to use the long form.
+<p>You can nest 
+"if" statements inside
+"if" statements, but combining long and short forms
+doesn't always work. Notice a pattern?
+I personally avoid the short form, because if I add an 
+"else" clause, or a nested 
+"if" statement, I get a syntax error.
+<p>The next problem is more subtle, but 
+an indication of the 
+<i>ad hoc</i> parsing done by the C shell.
+The commands that deal with flow control
+must be the first command on the line.
+As you recall, the Bourne shell specifies commands have to be on
+a new line, but a semicolon works as well as a new line.
+The C shell 
+<b>requires</b> the command to be the first word. 
+"So what?" you may ask. You may have never experienced this problem, but I have.
+Try to pipe something into a conditional statement. 
+The C shell won't let you do this without creating another script.
+<p><h1><a name="uh-29" href="Csh.html#toc-uh-29">The While command</a></h1><p>The second command used for flow control is the
+"while ...end" command.
+This statement will execute the statements inside the loop
+while the condition is true. 
+I often type the following in a window to examine a print queue:
+<dl><dd>while (1)<br>
+	lpq<br>
+	sleep 10<br>
+end<br>
+
+</dl><p>This command runs until I press control-C.
+"While"" and
+"end" must be the only words on the line.
+<p>As for problems, it's hard to use the C shell to read a file one line
+at a time. 
+<p><h1><a name="uh-30" href="Csh.html#toc-uh-30">The Foreach command</a></h1><p>The third command,
+"foreach," is used to loop through a list.
+One common use is to loop through the arguments
+of a script:
+<br><br>#!/bin/csh<br>
+# arguments are $*<br>
+foreach i ( $* )<br>
+	echo file $i has `wc -l <$i` lines<br>
+end<br>
+
+<br>Click here to get file: <a href="Scripts/WordCount.csh">WordCount.csh</a><br>
+It can also be used with other ways of getting a list:
+<dl><dd># remember the shell expands meta-characters<br>
+foreach file ( A*.txt  B*.txt )<br>
+	echo working on file $file<br>
+	# rest of code<br>
+end<br>
+<p><br>
+# here is another example<br>
+foreach word ( `cat file|sort` )<br>
+	echo $word is next<br>
+	# rest of code<br>
+end<br>
+
+</dl><p>
+<p><h1><a name="uh-31" href="Csh.html#toc-uh-31">The Switch statement</a></h1><p>The last flow-control command is the 
+"switch" statement. It is used as a multiple
+"if" statement.
+The test is not an expression, but a string.
+The case statement evaluates variables, and 
+strings with the meta-characters
+"*," 
+"?," 
+"[" and
+"]" can be used. Here is an example that shows
+most of these variations. It prints out the day of the week:
+<br><br>#!/bin/csh<br>
+set d = (`date`)<br>
+# like <br>
+#  set d = ( Sun Feb 9 16:08:29 EST 1997 )<br>
+# therefore<br>
+# d[1] = day of week<br>
+set day2="[Mm]on"<br>
+switch ( $d[1] )<br>
+case "*Sun": <br>
+	echo Sunday; breaksw<br>
+case $day2: <br>
+	echo Monday;breaksw;<br>
+case Tue: <br>
+	echo Tuesday;breaksw;<br>
+case Wed: <br>
+	echo Wednesday;breaksw;<br>
+case Th?: <br>
+	echo Thursday;breaksw;<br>
+case F*: <br>
+	echo Friday;breaksw;<br>
+case [Ss]at: <br>
+	echo Saturday;breaksw;<br>
+default:<br>
+	echo impossible condition<br>
+	exit 2<br>
+endsw<br>
+
+<br>Click here to get file: <a href="Scripts/GetDate.csh">GetDate.csh</a><br>
+The statements can't be on the same line as the
+"case" statement. Again, the 
+<i>ad hoc</i> parser is the reason. The
+"breaksw" command causes the shell to skip to the end.
+Otherwise, the next statement would be executed.
+<p>
+<p><h1><a name="uh-32" href="Csh.html#toc-uh-32">Complex Expressions</a></h1><p>The Bourne shell uses the program
+<i>expr</i> to perform arithmetic.
+It uses the 
+<i>test</i> program to compare the results.
+The C shell can both calculate complex expressions and test them 
+at the same time.
+This provides simplicity, but there are penalties, which I will discuss later.
+Table 1 shows the list of operators, in order of precedence. Operators in
+the same box have the same precedence.
+<pre>
+	+-----------------------------------+
+	    |Operator	  Meaning		|
+	    +-----------------------------------+
+	    |(...)	  Grouping		|
+	    +-----------------------------------+
+	    |~		  One's complement	|
+	    +-----------------------------------+
+	    |!		  Logical negation	|
+	    +-----------------------------------+
+	    |*		  Multiplication	|
+	    |/		  Division		|
+	    |%		  Remainder		|
+	    +-----------------------------------+
+	    |+		  Addition		|
+	    |-		  Subtraction		|
+	    +-----------------------------------+
+	    |&lt;&lt;		Bitwise shift left	|
+	    |&gt;&gt;		Bitwise shift right	|
+	    +-----------------------------------+
+	    |&lt;		Less than		|
+	    |&gt;		Greater than		|
+	    |&lt;=		Less than or equal	|
+	    |&gt;=		Greater than or equal |
+	    +-----------------------------------+
+	    |==		  Equal to		|
+	    |!=		  Not equal to		|
+	    |=~		  Pattern Match		|
+	    |!~		  Pattern doesn't match |
+	    +-----------------------------------+
+	    |&amp;		Bitwise AND		|
+	    |^		  Bitwise OR		|
+	    ||		  Bitwise inclusive OR	|
+	    |&amp;&amp;		  Logical AND		|
+	    |||		  Logical OR		|
+	    +-----------------------------------+</pre>
+<p>
+The operators
+"==," 
+"!=," 
+"=~" and
+"!~" operate on strings. The other operators work on numbers.
+The
+"~" and
+"!" are unary operators.
+The rest require two numbers or expressions.
+Null or missing values are considered zero. All results are strings, 
+which may also represent decimal numbers.
+Table 2 shows some expressions, and the value after being evaluated.
+<pre>
+		+--------------------------+
+		|Expression	   Results |
+		+--------------------------+
+		|~ 0			-1 |
+		|~ 1			-2 |
+		|~ 2			-3 |
+		|~ -2			 1 |
+		|! 0			 1 |
+		|! 1			 0 |
+		|! 2			 0 |
+		|3 * 1			 3 |
+		|30 / 4			 7 |
+		|30 % 4			 2 |
+		|30 + 4			34 |
+		|4 - 30		       -26 |
+		|512 &gt;&gt; 1	       256 |
+		|512 &gt;&gt; 2	       128 |
+		|512 &gt;&gt; 4		32 |
+		|2 &lt;&lt; 4			32 |
+		|3 &lt;&lt; 8			768 |
+		|4 &lt; 2			0 |
+		|4 &gt;= 2			1 |
+		|ba =~ b[a-z]		1 |
+		|7 &amp; 8			0 |
+		|7 ^ 8			15 |
+		|15 &amp; 8			8 |
+		|15 ^ 8			 7 |
+		|15 ^ 7			 8 |
+		|15 | 48		63 |
+		|15 | 7			15 |
+		|15 &amp;&amp; 8		 1 |
+		|15 || 8		 1 |
+		+--------------------------+</pre>
+
+<p>The C Shell also supports file operators, shown in table 3.
+<pre>
++-----------------------------------------------------------+
+|Operator      Meaning					    |
++-----------------------------------------------------------+
+|-r filename   Returns true, if the user has read access    |
+|-w filename   Returns true, if the user has write access   |
+|-x filename   Returns true, if the user has execute access |
+|-e filename   Returns true, if the file exists		    |
+|-o filename   Returns true, if the user owns the file	    |
+|-z filename   Returns true, if the file is empty	    |
+|-f filename   Returns true, if the file is a plain file    |
+|-d filename   Returns true, if the file is a directory	    |
++-----------------------------------------------------------+</pre>
+If the file does not exist, or inaccessible, the test returns false.
+<p><h1><a name="uh-33" href="Csh.html#toc-uh-33">Commands that use expressions</a></h1><p>Only two flow-control commands support complex expressions,
+"while," and
+"if." The 
+"exit" command also takes a complex expression.
+This allows sophisticated passing of exit codes to a calling program, 
+but I've never seen a C shell script that makes use of this.
+Surprisingly, the
+"set" command does 
+<b>not</b> use complex expressions. If you execute the command
+<dl><dd>set a = ( 1 + 2 )<br>
+
+</dl><p>This creates a list of three elements, and $a[2] has the value of 
+"+." There is a mechanism to assign complex expressions to variables.
+A special command, called
+"@" is used. You must have spaces after the
+"@" character. Spaces are almost always required between all operators and expression
+elements. The C shell likes spaces, and gets grumpy if you
+don't include enough. A vitamin deficiency, I guess.
+The 
+"@" command also supports the 
+"++" and 
+"--" postfix operators, 
+which increment or decrement the variable specified.
+This construct was taken from the C language.
+<p>Also borrowed from the C language is
+the assignment operators +=, -=, *=, /=, and %=.
+The expression
+<dl><dd>@ a %= 4<br>
+
+</dl><p>is the same as
+<dl><dd>@ a = $a % 4<br>
+
+</dl><p>Other examples of the
+"@" command are:
+<dl><dd>@ a++<br>
+@ b=$a + 4<br>
+@ c*=3<br>
+@ c=4 + $b<br>
+
+</dl><p>
+<p><h1><a name="uh-34" href="Csh.html#toc-uh-34">Examples</a></h1><p>Suppose you want to source a file, but are afraid that someone might
+substitute it for another file.  A crude example that checks if a file
+is owned by you, and readable would be:
+<dl><dd>if ( -o $file &amp;&amp; -r $file ) then<br>
+	source $file<br>
+endif<br>
+
+</dl><p>This example isn't 100% secure, but it is slightly better than
+blindly sourcing a file without checking who owns it.
+Most of the time the file test operators are used to prevent runtime
+errors caused by files that are not readable, or executable.
+<p>Notice the
+<i>for</i> command does not support complex expressions.
+You can emulate the C language
+<i>for</i> construct using
+<i>while</i>. This code fragment counts up to 10 using a list:
+<dl><dd>foreach i ( 1 2 3 4 5 6 7 8 9 10 )<br>
+	echo $i<br>
+end<br>
+
+</dl><p>However, if you wish to count to 100, this becomes impractical.
+Here is how you can do it using complex expressions:
+<dl><dd>@ a = 1<br>
+@ MAX=100<br>
+<p><br>
+# count from 1 to $MAX<br>
+<p><br>
+while ( $a &lt;= $MAX )<br>
+	echo $a<br>
+	@ a++<br>
+end<br>
+
+</dl><p>
+<p><h1><a name="uh-35" href="Csh.html#toc-uh-35">Tricky expressions to test</a></h1><p>One stumbling block people discover is 
+looking for command line arguments. Suppose your script will
+accept a 
+"-r" option.
+However, the following line will not work:
+<dl><dd>if ( $argv[1] =~ -r ) echo found it<br>
+
+</dl><p>If the first argument is 
+"-r." then this is evaluated as:
+<dl><dd>if ( -r =~ -r ) echo found it<br>
+
+</dl><p>The C shell will assume you meant to use a file operator, and test the
+file
+"=~" to see if it is readable. Then it sees the next operator,
+which is again a 
+"-r," but in this case there is no filename afterwards. This generates a
+syntax error. The solution is to place a dummy character before both
+strings:
+<dl><dd>if ( X$argv[1] =~ X-r ) echo found it<br>
+
+</dl><p>
+<p><h1><a name="uh-36" href="Csh.html#toc-uh-36">Parenthesis in the C shell</a></h1><p>In complex expressions, parenthesis can be used to alter the default
+precedence in evaluation. To put it another way, when in doubt, use parenthesis.
+Both expressions below do the same thing:
+<dl><dd>if (  $a + 2 &gt; 5 ) echo yes<br>
+if (  ( $a + 2 ) &gt; 5 ) echo yes<br>
+
+</dl><p>However, parenthesis have several jobs.
+The context specifies how parenthesis are used.
+This is where the parsing of the C shell shows some additional warts.
+In these examples, the parenthesis are used to specify a list:
+<dl><dd>set i = ( a b c d e f g )<br>
+foreach i ( a b c d e f g ) <br>
+	echo $i<br>
+end<br>
+
+</dl><p>These show expressions:
+<dl><dd>if ( $x &gt; 2 ) echo yes<br>
+while ( $x )<br>
+	@ $x--<br>
+end<br>
+
+</dl><p>This is an example of creating a subshell:
+<dl><dd>(stty 9600;cat file) &gt;/dev/printer<br>
+
+</dl><p>And this is an example of grouping:
+<dl><dd>@ x = ( ( $b + 4 ) &amp; 255 ) &lt;&lt; 2<br>
+
+</dl><p>And here is an example where the parenthesis have two different meanings:
+<dl><dd>if ( ( $b + 4 ) &gt; 10 ) echo yes<br>
+
+</dl><p>I've tried to combine several of these uses into one statement, and
+it generates errors. I'm not surprised.
+<p><h1><a name="uh-37" href="Csh.html#toc-uh-37">Break and continue</a></h1><p>The C shell has special 
+"escape" commands, used to exit from 
+"while" and
+"foreach" loops.
+The
+<i>break</i> command will escape out and terminate the loop.
+The
+<i>continue</i> command will go to the end of the loop, but cycle through again.
+Here is a complete shell script that prints out the numbers
+2, 4, 6 and 8, but it's nothing to cheer about.
+<br><br>#!/bin/csh<br>
+<br>
+foreach i ( 1 2 3 4 5 6 7 8 9 10 11 12 ) <br>
+<br>
+	# if 9, exit<br>
+	if ( $i == 9 ) break<br>
+	# if odd, then don't echo<br>
+	if ( $i % 2 == 1 ) continue<br>
+	# Even numbers only<br>
+	echo  $i<br>
+	sleep 1<br>
+end<br>
+echo 'Who do we appreciate?'<br>
+sleep 1; echo $USER<br>
+sleep 1; echo $USER<br>
+sleep 1; echo $USER<br>
+sleep 1; echo 'Yeah!!!!!!'<br>
+
+<br>Click here to get file: <a href="Scripts/Cheer.csh">Cheer.csh</a><br>
+I think this covers most of the issues with complex expressions.
+Let me know if you have any questions.
+<p><h1><a name="uh-38" href="Csh.html#toc-uh-38">Interactive Features of the C shell</a></h1><p>
+<p><h1><a name="uh-39" href="Csh.html#toc-uh-39">Bill Joy's Legacy</a></h1><p>In my discussion of the C shell, I've described the good points and bad 
+points of the C shell. For those who are keeping score, the Bourne shell is 
+ahead 10 to 2. Why is the C shell so popular?
+To explain this requires a short history lesson. Forgive me.
+<p>When I went to college in the early 70s, programming meant going to
+the keypunch station and carrying around decks of punch cards.  The
+first time I used an interactive terminal, directly connected to a
+computer, it was a
+hard-copy device.
+A popular interactive terminal at that time was the Teletype. 
+It had a keyboard, and printed on a ugly roll of yellow paper.
+Some models supported a paper tape reader and paper tape punch.
+It was a bargain, because one machine was a terminal, printer, and backup 
+device. A complete I/O system in one unit, for less than $10,000!
+<p>We had a programmer whose job was to edit
+paper tapes, punching new holes, and splicing paper.
+The only device used was a Teletype and a tape splicer.
+If a mistake was made, the 
+"programmer" would position the paper tape just right, and punch out all of the holes
+to erase that letter. In case you wondered, this is why the ASCII code for
+delete is 11111111 in binary. Each 
+"1" corresponds to a hole, and a row of 8 holes corresponded to
+a deleted character. If you made a mistake, you could 
+"erase" the mistake without starting a brand new tape. Just back up and punch
+out the error.
+We felt fortunate when the boss ordered several video terminals, 
+which cost more than a complete PC system nowadays.
+Editing was done by the terminal, which had memory, and keys with arrow 
+characters. We were truly excited. With our new program, that only
+worked with our new terminal, and 64K of RAM, and 5 MB of hard
+disk, we now had a 
+<b>real</b> computer system.
+I imagine Berkeley had computers of a similar configuration, and 
+was equally excited when they got their first VAX. Trouble was,
+the default editor,
+<i>ed</i>, was designed for those old-fashioned hard copy terminals.
+<i>Ed</i> has a consistent user interface.
+If you typed something right, it said nothing.  
+If you typed something the program
+didn't understand, it printed out a single question mark. The authors felt
+that this was sufficient information, and the interpretation
+of the error message should be obvious.
+Nowadays people comment on this statement as proof that UNIX
+was not originally user-friendly.
+Wrong!
+You see, Teletypes were incredibly loud.
+Teletypes were also incredibly slow.
+I remember pounding on the keys on a model 33 Teletype.
+Pounding is the right word. I imagine martial-art students practiced
+on the keyboard, in their effort attempt to develop strong-as-steel fingers.
+Alas, I lacked the skill, 
+and the instant I made a mistake, the Teletype let loose a 
+70 decibel machine-gun rat-a-tat-tat for 5.7 seconds, as it typed
+"Syntax error, please type command again - you stupid person." Needless to say, this irritated me immensely. When I am irritated, I make mistakes.
+If the operating systems I used only printed a question mark, the years of 
+electro-shock therapy might not have been necessary.
+<p>There must be a better way. There was. Bill Joy
+decided the standard editor sucked, and wrote an editor that
+did not require special hardware, and 
+allowed you to see what your file looked like 
+<b>while</b> you were editing it.
+It was a WYSIWYG editor for ASCII characters.
+He wrote a library
+called 
+<i>termcap</i> to go along with his
+<i>vi</i> editor. 
+Most people forget what a major breakthrough this was.
+Going through my 1980 edition of the Berkeley UNIX manual,
+I see that Bill Joy wrote the
+Pascal interpretor and compiler, along with
+<i>vmstat</i>, 
+<i>apropos</i>, 
+<i>colcrt</i>, 
+<i>mkstr</i>, 
+<i>strings</i>, 
+<i>whereis</i>, 
+<i>whatis</i>, 
+<i>vgrind</i>, 
+<i>soelim</i>, 
+<i>msgs</i>, and the Pascal modifications to
+<i>ctags</i> and
+<i>eyacc</i>. He also wrote a significant part of the virtual memory, demand paging,
+and page replacement algorithm for Berkeley Unix.
+<p>Bill Joy also wrote the C shell.
+Twenty years later it's easier to find fault in the C shell,
+compared with current shells. But at the time, the C shell
+had many new ideas, and many still favor it for
+interactive sessions. Several years elapsed before
+the Korn shell was written. And several more years elapsed before it
+or similar shells became commonly available.
+I'd like to meet someone who feels they could have done a better a
+better job that Bill, in the same conditions.
+<p>Enough ranting.
+<p><h1><a name="uh-40" href="Csh.html#toc-uh-40">C shell File Redirection</a></h1><p>All shells support file redirection using
+"program &gt; file" and
+appending to a file using
+"program &gt;&gt; oldfile." This only redirects standard output.
+If you want to capture both standard output and error output,
+the C shell has a simple syntax. Just add a
+"&amp;" to the angle brackets.
+This also works with pipes.
+A list of the different combinations follows:
+<pre>
++---------------------------------------------------------------+
+|Characters	 Meaning					|
++---------------------------------------------------------------+
+||		 Pipe standard output to next program		|
+||&amp;		 Pipe standard and error output to next program |
+|&gt;		 Send standard output to new file		|
+|&gt;&amp;	 Send standard and error output to new file	|
+|&gt;&gt;	 Append standard output to file			|
+|&gt;&gt;&amp;	 Append standard and error output to file	|
++---------------------------------------------------------------+</pre>
+This is very simple, and takes care of 98% of the needs
+of the typical user. If you want to discard  standard output, an keep the 
+error output, you can use
+<dl><dd>(program &gt;/dev/null) &gt;&amp; file<br>
+
+</dl><p>This takes care of 99% of the cases.
+It is true the Bourne shell is more flexible when it comes to
+file redirection, but the C shell is very easy to understand.
+<p><h1><a name="uh-41" href="Csh.html#toc-uh-41">The noclobber variable</a></h1><p>One of the features the C shell has for new users is a special
+variable that can prevent a user from
+"shooting oneself in the foot." Consider the following steps to create and execute a script:
+<dl><dd>vi script<br>
+chmod +x script<br>
+script &gt; script .out<br>
+
+</dl><p>One small typo, i.e. the space between
+"script" and
+".out," and the script is destroyed.
+Here is another example:
+<dl><dd>program1 &gt;&gt;log<br>
+program2 &gt;&gt;log<br>
+program3 &gt;&gt;log<br>
+program4 &gt;&gt;lag<br>
+
+</dl><p>Because of a typo in the last line, the information
+is sent to the wrong log file.
+<p>Both problems can be prevented very easily. Just set the
+<i>noclobber</i> variable:
+<dl><dd>set noclobber<br>
+
+</dl><p>In the first case, you will get an error that the file already exists.
+The second will generate an error that there is no such file.
+When the 
+"noclobber" variable is set,
+"&gt;" must only point to a new file, and
+"&gt;&gt;" must only point to a file that already exists.
+<p>This seems like a great idea, but there are times when
+this feature gets in the way.
+You may want to write over an existing file.
+Or you may want to append to a file, but don't know
+if the file exists or not.
+If you want to disable this feature, type
+<dl><dd>unset noclobber<br>
+
+</dl><p>You may wish to keep this feature enabled, but disable it
+on a line-by-line basis.
+Just add a
+"!" after the angle brackets.
+This is like saying 
+"I really mean it!" Here are some examples:
+<dl><dd># Create new file<br>
+program &gt;out<br>
+# overwrite the same file<br>
+program &gt;!out<br>
+# append to a file, even if it doesn't exist.<br>
+program &gt;&gt;!log<br>
+
+</dl><p>The 
+<i>noclobber</i> variable also affects the
+"&gt;&amp;" an
+"&gt;&gt;&amp;" combinations:
+<dl><dd>#capture error and standard output<br>
+program &gt;&amp;! file<br>
+program &gt;&gt;&amp;! log<br>
+
+</dl><p>If you sometimes use the 
+<i>noclobber</i> variable, you have to change your style to use the exclamation
+point when needed.
+That is, when you want to append 
+to a file that doesn't exist, or write to a file that may exist.
+A complete list of all of the variations, and their meaning, is below.
+Notice how the meaning changes depending on the
+<i>noclobber</i> variable:
+<pre>
++--------------------------------------------------------------------------------------+
+|Characters	  Noclobber	   Meaning					       |
++--------------------------------------------------------------------------------------+
+||		  Doesn't Matter   Pipe standard output to next program		       |
+||&amp;		  Doesn't Matter   Pipe standard and error output to next program      |
+|&gt;		  Not set	   Send standard output to old or new file	       |
+|&gt;		  Set		   Send standard output to new file		       |
+|&gt;&amp;	  Not set	   Send standard and error output to old or new file   |
+|&gt;&amp;	  Set		   Send standard and error output to new file	       |
+|&gt;&gt;	  Not set	   Append standard output to old or new file	       |
+|&gt;&gt;	  Set		   Append standard output to old file		       |
+|&gt;&gt;&amp;	  Not set	   Append standard and error output to old or new file |
+|&gt;&gt;&amp;	  Set		   Append standard and error output to old file	       |
+|&gt;!		  Doesn't	   Send standard output to new or old file	       |
+|&gt;&amp;!	  Doesn't Matter   Send standard and error output to new or old file   |
+|&gt;&gt;!	  Doesn't Matter   Append standard output to old or new file	       |
+|&gt;&gt;&amp;!	  Doesn't Matter   Append standard and error output to old or new file |
++--------------------------------------------------------------------------------------+</pre>
+
+<p>
+<p><h1><a name="uh-42" href="Csh.html#toc-uh-42">Safe Aliases</a></h1><p>
+<p>A second modification that Berkeley made was to add the
+"-i" options to the
+<i>cp</i>, 
+<i>mv</i> and
+<i>rm</i> commands. These options warned the user if a file was going to be
+destroyed.
+The C shell supported an alias feature that allows you to define new
+commands. If you type
+<dl><dd>alias move mv<br>
+
+</dl><p>then when you execute the command
+"move," the C shell performs a substitution, and executes the
+"mv" command.
+The new options, along with the alias command, allowed new users to
+specify
+<dl><dd>alias mv mv -i<br>
+alias cp cp -i<br>
+alias rm rm -i<br>
+
+</dl><p>and before any file is destroyed, the system would warn you.
+If you define these aliases, and wish to ignore them, just place a
+backslash before the command:
+<dl><dd>\rm *<br>
+
+</dl><p>This turns off the alias mechanism.
+<p><h1><a name="uh-43" href="Csh.html#toc-uh-43">C Shell Start-up Files</a></h1><p>Since I've started talking about the C shell interactive features,
+it's time to discuss the start-up files, or files whose name starts
+with a dot. The C shell uses three dot-files:
+<pre>
++-----------------------------------------------+
+      |File	  Purpose			      |
+      +-----------------------------------------------+
+      | .cshrc	  Used once per shell		      |
+      | .login	  Used at session start, after .cshrc |
+      | .logout	  Used at session termination	      |
+      +-----------------------------------------------+</pre>
+To be more accurate, the .logout file is more like a 
+"finish-up" file, but I'll discuss that shortly.
+<p><h1><a name="uh-44" href="Csh.html#toc-uh-44">The .cshrc file</a></h1><p>The 
+<i>.cshrc</i> file is scanned, or more accurately <b>source</b>d, every time a new shell starts.
+The shell executes the source command on the file.
+If a C shell script starts with 
+<dl><dd>#!/bin/csh -f<br>
+
+</dl><p>or you explicitly execute a C shell script with
+<dl><dd>csh -f script<br>
+
+</dl><p>Then the start-up file is not executed.
+Think of the -f flag as the fast option.
+I recommend that every C shell script start with
+the
+"#!/bin/csh -f" option.
+Without it, the C shell executes the
+<i>$HOME/.cshrc</i> file. Remember - this is the user's personal file. 
+My file is different from yours.
+If I executed that script, it might not work the same as when you
+execute the script.
+A shell script that depends on the contents of the
+<i>.cshrc</i> file is likely to break when other users execute it: a bad idea.
+<p>It is important to understand when these files are sourced.
+When you execute a program like
+<i>cmdtool</i>, 
+<i>shelltool</i> or
+<i>xterm</i>, The value of the 
+<i>SHELL</i> environment variable is used, and that shell is executed.
+If the shell is the C shell, then the
+<i>.cshrc</i> file is sourced.
+If you execute a remote command using
+<i>rsh</i>, the shell specified in the 
+<i>/etc/passwd</i> file is used.
+If this is the C shell, then
+<i>.cshrc</i> is used at the start of the process.
+<p><h1><a name="uh-45" href="Csh.html#toc-uh-45">The .login file</a></h1><p>The second startup file is
+the
+<i>.login</i> file.
+It is executed when the user logs onto a system.
+These sessions are called a
+<i>login</i> shell.
+Assuming you have specified the C shell as your default shell,
+typing your username to the 
+"login:" prompt on a console, or using the 
+<i>telnet</i> or
+<i>rlogin</i> command, then this is a login shell,
+and the
+<i>.login</i> file is sourced.
+Ever wonder how the shell knows this?
+The mechanism is simple, but most people don't know about it.
+When the 
+<i>login</i> program executes a login shell, it tells the program that the first
+character of the program is a hyphen.
+That is, if you execute
+"-csh" instead of
+"csh." then you would be starting a login shell.
+You can prove this by copying 
+or linking
+<i>/bin/csh</i> to a filename that starts with a hyphen:
+<dl><dd>cd /tmp<br>
+cp /bin/csh -csh<br>
+-csh<br>
+
+</dl><p>Try this and see. If you execute
+"csh." the .cshrc file is read. If you execute
+"-csh," both the .cshrc and .login files are read.
+A shell created in this fashion executes the
+<i>.cshrc</i> file first, then the
+<i>.login</i> file.
+Without the hyphen, just the
+<i>.cshrc</i> file is executed.
+<p><h1><a name="uh-46" href="Csh.html#toc-uh-46">The .logout file</a></h1><p>The last file the C shell executes is the
+<i>.logout</i> file. This only happens when the shell is a login shell.
+<p>
+<p><h1><a name="uh-47" href="Csh.html#toc-uh-47">What goes where?</a></h1><p>Knowing when each file is used is very important
+if you want to keep your account as efficient as possible.
+People have a tendency to add commands to any file, or in some cases both files.
+Finally the system behaves the way the user wants, and the changes
+are kept where they are without understanding the whys and wherefores.
+As always, I believe it providing tables, allowing you to look up
+the exact behavior in each condition. This is a summary
+of those actions:
+<pre>
++-----------------------------------------------------------------+
+|Condition		     Files sourced			  |
++-----------------------------------------------------------------+
+|Logging on the console	     .cshrc, then .login, finally .logout |
+|rlogin system		     .cshrc, then .login, finally .logout |
+|rsh system		     .cshrc, then .login, finally .logout |
+|rsh system command	     .cshrc				  |
+|csh filename		     .cshrc				  |
+|csh -f filename	     -					  |
+|C shell Script without -f   .cshrc				  |
+|C shell Script with -f	     -					  |
+|Starting a new shell	     .cshrc				  |
+|Opening a new window	     .cshrc				  |
++-----------------------------------------------------------------+</pre>
+
+<p><h1><a name="uh-48" href="Csh.html#toc-uh-48">The tricky part about start-up files</a></h1><p>There are a couple of problems people have with their start-up
+scripts. Let me list them.
+<p><OL><li>Determining which commands are the ones you want to execute.
+You discover a useful setting, and want to add this feature to all sessions.
+<li>Learning when you want to execute these commands. 
+Does this feature need to be set once, or for every shell?
+<li>Executing commands at the wrong time.  Some people put
+"biff y" in their .cshrc file. This is wrong. It should be in the .login file.
+<li>Learning when the two files are sourced, and in which order.
+Some people think the .login file is executed before the .cshrc file.
+This seems logical, because the .login file is executed during login, 
+but it is wrong. The .cshrc file is always sourced before the .login file.
+<li>Bloat.
+Don't add commands without thinking of where they go.
+Placing commands and options in the wrong place, may be meaningless,
+and slow down your shell. 
+</OL><p>All of these problems confound the new C shell user.
+So how can you distinguish between these different cases?
+Well, the C shell sets various variables under different conditions.
+The operating system also has variables, independent of the shell.
+I'll briefly describe the difference, and provide a template.
+<p><h1><a name="uh-49" href="Csh.html#toc-uh-49">The C shell prompt variable</a></h1><p>I mentioned earlier that you can check if a variable is defined by using
+"$?" before the variable name. For example, if variable
+"abc" is defined, then
+"$?abc" has the value of 1. 
+The $prompt variable is defined when the C shell is in 
+interactive mode. However, when the shell executes a script, 
+the $prompt variable is undefined. Therefore if you have the code
+<dl><dd>if ( $?prompt == 0 ) then<br>
+	# This is a shell script<br>
+else<br>
+	# This is interactive<br>
+endif<br>
+
+</dl><p>If you set the prompt in your .cshrc file without
+testing that variable, then you will be unable to distinguish between 
+interactive sessions and scripts.
+Why is this important? I have a large number of aliases. How large?
+I currently have about 300 aliases. You may or may not think this is large.
+It is significant, however. I noticed by shell was taking longer and
+longer
+to execute scripts. When I started customizing my
+C shell, I tried
+<dl><dd>if ( $?prompt ) then<br>
+	...<br>
+	...<br>
+	# 300 lines later<br>
+endif<br>
+
+</dl><p>This does make the shell faster. However,
+I found there are two problems with this.
+As the number of aliases I had grew, it became harder to 
+remember the association between the if/then/endif commands, because they were 
+six pages apart. 
+Good coding style says we should keep modules short and easy to understand.
+The other problem was a matter of efficiency.
+Even though the shell didn't have to execute the 300 lines of aliases,
+it still had to read each line, looking for the 
+"endif" command. This slowed down the shell.
+Therefore I currently use something like this:
+<dl><dd>if ( ! $?prompt ) exit<br>
+if ( -f ~/.aliases ) source ~/.aliases<br>
+
+</dl><p>This keeps my .cshrc file short,
+and allows the shell to skip reading a large file when it doesn't have
+to.
+<p><h1><a name="uh-50" href="Csh.html#toc-uh-50">The current terminal</a></h1><p>A second important condition used to customize your shell session
+is the current terminal. This is learned by executing the program
+"tty." This will either be a serial device, like
+"/dev/ttya" or a pseudo terminal, like 
+"/dev/pts/1" or
+the master console on the workstation, which is
+"/dev/console." Many users customize their shell, so that they automatically
+start up a window system. 
+I often see something like the following in a .login file:
+<dl><dd>if ( "`tty`" =~ "/dev/console" ) then<br>
+	# start up the window system<br>
+	/usr/openwin/bin/openwin<br>
+endif<br>
+
+</dl><p>I place double quotes around the command. This is good practice,
+because if the command ever fails, the variable will have an empty
+string as a value. The double quotes prevent this from becoming a
+syntax error.
+<p><h1><a name="uh-51" href="Csh.html#toc-uh-51">Local variables vs. Environment variables</a></h1><p>There are two kinds of C shell variables: local and environmental.
+Local variables are local to the current shell.
+If a new shell is created, then it does not have these variables set.
+You have to set them for each shell. The .cshrc file is used to set 
+local variables.
+<p>Environment variables are exported to all sub-shells.
+That is, if you set an environment variable, and then create
+a new shell, the new shell inherits the value of this variable.
+Inherit is the essential concept. The child can inherit the traits of the parent,
+but anything the child does to itself does not affect the parent.
+If you specify an environment variable before you start up the window system,
+then all new shells, i.e. all new windows, will inherit the environment 
+variables from the parent shell.
+But if you set an environment variable to a different value in each window,
+this has no effect on the parent process, which is your login shell.
+<p>You can set environment variables in your .cshrc file. However, this
+is unnecessary, because any variable set in the .login file will be
+inherited by all sub-shells. There are two reasons you need to set an
+environment variable in the .cshrc file. The first is because you need
+to customize it for each shell. Perhaps different windows have
+different values. The second reason is that you need to look up
+something, by executing a program, and want to optimize your shell, so
+that this only has to be done once.
+Suppose you wanted to learn what your current computer is called.
+You could use the following test:
+<dl><dd>if ( "`hostname`" =~ "grymoire" ) then<br>
+	...<br>
+endif<br>
+
+</dl><p>However, this executes the program
+"hostname" in every shell. If you want to optimize your shell, then only do this
+once. The logical place is to do this in your .login file.
+But you may want to use this information for something that is set in
+your .cshrc file. One way to solve this problem is to check for a
+special environment variable, and if it is not set, then execute the
+command, and set the variable. An example is:
+<dl><dd>if ( ! $?HOSTNAME ) then<br>
+	setenv HOSTNAME `hostname`<br>
+endif<br>
+
+</dl><p>
+<p><h1><a name="uh-52" href="Csh.html#toc-uh-52">Other conditions</a></h1><p>There are some other special cases. Many people perform different actions
+based on the current terminal type. If you log onto a system with a device
+local to the system, the terminal type is known.
+If you use
+<i>rlogin</i> or 
+<i>rsh</i> to create an interactive session, the terminal type is communicated
+to the remote system. If you use the
+<i>telnet</i> command, the terminal type is unknown, and must be determined somehow.
+Once the terminal type is known, the user often customizes the keyboard
+configuration. In particular, some characters, especially the delete
+key, differs on different terminals. One terminal may have an easily
+accessible backspace key, and another has a convenient delete key.
+The command to modify this is the
+"stty" command. The .login file typically adjusts this parameter, based on
+the terminal type.
+<dl><dd># if the terminal type is an HP terminal, <br>
+# change the delete character<br>
+if ( $TERM =~ "hp*" ) then<br>
+	stty erase '^h'<br>
+endif<br>
+
+</dl><p>
+<p><h1><a name="uh-53" href="Csh.html#toc-uh-53">Sample startup files</a></h1><p>Here is a sample .login file:
+<dl><dd># Sample C shell .login file<br>
+# Created by Bruce Barnett <br>
+# This file is sourced after .cshrc is sourced<br>
+# set up the terminal characteristics<br>
+if ( -f ~/.terminal ) source ~/.terminal<br>
+# define the environment variables<br>
+if ( -f ~/.environment ) source ~/.environment<br>
+# set search path<br>
+if ( -f ~/.path ) source ~/.path<br>
+<p><br>
+# Start up window system, but first, learn the terminal type once<br>
+if ( ! $?tty ) then<br>
+	set tty = `tty`<br>
+endif<br>
+<p><br>
+# You may wish to start a window system<br>
+# Here is one way:<br>
+<p><br>
+if ( "$TERM" =~ "sun*" &amp;&amp; "$tty" =~ "/dev/console" ) then<br>
+	# some people like to wait 5 seconds<br>
+#	echo "starting window system in 5 seconds"<br>
+#	sleep 5;<br>
+<p><br>
+	# By using 'exec', then when you exit the window system, <br>
+	# you will be logged out automatically<br>
+	# without the exec, just return to the shell<br>
+	/usr/openwin/bin/openwin<br>
+#	exec /usr/openwin/bin/openwin<br>
+<p><br>
+# - any more window systems?<br>
+# elsif ( $TERM =~ "abc*" &amp;&amp; "$tty" =~ "/dev/console" ) then<br>
+#	start up another window system<br>
+<p><br>
+endif<br>
+
+</dl><p>And here is a sample .cshrc file:
+<br><br># Sample .cshrc file<br>
+# Bruce Barnett <br>
+# This part is executed on the following occasions:<br>
+#	1. "rsh machine command"<br>
+#	2. "csh scriptname"<br>
+#	3. All scripts that start with #!/bin/csh (without -f)	<br>
+# Read the minimum .cshrc file, if there<br>
+<br>
+if ( -f ~/.cshrc.min ) source ~/.cshrc.min<br>
+<br>
+# if run as a script, then $?prompt == 0<br>
+# if run as a remote shell, then $?prompt == 0 && $?term == 0<br>
+# if $USER is not defined, then "~" doesn't have the proper value<br>
+#     so bail out in this case<br>
+<br>
+if ( ! ( $?USER && $?prompt && $?TERM )) exit<br>
+<br>
+# This is an interactive shell<br>
+<br>
+#---Local variables<br>
+# examples:<br>
+#     set noclobber<br>
+#     set myvariable = "value"<br>
+#     set mylist = ( a b c d e f g)<br>
+<br>
+<br>
+#----aliases<br>
+if ( -f ~/.aliases ) source ~/.aliases<br>
+<br>
+#----Searchpath<br>
+if ( -f ~/.path ) source ~/.path<br>
+
+<br>Click here to get file: <a href="Files/Cshrc1">Cshrc1</a><br>
+<p><h1><a name="uh-54" href="Csh.html#toc-uh-54">C Shell Searchpath</a></h1><p>
+<p>An essential part of Shell Mastery is understanding what a searchpath
+is,
+and how to optimize it.
+Following the principle of modularity,
+most of the UNIX commands are separate programs. Only a few are built
+into the shell.
+This means you can change your shell, and still use 99% of the
+commands without change. 
+These external programs may be scattered in dozens of directories.
+When you ask for a command that the shell doesn't understand, it searches
+the directories in the order specified by the search-path, and executes
+the
+<b>first</b> command it finds with the name you specified.
+And trust me on this, systems that do not behave consistently are bad
+for your mental health.
+I knew a programmer who was writing software for a system that
+behaved unpredictably. He receives excellent care nowadays, but he
+always asks me the same question.
+"Two plus two is ALWAYS four, right?" Poor guy.
+The world will never be safe for programmers until we eliminate
+all non-deterministic systems. 
+<p>
+<p><h1><a name="uh-55" href="Csh.html#toc-uh-55">Bourne shell and C shell paths</a></h1><p>The searchpath is stored in an environment variable 
+"PATH." You set or change the Bourne shell PATH variable using commands like:
+<dl><dd>PATH=/usr/bin:/usr/ucb:/usr/local/bin<br>
+PATH=$PATH:$HOME/bin<br>
+EXPORT PATH<br>
+
+</dl><p>The C shell has a different syntax for setting environment variables:
+<dl><dd>setenv PATH /usr/bin:/usr/ucb:/usr/local/bin<br>
+setenv PATH ${PATH}:~/bin<br>
+
+</dl><p>Notice that the tilde can be used instead of $HOME.
+The curly brace is necessary in this case, because the C shell
+has the ability to perform 
+<i>basename</i>-like actions if a color follows a variable name.
+The curly braces
+turn this feature off. Without the braces, you would get a syntax error.
+The braces could be added in the Bourne shell example above, but it
+isn't required.
+<p>The C shell has an alternate way to modify the searchpath, using
+a list. Here is the same example as before:
+<dl><dd>set path = ( /usr/bin /usr/ucb /usr/local/bin )<br>
+set path = ( $path ~/bin )<br>
+
+</dl><p>The variable name is lower case, the syntax is the list form, and a
+space is used to separate directories.  The Bourne shell uses a colon
+as a separator, and a blank value is used to indicate the current
+directory.  Since any number of spaces can be used as a separator,
+something else must be used to indicate the current directory. The
+period is used instead.  This is logical, because
+"." refers to the current directory.
+The following command:
+<dl><dd>set path = ( . $path )<br>
+
+</dl><p>
+<p>specifies that the current directory is searched for commands before
+all other directories.
+<b>Important!</b> This is a security problem.
+See the sidebar to fully understand the danger of this action.
+<p>It might seem confusing that there are two path variables, one in
+upper case, and the other in lower case. These are not two different
+variables. Just two different ways to set the same variable.
+Change one, and the other changes.
+<p>Because the C shell uses a list, this allows some convenient
+mechanisms to examine and manipulate the searchpath.
+For instance, you can add a directory to the third place of a searchpath
+using
+<dl><dd>set path = ( $path[1-2] ~/new $path[3-] )<br>
+
+</dl><p>Examining files in the searchpath is easy. Suppose you want to 
+write a simple version of the
+"which" command. The C shell makes this an easy job:
+<br><br>#!/bin/csh -f<br>
+# A simple version of which that prints all <br>
+# locations that contain the command<br>
+if ( $#argv != 1 ) then<br>
+    echo "Wrong number of arguments - usage: 'which command'"<br>
+    exit 1<br>
+endif<br>
+foreach dir ( $path )<br>
+    if ( -x $dir/$1 ) echo $dir/$1<br>
+end<br>
+
+<br>Click here to get file: <a href="Scripts/Which.csh">Which.csh</a><br>
+<p>Here is the same script using the Bourne shell:
+<br><br>#!/bin/sh<br>
+# A simple version of which that prints all <br>
+# locations that contain the command<br>
+file=${1:-"Wrong number of arguments - usage: 'which command'"}<br>
+paths=`echo $PATH | sed '<br>
+s/^:/.:/g<br>
+s/:$/:./g<br>
+s/::/:.:/g<br>
+s/:/ /g<br>
+'`<br>
+for dir in $paths<br>
+do<br>
+    [ -x $dir/$file ] && echo $dir/$file<br>
+done<br>
+
+<br>Click here to get file: <a href="Scripts/Which.sh">Which.sh</a><br>
+As you can see, the Bourne shell is much more complicated.
+Surprisingly, my measurements show the Bourne shell version is faster.
+Well, I found it surprising. I expected the C shell version to be
+faster, because it doesn't use any external programs. The Bourne shell
+version executes three additional processes because of the back
+quotes.
+Therefore four programs compete with one C shell script. And the C
+shell still loses. Hmmm. Does this tell you something?
+<p>The system comes with a C shell script called
+"which." Not only does it find the first reference, but it reports if the
+command is an alias. This is fine, but I prefer the above script,
+because it tells me about all of the commands, and runs much faster.
+I called it 
+"Which," with a capital 
+"W," so I can use either one. 
+The Korn shell has a build-in command, called 
+"whence." 
+<p><h1><a name="uh-56" href="Csh.html#toc-uh-56">When to change searchpaths</a></h1><p>Most people specify their searchpath in their 
+".cshrc" file. 
+But this really isn't necessary. Like all environment variables,
+all newly created shells get their environment from their parent.
+Some people therefore specify it in their 
+"login" file.
+All new shells will have this searchpath.
+I set my searchpath before I start my window system.
+This is very flexible, and quite easy to do.
+Just create a shell script that specifies your new searchpath, and
+then start up the windowing system. If you use OpenWindows, 
+an example might be
+<dl><dd>if ( ! $?OPENWINHOME ) then<br>
+	setenv OPENWINHOME /usr/openwin<br>
+endif<br>
+<p><br>
+set path = ( $path $OPENWINHOME/bin )<br>
+<p><br>
+$OPENWINHOME/bin/openwin<br>
+
+</dl><p>If you want to add a new directory to your searchpath, 
+change it. If you then create a new window using a command
+like
+<i>shelltool</i>, or
+<i>xterm</i>, that window will inherit the searchpath from their parent.
+I specify my searchpath in a file called
+".path." It contains something like this:
+<dl><dd>set mybin = ( ~/bin )<br>
+set standardbin = ( /usr/ucb /usr/bin /bin )<br>
+if ( $?OPENWINHOME ) then<br>
+	set winpath = ( $OPENWINHOME/bin )<br>
+else<br>
+	set winpath = ( )<br>
+endif<br>
+# extra lines omitted<br>
+set path = ( $mybin $standardbin $winbin )<br>
+
+</dl><p>
+<p>I start my window system like this:
+<br><br>#!/bin/csh -f<br>
+# start OpenWindows<br>
+setenv OPENWINHOME /usr/openwin<br>
+source ~/.path<br>
+$OPENWINHOME/bin/openwin<br>
+
+<br>Click here to get file: <a href="Scripts/OpenWin.csh">OpenWin.csh</a><br>
+This way I have one place to change my searchpath for all conditions.
+Any time I want to, I can define or undefine variables, and
+source the same file to reset my path.
+This allows me to use different windowing systems, or
+different versions, and have one main file to control my search-path.
+<p>Another way I change my searchpath is with an alias.
+You may want to define the following aliases:
+<dl><dd>alias .path 'set path = ( . $path )'<br>
+alias poppath 'set path = ( $path[2-] )'<br>
+
+</dl><p>The
+".path" alias adds the current directory, while
+"poppath" removes the first one from the list.
+<p>You can make aliases as simple or as complicated as needed.
+For instance, you can radically change your environment with the
+simple
+<dl><dd>alias newstuff "source ~/.anotherpath"<br>
+alias newwin "source ~/.anotherpath;cmdtool&amp;"<br>
+
+</dl><p>You can create multiple personalities, so to speak.
+<p><h1><a name="uh-57" href="Csh.html#toc-uh-57">Undoing any changes</a></h1><p>One of the simplest way to reset your path is to
+type the new path on the command line. 
+If you have problems, you can always 
+change your 
+".cshrc" file to have a precise path, or have it source the
+".path" file you created.
+After this, all new shell windows you create will have the new path.
+Another convenient way to undo the change is to execute another shell.
+That is, before you experiment, type
+<dl><dd>csh<br>
+
+</dl><p>Then modify your searchpath. When done, type a Control-D.
+This forces the current shell to terminate, and the environment
+variables of the earlier shell are restored.
+<p><h1><a name="uh-58" href="Csh.html#toc-uh-58">Summary</a></h1><p>I've discussed several ways to change your searchpath.
+As a summary, here are the methods:
+<p><OL><li>Explicitly set the path.
+<li>Specify it in your .cshrc file.
+<li>Specify it in your .login file, or before you start the windowing system.
+<li>Specify it in another file, and source this file.
+<li>Execute a shell script that changes the path, and then executes
+another program or shell.
+<li>Use an aliases to do any or all of the above.
+<p>No one method is right for everyone. Experiment. But don't think you
+have to set your searchpath in your
+".cshrc" file. Other solutions are possible. In fact, next month, I will
+discuss how to optimize your searchpath.
+<p></OL><h1><a name="uh-59" href="Csh.html#toc-uh-59">Sidebar</a></h1><p>Some people put their current directory in their searchpath.
+If you type
+<dl><dd>echo $path<br>
+
+</dl><p>and you see a dot, then you are vulnerable.
+If you ever change directories to one owned by someone
+else, you may be tricked to execute their commands instead of the ones
+you expect.
+Don't believe me?
+Okay. You've forced my hand. 
+Suppose I created a file called
+"ls" that contains the following command:
+<dl><dd>/bin/rm $HOME/*<br>
+
+</dl><p>If I placed it in the 
+"/tmp" directory, then
+as soon as you typed
+<dl><dd>cd /tmp<br>
+ls<br>
+
+</dl><p>
+<b>all of your files would be deleted!</b> 
+<p>If you 
+<b>must</b> include the current directory in your searchpath, put it
+at the end:
+<dl><dd>set path = ( $path . )<br>
+
+</dl><p>This is a little better, but you can still fall victim to the same trap.
+Have you ever made a typo when you executed a command?
+I could call the script
+"mroe" or something similar, and still delete all of your files.
+Now - are you willing to risk this?
+I hope not. I tell people how dangerous this is. Remember, other
+actions could be taken instead.
+<p>Personally, I don't have the current directory in my searchpath.
+It was painful at first, but I soon learned how to adjust.
+When I want to execute a command in the current directory, I just type
+<dl><dd>./command<br>
+
+</dl><p>I do this when I debug the script.
+When done, 
+I move the command into my private 
+"bin" directory:
+<dl><dd>cp command ~/bin<br>
+
+</dl><p>
+<p>Is that so hard? I sleep much better at night.
+<p><h1><a name="uh-60" href="Csh.html#toc-uh-60">Optimizing the C Shell Searchpath</a></h1><p>
+<p>Last month I discussed various ways to modify your C shell searchpath.
+This month, I will discuss ways to optimize your path.
+<p>What do I mean by optimization?
+Well, to tell the truth, I have looked at a lot of C shell start-up
+files, 
+and I shudder at what I see. Some people have dozens of directories in
+their searchpath. I also see people walking around with a gloomy
+look, as if a storm cloud is circling over their head. 
+<p>
+"What's the matter?" I ask. 
+<p>
+"My file server is down. I can't get any work done." they reply. 
+<p>
+"Oh." I reply.
+"I didn't notice." 
+<p>And it's true. A server went down, and it didn't bother me
+at all because it wasn't in my searchpath.
+When some people 
+discover a directory that contains useful programs, they add it to
+their searchpath. The searchpath grows and grows, until it becomes so
+convoluted, no one understands it.
+That's the wrong thing to do.
+<p>You see, I created a special directory that contained symbolic links
+to files on remote systems. Because the directory is on my local
+workstation, I am not affected if a server goes down. The only time I
+have a problem is if I use one of those executables. That process will
+freeze, but only that process. All I have to do is create a new
+window, and continue working.
+I call this a cache dirctory, and I know that isn't the best name for
+it. A better name ought to be 
+"favored." but what the heck.
+<p>I will admit that solving this problem isn't trivial.
+In fact, I wrote a program to help me figure out what to do.
+Several programs, as it turns out. Let me describe them.
+<p><h1><a name="uh-61" href="Csh.html#toc-uh-61">Programs to Optimize the Searchpath</a></h1><p>The first script, and the most important one
+creates and maintains the cache directory.
+If you want to use the directory
+"/local/cachebin" as a cache directory, and want to eliminate the directory
+"/public/bin," just type
+<dl><dd>CreateCacheDir /local/cachebin /public/bin<br>
+
+</dl><p>This will look at all of the executables in
+"/public/bin" and create a symbolic link to them in the
+"/local/cachebin" directory.
+You can then remove
+"/public/bin" from your searchpath, and if the server providing this directory goes
+down,
+you will not be affected. 
+The script
+<i>CreateCacheDir</i> follows:
+<br><br>#!/bin/sh<br>
+# Argument #1 is the directory where we will cache<br>
+# a filename. Actually, not a cache, but a link.<br>
+# where is the cache directory?<br>
+# Usage<br>
+#     CreateCacheDir Cachedir dir1 [dir2 ...]<br>
+# Function:<br>
+# - Create a symbolic link in cachedir, pointing to the files in dir1, etc.<br>
+#<br>
+CACHE=${1:?'Target directory not defined'}<br>
+if [ ! -d "$CACHE" ]<br>
+then<br>
+	echo making cache directory "$CACHE"<br>
+	mkdir $CACHE<br>
+fi<br>
+<br>
+shift<br>
+<br>
+# The rest of the arguments are directories to cache<br>
+<br>
+verbose=false # true to see what happens<br>
+debug=false # true if you want extra information<br>
+doit=true # false if you don't want to change anything<br>
+<br>
+for D in $*<br>
+do<br>
+    $verbose && echo caching directory $D<br>
+    # list files, but ignore any that end with ~, or # or % (backup copies)<br>
+    for f in `cd $D;ls|grep -v '[~#%]$'`<br>
+    do<br>
+        if [  -f $CACHE/$f ]<br>
+	then<br>
+	    $debug && echo $CACHE/$f already exists<br>
+	else<br>
+	    if [ -f $D/$f -a -x $D/$f ]<br>
+	    then<br>
+	    echo $D/$f<br>
+ 		$verbose && echo ln -s $D/$f $CACHE/$f <br>
+		$doit && ln -s $D/$f $CACHE/$f <br>
+	    elif [ -d $D/$f ]<br>
+	    then<br>
+		$verbose && echo linking directory: ln -s $D/$f $CACHE/$f <br>
+		$doit && ln -s $D/$f $CACHE/$f <br>
+	    else<br>
+		$verbose && echo linking other: ln -s $D/$f $CACHE/$f <br>
+		$doit && ln -s $D/$f $CACHE/$f <br>
+	    fi<br>
+	fi<br>
+    done<br>
+echo you can now take $D out of your searchpath<br>
+	<br>
+done<br>
+
+<br>Click here to get file: <a href="Scripts/CreateCacheDir.sh">CreateCacheDir.sh</a><br>
+This does the work, but how do  you know which directories to replace?
+I wrote some programs to measure how good (or bad) my searchpath is.
+You might find them useful.
+<p><h1><a name="uh-62" href="Csh.html#toc-uh-62">Programs to measure your efficiency</a></h1><p>One way to simplify the searchpath is to identify directories that are
+really symbolic links to other directories.
+For instance, there is no reason to have both
+/bin
+and /usr/bin
+in your searchpath, if one points to the other.
+This script, called 
+<i>ResolveDir</i>, will identify these cases:
+<br><br>#!/bin/sh<br>
+# Find the unique and final location of a directory<br>
+# Usage:<br>
+#   ResolveDir directoryname<br>
+#<br>
+# If the directory is called ".", return "."<br>
+dir=${1:?'Missing argument'}<br>
+<br>
+[ "$dir" = "." ] && { echo "."; exit 0; }<br>
+cd $dir  >/dev/null 2>&1 && { pwd; exit 0; }<br>
+exit 1;<br>
+
+<br>Click here to get file: <a href="Scripts/ResolveDir.sh">ResolveDir.sh</a><br>
+The next script, when given a directory, returns the system name on which the
+directory resides.
+If the file is on the local system, it returns the host name.
+This script is called
+<i>Dir_to_System</i>. 
+<br><br>#!/bin/sh<br>
+# Given a directory, return the system it is mounted on<br>
+# If it is localhost, then echo `hostname`<br>
+dir=${1:?'No directory specified'}<br>
+cd $dir<br>
+<br>
+# On SunOS 4.x, use /usr/bin/df before /usr/5bin<br>
+# On Solaris 5.x, use /usr/ucb/df before /usr/bin<br>
+# Solve the problem by specifying the explicit path<br>
+PATH=/usr/ucb:/usr/bin:/usr/5bin:$PATH<br>
+export PATH<br>
+<br>
+x=`df . | grep -v Filesystem`<br>
+# use expr to extract the system name<br>
+server=`expr "$x" : '(.*):'`<br>
+# with sed, I could do $server=`echo $x | sed 's/:.*//'`<br>
+if [ "$server" ] <br>
+then <br>
+    echo $server<br>
+else<br>
+    hostname<br>
+fi<br>
+
+<br>Click here to get file: <a href="Scripts/Dir_to_System.sh">Dir_to_System.sh</a><br>
+Using these programs, I wrote some programs that evaluate my current
+searchpath. Since I am talking about the C shell, I started to write
+the script in this shell. 
+However, because of limitations of the C shell, I have to
+split one script into three files. The main script, 
+<i>AnalyzePaths</i>, calls two scripts:
+<br><br>#!/bin/csh -f<br>
+# this could be one script instead of three if <br>
+# we were using the Bourne Shell<br>
+# But the C shell isn't very good at piping<br>
+# commands inside of loops.<br>
+#<br>
+# Therefore we generate the pipe in one script, <br>
+# and feed AWK in another script<br>
+GetPaths | analyze_paths.awk HOSTNAME=`hostname`<br>
+
+<br>Click here to get file: <a href="Scripts/AnalyzePaths.csh">AnalyzePaths.csh</a><br>
+The script 
+<i>GetPaths</i> Outputs one line for each directory in the searchpath.
+Each line contains the directory name, the final name (if a symbolic
+link) and the system that provides the directory:
+<br><br>#!/bin/csh -f<br>
+foreach p ( $path )<br>
+    if ( -d $p ) then<br>
+	set newp = (`ResolveDir $p`)<br>
+	set server = (`Dir_to_System $p`)<br>
+	echo "${p}:${newp}:${server}"<br>
+    else<br>
+	echo "${p}:?:?"<br>
+    endif<br>
+end<br>
+
+<br>Click here to get file: <a href="Scripts/GetPaths.csh">GetPaths.csh</a><br>
+The last script is a complex 
+<i>nawk</i> script, but it outputs useful information.
+For instance, it reports directories that don't exist,
+redundant directories, and specifies remote directories that can be
+eliminated. For example, it could report
+<dl><dd>Directories that don't exist on this system:<br>
+        /local/bin/SunOS<br>
+        /usr/etc<br>
+You are dependent upon the following systems:<br>
+        server1, directories:  /home/barnett/bin<br>
+Directory /usr/X11R6/bin used 2 times (symbolic links: 1)<br>
+	symbolic links for '/usr/X11R6/bin' are:  /usr/X11/bin<br>
+
+</dl><p>The script is:
+<br><br>#!/usr/bin/nawk -f<br>
+# Do this before you read any input<br>
+BEGIN {<br>
+  FS=":";<br>
+}<br>
+<br>
+# do this for each line<br>
+(NF==3) {<br>
+  if ($3 ~ /?/ ) {<br>
+# then it is a directory that does not exist    <br>
+    missing[$1]=1;<br>
+    number_of_missing++;<br>
+  } else if ( $1 ~ /./ ) {<br>
+# ignore it  - it is the "." directory<br>
+  } else {<br>
+# count how many times each directory is used<br>
+    used_count[$2]++;<br>
+# is it a duplicate,<br>
+    if ($1 !~ $2) {<br>
+      links[$2]++;<br>
+# remember it, by catenating two strings<br>
+      used[$2] = used[$2] " "  $1;<br>
+    }<br>
+<br>
+# Is it a remote system?<br>
+    if ($3 !~ HOSTNAME) {<br>
+      systems[$3]++;<br>
+# if this is the first time we have seen this directory      <br>
+	system_to_dir[$3] = <br>
+	   system_to_dir[$3] " " $1;<br>
+      remote_systems++;<br>
+    }<br>
+  }<br>
+<br>
+#  printf("%st%st%sn",$1, $2, $3);<br>
+}<br>
+# Do this at the end of the file<br>
+END {<br>
+# Any directories that do not have to be included?<br>
+<br>
+  if (number_of_missing>0) {<br>
+    printf("Directories that don't exist on this system:n");<br>
+    for (i in missing) {<br>
+      printf("t%sn", i);<br>
+    }<br>
+  }<br>
+<br>
+# how many computer systems are needed?<br>
+<br>
+  if (remote_systems) {<br>
+    printf("You are dependent upon the following systems:n");<br>
+    for (i in systems ) {<br>
+        printf("tsystem %s, directories: %sn", i, system_to_dir[i]);<br>
+    }<br>
+    <br>
+  } else {<br>
+    printf("Good! You are not dependent upon any other servers,");<br>
+for your current directoryn");<br>
+    printf(" except for your current directoryn");<br>
+  }<br>
+<br>
+<br>
+# What about duplicate directories?<br>
+<br>
+  for (i in used ) {<br>
+    if (used_count[i]>1) {<br>
+      printf("nDirectory %s used %d times (symbolic links: %d)n", <br>
+	     i, used_count[i],  links[i]);<br>
+      if (links[i]>0) {<br>
+	printf("tsymbolic links for '%s' are: %sn", i, used[i]);<br>
+      }<br>
+    }<br>
+  }<br>
+<br>
+}<br>
+
+<br>Click here to get file: <a href="Scripts/analyze_paths.nawk">analyze_paths.nawk</a><br>
+There you go. Using these scripts will give you a set of tools to
+improve your searchpath. Do it right, and may you never have your 
+workstation freeze again. 
+<p><h1><a name="uh-63" href="Csh.html#toc-uh-63">Specifying system-specific searchpaths</a></h1><p>So far, I've explained how to optimize your searchpath.
+But that is only part of the problem.
+If you only used one computer, simplifying your searchpath would be
+easy.
+But logging onto many different computers makes life
+"interesting," as the ancient Chinese curse goes.
+You could do what most people do, and keep adding directories 
+<i>ad nauseum</i> until every possible directory is in your searchpath.
+Of course, as I explained last month, this makes your account as
+stable as a one-legged elephant.
+I have a solution, based on specific rules.
+Here is the short list:
+<dl><dd>Understand directory characteristics.<br>
+Define a consistent naming convention.<br>
+Define a strategy.<br>
+Reduce the complexity.<br>
+Use local link/caching directories.<br>
+Consider a local home directory<br>
+
+</dl><p>Let me describe each of these rules.
+<p><h1><a name="uh-64" href="Csh.html#toc-uh-64">Understand directories characteristics.</a></h1><p>The UNIX file system was designed to be the single common structure to
+perform all operations. All input and output, all devices, and the
+internals of the operating system are reachable by using special files.
+With NFS, this was extended to include remote files, making them
+look like local files, and making all file-based UNIX utilities
+capable to operating on remote files.
+<p>However, all directories don't have the same characteristics.
+Here are some of the variations:
+<p><DL><dt>&#183;<dd>A directory that contains standard architecture-specific executables.
+The directory is read-only, and identical on other systems of the same
+architecture. Example: /usr
+<dt>&#183;<dd>System-specific configuration files. Typically writable by
+super-users only. Example: /etc
+<dt>&#183;<dd>System-specific directory to hold temporary files. Writable by various
+processes, programs, and users. Often not backed up. Not visible by
+other systems.
+Example: /var
+<dt>&#183;<dd>Same as the above, but backed up frequently. 
+Example: /private
+<dt>&#183;<dd>Common files shared across multiple groups.
+Log onto other systems, and see the same files.
+Example: /home/server/project
+<dt>&#183;<dd>Directories which contain locally added executables.
+This may be private to the system. Example: /local
+<dt>&#183;<dd>Same as above, but containing executables that are shared among
+several systems of the same architecture. Examples: /usr/local, /project/bin
+<dt>&#183;<dd>Same as the above, but containing executables and/or data for multiple
+architectures.  Example: /public
+</DL><P><p>As you can see, there are many different characteristics, and 
+every user has to understand the difference.
+Make sure you understand how the files at your site are organized.
+Most new workstations have lots of disk space, and it is rare that the
+systems don't make it available. Users should know if
+the files are visible to other systems, and if the files are backed up
+or not. 
+<p>Some directories are project-related.
+Executables are only used when working on the project.
+Other directories, such as
+"/projects/bin," are used for certain rarely-used functions.
+These are what I call 
+"optional" directories. If they are missing, you can still do other work.
+Other directories are mandatory.
+<p><h1><a name="uh-65" href="Csh.html#toc-uh-65">Define a consistent naming convention.</a></h1><p>Some companies do not have a consistent naming strategy. This is a
+serious problem. If the location of a single file changes when
+different machines are used, then the user has to deal with this extra
+complexity, which is very difficult, and if not taken care of, can
+lead to irritability, moroseness, and eventually--insanity. 
+Sun's automounter can help. For instance, you can set up a network so
+that your home directory always has the same name, even if it is
+moved to another system. Some sites also use a mechanism such as
+"/work/<i>projectname</i>" to specify the location of a project.
+Another popular and practical convention is to specify 
+machine-specific files using a path that contains the name of the
+machine.
+If all machines use the same convention, then you can make sure the
+"data" directory on computer
+"server" is called
+"/home/server/data" is the same directory on all machines.
+<p>
+<p><h1><a name="uh-66" href="Csh.html#toc-uh-66">Define a strategy.</a></h1><p>You may want to write up your strategy. This helps
+clarify some of the decisions. For instance, here is one similar to
+what I use, leaving out the standard directories:
+<dl><dd>/home/<i>systemname</i> - Shared system-specific files. Backed up.<br>
+/work/<i>Projectname</i> - Project directories.<br>
+/private - Local to system, not backed up, unless I do it myself. <br>
+/local - Local to current system. Not shared. <br>
+~/SunOS/5.5.1/sun4u/bin - Executables for a specific system type<br>
+
+</dl><p>The important directories are the last two, because these contain the 
+executables for my computer. 
+But deciding on a naming strategy is the first step.
+<p><h1><a name="uh-67" href="Csh.html#toc-uh-67">Reduce the complexity.</a></h1><p>It doesn't matter what the convention is, as long as it is
+consistent. But if it's too complicated, errors can occur.
+When possible, keep things simple.
+Remove non-essential directories. 
+If you don't need to use certain executables all the time,
+then add them when you need them using an alias.
+To repeat the lesson from two months ago, don't set the path in your 
+".cshrc" or 
+".login" file. Inherit it from your environment. When you want to
+add a directory, change your environment for that window.
+<p><h1><a name="uh-68" href="Csh.html#toc-uh-68">Use local link/caching directories.</a></h1><p>Once you have removed all of the directories you use occasionally, 
+you still might have several directories that
+are on other systems. What then?
+<p>The solution is simple. Create a directory on your local system, that
+contains symbolic links to the real files.
+Then remove the original directory from your searchpath, and add the
+new one. I discussed this in detail last month.
+But there is one more step.
+<p><h1><a name="uh-69" href="Csh.html#toc-uh-69">Consider a local home directory</a></h1><p>Most large installations share user home directories.
+No matter which system you log onto, you are in the same spot.
+This is convention, but there are two problems.
+The first concerns efficiency, and the second security.
+The efficiency is a concern if the server providing this file goes
+down.
+The security is a concern, because anyone who can gain superuser
+access
+on any system that mounts that home directory, can break into that
+account if you use
+<i>rlogin,</i> and have access to your files.
+To solve both problems, create a directory on the local system that
+has copies of some of the critical files, like 
+".cshrc" and 
+".login." Since the 
+".rhosts" file is not available to other systems through NFS,
+A hacker cannot modify your
+".rhosts" file and log onto your workstation.
+A better solution is to eliminate the 
+"rlogin" and
+"rsh" services, using a program like
+"ssh" instead. But that's another topic.
+<p>Having a home directory local to your main computer can increase your
+efficience, by removing the dependance on other systems.
+You can have your own directory for
+executables, for instance.
+<p><h1><a name="uh-70" href="Csh.html#toc-uh-70">Customizing your environment</a></h1><p>I'll go through it a step at a time.
+Remember, I do not recommend you always set your searchpath in your
+".cshrc" or 
+".login" file.
+Set it when you need it, like starting up a window system.
+Assume the searchpath is controlled by a file called
+".path." Here is my version of this file:
+<br><br># example .path file<br>
+<br>
+if ( -f ~/.path.default ) then<br>
+    source ~/.path.default<br>
+else<br>
+    # this is a default searchpath<br>
+    set path = ( ~/bin /usr/ucb /usr/bin /usr/local/bin /local/bin )<br>
+endif<br>
+
+<br>Click here to get file: <a href="Files/Path1.csh">Path1.csh</a><br>
+The system searches for a file called
+".path.default." If this file is found, then it is used. Otherwise a default searchpath
+is specified.
+The file
+".path.default" is a bit more complicated, but it is designed to handle special cases
+in a simple manner:
+<br><br># .path.default modified for SunOS<br>
+<br>
+if ( ! $?HOSTNAME ) then<br>
+    setenv HOSTNAME `hostname`<br>
+endif<br>
+<br>
+# get host specific path, if there<br>
+if ( -f ~/.path.$HOSTNAME ) then<br>
+    source ~/.path.$HOSTNAME<br>
+endif<br>
+<br>
+if ( ! $?SYSTEM ) then<br>
+    set SYSTEM = "`uname -s`"<br>
+endif<br>
+<br>
+# get system-specific searchpath, if there<br>
+if ( -f ~/.path.$SYSTEM ) then<br>
+    source ~/.path.$SYSTEM<br>
+endif<br>
+<br>
+# define these if .path.$SYSTEM doesn't<br>
+<br>
+# define the system defined paths<br>
+if (! $?SYSPATH ) then<br>
+    set SYSPATH  = ( /usr/ucb /usr/bin /bin )<br>
+endif<br>
+<br>
+# define the places a window system's files are located<br>
+<br>
+<br>
+if (! $?WINPATH ) then<br>
+    set WINPATH  = ( /usr/X11/bin /usr/X11R6/bin /usr/openwin/bin )<br>
+endif<br>
+<br>
+# Private executables<br>
+if ( ! $?MYBIN ) then<br>
+    set MYBIN = ( ~/bin ~/bin/$SYSTEM )<br>
+endif<br>
+<br>
+# local to machine<br>
+if ( ! $?LOCALBIN ) then<br>
+    set LOCALBIN = ( /local/bin /local/bin/$SYSTEM )<br>
+endif<br>
+<br>
+#set CACHEBIN = ( $HOME/cachebin )<br>
+set CACHEBIN = ( )<br>
+<br>
+#If TOTALPATH is defined, use it, else build it up from the pieces<br>
+if ( $?TOTALPATH ) then<br>
+    set path = ( $TOTALPATH )<br>
+else<br>
+    set path = ( $CACHEBIN $MYBIN $LOCALBIN $WINPATH $SYSPATH )<br>
+#   set path = ( $CACHEBIN $MYBIN $LOCALBIN $WINPATH $SYSPATH . )<br>
+<br>
+endif<br>
+
+<br>Click here to get file: <a href="Files/Path.default">Path.default</a><br>
+There are many things to point out in this file.
+First - let me describe the variables
+<dl><dd>HOSTNAME - The system hostname<br>
+SYSTEM - The operating system type<br>
+SYSPATH - The standard vendor-supplied directories<br>
+WINPATH - Directories used for the window system<br>
+MYBIN - Directories that contain my personal executables<br>
+LOCALBIN - Where extra executables are kept<br>
+CACHEBIN - My local cache directory<br>
+
+</dl><p>Suppose you are on a system called
+"pluto." If so, then the script searches for the file
+".path.pluto." If this file is found, it is sourced.
+This file can be quite simple.
+For instance, if the file
+".path.pluto" contained these two lines only:
+<dl><dd>set SYSTEM = "FunnyUnix"<br>
+set TOTALPATH = ( ~/bin /usr/bin /usr/ucb /usr/local/bin )<br>
+
+</dl><p>Then the value of 
+<i>TOTALPATH</i> will be used to set the searchpath.
+No other programs will be executed.
+The system doesn't even need the
+"uname" executable.
+<p>Here is another example, names
+"path.neptune" for a computer called neptune:
+<dl><dd>set SYSTEM = "SunOS"<br>
+set MYBIN = ( ~/bin ~/SunOS/bin )<br>
+
+</dl><p>In this case, the file
+".path.SunOS" would be sourced, and the default values in that file would
+specify the searchpath
+The exception would be the value of
+"MYBIN." I have set up these files so that
+each system can have it's collection of paths that define the searchpath.
+You can customize the directory used for the window system 
+on a particular machine, yet still add a common NFS directory to all
+systems,
+by modifying the value of $path near the end of the file.
+Still, this doesn't solve all cases.
+In particular, SunOS 4.X and 5.X systems have different
+searchpaths. Here is a file that shows one way to automatically
+change the searchpath based on the version of the operating system:
+<br><br># .path.SunOS<br>
+# copied from .path.default, and modified<br>
+<br>
+if ( ! $?SYSTEM ) then<br>
+    set SYSTEM = "`uname -s`"<br>
+endif<br>
+<br>
+# Having this here would cause an infinite loop<br>
+# Make sure it is commented out<br>
+#if ( -f ~/.path.$SYSTEM ) then<br>
+#    source ~/.path.$SYSTEM<br>
+#endif<br>
+<br>
+# define these if .path.$SYSTEM doesn't<br>
+<br>
+if ( ! $?MACHINE ) then<br>
+    set MACHINE = "`uname -m`"<br>
+endif<br>
+<br>
+if ( ! $?REV ) then<br>
+    set REV = "`uname -r`"<br>
+endif<br>
+<br>
+# define the system defined paths<br>
+if (! $?SYSPATH ) then<br>
+  if ( "$REV" =~ 4.[012].* ) then<br>
+    set SYSPATH  = ( /usr/ucb /usr/bin /usr/5bin /bin  /usr/etc )<br>
+  else if (  "$REV" =~ 5.[0-6].* ) then<br>
+    set SYSPATH = ( /opt/SUNWspro/bin /usr/ccs/bin <br>
+      /usr/ucb /usr/bin /usr/sbin )<br>
+  else<br>
+#   How did I get here?<br>
+    set SYSPATH  = ( /usr/ucb /usr/bin /bin )<br>
+  endif<br>
+endif<br>
+<br>
+# define the places a window system's files are located<br>
+# I could look at DISPLAY, and change this depending on <br>
+# the value<br>
+<br>
+if (! $?WINPATH ) then<br>
+    if ( ! $?OPENWINHOME ) then<br>
+        setenv OPENWINHOME /usr/openwin<br>
+    endif<br>
+    set WINPATH  = ( $OPENWINHOME/bin )<br>
+endif<br>
+<br>
+# define the places where architecture-specific binaries are<br>
+#<br>
+if ( ! $?MYBIN ) then<br>
+    set MYBIN = ( ~/bin ~/$SYSTEM/$REV/$MACHINE/bin  )<br>
+endif<br>
+<br>
+if ( ! $?LOCALBIN ) then<br>
+    set LOCALBIN = ( /local/bin )<br>
+endif<br>
+<br>
+#set CACHEBIN = ( )<br>
+set CACHEBIN = ( $HOME/cachebin )<br>
+<br>
+# If I set this, <br>
+#   then the variables in .path.default will be skipped<br>
+#set TOTALPATH = ( $CACHEBIN $MYBIN $LOCALBIN $WINPATH $SYSPATH )<br>
+
+<br>Click here to get file: <a href="Files/Path.sunos">Path.sunos</a><br>
+As you probably noticed, I used 
+<dl><dd>~/$SYSTEM/$REV/$MACHINE/bin<br>
+
+</dl><p>as a directory for a machine-specific searchpath.
+This becomes, when evaluated, 
+<dl><dd>~/SunOS/5.5.1/sun4u/bin<br>
+
+</dl><p>You can move an executable there, and make links from other
+directories to that file if you want to.
+Other approaches also make sense. You could have a searchpath that
+includes several directories in a particular order, such as the following:
+<dl><dd>~/bin<br>
+~/SunOS/bin<br>
+~/SunOS/5.5.1/bin<br>
+~/SunOS/5.5.1/sun4u/bin<br>
+
+</dl><p>The first one could hold all shell scripts.
+The second one could contain all Sun specific shell scripts.
+The third one could contain all executables for a Solaris 5.5.1
+system. And the fourth directory can contain machine-dependent 
+executables.
+Or you could use underscores instead of slashes:
+<dl><dd>set MYPATH = ( ~/bin ~/SunOS_bin ~/SunOS_5.5.1_bin )<br>
+
+</dl><p>I hope you find this setup easy to use, and easy to modify.
+It is a bit complex, but it offers a lot of flexiability.
+I hope you find it useful.
+<p><h1><a name="uh-71" href="Csh.html#toc-uh-71">C Shell History - Forward into the Past</a></h1><p>
+<p>
+<p><h1><a name="uh-72" href="Csh.html#toc-uh-72">Prehistoric History</a></h1><p>In ancient times, before mice existed, large beasts roamed the earth.
+These included band printers, 9 track tape drives, (oddly 9-track was
+before 8-track), and disk platters.  The most fearsome of all the
+beasts was the TeleType, able to cause piercing headaches. Quieter
+machines evolved, like the Silent 700, and the DecWriter.  A new beast
+was seen wandering the dark and desolate laboratories. It was
+quick. It was silent. It was the VKB, or Video Keyboard, a choice
+morsel for those higher in the evolutionary plane i.e. the Hacker
+(Hackerus Keyboardus).
+<p>A common sound was the stampede of fingertips, as the Hacker stalked
+his or her prey - the perfect program. Faster, faster went the
+fingers, but it was never fast enough. That perfect program was just
+around the corner, but rarely was it caught.
+<p>One hacker, in an effort to go faster still, decided to enhance his
+shell
+in such a way that all he had to do was take a tiny step in a
+direction, and the shell knew what he wanted to do.
+That hacker added <b>history</b>. And thus was the history mechanism born.
+<p><h1><a name="uh-73" href="Csh.html#toc-uh-73">Enabling History</a></h1><p>Nowadays shells (like <i>ksh</i>) support a history mechanism that can
+visually modify the command line, allowing the user to edit the
+command line, call up previous commands by pressing the up arrow. The C shell
+does not do this. It was designed for 
+<b>any</b> terminal, including the prehistoric hard-copy terminals.
+The C shell has no problems running within
+Sun's <i>cmdtool</i>, for instance.
+To enable history, set the history variable:
+<dl><dd>set history = 100<br>
+
+</dl><p>This tells the shell to remember the last 100 commands.
+You can make this number bigger or smaller. But the larger the number,
+the more memory the shell uses.
+<p>The command
+"history" will print out the history information.
+If you specify a number such as 20, it will list the last 20 commands.
+You can save a series of commands, and read them in later:
+<dl><dd>history -h 20 &gt;file<br>
+... (do something else )<br>
+source -h file<br>
+
+</dl><p>The
+"-h" option is used to make the format suitable for sourcing files.
+The history command normally adds a number before each line for
+reference.
+The
+"-h" turns this off, so it can be <i>source</i>d.
+You can reverse the order by adding a
+"-r" to the history command.
+The
+"source -h" command reads the file in, but does not execute the commands.
+<p><h1><a name="uh-74" href="Csh.html#toc-uh-74">Automatic History Saving</a></h1><p>You can automate this.
+The 
+"savehist" variable specifies the number of lines to remember.
+Therefore, when you type
+<dl><dd>set savehist = 10<br>
+
+</dl><p>and you log out, the program will save the last 10 lines in the file
+"~/.history." The next time the C shell starts up, it will read this file,
+effectively executing the
+<dl><dd>source -h ~/.history<br>
+
+</dl><p>command. Large values of
+<i>savehist</i> will slow down the C shell during the start-up process.
+<p><h1><a name="uh-75" href="Csh.html#toc-uh-75">Changing your prompt</a></h1><p>The C shell numbers each command for reference.
+Many people like to see these numbers automatically.
+The C shell allows you to put this number into the prompt.
+Placing the magic character
+"!" in the prompt does this:
+<dl><dd>set prompt = '!% '<br>
+
+</dl><p>The command
+"history" will display the list of past commands.
+Add a number afterwards, and it limits the list to that number of commands.
+Some people create aliases to make it easier to view the history:
+<dl><dd>alias h history<br>
+
+</dl><p>or
+<dl><dd>alias h "history 20"<br>
+alias H "history 100 | more"<br>
+
+</dl><p>
+<p><h1><a name="uh-76" href="Csh.html#toc-uh-76">Repeating Past Commands</a></h1><p>The history mechanism isn't just used to keep track of
+your past commands. You can execute them again very easily.
+The command
+<dl><dd>!!<br>
+
+</dl><p>executes the last command again. 
+Besides repeating the same command, it can be used 
+in other ways:
+<dl><dd>ls file?<br>
+# now rename each of these files<br>
+foreach i (`!!`)<br>
+    mv $i $i.old<br>
+end<br>
+
+</dl><p>
+<p><h1><a name="uh-77" href="Csh.html#toc-uh-77">Repeating older commands</a></h1><p>You can execute ANY command stored in the history list.
+If you know the number in the history list 
+(or the number that was in the prompt), just specify the number.
+Suppose the history command listed the following:
+<dl><dd>31 vi file1.c<br>
+32 make file1<br>
+33 ./file1<br>
+
+</dl><p>You could edit the file again with
+<dl><dd>!31<br>
+
+</dl><p>You can also specify the relative position, by putting a minus
+before the number. The command
+"!-2" executes the command before the last.
+Remember, the position is relative.
+So you can guess the relative position, and if you get the wrong
+command,
+type the same history command, and you will execute the next one in
+the list.
+In the vi/make/file1 example before, you can keep executing
+"!-3" to execute the same three commands in a rotating order.
+<p>A third form uses the first few letters of the command.
+To repeat the 
+<i>vi</i> command, you can use
+<dl><dd>!v<br>
+
+</dl><p>You only need to specify enough letters to match the desired command.
+The first matching command, searching backwards, is executed.
+This is my favorite method. It is not necessary to know the number, or
+to list the history. 
+<p>Suppose you typed the following commands:
+<dl><dd>make prog1;./prog1<br>
+make prog2;./prog2<br>
+
+</dl><p>If you type any of the following commands, you will execute the second
+make command:
+<dl><dd>!m<br>
+!ma<br>
+!mak<br>
+!make<br>
+
+</dl><p>You cannot specify a pattern with a space. For instance, the command
+<dl><dd>!make prog1<br>
+
+</dl><p>do not execute the first
+<i>make</i> command. 
+To execute the first make command, without knowing the number,
+you can tell the C shell to search for a string, and execute the
+command that contains the string. This is done with the special
+pattern
+"?pattern?." Therefore, to execute the first make command, type
+<dl><dd>!?prog1?<br>
+
+</dl><p>
+<p><h1><a name="uh-78" href="Csh.html#toc-uh-78">Appending to a previous command</a></h1><p>Often I find myself executing a command, and 
+wish to repeat the previous command, but append something to the end.
+Just execute the
+"!!" command, and append the addition to the end.
+(This is why you cannot search for a command that contains a space).
+I often develop complex filters on the fly. I type a command, and add
+filters one step at a time. Here is an example, where I want to
+find all lines that contain 
+"keyword" but not
+"ignore." Once I find this, I want the second word of the line, sorted.
+One way to do this, without writing a shell script, is:
+<dl><dd>grep keyword file*<br>
+!! | grep -v ignore<br>
+!! | sort<br>
+!! | more<br>
+
+</dl><p>If you want to append to the last command, without adding a space,
+you can. The following will print files
+"prog" and
+"prog1" 
+<dl><dd>lpr prog<br>
+!!1<br>
+# same as <br>
+#   lpr prog1<br>
+
+</dl><p>Suppose you want to append to a command that was not the last command?
+This is no problem if you want a space between the old command and
+the new word. If you edited file1.c, and wanted to edit that file and
+a second file, you can type:
+<dl><dd>!v file2.c<br>
+
+</dl><p>This edits file1.c and file2.c
+Now suppose you type the following commands:
+<dl><dd>vi File<br>
+chmod +x File<br>
+./File<br>
+cp File File1<br>
+
+</dl><p>and now you want to edit File1 without typing the complete line?
+You can't type
+<dl><dd>!v1<br>
+
+</dl><p>and
+<dl><dd>!v 1<br>
+
+</dl><p>will edit the wrong files.
+There are two solutions. The first is to execute the 
+<i>vi</i> command again, and then append a 
+"1" 
+<dl><dd>!v<br>
+!!1<br>
+
+</dl><p>There is another way. Remember that most UNIX shells have two ways to
+specify a variable, $x and ${x}? The C shell history mechanism has a
+similar feature. To append the number
+"1" to the previous
+<i>vi</i> command, type
+<dl><dd>!{v}1<br>
+
+</dl><p>This works for all of the examples discussed. That is, you can use the
+curly braces to enclose the history specification:
+<dl><dd>!{-2}<br>
+!{32}<br>
+!{?File1?}<br>
+
+</dl><p>Adding the number
+"1" without adding a space can be done by typing:
+<dl><dd>!{-2}1<br>
+!{32}1<br>
+!{?File1?}1<br>
+
+</dl><p>
+<p><h1><a name="uh-79" href="Csh.html#toc-uh-79">Using history to reuse words</a></h1><p>So far, I have only talked about using the history feature to
+repeat entire command lines. You can also use it to repeat words.
+The special variable
+"!$" refers to the last word on the last line. This is very useful, if you
+want to save keystrokes. Here is an example:
+<dl><dd>touch File<br>
+chmod +x !$<br>
+vi !$<br>
+./!$<br>
+cp !$ !$.orig<br>
+
+</dl><p>This is the same as typing
+<dl><dd>touch File<br>
+chmod +x File<br>
+vi File<br>
+./File<br>
+cp ./File ./File.orig<br>
+
+</dl><p>The variable
+"!^" refers to the first argument on the line. 
+That is, instead of typing
+<dl><dd>touch File<br>
+cp File File.backup<br>
+vi File<br>
+chmod +x File<br>
+File abc<br>
+
+</dl><p>you could type
+<dl><dd>touch File<br>
+cp !^ !^.backup<br>
+vi !^<br>
+chmod +x !^<br>
+!$ abc<br>
+
+</dl><p>
+<p><h1><a name="uh-80" href="Csh.html#toc-uh-80">!* - All of the arguments</a></h1><p>The string
+"!!*" refers to all of the arguments on the previous line, except the first.
+You can use this to reuse arguments:
+<dl><dd>ls *% %~ *.old *.backup<br>
+# A lot of files - move them into a directory<br>
+mv !* OldDirectory<br>
+
+</dl><p>In this case, 
+"!*" and
+"!!*" mean the same.
+There is another mechanism for specifying part
+of the argument list. 
+A hyphen can specify a range. by itself, it's the same as
+the entire line, including the command. 
+Put a number afterwards, and it places a limit on the range:
+<dl><dd>ls f1 f2 f3 f4 f5 f6 f7 f8 f9<br>
+!!-4<br>
+# this is the same as <br>
+ls f1 f2 f3 f4 f5<br>
+
+</dl><p>I mention this for completeness. 
+Next month I will discuss more elaborate
+variations. Notice that
+"!-4" and 
+"!!-4" are 
+<b>not</b> the same.
+<p><h1><a name="uh-81" href="Csh.html#toc-uh-81">!% - find the word</a></h1><p>I've mentioned that you can search for a command containing
+a particular word. For instance, to repeat the command 
+containing
+"ABC" type:
+<dl><dd>!?ABC?<br>
+
+</dl><p>It doesn't matter where the string
+"ABC" is on the line, the command will be executed again.
+But sometimes you don't want to execute the command again.
+You just want to use the word.
+As an example, suppose you execute
+<dl><dd>more A_file_with_a_long_name<br>
+
+</dl><p>Now suppose you type some other commands, and then decide to print
+the file. You could type
+<dl><dd>!more<br>
+lpr !$<br>
+
+</dl><p>If you executed the
+<i>more</i> program a second time, this will not work.
+You could type
+<dl><dd>history | grep A<br>
+
+</dl><p>and then repeat the command. 
+Or you could search for that line, and print the line out without
+executing it, by typing
+<dl><dd># print the command containing "A"<br>
+echo !?A?<br>
+lpr !$<br>
+
+</dl><p>But there is an easier way.
+If you use the character
+"%" after a search, it is the same as the entire word matched.
+In other words, you can search for the line, extract the word,
+and use it in one step:
+<dl><dd>lpr !?A?%<br>
+# same as<br>
+#    lpr A_file_with_a_long_name<br>
+
+</dl><p>
+<p><h1><a name="uh-82" href="Csh.html#toc-uh-82">Editing the last command</a></h1><p>One of the most useful features of the C shell is the ability
+to correct a mistake. If you make the following typo:
+<dl><dd>mroe File<br>
+
+</dl><p>and you want to change
+"mroe" to
+"more," you can simply type:
+<dl><dd>^ro^or^<br>
+
+</dl><p>The shell changes 
+"ro" to
+"or," and repeats the commands.
+<p>Someone onced asked me if there was a way to do this with a function
+key.
+They kept pressing the backquote by mistake.
+That is, they typed
+<dl><dd>ls`<br>
+
+</dl><p>and wanted an easy way to fix this.
+If this was done in a 
+<i>shelltool</i> window, there is a solution.
+Place the following in your
+<i>.ttyswrc</i> file:
+<dl><dd># i.e. csh history<br>
+mapi F7 ^`^n<br>
+
+</dl><p>This maps the F7 function key to effectively type
+<dl><dd>^`^<br>
+
+</dl><p>and type return at the same time.
+You can also use this to duplicate other common operations.
+Alas - this only works with 
+<i>shelltool</i> and not in
+<i>cmdtool</i> mode.
+<p>One more thing, recent versions of Solaris do not require you to type
+the second up-arrow. If you want to delete the letter 
+"x" from the previous command, just type
+<dl><dd>^x<br>
+
+</dl><p>and the letter will be deleted.
+<p><h1><a name="uh-83" href="Csh.html#toc-uh-83">Word Modifiers in History</a></h1><p>Last month I discussed the history mechanism.
+I showed how you could use it to execute commands without typing the
+entire command again, by using the
+"!" character.. I also discussed the substitution mechanism,
+triggered by using the
+"^" character.
+Different characters can be used, by modifying the value of the
+<b>histchars</b> variable, which has the default value of
+"!^." 
+<p>There are three types of history substitutions:
+events, words, and word modifiers.
+I discussed event designators last month.
+These correspond to lines typed at the keyboard.
+A summary of event designators follows:
+<pre>
++-----------------------------------------------------------+
+|Format	  Example   Meaning				    |
++-----------------------------------------------------------+
+|n	  !2	    Command from line #2		    |
+|-n	  !-3	    Command 3 commands ago		    |
+|#	  !#	    The current command			    |
+|!	  !!	    The last command			    |
+|s	  !abc	    The last command that starts with 'abc' |
+|?s?	  !?abc?    The last command that contained 'abc'   |
++-----------------------------------------------------------+</pre>
+
+<p>I didn't mention the
+"!#" event last time. This is a feature of newer versions of the
+C shell.
+It matches the current line. It isn't much used unless you use some of
+the features described below.
+<dl><dd>long_word !#<br>
+
+</dl><p>is the same as
+<dl><dd>long_word long_word<br>
+
+</dl><p>Yeah. 
+<b>That's</b> real useful.
+<p><h1><a name="uh-84" href="Csh.html#toc-uh-84">Word events</a></h1><p>The previous events refer to complete lines.
+You don't have to recall previous lines, and use the entire line.
+You can just use part of the line. Last month I discussed four
+word designators.
+If the last command was
+<dl><dd>program arg1 special2 arg3 arg4<br>
+
+</dl><p>Then the value of these word designators would be
+<pre>
++-----------------------------------------------+
+      |Character   Example    Value		      |
+      +-----------------------------------------------+
+      |^	   !^	      arg1		      |
+      |*	   !*	      arg1 special2 arg3 arg4 |
+      |$	   !$	      arg4		      |
+      |%	   !?spec?%   special2		      |
+      +-----------------------------------------------+</pre>
+These word designators are specialized abbreviations of
+a more flexible, but complex syntax.
+All five examples below are identical:
+<dl><dd>program arg1 arg2<br>
+# now print arg2<br>
+lpr !$<br>
+lpr !!$<br>
+lpr !!:$<br>
+lpr !{!:$}<br>
+lpr !:$<br>
+
+</dl><p>
+<p><h1><a name="uh-85" href="Csh.html#toc-uh-85">Numeric word events</a></h1><p>Using the last syntax, it is possible to specify any word on the previous
+command line, besides the first or last. Just specify the number:
+<dl><dd>lpr !:2<br>
+
+</dl><p>It is important to remember that the history mechanism comes early, 
+before the meta-characters are expanded.
+For instance, suppose the following command was typed:
+<dl><dd>program abc{1,2,3} *.? "a b";program2&gt;file.out<br>
+
+</dl><p>This table lists the words that can be recalled in a history event:
+<pre>
++------------------+
+		    |Word   Value      |
+		    +------------------+
+		    |!:0    program    |
+		    |!:1    abc{1,2,3} |
+		    |!:2    *.?	       |
+		    |!:3    "a b"      |
+		    |!:4    ;	       |
+		    |!:5    program2   |
+		    |!:6    &gt;       |
+		    |!:7    file.out   |
+		    +------------------+</pre>
+Notice how the shell separates words not based on white-spaces, but on 
+meta-characters like
+"&gt;" and
+";." 
+<p>I've already mentioned that 
+"!!:5" is the same as
+"!:5" when used to refer to the fifth word of the previous line.
+Two different syntaxes exist, because you can use these word modifiers
+to refer to any command stored in the history memory.
+If the history contained the following command:
+<dl><dd>cc -o prog prog.c<br>
+./prog &gt;A_long_file_name<br>
+
+</dl><p>then the following table shows some of the values
+<pre>
++-----------------------------+
+	       |Modifier    Value	     |
+	       +-----------------------------+
+	       |!c:2	    prog	     |
+	       |!?long?:2   A_long_file_name |
+	       +-----------------------------+</pre>
+
+<p><h1><a name="uh-86" href="Csh.html#toc-uh-86">:- - Ranges of words</a></h1><p>You can specify range of words, using the
+"-" modifier.
+Assuming the command
+<dl><dd>program a b c d e f g h<br>
+
+</dl><p>then the following table shows possible ranges of words:
+<pre>
++---------------------------+
+		|Variable   Value	    |
+		+---------------------------+
+		|!!:2	    b		    |
+		|!!:4	    d		    |
+		|!!:2-4	    b c d	    |
+		|!!:2-	    b c d e f g	    |
+		|!!:2-$	    b c d e f g h   |
+		|!!:2*	    b c d e f g h   |
+		|!!:-	    a b c d e f g   |
+		|!!:1-$	    a b c d e f g h |
+		|!!:*	    a b c d e f g h |
+		+---------------------------+</pre>
+As you can see, if the value before the hyphen is omitted, 
+then the default beginning is 1.
+If the value after the hyphen is omitted, the defaults is the next to
+last argument.
+In other words, 
+"*" acts like 
+"-$" when used after a number.
+I should also mention that the rules for abbreviations are confusing.
+"!!:-" is the same as 
+"!:-" but it is not the same as
+"!-" because the last looks like the relative event identifier, i.e.
+"!-2." 
+<p><h1><a name="uh-87" href="Csh.html#toc-uh-87">Events, words, arguments, aliases</a></h1><p>I haven't discussed aliases in detail, but the mechanism used for
+history are also used in defining aliases.
+For instance, to make an alias so that
+<dl><dd>compile xyz<br>
+
+</dl><p>does the same as
+<dl><dd>cc -o xyz xvz.c<br>
+
+</dl><p>you would use the alias
+<dl><dd>alias compile 'cc -o !:1 !:1.c'<br>
+
+</dl><p>Find this confusing? Wait till you learn about variable modifiers.
+<p><h1><a name="uh-88" href="Csh.html#toc-uh-88">Variable Modifiers</a></h1><p>The C shell has variable modifiers, that can be used
+to extract part of a variable.
+That is, if a variable 
+"x" has the value
+"file.c," and if you wanted to remove the
+".c" part, then you can use the
+"root" modifier
+":r." That is, 
+"$x:r" is the same as
+"file." There exists four useful modifiers, that extract the head, tail, root
+and extension of a variable.
+Assume a variable has been set by typing:
+<dl><dd>set a = "/a/b/c/d.e.f.g"<br>
+
+</dl><p>Then the four modifiers would give the following results:
+<pre>
++-------------------------------------------------------+
+  |Modifier   Meaning		    Example   Results	  |
+  +-------------------------------------------------------+
+  |r	      Root		    $a:r      a/b/c.d.e.f |
+  |e	      Extension		    $a:e      g		  |
+  |h	      Head (or Directory)   $a:h      /a/b	  |
+  |t	      Tail (or Filename)    $a:t      c.d.e.f.g	  |
+  +-------------------------------------------------------+</pre>
+One way to think of this is to realize that
+Root and Extension are matching pairs. That is,
+"${a:r}.${a:e}" is the same as
+"$a." Head and Tail, or rather, Directory and Filename are also matching.
+"${a:h}/${a:t}" is the same as 
+"$a." 
+<p>Earlier, I mentioned how the syntax of the C shell can be complex.
+These variable modifiers can be used for variables, arguments,
+history 
+<b>and</b> aliases.
+Let me give some examples.
+If you wanted to rename all files with the extension
+".old" to the extension
+".new," then use
+<dl><dd>foreach i ( *.old )<br>
+	mv $i $i:r.new<br>
+end<br>
+
+</dl><p>To make a shell script called 
+"compile" that did the same as the alias above (except the .c is not needed), use
+<dl><dd>#!/bin/csh -f<br>
+cc -o $1:r $i:r.c<br>
+
+</dl><p>An alias to do the same would be
+<dl><dd>alias compile 'cc -o !:1:r !:1:r.c'<br>
+
+</dl><p>Lastly, suppose you wanted to execute the following:
+<dl><dd>diff file.old file<br>
+
+</dl><p>There are several ways to do this.
+You can use the in-line expansion:
+<dl><dd>diff file{.old,}<br>
+
+</dl><p>You can also use the
+"!#" value, combined with a way to get one word from the event, with a
+variable modifier:
+<dl><dd>diff file.old !#:$:r<br>
+
+</dl><p>Of course that example is a bad one for several reasons.
+The abbreviation is
+longer than typing
+"file." Also - it doesn't work. I tried it, got a segmentation fault, the
+shell exited, and my window disappeared. It's so much fun researching
+these little-used features.  Using
+"!#:1:r" worked, however. Go figure.
+<p><h1><a name="uh-89" href="Csh.html#toc-uh-89">:p - Print modifier</a></h1><p>There are other modifiers.
+You can use 
+":p" as a 
+"print, but not execute" modifier.
+If you wanted to see the command that started with
+"abc" but did not want to execute it, you could type:
+<dl><dd>echo !abc<br>
+
+</dl><p>The
+":p" modifiers does this, with fewer characters. Just type
+<dl><dd>!abc:p<br>
+
+</dl><p>and the history value is printed, but not executed.
+This modifier isn't useful for the other cases.
+If you can find a use for variables, arguments or aliases, let me know.
+<p><h1><a name="uh-90" href="Csh.html#toc-uh-90">:s - Substitute modifier</a></h1><p>A useful modifier is
+":s," as it can be used to perform simple substitutions
+on all variables.
+If you wanted to change
+"old" to 
+"new" in a filename, use
+<dl><dd>#!/bin/csh -f<br>
+mv $1 $1:s/old/new/<br>
+
+</dl><p>An alias would be
+<dl><dd>alias old2new 'mv !:1 !:1:s/old/new/'<br>
+
+</dl><p>This substitution always changes the first string found.
+Any character can follow the
+"s" character; it is used as the delimiter.
+Note that 
+"!!:s^" is the same as 
+"^" when the later is used at the beginning of a line.
+<p>The string substituted is not a regular expression.
+The characters are ordinary. There is one special character, when used
+in the second pattern - 
+"&amp;." This matches the string in the first part.
+Suppose you typed
+<dl><dd>echo abc.{1,2}<br>
+
+</dl><p>(which prints abc.1 abc.2)
+and you wanted to change this to
+<dl><dd>echo {abc,def}.{1,2}<br>
+
+</dl><p>(which prints abc.1 abc.2 def.1 def.2),
+you can use the
+"&amp;" character like this:
+<dl><dd>^abc^{&amp;,def}<br>
+
+</dl><p>
+<p><h1><a name="uh-91" href="Csh.html#toc-uh-91">:&amp; - Repeat substitution</a></h1><p>Suppose you type the following command:
+<dl><dd>cc -o trial trial.c<br>
+
+</dl><p>and you want to change
+"trial" to
+"program." If you type
+<dl><dd>!!:s^trial^program^<br>
+
+</dl><p>or more simply
+<dl><dd>^trial^program<br>
+
+</dl><p>then the first change will be made.
+This will be the same as typing
+<dl><dd>cc -o program trial.c<br>
+
+</dl><p>This doesn't change the second occurrance.
+If you want to repeat it, then either type the same command a second
+time, or use the
+":&amp;" modifier, which says to repeat the last substitution.
+If you add a
+"g" before the
+"&amp;" then the substitution is repeated on each word.
+Instead of typing
+<dl><dd>program abc.1 abc.2 abc.3 abc.4<br>
+program def.1 def.2 def.3 def.4<br>
+
+</dl><p>You could type
+<dl><dd>program abc.1 abc.2 abc.3 abc.4<br>
+# Now change 'abc' to 'def', but don't execute it<br>
+^abc^def^:p<br>
+# Now repeat it for each argument<br>
+!!:g&amp;<br>
+
+</dl><p>The last step will echo
+"program def.1 def.2 def.3 def.4" and then execute it.
+This only changes the first occurrence in each word.
+Suppose the following lines were executed:
+<dl><dd>echo a aa aaa aaaa<br>
+^a^A^:p<br>
+!!:g&amp;<br>
+
+</dl><p>This last line is equivalent to executing
+<dl><dd>echo A Aa Aaa Aaaa<br>
+
+</dl><p>The tcsh variation has a
+"a" modifier in addition to the
+"g" modifier. If present, then the change is made several times in each word.
+If your shell has this, you could change all lower case 
+"a's" to upper case
+"A's." 
+<p><h1><a name="uh-92" href="Csh.html#toc-uh-92">:q - Quote modifier</a></h1><p>The C shell and Bourne shell behave differently when
+a filename pattern is used, and nothing matches.
+Suppose you have a shell script, named
+"test_me," that says
+<dl><dd># The test_me script, either sh or csh<br>
+echo $1<br>
+
+</dl><p>and you call it using:
+<dl><dd>test_me ?<br>
+
+</dl><p>The Bourne shell will echo
+"?" which the C shell will report
+"echo: No match." You can disable this error by setting the 
+<b>nonomatch</b> variable:
+<dl><dd>#!/bin/csh -f<br>
+set nonomatch<br>
+echo $1<br>
+
+</dl><p>The other way to do this is to use the
+":q" modifier, which quotes the variable:
+<dl><dd>#!/bin/csh -f<br>
+echo $1:q<br>
+
+</dl><p>
+<p><h1><a name="uh-93" href="Csh.html#toc-uh-93">:x - Quotes with spaces</a></h1><p>Suppose you had a script that was called with the following argument:
+<dl><dd>test_1 'This is a question?'<br>
+
+</dl><p>This script has one argument. If you wanted to pass it to a second
+script,
+and wanted to retain the meta-characters like
+"?" and
+"*," simply use the
+":q" modifier described above:
+<dl><dd>#!/bin/csh -f<br>
+# This is the test_1 script<br>
+test_2 $1:q<br>
+# or use<br>
+set nonomatch<br>
+test_2 "$1"<br>
+
+</dl><p>The second script will get the identical argument the first one has.
+But what would you do if you wanted to separate the words into
+arguments, but leave the question mark alone?
+You could use the 
+<b>nonomatch</b> variable:
+<dl><dd>#!/bin/csh -f<br>
+# This is the test_1 script<br>
+set nonomatch<br>
+test_2 $1<br>
+
+</dl><p>Another choice is to use the 
+":x" modifier, which is like the
+":q" modifier, but separates words when whitespace is found:
+<dl><dd>#!/bin/csh -f<br>
+test_2 $1:x<br>
+
+</dl><p>
+<p><h1><a name="uh-94" href="Csh.html#toc-uh-94">:u and :l  - Upper and Lower Case</a></h1><p>The tcsh variable supports two additional modifiers.
+":u" makes the first lowercase letter uppercase, and
+":l" makes the first uppercase letter lowercase.
+<p><h1><a name="uh-95" href="Csh.html#toc-uh-95">The End of History?</a></h1><p>There are a few more points to mention. You can have multiple
+variable modifiers on a single variable.
+In some cases, braces are needed to specify the variable part.
+In complex cases, the tcsh variant of the C shell behaves differently.
+<p>Well, that is everything I know about the history feature of the C
+shell. It is confusing, but I tried to come up with examples of all of
+the main features. I hope you found this interesting. 
+<p><h1><a name="uh-96" href="Csh.html#toc-uh-96">C shell Aliases</a></h1><p>I'm lazy.
+<p>If there is something that I do on the computer a lot, I look for ways
+to make my life easier. If there is something that takes ten seconds to
+type, I'll do whatever it takes to save nine seconds of those ten, even if it
+takes me days to accomplish this. Weeks, even. Months. Years. No. Not
+quite. I'm not
+<b>compulsive</b>, you know. Don't be silly.
+<p>C shell users have a very important tool to save those extraneous
+seconds: aliases. There are several alternative techniques to save
+keystrokes. In the last two columns I discussed the history function in
+detail. You can also create shell scripts. However, shell scripts
+run in a new shell process. You cannot use them to change your current
+shell process. Most of you have tried this, by creating a script that
+says something like:
+<dl><dd>#!/bin/csh -f<br>
+cd newdirectory<br>
+setenv VAR `pwd`<br>
+
+</dl><p>If you execute this script below, will the directory be changed?
+<dl><dd>myscript;pwd;echo $VAR<br>
+
+</dl><p>The answer is no. The current shell executes a new shell, which
+changes its directory. However, this shell, being a child, does not
+affect the parent shell.
+Another technique is needed.
+<p>The third method is to use variables as commands. Many people forget
+about this particular approach.  The following commands will execute
+the contents of the C shell script in the current shell, changing the
+current directory:
+<dl><dd>set DO = "source ~/bin/myscript"<br>
+$DO<br>
+
+</dl><p>The fourth way is to use aliases, which is the subject of this month's
+tutorial.
+<dl><dd>alias DO "source ~/bin/myscript"<br>
+DO<br>
+
+</dl><p>
+<p><h1><a name="uh-97" href="Csh.html#toc-uh-97">Advantages and disadvantages of C shell aliases</a></h1><p>There are several advantages to aliases.
+<p><DL><dt>&#183;<dd>You can save keystrokes.
+<dt>&#183;<dd>Simple aliases are easy to understand.
+<dt>&#183;<dd>Changes affect the current shell.
+<dt>&#183;<dd>Meta-characters can be passed without quoting.
+<p>But there are several disadvantages:
+<dt>&#183;<dd>Complex aliases have a confusing syntax.
+<dt>&#183;<dd>Certain characters must be quoted to pass them into an alias.
+This makes the syntax 
+<b>more</b> complex.
+<dt>&#183;<dd>Aliases are defined on a single line.
+This makes it difficult to document complex aliases,
+and multiple-lined aliases must have the newline quoted.
+<dt>&#183;<dd>Because the C shell syntax requires certain words on the beginning of
+the line, it is difficult to include commands like
+<b>while</b>, or 
+<b>foreach</b> in the alias definition.
+Using these in aliases require additional quoting, adding more complexity.
+<p>Bourne shell functions were added long after C shells
+had the alias. They act like aliases, but do not suffer from the above
+problems. Instead, Bourne shell functions have the following
+advantages:
+<dt>&#183;<dd>Bourne shell functions have the same syntax as shell scripts.
+<dt>&#183;<dd>Bourne shell functions can be easily documented, especially those that
+are several lines long.
+<dt>&#183;<dd>Bourne shell functions don't require additional quoting, and the
+quoting is more consistant.
+<p>All-in-all, the concept of C shell aliases is flawed. They are fine
+for simple definitions, but if you need anything more complex,
+I suggest you use a shell script (in whatever shell you prefer)
+or define an alias to source the script, as I did above.
+<p></DL><P><h1><a name="uh-98" href="Csh.html#toc-uh-98">A file for aliases</a></h1><p>I have the following in my
+<i>.cshrc</i> file:
+<dl><dd>if ( -f ~/.aliases &amp;&amp; -o ~/.aliases ) source ~/.aliases<br>
+
+</dl><p>This sources my alias file if the file exists and I own it.
+This isn't high security, but I no longer wake up screaming in the
+middle of the night.
+You can make sure that you only read this file once, by using a
+special variable: 
+<dl><dd>if ( ! $?ALIAS_def ) then<br>
+	if ( -f ~/.aliases &amp;&amp; -o ~/.aliases ) source ~/.aliases<br>
+endif<br>
+
+</dl><p>Inside the file
+<i>.aliases</i> you need to add the line:
+<dl><dd>set ALIAS_def<br>
+
+</dl><p>Some people include the following aliases:
+<dl><dd>alias rm rm -i<br>
+alias mv mv -i<br>
+alias cp cp -i<br>
+
+</dl><p>This is a good idea. But remember that if you change to
+another user ID, (like the superuser), these aliases may not be
+there. So don't assume they always exist.
+<p>Aliases can also abbreviate commands:
+<dl><dd>alias a alias<br>
+# create aliases for "more" and "emacs"<br>
+a m more<br>
+a e emacs<br>
+
+</dl><p>There are variations of the
+<i>ls</i> command, that I've seen many people define as aliases:
+<dl><dd>alias lf ls -F<br>
+alias la ls -a<br>
+alias li ls -i<br>
+alias ll ls -l<br>
+# yada yada...<br>
+
+</dl><p>These alias, composed of a single command and options,
+allow arguments:
+<dl><dd>lf A*<br>
+ll *.c<br>
+
+</dl><p>
+<p><h1><a name="uh-99" href="Csh.html#toc-uh-99">Disabling aliases</a></h1><p>There are two ways to disable an alias.
+The first is to remove the definition:
+<dl><dd>unalias rm mv cp<br>
+
+</dl><p>If you want to ignore an alias once, then quote it. That is, make part
+of the command quoted. This by-passes the alias expansion. Examples:
+<dl><dd>rm file*<br>
+"mv" file1 file2<br>
+""cp new old<br>
+
+</dl><p>Aliases can refer to other aliases:
+<dl><dd>alias ll ls -l<br>
+alias llF ll -F<br>
+
+</dl><p>The second alias uses the first alias. Be careful of alias loops:
+<dl><dd>alias AA BB<br>
+alias BB AA<br>
+
+</dl><p>If you execute either command, the C shell will report
+"Alias loop." 
+<p><h1><a name="uh-100" href="Csh.html#toc-uh-100">Alias with pipes</a></h1><p>Aliases can be several commands, piped together:
+<dl><dd># do an ls -l, but only list directories<br>
+alias ldir 	'ls -l|grep "^d"'<br>
+
+</dl><p>I often use the aliases below. They sort
+various files, based on size, date, or accessed date:
+<br><br># sort by date:<br>
+alias newest 'ls -lt | head -30'<br>
+alias oldest 'ls -ltr | head -30'<br>
+# sort by size:<br>
+alias biggest 'ls -ls|sort -nr | head -30'<br>
+alias smallest 'ls -ls|sort -n | head -30'<br>
+# sort by time last used<br>
+alias popular 'ls -lut | head -30'<br>
+alias unpopular 'ls -lutr | head -30'<br>
+# Sort by link time<br>
+alias lsst 'ls -lct | head -30'<br>
+alias lsstr 'ls -lctr | head -30'<br>
+
+<br>Click here to get file: <a href="Files/Aliases4.csh">Aliases4.csh</a><br>
+These last few aliases, however, do not take arguments in the proper
+place. Typing
+<dl><dd>biggest [A-Z]*<br>
+
+</dl><p>is the same as
+<dl><dd>ls -lut | head -30 [A-Z]*<br>
+
+</dl><p>This isn't what a user might expect.
+<p><h1><a name="uh-101" href="Csh.html#toc-uh-101">Arguments to aliases</a></h1><p>It is possible to pass arguments to aliases.
+The syntax for aliases is based on the same crufty syntax for the history
+mechanism. The string
+"!*" matches all arguments. The exclamation mark must be quoted by a
+backslash:
+<dl><dd># sort by date:<br>
+alias newest 'ls -lt !* | head -30'<br>
+alias oldest 'ls -ltr !* | head -30'<br>
+
+</dl><p>Some aliases will only work with a single argument. That is, if you
+give it two arguments, the program will complain with an error
+message.
+Let's assume you want an alias to recursively search for a file.
+That is, the alias will search from the current directory, and go
+inside any subdirectories. The only argument is a pattern that
+describes the filename:
+<dl><dd>% findfile test*<br>
+-rw-r--r--   1 barnett  staff    22027 Nov  9 23:32 ./test.pl<br>
+-rw-rw-r--   1 barnett  staff    18520 Aug 26 12:13 ./Old/test.out<br>
+-rwxrwxr-x   1 barnett  staff    18557 Sep 12 09:43 ./Tmp/test.sort<br>
+
+</dl><p>Notice the asterisk is
+<b>not</b> quoted.
+If this was a shell script, you would have to quote the
+meta-character like this:
+<dl><dd>findfile test*<br>
+or<br>
+findfile 'test*'<br>
+
+</dl><p>The C shell alias doesn't need to have meta-characters quoted, 
+because the alias
+substitution happens 
+<b>before</b> the meta-character for filenames are expanded.
+<p>You can reuse a single argument. Here is an alias I use when I want to
+work on a copy of a file, and leave the original alone, keeping the
+date the same:
+<dl><dd>alias orig "mv !:1 !:1.orig;cp !:1.orig !:1"<br>
+
+</dl><p>typing 
+"orig file.c" does the following:
+<dl><dd>mv file.c file.c.orig<br>
+cp file.c.orig file.c<br>
+
+</dl><p>I use this alias, because it keeps the original version of the file
+unchanged. If I ever examine the dates of the new and old file, the
+original file has the original date. If I just executed
+"cp file.c file.c.orig" and then edited 
+"file.c" the dates of the two files would be close to identical.
+<p>Compiling C programs can be complex, especially if you do not have a 
+<i>makefile</i> to go with it.
+Here are some that can be used to compile C programs:
+<dl><dd>alias ccc  'cc -o !:1:r !*'<br>
+alias ccg  'cc -g -o !:1:r !*'<br>
+alias cco  'cc -fast -o !:1:r !*'<br>
+alias ccx  'cc -o !:1:r !* -L${OPENWINHOME}/lib -lX11<br>
+
+</dl><p>Use them as following
+<dl><dd>ccg main.c part1.c part2.c<br>
+
+</dl><p>This compiles programs without needed a
+<i>makefile</i>. Here is one that is useful to kill a process:
+<dl><dd>alias slay 'set j=`/usr/ucb/ps -ax| grep !*|head -1`; <br>
+	kill -9 `echo $j[1]`'<br>
+
+</dl><p>Notice how it uses a C shell array to extract the first word on the
+line (i.e. the PID or the Process Identification Number).
+<p>You can pick and choose the arguments you want.
+If you wanted an alias to move to a directory, with the directory as
+the first argument, use
+<dl><dd># as in<br>
+#    moveto directory *.c<br>
+alias moveto 'mv !:2* !:1'<br>
+
+</dl><p>Some examples of arguments inside an alias follow:
+<pre>
++----------------------------------+
+	    |	     Aliases arguments	       |
+	    +----------------------------------+
+	    |Variable	meaning		       |
+	    +----------------------------------+
+	    |!:1	Argument 1	       |
+	    |!:2	Argument 2	       |
+	    |!*		Arguments 1 through n  |
+	    |!:1-$	Arguments 1 through n  |
+	    |!:1*	Arguments 1 through n  |
+	    |!$		Nth argument	       |
+	    |!:-	Argument 1 through n-1 |
+	    |!:2-	Argument 2 through n-1 |
+	    |!:2-$	Argument 2 through n   |
+	    |!:2*	Argument 2 through n   |
+	    |!:2-4	Arguments 2, 3 and 4   |
+	    +----------------------------------+</pre>
+
+<p><h1><a name="uh-102" href="Csh.html#toc-uh-102">Redefining commands</a></h1><p>You can redefine any command with an alias:
+<dl><dd>alias cat mycat<br>
+alias /bin/cat mycat<br>
+alias /usr/bin/cat mycat<br>
+
+</dl><p>You can also 
+"trap" commands, and execute a special command:
+<dl><dd>alias command '/source ~/.command; /bin/command'<br>
+
+</dl><p>
+<p><h1><a name="uh-103" href="Csh.html#toc-uh-103">Multiple-line aliases</a></h1><p>You can create an alias that spans over several lines.
+Here is one that compiles a C program. If you tell it to compile a
+program that does not end with a 
+".c," an error occurs. That is, if you type:
+<dl><dd>C file1.f<br>
+
+</dl><p>The message is this:
+<dl><dd>Error: this is for C programs only<br>
+Extension should be .c on file file1.f, not .f<br>
+
+</dl><p>On the other hand, if you typed
+<dl><dd>C prog.c file1.c file2.c file3.c<br>
+
+</dl><p>and the file
+"prog" existed, the alias would do the following:
+<dl><dd>mv prog prog.old<br>
+cc -o prog proc.c file1.c file2.c<br>
+
+</dl><p>Here is the alias:
+<br><br>alias C 'eval "if (!:1 !~ *.c) then <br>
+	echo "Error: this is for C programs only" <br>
+	echo "Extension should be .c on file !:1, not .!:1:e" <br>
+    else <br>
+	if ( -e !:1:r ) mv !:1:r !:1:r.old<br>
+	cc -o !:1:r !:1:r.c !:2* <br>
+    endif<br>
+
+<br>Click here to get file: <a href="Files/AliasesC.csh">AliasesC.csh</a><br>
+Notice how the alias includes an
+"eval" call. This makes sure the meta-characters are expanded.
+They are quoted in the alias, so they are unchanged so the alias can
+be defined. The
+"eval" command reverses this action. Also note the liberal use of the
+":r" variable modifier.
+<p>I have tried to use aliases that use 
+<b>foreach</b> and
+<b>while</b> commands.
+To be honest, I find them impossible to write. I suggest you use a
+shell script if possible. There are, however, times when a shell script doesn't
+work well.
+Suppose you want to source several files.
+You could type
+<dl><dd>foreach i ( *.alias )<br>
+	source $i<br>
+end<br>
+
+</dl><p>This, however, could 
+<b>not</b> be done with a shell script.
+You can try it, but your current shell would not know about the
+aliases, because a different shell is executing the commands.
+Below is an alias that will solve the problem, however.
+It has the advantages of an alias, without the
+disadvantages of trying to get the C shell to work on one line.
+The alias is
+<dl><dd>alias FOREACH 'set a = !:1;<br>
+	set b = (!:2*);<br>
+	source ~/source_alias/FOREACH.csh;'<br>
+<p><br>
+
+</dl><p>Really, this alias is in two parts.  This first part sets two
+variables, and sources a file, the second part.  I have created a
+special directory that contains these sourced aliases.  
+This allows me to source them in easily, and to keep them in one
+location.
+The file looks
+like this:
+<dl><dd>#!/bin/echo use source to execute this command<br>
+# variable a = filename metacharacter<br>
+# variable b = command to execute<br>
+foreach i ( $a )<br>
+	eval $b $a<br>
+end<br>
+
+</dl><p>To use this, type
+<dl><dd>FOREACH *.csh source<br>
+
+</dl><p>Note how the first line starts with a 
+"#!/bin/echo" command. This is to make sure that people source the file, and not
+execute it.
+<p>Now, for a special treat, (I'm proud of this next trick) I have a more
+powerful version. Suppose we wanted to take each file, and rename it
+with a 
+".old" extension. That is, suppose you type:
+<dl><dd>FOREACH *.csh mv # #.old<br>
+
+</dl><p>The character
+"#" is used as a special character, and it changes to match each argument
+in the list.
+This does the same as typing the following, but one line is used.
+<dl><dd>foreach i ( *.csh )<br>
+	mv $i $i.old<br>
+end<br>
+
+</dl><p><p>
+Since this is starting to get a bit complex, I combined the definition
+of the alias with the script itself. You source this file to define
+the alias. You also source the same file to execute the script. 
+Therefore both parts are in the same file:
+<br><br>#!/bin/echo use source to execute this command<br>
+# variable a = filename metacharacter<br>
+# variable b = command to execute<br>
+<br>
+# source this to define the alias<br>
+if ( ! $?FOREACH_def) then<br>
+	alias FOREACH 'set a = !:1; <br>
+		set b = (!:2*);<br>
+		source ~/source_alias/FOREACH.csh;'<br>
+	set FOREACH_def<br>
+else<br>
+    echo $b | grep '#' >/dev/null<br>
+    # remember status<br>
+    set r = $status<br>
+    foreach i ( $a )<br>
+	if ( $r == 0 ) then<br>
+	    # change '#' to $i<br>
+	    set B = `echo $b | sed 's/#/'$i'/g'`<br>
+	else<br>
+	    # Add a '$i' to the end, if it is missing<br>
+	    set B = `echo $b | sed 's/$/ '$i'/'`<br>
+	endif<br>
+	eval $B<br>
+    end<br>
+endif<br>
+
+<br>Click here to get file: <a href="Files/Foreach1.csh">Foreach1.csh</a><br>
+This script is upwardly compatable with the previous script.
+If you typed
+<dl><dd>FOREACH *.csh source #<br>
+
+</dl><p>this does the same as typing
+<dl><dd>FOREACH *.csh source<br>
+
+</dl><p>In other words, if you omit the 
+"#" it assumes there is one at the end.
+However, this script does not remove the extension. If I wanted a
+script
+that converted all files ending in .c to files ending in .old.c, I
+could not use the above script. Here is another one, slightly
+different, called
+"FOREACHr," that removes the extension from the arguments. I added a
+"r" on the end to remine me that it uses the 
+":r" variable modifier.
+To use it, type
+<dl><dd>FOREACHr *.c mv #.c #.old.c<br>
+
+</dl><p>The script is almost identical to the previous:
+<br><br>#!/bin/echo use source to execute this command<br>
+# variable a = filename metacharacter<br>
+# variable b = command to execute<br>
+<br>
+# source this to define the alias<br>
+if ( ! $?FOREACHr_def) then<br>
+	alias FOREACHr 'set a = !:1; <br>
+	set b = (!:2*); <br>
+	source ~/source_alias/FOREACHr.csh;'<br>
+	set FOREACHr_def<br>
+else<br>
+    echo $b | grep '#' >/dev/null<br>
+    # remember status<br>
+    set r = $status<br>
+    foreach i ( $a )<br>
+	# Here is the different part<br>
+	set j = $i:r<br>
+	if ( $r == 0 ) then<br>
+	    # change '#' to $j<br>
+	    set B = `echo $b | sed 's/#/'$j'/g'`<br>
+	else<br>
+	    set B = `echo $b | sed 's/$/ '$j'/'`<br>
+	endif<br>
+	eval $B<br>
+    end<br>
+endif<br>
+
+<br>Click here to get file: <a href="Files/Foreach2.csh">Foreach2.csh</a><br>
+I hope you enjoyed my examples. I tried to illustrate the important
+points, and give useful examples. Next month, I'll tackle directories
+and prompts.
+<p><h1><a name="uh-104" href="Csh.html#toc-uh-104">Directories and the C shell</a></h1><p>
+<p>This section talks about the 
+"cd" command.
+Wait! Come back. Sure, everyone knows this command.
+It's the first command UNIX users learn.
+Sounds like an excellent reason to discuss it.
+Ah, you question my sanity. It's okay. I'm used to it.
+It's a good topic, because it has subtle abilities and most people
+are ignorant of them.
+<p>Directories and paths are either absolute (starting with 
+"/)" or relative (starting with any other character).
+The directories
+"." and
+".." are special. The first specifies the current directory, and the second
+the parent of the current directory.
+The command
+<dl><dd>cd ./dir/../dir/../.<br>
+
+</dl><p>will not change the current directory.
+<p>If you get lost, or you simply want a quick way to go back to your
+home directory, the command
+<dl><dd>cd<br>
+
+</dl><p>with no arguments takes you to your login directory.
+<p>Normally, when you start up your window system, each new window starts
+up with the working directory being the same as the one you were in
+when you started up the windowing system.
+However, 
+"cd" with no arguments still takes you to your home directory.
+Alternately, you can change your home directory:
+<dl><dd>set home = /usr/project<br>
+
+</dl><p>then every time you type 
+"cd" or
+"cd ~" you will go to the projects directory instead of your normal home directory.
+The variable 
+"home" is special because it is automaticallt converted to the
+"HOME" directory, and exported.
+The character 
+"~" is an
+abbreviation of the variable 
+"$home." 
+<p>Your true home directory, or any user's home directory, which is
+determined by the entries in the 
+"/etc/passwd" file, can be 
+accessed by 
+<dl><dd>cd ~username<br>
+
+</dl><p>even if you change the variable 
+"home." 
+<p><h1><a name="uh-105" href="Csh.html#toc-uh-105">cdpath - favorite directories</a></h1><p>
+<p>You may occasionally type the 
+"cd" command and get the error 
+"no such file of directory." Perhaps you forgot which directory you were in, or forgot to add
+"~/" or
+"../" before the name.
+This can be fixed. If you have a set of favorite directory where you
+normally create new directories, you can specify this set, by setting
+the variable
+"cdpath." This variable accepts a wordlist. Example:
+<dl><dd>set cdpath = ( .. ~/Src /usr/projects ~ )<br>
+
+</dl><p>Now when you type
+<dl><dd>cd prog<br>
+
+</dl><p>the system will look for
+<dl><dd>./prog<br>
+../prog<br>
+~/Src/prog<br>
+/usr/projects/prog<br>
+~/prog<br>
+
+</dl><p>in that order. 
+<p><h1><a name="uh-106" href="Csh.html#toc-uh-106">Variables</a></h1><p>Another way to access favorite directories is to define variables with
+the names of the directories. Example:
+<dl><dd>set Src = "~/Src"<br>
+set p = "/usr/projects"<br>
+
+</dl><p>You can now use the commands
+<dl><dd>cd $Src<br>
+cd $Src/program<br>
+cp $P/data .<br>
+
+</dl><p>The command 
+"cd" will test for one more conditions
+before reporting an error. It will look for a variable with the same
+name as its argument.
+Therefore the two commands below are equivalent:
+<dl><dd>cd $P<br>
+cd P<br>
+
+</dl><p>
+<p>Remember that the C shell first looks for the directory in the current
+directory, then the list in
+"cdpath," and finally the variable.
+<p>This can be used by adding the following alias to your .cshrc file:
+<dl><dd>alias =  'set !:1=$cwd'<br>
+
+</dl><p>Then you can type
+<dl><dd>= A<br>
+
+</dl><p>This remembers the directory.
+Whenever you type
+<dl><dd>cd A<br>
+
+</dl><p>you go to that directory. You can also go to another directory, and 
+refer to the old directory:
+<dl><dd>= A<br>
+cd NewDirectory<br>
+cp $A/file .<br>
+
+</dl><p>
+<p>Remember that only 
+"cd" will test for a variable. So commands like
+<dl><dd>cp A/file .<br>
+
+</dl><p>won't work.
+<p>You can also use aliases. Executing the command
+<dl><dd>alias projects 'cd /usr/projects'<br>
+
+</dl><p>will define a shortcut to specify a change in a directory.
+<p><h1><a name="uh-107" href="Csh.html#toc-uh-107">Specifying the current directory</a></h1><p> There are two ways to find out what your current working directory is.
+The first is with the program 
+"pwd" - print working directory.
+The second is with the variable 
+"cwd," which can be examained by
+<dl><dd>echo $cwd<br>
+
+</dl><p>or by creating a new alias
+<dl><dd>alias cwd 'echo $cwd'<br>
+
+</dl><p>Examining the internal variable 
+"cwd" is faster than executing the
+stand-alone program 
+"pwd," but there is one subtle difference.
+If you access a symbolic link in your directory path, then 
+"pwd" will
+show the actual directory path, while 
+"cwd" will show the path you
+used to get to the directory. For instance, the command
+<dl><dd>cd /usr/tmp; pwd; echo $cwd<br>
+
+</dl><p>might output the following:
+<dl><dd>/var/tmp<br>
+/usr/tmp<br>
+
+</dl><p>The first is the actual directory, while the second is the directory
+you 
+<b>think</b> you are in.
+You can force directories to be displayed with the true path by the
+C-shell command
+<dl><dd>set hardpaths<br>
+
+</dl><p>
+<p>NOTE: what about cd /usr/tmp/..?
+<p>The C-shell also provides a convenient method of changing between a
+common set of directories. It keeps a 
+"directory stack" - which can be
+displayed with the command
+<dl><dd>dirs<br>
+
+</dl><p>There is an optional 
+"-l" argument which expands the 
+"~" abbreviations.
+<p>You can make use of this stack by using the command 
+"pushd" - push
+directory - instead of 
+"cd." They both change directories, but 
+"pushd" adds your old directory to the stack, and puts the new directory on
+the top of the same stack.
+<p>Here is an example (lines starting with 
+"%" are typed by the user)
+<dl><dd>% <b>dirs</b><br>
+~<br>
+% <b>pushd /usr; dirs; pwd</b><br>
+/usr ~<br>
+/usr<br>
+
+</dl><p>To return to the old directory, (i.e. the second director on the
+stack), use the command
+<dl><dd>popd<br>
+
+</dl><p>If you merely wish to exchange the first and second directory, the
+command 
+"pushd" with no arguments will do this. If you repeat this,
+you go back again. 
+"Pushd" is very convenient when you wish to go back
+and forth between two directories.
+<p>
+"Cd" only changes the top directory. If, therefore, you are in a
+projects directory, but are interrupted, you can 
+"pushd" to the new
+directory, and 
+"cd" to several other directories. When you are done,
+"popd" will return you to the directory before the interruption.
+<p>Both 
+"pushd" and 
+"popd" can have an argument consisting of the
+character 
+"+" followed by a number. 
+"popd" will discard the 
+"nth" entry in the stack, without changing the current directory. 
+"pushd" will change the current directory to the 
+"nth" entry, rotating the
+entire stack so that entry is now on top.
+<p>For instance, if you had the stack
+<dl><dd>/usr/spool/news/comp/sys /usr/spool/news/comp /usr/spool/news /usr/spool /usr <br>
+
+</dl><p>the command
+<dl><dd>pushd +2<br>
+
+</dl><p>will change the stack to
+<dl><dd>/usr/spool/news /usr/spool /usr /usr/spool/news/comp/sys /usr/spool/news/comp <br>
+
+</dl><p>bringing entry 2 to the top, entry 3 to be second from the top, etc.
+The top of the stack is entry 0.
+<p>Some people like to keep their current stack of directories in an
+array.
+This is simple:
+<dl><dd>alias pushd 'pushd !* &amp;&amp; set dirs = (`dirs`)'<br>
+alias popd 'popd !* &amp;&amp; set dirs = (`dirs`)'<br>
+
+</dl><p>This allows you to use
+"$dirs[2]" in command lines, and to search for files:
+<dl><dd>cp $dirs[2]/file $dirs[3]<br>
+foreach dir ( $dirs )<br>
+   if ( -f $ddir/DATA ) echo $dir/DATA found<br>
+end<br>
+
+</dl><p>You can clear the stack by typing
+<dl><dd>repeat 9 popd<br>
+
+</dl><p>Others like to create aliases:
+<dl><dd>alias +1 pushd +1<br>
+alias +2 pushd +2<br>
+alias +3 pushd +3<br>
+alias -1 popd +1<br>
+alias -2 popd +2<br>
+alias -3 popd +3<br>
+
+</dl><p>
+<p><h1><a name="uh-108" href="Csh.html#toc-uh-108">chdir versus cd</a></h1><p>
+<p>Be aware that 
+"cd" is built into the shell. The command 
+"chdir" is a
+synonym, convenient when creating aliases for 
+"cd." So executing cd
+in a shell script will not change your current shell's directory.  If
+you want to do some clever things, like changing your prompt to
+reflect your current directory, you have to use the alias feature. But
+when the alias is combined with the 
+"source" command in the C-shell, a
+lot of flexibility is available.
+But more on that later.
+<p>This alias will echo your current directory whenever you change it.
+<dl><dd>alias cd            'cd !*;echo $cwd'<br>
+
+</dl><p>However, you must be careful of alias loops.
+As a general rule, I use
+"chdir" instead of 
+"cd" in aliases, to prevent a potential loop. Therefore the above should
+be:
+<dl><dd>alias cd            'chdir !*;echo $cwd'<br>
+
+</dl><p>Suppose you want to execute a special command whenever you change
+directories. Or you want to change your aliases whenever you change
+directories. The following example will execute the commands in the
+file 
+".dir" whenever you change directories and it finds the file
+".dir" in the directory and you also own it.
+<dl><dd>alias cd 'chdir !*; if ( -f .dir &amp;&amp; -o .dir ) source .dir '<br>
+
+</dl><p>The test for ownership, 
+"-o," protects you from executing someone
+else's copy of 
+".dir." You could instead use two files, say called
+".in" and 
+".out" and execute one when you eeenter a directory, and another when you leave.
+Both choices are dangerous, because someone might have write access to
+one of your files, and trick you into executing a command.
+<p>These aliases allow you to move up and down directories, and the
+command 
+"." is easier to type, and faster, than 
+"pwd." 
+<dl><dd>alias .         'echo $cwd'<br>
+alias ..        'set dot=$cwd;cd ..'<br>
+alias ,         'cd $dot '<br>
+
+</dl><p>Some people simply use the alias
+<dl><dd>alias cwd echo $cwd<br>
+
+</dl><p>Many people like to have their prompt change to show the current
+directory. Others like to display the history number.
+All of these can be done.
+The character
+"!" has a special meaning when the 
+"prompt" variable contains it. It is expanded to be the current command number.
+You don't need to type the
+"history" command to learn the number of a previous command.
+Just type
+<dl><dd>set prompt="! % "<br>
+
+</dl><p>Or create an alias
+<dl><dd>alias SP 'set prompt="! % "'<br>
+SP<br>
+
+</dl><p>Others like to show the current directory in the prompt.
+This can be combined with the cd alias above:
+<dl><dd>alias cd 'chdir !*;SP'<br>
+alias SP 'set prompt="! $cwd % "'<br>
+
+</dl><p>Finally, here is a elaborate example that displays
+<dl><dd>command number<br>
+hostname<br>
+user<br>
+current directory<br>
+
+</dl><p>with each prompt with the format of "10 hostname {username} cwd &gt;"
+<dl><dd>alias cd 'chdir !*;SP'<br>
+alias SP 'set prompt="! `hostname` {$USER} $cwd &gt; "'<br>
+
+</dl><p>If you would rather have just the base directory (the last directory in the path)
+instead of the entire path,
+try:
+<dl><dd>alias SP 'set prompt="! `hostname` {$USER} `basename $cwd` &gt; "'<br>
+
+</dl><p>or
+<dl><dd>alias SP 'set prompt="! `hostname` {$USER} $cwd:t &gt; "'<br>
+
+</dl><p>
+<p>instead of the above line.
+<p>Some people even use multi-line prompts:
+<dl><dd>set hostname = `hostname`<br>
+alias SP 'set prompt="<br>
+${hostname}::${cwd}<br>
+! % "'<br>
+
+</dl><p><p>
+Next month, I will explain my system for integrating
+diretory management with the window system.
+I have used more elaborate aliases that execute programs which provide
+directory selection from the current stack using cursor keys.
+But that is beyond this tutorial. Instead, I would like to end with a
+popular set of aliases that changes the black bar on top of each
+SunView window to show the current hostname and directory stack.
+In addition, it adds the following commands:
+<pre>
++---------------------------------------+
+	  |Command   Function			  |
+	  | _					  |
+	  | +	     alias for "pushd"		  |
+	  | -	     alias for "popd"		  |
+	  | ~	     alias for "cd ~"		  |
+	  | .	     update top stripe, show jobs |
+	  | ..	     go up one directory	  |
+	  | ,	     go back down (used with ..)  |
+	  | --	     go to last directory	  |
+	  +---------------------------------------+</pre>
+This was documented in the SunOS Release 3.5 manual, but that version had 
+some errors. The characters 
+"^[" below must be changed to an escape character.
+<p>
+<br><br>#!/bin/sh <br>
+# Zappath: created by Bruce Barnett<br>
+# this script edits the output of the C shell "dirs"<br>
+# command and shortens the strings to a compact form<br>
+#<br>
+# Some example editing:<br>
+#<br>
+# 	remove the automount /tmp_mnt prefix<br>
+#	change /usr/export/home to /home<br>
+#	change /homedisk to /home<br>
+#	change $HOME into ~<br>
+# 	change /home/abc to abc<br>
+#	change /usr/etc to ./etc<br>
+#	change */*/ABC to ./ABC	<br>
+# one more thing:<br>
+# must change ~ to be -<br>
+sed '<br>
+s:/tmp_mnt::g<br>
+s:/usr/export/home:/home:g<br>
+s:/homedisk:/home:g<br>
+s:'${HOME}':~:g<br>
+s:/home/::g<br>
+s:/usr/:./:g<br>
+s:[^/ ]*/[^/ ]*/:./:g<br>
+s:~:-:g<br>
+'<br>
+
+<br>Click here to get file: <a href="Scripts/Zappath.sh">Zappath.sh</a><br>
+<br><br># C shell aliases to display hosts, directories, and directory stacks<br>
+# in the window title bar, icon string, and directory prompt<br>
+# created by Bruce Barnett <br>
+# Based on the SunOS 3.5 Release notes<br>
+# Usage:<br>
+#	if ( -f ~/.header && -f ~/bin/Zappath ) source ~/.header<br>
+#<br>
+# the SP alias sets the directory prompt<br>
+# the setbar alias changes the window title bar and icon string<br>
+# define them here as the default case<br>
+<br>
+	alias SP 'set prompt="$cwd:t% "'<br>
+	alias setbar 'echo !* >/dev/null'<br>
+<br>
+# If not a sun cmdtool or shelltool, or not an X terminal, exit.<br>
+if ( ! ( $term =~ sun* ) &&  ! ( $term =~ xterm )) goto getout<br>
+<br>
+# if using a raw console, don't do anything<br>
+if ( `tty` =~ /dev/console ) goto getout<br>
+<br>
+# set a few variables for later<br>
+# but only if the environment variable is not set<br>
+<br>
+if ( ! $?HOSTNAME ) then<br>
+	setenv  HOSTNAME `hostname`<br>
+endif<br>
+<br>
+# find the home machine<br>
+# is there a file that has a machine name in it?<br>
+if ( -f  ~/.display ) then<br>
+	set mymachine = `sed -e 's/:.*//' <~/.display`<br>
+else<br>
+	# obviously change this to match your<br>
+	# default system. Mine is "grymoire" - of course<br>
+	set mymachine = "grymoire"<br>
+# alternately, some people use "who am i"<br>
+endif<br>
+<br>
+set console = '&lt;&lt; CONSOLE &gt;&gt;'<br>
+<br>
+# figure how how to generate escape, bell, <br>
+# and echo commands without a a line terminator<br>
+# I may have done this before. If so, the variable E is set<br>
+<br>
+# have I executed this script before on this system?<br>
+if ( $?E ) then<br>
+#	echo "already set the echo variables">/dev/tty<br>
+else if ( -f ~/.echo.${HOSTNAME} ) then<br>
+	source ~/.echo.${HOSTNAME}<br>
+else if ( `echo -n |wc -l`  == 0 ) then<br>
+#	echo "built in echo is bsd" >/dev/tty<br>
+	# then berkeley style echo<br>
+	echo 'set ech = "echo -n"' >~/.echo.${HOSTNAME}<br>
+	echo "set E = `echo a | tr a ' 33'`" >> ~/.echo.${HOSTNAME}<br>
+	echo "set B = `echo a | tr a ' 07'`" >> ~/.echo.${HOSTNAME}<br>
+	echo 'set N = ""' >> ~/.echo.${HOSTNAME}<br>
+	source ~/.echo.${HOSTNAME}<br>
+else <br>
+#	echo "built in echo is sysV" >/dev/tty<br>
+	echo 'set ech = "echo"' >~/.echo.${HOSTNAME}<br>
+	echo 'set E = " 33"' >> ~/.echo.${HOSTNAME}<br>
+	echo 'set B = " 07"' >> ~/.echo.${HOSTNAME}<br>
+	echo 'set N = ""' >> ~/.echo.${HOSTNAME}<br>
+	source ~/.echo.${HOSTNAME}<br>
+endif	<br>
+<br>
+<br>
+# Are we using shelltool, cmdtool or xterm?<br>
+# duplicate these aliases here to avoid problems<br>
+if ( $term =~ sun* ) then<br>
+	# Sun Aliases<br>
+	alias Header '${ech}  "${E}]l!:1${E}${N}"'<br>
+	alias IHeader '${ech}  "${E}]L!:1${E}${N}"'<br>
+else if ( $term =~ xterm ) then<br>
+	alias Header '${ech}  "${E}]2;!:1${B}${N}"'<br>
+	alias IHeader '${ech}  "${E}]1;!:1${B}${N}"'<br>
+endif<br>
+<br>
+# There are three different combinations:<br>
+# 1) A window on a remote machine<br>
+# 2) A window on my machine<br>
+# 3) A console on my machine<br>
+<br>
+# test for each case:<br>
+<br>
+if (${HOSTNAME} != $mymachine ) then<br>
+	# it is a remote machine, therefore:<br>
+	# window title has machinename and dirs <br>
+	# icon has machine name only<br>
+	# prompt has machine name+directory<br>
+<br>
+       alias setbar 'Header "${HOSTNAME}: `dirs | ~/bin/Zappath`" ; IHeader ${HOSTNAME}'<br>
+<br>
+# use either of these two lines to suit your tastes<br>
+# the first one shows the command number and full directory path<br>
+# The second shows just the hostname and the tail of the directory name<br>
+<br>
+#	alias SP 'set prompt="[!] ${HOSTNAME}:$cwd % "'<br>
+	alias SP 'set prompt="${HOSTNAME}:$cwd:t% "'<br>
+<br>
+else if ( `tty`  == "/dev/console" ) then<br>
+	goto getout<br>
+else if ( `tty`  == "/dev/ttyp0" ) then<br>
+<br>
+# in this case an assumption is made that the first pty <br>
+# window to appear is the console window.<br>
+# It's not always true, but it usually works<br>
+<br>
+	# window title has &lt;&lt;CONSOLE&gt;&gt; and dirs <br>
+	# icon has "console" only<br>
+	# prompt has directory<br>
+<br>
+	alias setbar 'Header "${console} `dirs | ~/bin/Zappath`"'<br>
+<br>
+# both of these works - pick one that suits you<br>
+#	alias SP 'set prompt="[!] $cwd % "'<br>
+	alias SP 'set prompt="$cwd:t% "'<br>
+else<br>
+	# a plain window on my localhost<br>
+	# window title has dirs <br>
+	# icon has cwd only<br>
+	# prompt has directory<br>
+	# The next line must be one line, and not split onto two<br>
+	alias setbar 'Header "`dirs | ~/bin/Zappath `"; IHeader "`echo $cwd| ~/bin/Zappath`"'<br>
+#	alias SP 'set prompt="[!] $cwd % "'<br>
+	alias SP 'set prompt="$cwd:t% "'<br>
+endif<br>
+<br>
+# redo current window<br>
+alias . 'dirs|~/bin/Zappath;setbar;jobs'<br>
+<br>
+#  change cd to change prompt, window and icon title<br>
+alias cd 'chdir !*; SP;setbar'<br>
+alias pushd 'pushd !*; SP;setbar'<br>
+alias popd 'popd !*; SP;setbar'<br>
+<br>
+SP;setbar<br>
+getout:<br>
+# end<br>
+
+<br>Click here to get file: <a href="Files/Header.csh">Header.csh</a><br>
+<p>
+Other of my Unix shell tutorials can be found 
+<a href="http://www.grymoire.com/Unix">here.</a>
+Other shell tutorials can be found at
+<a href="http://www.shelldorado.com/links/index.html#tutorials">Heiner's SHELLdorado</a>
+and 
+<a href="http://cfajohnson.com/shell/">Chris F. A. Johnson's Unix Shell Page</a>
+
+<I>This document was translated by troff2html v0.21 on September 22, 2001.</I>
+<P>
+</div>
+</body>

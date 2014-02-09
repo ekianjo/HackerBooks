@@ -1,0 +1,699 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<title>
+Tar
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<META NAME="Description" CONTENT="tar Tutorial"  >
+<META NAME="Keywords" CONTENT="tar, tutorial, UNIX, shell scripts, regular expressions, tr, linux, regex" >
+<META name="Author" content="Bruce Barnett">
+<link href="myCSS.css" rel="stylesheet" type="text/css"> 
+</head>
+<body>
+<!-- INCLUDE Navigation -->
+<div id="navigation">
+<img src="grymoire.jpg" alt="grymoire" width="240" height="80">
+<h2>Grymoire<br> Navigation</h2>
+
+<ul>
+<li><a href = "index.html">Unix/Linux</a>
+<ul>
+<li><a href = "Quote.html">Quotes</a></li>
+<li><a href = "Sh.html">Bourne Shell</a></li>
+<li><a href = "Csh.html">C Shell</a></li>
+<li><a href = "Permissions.html">File Permissions</a></li>
+<li><a href = "Regular.html">Regular Expressions</a></li>
+<li><a href = "Grep.html">grep</a></li>
+<li><a href = "Awk.html">awk</a></li>
+<li><a href = "sed.html">sed</a></li>
+<li><a href = "Find.html">find</a></li>
+<li><a href = "Tar.html">tar</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/Security/index.html">Security</a>
+<ul>
+<li><a href = "http://www.grymoire.com/Security/IPv6.html">IPv6</a></li>
+<li><a href = "http://www.grymoire.com/Security/Wireless.html">Wireless</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/Spam/index.html">spam</a></li>
+<li><a href = "http://www.grymoire.com/Deception/index.html">Deception</a></li>
+<li><a href = "http://www.grymoire.com/Postscript/index.html">PostScript</a>
+<ul>
+<li><a href = "http://www.grymoire.com/Postscript/Halftones.html">Halftones</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/Privacy/index.html">Privacy</a>
+<ul>
+<li><a href = "http://www.grymoire.com/Privacy/BillOfRights.html">Bill of Rights</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/References.html">References</a>
+<ul>
+<li><a href = "CshTop10.txt">Top 10 reasons to avoid CSH</a></li>
+<li><a href = "SedChart.pdf">sed Chart (PDF)</a></li>
+<li><a href = "AwkRef.html">awk Reference (HTML)</a></li>
+</ul>
+<li><a href = "http://www.grymoire.com/magic.html">Magic                    </a></li>
+<li><a href = "http://www.grymoire.com/Search.html">Search</a></li>
+<li><a href = "http://www.grymoire.com/About.html">About</a></li>
+</ul>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Navigation -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:120px;height:600px"
+     data-ad-client="ca-pub-3246203470757260"
+     data-ad-slot="8751184583"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20908972-2']);
+  _gaq.push(['_setDomainName', 'grymoire.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</div>
+<div id="centerDoc">
+<h1>Tar</h1>
+<h2>Table of Contents</h2>
+
+<ul>
+<li><a href="Tar.html#uh-0" name="toc-uh-0">Why bother with Backups?</a>
+<li><a href="Tar.html#uh-1" name="toc-uh-1">Making a backup using tar</a>
+<li><a href="Tar.html#uh-2" name="toc-uh-2">Syntax of the tar command</a>
+<li><a href="Tar.html#uh-3" name="toc-uh-3">What is the name of the tape drive?</a>
+<li><a href="Tar.html#uh-4" name="toc-uh-4">More on tape names</a>
+<li><a href="Tar.html#uh-5" name="toc-uh-5">Using tar without a tape</a>
+<li><a href="Tar.html#uh-6" name="toc-uh-6">Using tar to create disk files</a>
+<li><a href="Tar.html#uh-7" name="toc-uh-7">Excluding/Including files when using tar</a>
+<li><a href="Tar.html#uh-8" name="toc-uh-8">Including other directories</a>
+<li><a href="Tar.html#uh-9" name="toc-uh-9">Restoring files with tar</a>
+<li><a href="Tar.html#uh-10" name="toc-uh-10">Restoring a few files</a>
+<li><a href="Tar.html#uh-11" name="toc-uh-11">Remote Restoring</a>
+</ul>
+
+<p>Copyright 1991 Bruce Barnett and General Electric Company
+<p>Copyright 2013 Bruce Barnett
+<p>All rights reserved
+<p>You are allowed to print copies of this tutorial for your personal
+use, and link to this page, but you are not allowed to make electronic
+copies, or redistribute this tutorial in any form without permission.
+<p> Original version written in 1991 and published in the Sun Observer
+<blockquote>How to use your system's tape drive (diskette drive?) to store files.
+How to do your own backups, and why they are important.  Other uses
+tar.
+</blockquote>
+<p><h1><a name="uh-0" href="Tar.html#toc-uh-0">Why bother with Backups?</a></h1>As someone who has been an end user and a system manager, 
+I strongly believe that every user should understand the importance of
+security. Not only in preventing others from accessing and modifying your
+data, but also in storing and recovering data you may have deleted
+on purpose or through accident.
+<dl><dd><br>
+
+<b>If you have data that is important to you, you should<br>
+have a known backup.<br>
+
+</b></dl>
+<p>Accidents and oversights happen. 
+Tapes can be damaged, lost, or misslabeled.
+Assume your system administrator is top notch.
+The best administrator can recover your lost data 99%
+of the time.
+There is still a small chance that the files you need
+might not be recovered. 
+Can you afford to duplicate months of effort 1 per cent of the time?
+No.
+<p>An experienced programmer learns to be pessimistic. 
+Typically, this important fact is learned the hard way.
+Perhaps a few hours is lost. Perhaps days. Sometimes months
+are lost.
+<p>Here are some common situations:
+<p><OL><li>A user works on a program all day. At the end of the day, the program
+is deleted by accident. The system manager cannot recover the file.
+A day's work has been lost.
+<li>A programmer tries to clean up a project directory.
+Instead of typing
+"rm *.o" the programmer types
+"rm * .o" and the entire directory is lost.
+<li>A user deletes a file by accident.
+After a few days, the user asks the system administrator to recover
+the file. The incremental backup system has re-used the
+only tape the missing file was on.
+<li>A large project is archived on a magnetic tape and deleted
+from the disk. A year later, some of the information is needed.
+The tape has a bad block at the beginning. The system manager
+must learn how to recover data from a bad tape. The attempt is often
+unsuccessful. The information is lost forever, and must be
+recreated, at the cost of months of effort.
+<li>Someone breaks into a computer and accesses confidential information.
+<li>A fire breaks out in the computer room. The disks and
+<b>all</b> of the backup tapes are lost. 
+</OL><p>Gulp! 
+I scared myself.
+Excuse me for a few minutes while I load a tape....
+<p>Ah! I feel better now.
+As I was saying, being pessimistic has it's
+advantages.
+<p><h1><a name="uh-1" href="Tar.html#toc-uh-1">Making a backup using tar</a></h1>Making a backup is easy. Get a blank tape and learn how to load
+it onto the tape drive. Also learn how to write-protect the tape.
+Put a label on the tape.
+Then do the following:
+<dl><dd>cd<br>
+tar c .<br>
+
+</dl>
+<p>The
+"cd" command moves you to your home directory.
+You could back up any directory the same way.
+<p>The
+<b>tar</b> command, which is an abbreviation of <b>t</b>ape <b>ar</b>chive,
+copies the current directory, specified by the
+".," to the default tape drive. 
+The 
+"c" argument specifies the
+"create" mode of 
+<b>tar</b>. 
+<p>You might get an error. 
+Something about device
+"rmt8" off line. 
+Don't worry. I exaggerated slightly when
+I said 
+<b>tar</b> was easy to use.
+The tape device
+<b>tar</b> uses by default is
+"/dev/rmt8." There are several types of tape units, and not all
+can be referred to using that name.
+Some system administrators will link that name to the actual
+device, which makes 
+<b>tar</b> easier to use. But if that doesn't work, you need to specify
+additional arguments to 
+<b>tar</b>. 
+<p><h1><a name="uh-2" href="Tar.html#toc-uh-2">Syntax of the tar command</a></h1>
+<p>Most Unix commands follow a certain style when arguments are specified.
+<b>Tar</b> does not follow this convention, so you must be careful to
+use 
+<b>tar</b> properly.
+If the standard was followed, then the following might be an example
+of dumping the current directory to the 1/2 inch tape cartridge,
+verbose mode, block size of 20:
+<dl><dd>tapedump -c -v -b 20 -f /dev/rmt8 .<br>
+
+</dl>
+<p>Instead, all the flags are in the first argument, and the 
+parameters to those flags follow the first argument, in order of the
+flags specified:
+<dl><dd>tar cvbf 20 /dev/rmt8 .<br>
+
+</dl>
+<p>The same command can be specified in a different way by changing 
+the order of the letters in the first argument:
+<dl><dd>tar cvfb /dev/rmt8 20 .<br>
+
+</dl>
+<p>The only key letter that has a fixed location is the first
+one, which must specify if you are reading or writing an archive.
+The most common key letters, and the functions they perform are;
+<table border="1">
+  <tr>
+    <th>Key Letter</th>
+    <th align=center>Function</th>
+  </tr>
+  <tr>
+    <td>c</td>
+    <td>Create an archive</td>
+  </tr>
+  <tr>
+    <td>x</td>
+    <td>eXtract an archive</td>
+  </tr>
+  <tr>
+    <td>t</td>
+    <td>Table of contents</td>
+  </tr>
+</table>
+
+<p>Some versions of tar require a hyphen before the letter.
+It is optional on SunOS.
+<p><h1><a name="uh-3" href="Tar.html#toc-uh-3">What is the name of the tape drive?</a></h1>
+<p>Part of the difficulty in using 
+<b>tar</b> is figuring out which filename to use for which device.
+If you have a 1/2" tape drive, try
+<dl><dd>tar cf /dev/rmt8 .<br>
+
+</dl>
+<p>If you has a 1/4" tape cartridge, try
+<dl><dd>tar cf /dev/rst8 .<br>
+
+</dl>
+<p>If this doesn't work, then try changing the 
+"8" to a
+"0." You can also list the devices in the 
+<b>/dev</b> directory and look for one that has the most recent usage:
+<dl><dd>ls -lut /dev/r{m,s}t*<br>
+
+</dl>
+<p>Some unix systems use different standards for naming magnetic tapes.
+There might be a
+"h" at the end of a name for high density.
+When in doubt, examine the major and minor numbers (using the
+<b>ls -l</b> command, and read the appropriate manual page, which
+can be found by searching through the possible entries using
+<dl><dd>man -k mt<br>
+
+</dl>
+<p>and
+<dl><dd>man -k tape<br>
+
+</dl>
+<p><h1><a name="uh-4" href="Tar.html#toc-uh-4">More on tape names</a></h1>The names of tape devices always start with a 
+"r" by convention, which suggests this is a 
+"raw" device that does not support a file system.
+If the first two letters are
+"nr" then this suggests a
+"no-rewind" operation.
+Normally the tape is automatically rewound when you are done.
+If you repeat the 
+<b>tar</b> command, it will overwrite the first dump.
+As this can waste large amounts of tape, use the
+"nr" name of the tape to put several dumps on one tape.
+As an example, if you wanted to dump three separate directories
+to a 1/4 inch tape cartridge, you can type
+<dl><dd>cd dir1<br>
+tar cf /dev/nrst8 .<br>
+cd dir2<br>
+tar cf /dev/nrst8 .<br>
+cd dir3<br>
+tar cf /dev/rst8 .<br>
+
+</dl>
+<p>Note that the third dump does not use the
+"no-rewind" name of the device, so that it will rewind when done.
+<p>To examine a tape without extracting any files, 
+get a table of contents and use the key letter
+"t" or
+"tv" instead of the
+"c." The
+"v" flag gives a more verbose listing.
+<p>If you want to examine the third dump file, you can either 
+use
+<b>tar</b> twice with the 
+"no-rewind " names, or you can skip forward one or more dump files
+my using the
+<b>mt</b> (magnetic tape)
+command to skip forward 2:
+<dl><dd>mt -f /dev/nrst8 fsf 2<br>
+
+</dl>
+<p>SunOS 4.1 has added a new convenience to the
+<b>tar</b> command. If you defined an environment variable
+<b>TAPE</b>: 
+<dl><dd>setenv TAPE /dev/rst8<br>
+
+</dl>then you don't have to specify it for the
+<b>mt</b> or
+<b>tar</b> commands.
+<p><h1><a name="uh-5" href="Tar.html#toc-uh-5">Using tar without a tape</a></h1>
+<p>Your personal workstation probably doesn't have
+a tape drive connected.
+This makes creating
+<b>tar</b> backup files slightly more complicated.
+If you have an account on a machine with a tape drive,
+and the directory is NFS mounted, you can just 
+<b>rlogin</b> to the other machine and use 
+<b>tar</b> to backup your directory.
+<p>If the directory is not NFS mounted, or it is mounted 
+but you have permission problems accessing your own files,
+you can use 
+<b>tar</b>, 
+<b>rsh</b> and
+<b>dd</b> to solve this dilemma.
+The syntax is confusing, but if you forget, you can use
+<dl><dd>man tar<br>
+
+</dl>to refresh your memory.
+The command to dump the current directory to
+a tape in a remote machine called 
+<i>zephyrus</i>, the command is:
+<dl><dd>tar cvfb - 20 . | rsh zephyrus dd of=/dev/rmt0 obs=20b<br>
+
+</dl>
+<p>Here, the output file of
+<b>tar</b> is
+<b>-</b>, which 
+<b>tar</b> interprets as standard input if 
+<b>tar</b> is reading a tape, or standard output
+if 
+<b>tar</b> is creating a tape.
+<p>the
+<b>dd</b> command does a data copy from standard input to the device
+<b>/dev/rmt0</b>. 
+<p>This example assumes you can 
+use
+<b>rsh</b> without requiring a password.
+You can add your current machine's name to the remote
+<i>.rhost</i> file if you get a password prompt
+when you use
+<b>rlogin</b> to access this machine.
+<p>If you do not have an account, you might be able to let a friend 
+let you use their account temporarily.
+<dl><dd><br>
+
+<b>Don't Do This!</b> <br>
+
+</dl>
+<p>I have to warn you about this because there is no secure way to do this.
+Whenever you allow someone else access to your account,
+they can create a program that lets them back into your account
+without your knowledge.
+This also holds true whenever someone lets you access their account.
+That is, if someone allows you to type in a command from their
+workstation or terminal, you may not be executing the programs you think you are.
+One of these programs might capture your password!
+<dl><dd><br>
+
+<b>YOU HAVE BEEN WARNED!</b> <br>
+
+</dl>
+<p>In an effort to be complete, 
+I will describe how to use a remote tape when your account has a different name
+on the remote machine. 
+Let's assume your account on the remote machine is
+"sam." You could add a line to his
+<i>.rhosts</i> file with the following format:
+<dl><dd><br>
+
+<i>machinename username</i> <br>
+
+</dl>
+<p>where these match your machine and user name.
+You could then use the command:
+<dl><dd>tar cvfb - 20 . | rsh zephyrus -l sam dd of=/dev/rmt0 obs=20b<br>
+
+</dl>
+<p>to access the remote account.
+<p>The alert reader will realize that this is the same procedure used to allow
+someone else to have access to a remote account.
+I must stress that allowing someone else access to your account
+temporarily gives them the chance to access your account forever.
+I know of no simple, yet secure way to solve this problem.
+(I would like electronic mail if you think you know a solution that doesn't
+require writing
+a special purpose program.)
+<p><h1><a name="uh-6" href="Tar.html#toc-uh-6">Using tar to create disk files</a></h1>
+<p>Because of Unix's device independence, you can send a
+<b>tar</b> archive to a pipe or to a Unix file.
+Both commands create a file called
+<i>project.tar</i>: 
+<dl><dd>tar cf project.tar project<br>
+tar cf - project &gt;project.tar<br>
+
+</dl>
+<p>This is a convenient way to create an archive of a directory and move it
+to a different disk.
+This file does take up a lot of room.
+You can recover some of this room by running 
+<b>compress</b> on the 
+<b>tar</b> file:
+<dl><dd>compress project.tar<br>
+
+</dl>
+<p>This creates a file called
+<i>project.tar.Z</i> and deletes
+<i>project.tar</i>. This is a convenient way to save disk space,
+because a compressed tar file or a directory is typically smaller that the 
+original directory.
+Once the tar file is created, the original directory can be deleted.
+The directory can be recreated with these steps:
+<dl><dd>uncompress project.tar.Z<br>
+tar xf project.tar<br>
+
+</dl>
+<p>
+<b>Tar</b>, by default, restores the original modification times.
+The
+<b>m</b> option suppresses this.
+The times of the last modification is important because
+<b>make</b> uses this information to keep track of
+file dependencies.
+This makes
+<b>tar</b> a convenient program to copy directories, unlike
+<b>cp -r.</b> To use
+<b>tar</b> to copy a directory, this example from the manual pages can be used:
+<dl><dd>tar cf - . | (cd todir;tar xfBp -)<br>
+
+</dl>
+<p><h1><a name="uh-7" href="Tar.html#toc-uh-7">Excluding/Including files when using tar</a></h1>
+<p>
+<b>Tar</b> will archive binary and source files.
+To speed up the archiving and reduce the archive size,
+most project directories have a special command in the
+<b>make</b> file that deletes all files that can be recreated.
+This is typically
+<dl><dd>make clean<br>
+
+</dl>
+<p>that may just delete the executable file, object files and possibly a core dump:
+<dl><dd># contents of makefile<br>
+clean:<br>
+     /bin/rm -f *.o program core<br>
+
+</dl>
+<p>
+<b>Tar</b> has a special flag that helps you make snapshots of a project directory.
+If you specify the flag
+<b>F</b> then this tells 
+<b>tar</b> to not include the Source Code Control System (SCCS) directory.
+If you specify two
+<b>F</b> arguments, then this makes the restriction stronger, and files
+with the names
+<b>core</b>, 
+<b>a.out</b>, 
+<b>errs</b>, and any file ending with
+<b>.o</b> will not be written to the
+<b>tar</b> file.
+So, to create a backup of a project directory, the following
+command is used:
+<dl><dd>tar cvfFF project.tar project<br>
+
+</dl>
+<p>This is a convenient way to give someone all the current files
+needed to build an executable, without giving them every SCCS version
+of every file.
+<p>This is convenient, but it may include files you don't want.
+<b>Make</b> creates files starting with a
+<b>,</b> to keep track of dependencies.
+Various editors create backup files ending with
+<b>%</b> or
+<b>~</b>. I often keep the original copy of a program with the
+<b>.orig</b> extension, and old versions with a
+<b>.old</b> extension.
+There may be some binary files that you don't
+want to archive, but don't want to delete either.
+<p>The solution is to use the
+<b>X</b> flag to tar.
+This flag specifies that the matching argument to 
+<b>tar</b> is a filename that lists files to exclude from the archive.
+Here is an example:
+<dl><dd>find project -type f -print | <br>
+egrep  '/, | %$ | ~$ | .old$ | SCCS | /core$ | .o$ | .orig$' &gt;Exclude<br>
+tar cvfX project.tar Exclude project<br>
+
+</dl>
+<p>In this example,
+<b>find</b> lists all files in the directories, but does not
+print the directory names explicitly.
+If you have a directory name in an excluded list, 
+it will also exclude all the files inside the directory.
+<b>Egrep</b> is then used as a filter to exclude certain files from the archive.
+Here,
+<b>egrep</b> is given several regular expressions to match certain files.
+This expression seems complex but is simple once you understand
+a few special characters:
+<p>
+The slash is not a special character. 
+However, since no filename
+can contain a slash, it matches the beginning of a filename,
+as output by the 
+<b>find</b> command.
+The vertical bar separates each regular expression.
+The dollar sign is one of the two regular expression
+"anchors," and specifies the end of the line, or filename in this case.
+The other anchor, which specifies the beginning of the line, is
+"^." But because we are matching filenames output by
+<b>find</b>, the only filenames that can match
+"^" are those in the top directory.
+Normally the dot matches any character in a regular
+expression. Here, we want to match the actual
+character
+".," which is why the backslash is used to
+"quote" or
+"escape" the normal meaning.
+<p>A breakdown of the patterns and examples of the files
+that match these patterns are given below:
+<table border="1">
+  <tr>
+    <th>Pattern</th>
+    <th>Matches files</th>
+    <th>Used by</th>
+  </tr>
+<tr><td>/,</td><td>starting with comma</td><td>make dependency files</td></tr>
+<tr><td>%$</td><td>ending with %</td><td>Textedit backup files</td></tr>
+<tr><td>~$</td><td>ending with ~</td><td>emacs backup files</td></tr>
+<tr><td>.old$</td><td>ending with .old</td><td>old copies</td></tr>
+<tr><td>SCCS</td><td>in SCCS directory</td><td>Source Code Control System</td></tr>
+<tr><td>/core$</td><td>with name of "core"</td><td>core dump</td></tr>
+<tr><td>.o$</td><td>ending with .o</td><td>Object files</td></tr>
+<tr><td>.orig$</td><td>ending with .orig</td><td>programmer to show original version</td></tr>
+  </table>
+
+<p>Instead of specifying which files are to be excluded, you can specify which 
+files to archive using the
+<b>-I</b> option.
+As with the exclude flag, specifying directories tell
+<b>tar</b> to include (or exclude) entire directories.
+You should also note that the syntax of the
+<b>-I</b> option is different that the typical
+<b>tar</b> flag.
+This example dumps all C and
+<b>make</b> files;
+<dl><dd>find project -type f -print | <br>
+egrep  '.c | .h | akefile$'&gt;Include<br>
+tar cvf project.tar -I Include<br>
+
+</dl>
+<p>I suggest using
+<b>find</b> to create the include or exclude file.
+You can edit it afterwards, if you wish.
+Extra spaces at the end of any lines will cause that file
+to be ignored.
+<p>Another way to debug the
+<b>output</b> of the
+<b>find</b> command is to use
+<i>/dev/null</i> as the output file:
+<dl><dd> tar cvfX /dev/null Exclude project<br>
+
+</dl>
+<p><h1><a name="uh-8" href="Tar.html#toc-uh-8">Including other directories</a></h1>
+<p>There are times when you want to make an archive of several directories.
+You may want to archive a source directory and
+another directory like
+<i>/usr/local</i>. The natural. but wrong way to do this is to use the command:
+<dl><dd>tar cvf /dev/rmt8 project /usr/local<br>
+
+</dl>
+<b>When using tar, You must never specify a directory name starting with a 
+"/." 
+</b>This will cause problems when you restore a directory, as you will see later.
+The proper way to do this is to use the
+<b>-C</b> flag:
+<dl><dd>tar cvf /dev/rmt8 project -C /usr local<br>
+
+</dl>
+<p>This will archive
+<i>/usr/local/...</i> as
+<i>"local/"</i> 
+<p><h1><a name="uh-9" href="Tar.html#toc-uh-9">Restoring files with tar</a></h1>
+<p>There are several ways to specify a directory to archive.
+If the directory is under the current directory,
+I have already given the example:
+<dl><dd>tar c project<br>
+
+</dl>
+<p>A similar way to specify the same directory is
+<dl><dd>tar c ./project<br>
+
+</dl>
+<p>If you are currently in the directory you want archived, you
+can type:
+<dl><dd>tar c .<br>
+
+</dl>
+<p>Another way to archive the current directory is
+to type
+<dl><dd>tar c *<br>
+
+</dl>
+<p>Here, the shell expands the
+<b>*</b> character to the files in the current directory.
+However, it does not match files starting with a
+<b>.</b>, which is why the previous technique is preferred.
+<p>This causes a problem when restoring a directory from a
+<b>tar</b> archive.
+You may not know if an archive was created using
+<b>.</b> or the directory name.
+<p>I always check the names of the files before restoring an archive:
+<dl><dd>tar t<br>
+
+</dl>
+<p>If the archive loads the files into the current directory,
+I create a new directory, change to it, and extract the files.
+<p>If the archive restores the directory by name, then
+I restore the files into the current directory.
+<p><h1><a name="uh-10" href="Tar.html#toc-uh-10">Restoring a few files</a></h1>
+<p>If you want to restore a single file, get the pathname
+of the file as
+<b>tar</b> knows it, using the
+<b>t</b> flag.
+You must specify the exact filename, because
+<b>filename</b> and
+<b>./filename</b> are not the same.
+You can combine this in one command
+by using:
+<dl><dd>tar xvf /dev/rst0 `tar tf /dev/rst0  | grep filename`<br>
+
+</dl>
+<p>Whenever you use
+<b>tar</b> to restore a directory, you must always
+specify 
+<b>some</b> filename.
+If none is specified, no files are restored.
+<p> There is still the problem of restoring a directory whose pathname
+starts with 
+<b>/</b>. Because
+<b>tar</b> restores a file to the pathname specified in the archive,
+you cannot change 
+<b>where</b> the file will be restored.
+The danger is that you may either overwrite some existing files, or
+you will not be able to restore the files because you don't
+have permissions.
+<p>You can ask the system administrator to rename a directory and
+temporarily create a symbolic link pointing to a directory 
+where you can restore the files.
+Other solutions exist, including editing the
+<b>tar</b> archive, and creating a new directory structure with a
+C program executing the
+<b>chroot(2)</b> system call.
+Another solution is to get the Free Software Foundation's
+version of 
+<b>tar</b> that allows you to remap pathnames starting with 
+<b>/</b>. It also allows you to create archives that are too large for a single tape,
+incremental archives, and a dozen other advantages.
+<p>But the best solution is to never create an archive
+of a directory that starts with 
+<b>/</b> or
+<b>~</b>. 
+<p><h1><a name="uh-11" href="Tar.html#toc-uh-11">Remote Restoring</a></h1>
+<p>To restore a directory from a remote host, use the following command:
+<dl><dd>rsh -n host dd if=/dev/rst0 bs=20b | <br>
+tar xvBfb - 20 <i>filenames</i><br>
+
+</dl>
+<p>Because of it's nature, it is difficult to read
+fixed size blocks over a network.
+This is why
+<b>tar</b> uses the
+<b>B</b> flag to force it to read from the pipe
+until a block is completely filled.
+<p>
+<I>This document was translated by troff2html v0.21 on September 22, 2001.</I>
+<P>
+</div>
+</body>
+</html>

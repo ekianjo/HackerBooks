@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<title>What's In Your Environment (env, echo, Env:)</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/pygments.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+      <div class="twelve columns" id="header">
+          <div class="topbar">
+              <div class="global-nav">
+                  <div class="four columns" id="header-block">
+                      <p><a href="http://cli.learncodethehardway.org">The Command Line Crash Course</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p style="color: white"><a href="http://inculcate.me/school/courses/1/">Videos And PDFs For $6</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p>
+                      <a href="http://learnpythonthehardway.org">Python</a> |
+                      <a href="http://ruby.learncodethehardway.org">Ruby</a> |
+                      <a href="http://c.learncodethehardway.org">C</a> |
+                      <a href="http://sql.learncodethehardway.org">SQL</a> |
+                      <a href="http://regex.learncodethehardway.org">Regex</a> 
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <h1 class="title">What's In Your Environment (env, echo, Env:)</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="eleven columns">
+        <div class="section" id="do-this">
+<h1>Do This</h1>
+<div class="highlight"><pre><a name="code--ex21.sh-session-pyg.html-1"></a><span class="gp">$</span> env
+<a name="code--ex21.sh-session-pyg.html-2"></a><span class="go">TERM_PROGRAM=Apple_Terminal</span>
+<a name="code--ex21.sh-session-pyg.html-3"></a><span class="go">TERM=xterm</span>
+<a name="code--ex21.sh-session-pyg.html-4"></a><span class="go">SHELL=/bin/bash</span>
+<a name="code--ex21.sh-session-pyg.html-5"></a><span class="go">OLDPWD=/Users/zed/temp</span>
+<a name="code--ex21.sh-session-pyg.html-6"></a><span class="go">USER=zed</span>
+<a name="code--ex21.sh-session-pyg.html-7"></a><span class="go">COMMAND_MODE=unix2003</span>
+<a name="code--ex21.sh-session-pyg.html-8"></a><span class="go">PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin</span>
+<a name="code--ex21.sh-session-pyg.html-9"></a><span class="go">PWD=/Users/zed/</span>
+<a name="code--ex21.sh-session-pyg.html-10"></a><span class="go">LANG=en_US.UTF-8</span>
+<a name="code--ex21.sh-session-pyg.html-11"></a><span class="go">PS1=$ </span>
+<a name="code--ex21.sh-session-pyg.html-12"></a><span class="go">SHLVL=1</span>
+<a name="code--ex21.sh-session-pyg.html-13"></a><span class="go">HOME=/Users/zed</span>
+<a name="code--ex21.sh-session-pyg.html-14"></a><span class="go">LOGNAME=zed</span>
+<a name="code--ex21.sh-session-pyg.html-15"></a><span class="go">_=/usr/bin/env</span>
+<a name="code--ex21.sh-session-pyg.html-16"></a><span class="gp">$</span> env | grep zed
+<a name="code--ex21.sh-session-pyg.html-17"></a><span class="go">OLDPWD=/Users/zed//temp</span>
+<a name="code--ex21.sh-session-pyg.html-18"></a><span class="go">USER=zed</span>
+<a name="code--ex21.sh-session-pyg.html-19"></a><span class="go">PWD=/Users/zed/</span>
+<a name="code--ex21.sh-session-pyg.html-20"></a><span class="go">HOME=/Users/zed</span>
+<a name="code--ex21.sh-session-pyg.html-21"></a><span class="go">LOGNAME=zed</span>
+<a name="code--ex21.sh-session-pyg.html-22"></a><span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$USER</span>
+<a name="code--ex21.sh-session-pyg.html-23"></a><span class="go">zed</span>
+<a name="code--ex21.sh-session-pyg.html-24"></a><span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$PWD</span>
+<a name="code--ex21.sh-session-pyg.html-25"></a><span class="go">/Users/zed/</span>
+<a name="code--ex21.sh-session-pyg.html-26"></a><span class="gp">$</span> <span class="nb">export </span><span class="nv">TESTING</span><span class="o">=</span><span class="s2">&quot;1 2 3&quot;</span>
+<a name="code--ex21.sh-session-pyg.html-27"></a><span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$TESTING</span>
+<a name="code--ex21.sh-session-pyg.html-28"></a><span class="go">1 2 3</span>
+<a name="code--ex21.sh-session-pyg.html-29"></a><span class="gp">$</span> env | grep TESTING
+<a name="code--ex21.sh-session-pyg.html-30"></a><span class="go">TESTING=1 2 3</span>
+<a name="code--ex21.sh-session-pyg.html-31"></a><span class="gp">$</span>
+</pre></div><div class="highlight"><pre><a name="code--ex21-win.sh-session-pyg.html-1"></a><span class="gp">&gt;</span> get-childitem Env:
+<a name="code--ex21-win.sh-session-pyg.html-2"></a>
+<a name="code--ex21-win.sh-session-pyg.html-3"></a><span class="go">Name                           Value</span>
+<a name="code--ex21-win.sh-session-pyg.html-4"></a><span class="go">----                           -----</span>
+<a name="code--ex21-win.sh-session-pyg.html-5"></a><span class="go">ALLUSERSPROFILE                C:\ProgramData</span>
+<a name="code--ex21-win.sh-session-pyg.html-6"></a><span class="go">APPDATA                        C:\Users\zed\AppData\Roaming</span>
+<a name="code--ex21-win.sh-session-pyg.html-7"></a><span class="go">...</span>
+<a name="code--ex21-win.sh-session-pyg.html-8"></a>
+<a name="code--ex21-win.sh-session-pyg.html-9"></a>
+<a name="code--ex21-win.sh-session-pyg.html-10"></a><span class="gp">&gt;</span> <span class="nv">$env</span>:PROMPT
+<a name="code--ex21-win.sh-session-pyg.html-11"></a><span class="gp">$</span>P<span class="nv">$G</span>
+<a name="code--ex21-win.sh-session-pyg.html-12"></a><span class="gp">&gt;</span> <span class="nv">$env</span>:TEMP
+<a name="code--ex21-win.sh-session-pyg.html-13"></a><span class="go">C:\Users\zed\AppData\Local\Temp</span>
+<a name="code--ex21-win.sh-session-pyg.html-14"></a><span class="gp">&gt;</span> <span class="nv">$env</span>:OS
+<a name="code--ex21-win.sh-session-pyg.html-15"></a><span class="go">Windows_NT</span>
+<a name="code--ex21-win.sh-session-pyg.html-16"></a><span class="gp">&gt;</span>
+</pre></div></div>
+<div class="section" id="you-learned-this">
+<h1>You Learned This</h1>
+<p>Your shell has these &quot;hidden variables&quot; that can change how other programs work.
+In this exercise I first print out my environment, just dumping it to the screen.
+Then I do it again but pipe it through <tt class="docutils literal">grep</tt> to find only the variables
+with my username in them.  Finally, I set an environment variable TESTING to &quot;1 2 3&quot;.</p>
+<p>You may not run into this too often, but sometimes to get something configured
+you have to change these.  A good example is the PATH variable, which determines
+the search order for other commands.  Changing your PATH is going to be one
+of your exercises.</p>
+</div>
+<div class="section" id="do-more">
+<h1>Do More</h1>
+<ul class="simple">
+<li>I want you to go online and research how you change your PATH for your computer.  Try to do it entirely from the CLI.</li>
+</ul>
+</div>
+    </div>
+
+    <div class="one columns" id="right-nav">
+        <center>
+        <p><a href="http://learncodethehardway.org/book/"><img src="images/48_structure.png"></a></p>
+        <p><a href="mailto:help@learncodethehardway.org"><img src="images/48_email.png"></a></p>
+        <p><a href="ex21.html#faq"><img src="images/48_faq.png"></a></p>
+        <p><a href="http://inculcate.me/school/courses/1/"><img src="images/48_video.png"></a></p>
+        </center>
+    </div>
+    <div class="twelve columns" id="footer">
+        <div class="four columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org">Copyright (C) 2010 Zed. A. Shaw</a>
+            </p>
+        </div>
+        <div class="four columns" id="footer-block">
+            <p>
+            </p>
+        </div>
+        <div class="three columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org/credits.html">Credits</a>
+            </p>
+        </div>
+        <div class="one columns">
+            &nbsp;
+        </div>
+    </div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+</body>
+</html>

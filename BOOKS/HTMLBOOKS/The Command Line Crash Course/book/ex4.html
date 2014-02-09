@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<title>Make A Directory (mkdir)</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/pygments.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+      <div class="twelve columns" id="header">
+          <div class="topbar">
+              <div class="global-nav">
+                  <div class="four columns" id="header-block">
+                      <p><a href="http://cli.learncodethehardway.org">The Command Line Crash Course</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p style="color: white"><a href="http://inculcate.me/school/courses/1/">Videos And PDFs For $6</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p>
+                      <a href="http://learnpythonthehardway.org">Python</a> |
+                      <a href="http://ruby.learncodethehardway.org">Ruby</a> |
+                      <a href="http://c.learncodethehardway.org">C</a> |
+                      <a href="http://sql.learncodethehardway.org">SQL</a> |
+                      <a href="http://regex.learncodethehardway.org">Regex</a> 
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <h1 class="title">Make A Directory (mkdir)</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="eleven columns">
+        <div class="section" id="do-this">
+<h1>Do This</h1>
+<div class="highlight"><pre><a name="code--ex4.sh-session-pyg.html-1"></a><span class="gp">$</span> mkdir temp
+<a name="code--ex4.sh-session-pyg.html-2"></a><span class="gp">$</span> mkdir temp/stuff
+<a name="code--ex4.sh-session-pyg.html-3"></a><span class="gp">$</span> mkdir temp/stuff/things
+<a name="code--ex4.sh-session-pyg.html-4"></a><span class="gp">$</span> mkdir -p temp/stuff/things/frank/joe/alex/john
+<a name="code--ex4.sh-session-pyg.html-5"></a><span class="gp">$</span>
+</pre></div><div class="highlight"><pre><a name="code--ex4-win.sh-session-pyg.html-1"></a><span class="gp">&gt;</span> mkdir temp
+<a name="code--ex4-win.sh-session-pyg.html-2"></a>
+<a name="code--ex4-win.sh-session-pyg.html-3"></a>
+<a name="code--ex4-win.sh-session-pyg.html-4"></a><span class="go">    Directory: C:\Users\zed</span>
+<a name="code--ex4-win.sh-session-pyg.html-5"></a>
+<a name="code--ex4-win.sh-session-pyg.html-6"></a>
+<a name="code--ex4-win.sh-session-pyg.html-7"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex4-win.sh-session-pyg.html-8"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex4-win.sh-session-pyg.html-9"></a><span class="go">d----        12/17/2011   9:02 AM            temp</span>
+<a name="code--ex4-win.sh-session-pyg.html-10"></a>
+<a name="code--ex4-win.sh-session-pyg.html-11"></a>
+<a name="code--ex4-win.sh-session-pyg.html-12"></a><span class="gp">&gt;</span> mkdir temp/stuff
+<a name="code--ex4-win.sh-session-pyg.html-13"></a>
+<a name="code--ex4-win.sh-session-pyg.html-14"></a>
+<a name="code--ex4-win.sh-session-pyg.html-15"></a><span class="go">    Directory: C:\Users\zed\temp</span>
+<a name="code--ex4-win.sh-session-pyg.html-16"></a>
+<a name="code--ex4-win.sh-session-pyg.html-17"></a>
+<a name="code--ex4-win.sh-session-pyg.html-18"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex4-win.sh-session-pyg.html-19"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex4-win.sh-session-pyg.html-20"></a><span class="go">d----        12/17/2011   9:02 AM            stuff</span>
+<a name="code--ex4-win.sh-session-pyg.html-21"></a>
+<a name="code--ex4-win.sh-session-pyg.html-22"></a>
+<a name="code--ex4-win.sh-session-pyg.html-23"></a><span class="gp">&gt;</span> mkdir temp/stuff/things
+<a name="code--ex4-win.sh-session-pyg.html-24"></a>
+<a name="code--ex4-win.sh-session-pyg.html-25"></a>
+<a name="code--ex4-win.sh-session-pyg.html-26"></a><span class="go">    Directory: C:\Users\zed\temp\stuff</span>
+<a name="code--ex4-win.sh-session-pyg.html-27"></a>
+<a name="code--ex4-win.sh-session-pyg.html-28"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex4-win.sh-session-pyg.html-29"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex4-win.sh-session-pyg.html-30"></a><span class="go">d----        12/17/2011   9:03 AM            things</span>
+<a name="code--ex4-win.sh-session-pyg.html-31"></a>
+<a name="code--ex4-win.sh-session-pyg.html-32"></a>
+<a name="code--ex4-win.sh-session-pyg.html-33"></a><span class="gp">&gt;</span> mkdir temp/stuff/things/frank/joe/alex/john
+<a name="code--ex4-win.sh-session-pyg.html-34"></a>
+<a name="code--ex4-win.sh-session-pyg.html-35"></a>
+<a name="code--ex4-win.sh-session-pyg.html-36"></a><span class="go">    Directory: C:\Users\zed\temp\stuff\things\frank\joe\alex</span>
+<a name="code--ex4-win.sh-session-pyg.html-37"></a>
+<a name="code--ex4-win.sh-session-pyg.html-38"></a>
+<a name="code--ex4-win.sh-session-pyg.html-39"></a><span class="go">Mode                LastWriteTime     Length Name</span>
+<a name="code--ex4-win.sh-session-pyg.html-40"></a><span class="go">----                -------------     ------ ----</span>
+<a name="code--ex4-win.sh-session-pyg.html-41"></a><span class="go">d----        12/17/2011   9:03 AM            john</span>
+<a name="code--ex4-win.sh-session-pyg.html-42"></a>
+<a name="code--ex4-win.sh-session-pyg.html-43"></a>
+<a name="code--ex4-win.sh-session-pyg.html-44"></a><span class="gp">&gt;</span>
+</pre></div></div>
+<div class="section" id="you-learned-this">
+<h1>You Learned This</h1>
+<p>Now we get into typing more than one command.  These are all the different ways
+you can run mkdir.  What's mkdir do?  It make directories.  Why are you asking
+that?  You should be doing your index cards and getting your commands memorized.
+If you don't know that &quot;mkdir makes directories&quot; then keep working the index
+cards.</p>
+<p>What does it mean to make a directory?  You might call directories &quot;folders.&quot;  They're
+the same thing.  All you did above is create directories inside directories
+inside of more directories.  This is called a &quot;path&quot; and it's a way of saying
+&quot;first temp, then stuff, then things and that's where I want it.&quot;  It's a
+set of directions to the computer of where you want to put something in the tree
+of folders (directories) that make up your computer's hard disk.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this book I'm using the <tt class="docutils literal">/</tt> (slash) character for all paths since they work
+the same on all computers now.  However, Windows users will need to know that you can
+also use the <tt class="docutils literal">\</tt> (backslash) characters and other Windows users will typically
+expect those at times.</p>
+</div>
+</div>
+<div class="section" id="do-more">
+<h1>Do More</h1>
+<ul class="simple">
+<li>The concept of a &quot;path&quot; might confuse you at this point.  Don't worry. We'll
+do a lot more with them and then you'll get it.</li>
+<li>Make 20 other directories inside the temp directory in various levels.  Go look at them
+with a graphical file browser.</li>
+<li>Make a directory with a space in the name by putting quotes around it: <tt class="docutils literal">mkdir &quot;I Have Fun&quot;</tt></li>
+<li>If the <tt class="docutils literal">temp</tt> directory already exists then you'll get an error.  Use <tt class="docutils literal">cd</tt> to change to a work directory that you can control and try it there.  On windows <tt class="docutils literal">Desktop</tt> is a good place.</li>
+</ul>
+</div>
+    </div>
+
+    <div class="one columns" id="right-nav">
+        <center>
+        <p><a href="http://learncodethehardway.org/book/"><img src="images/48_structure.png"></a></p>
+        <p><a href="mailto:help@learncodethehardway.org"><img src="images/48_email.png"></a></p>
+        <p><a href="ex4.html#faq"><img src="images/48_faq.png"></a></p>
+        <p><a href="http://inculcate.me/school/courses/1/"><img src="images/48_video.png"></a></p>
+        </center>
+    </div>
+    <div class="twelve columns" id="footer">
+        <div class="four columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org">Copyright (C) 2010 Zed. A. Shaw</a>
+            </p>
+        </div>
+        <div class="four columns" id="footer-block">
+            <p>
+            </p>
+        </div>
+        <div class="three columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org/credits.html">Credits</a>
+            </p>
+        </div>
+        <div class="one columns">
+            &nbsp;
+        </div>
+    </div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+</body>
+</html>

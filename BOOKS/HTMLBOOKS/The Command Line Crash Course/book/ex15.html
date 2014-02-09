@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.10: http://docutils.sourceforge.net/" />
+<title>Pipes And Redirection</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/pygments.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+      <div class="twelve columns" id="header">
+          <div class="topbar">
+              <div class="global-nav">
+                  <div class="four columns" id="header-block">
+                      <p><a href="http://cli.learncodethehardway.org">The Command Line Crash Course</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p style="color: white"><a href="http://inculcate.me/school/courses/1/">Videos And PDFs For $6</a></p>
+                  </div>
+                  <div class="four columns" id="header-block">
+                      <p>
+                      <a href="http://learnpythonthehardway.org">Python</a> |
+                      <a href="http://ruby.learncodethehardway.org">Ruby</a> |
+                      <a href="http://c.learncodethehardway.org">C</a> |
+                      <a href="http://sql.learncodethehardway.org">SQL</a> |
+                      <a href="http://regex.learncodethehardway.org">Regex</a> 
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <h1 class="title">Pipes And Redirection</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="eleven columns">
+        <div class="section" id="do-this">
+<h1>Do This</h1>
+<div class="highlight"><pre><a name="code--ex15.sh-session-pyg.html-1"></a><span class="gp">$</span> cat ex12.txt ex13.txt | less
+<a name="code--ex15.sh-session-pyg.html-2"></a><span class="gp">$</span> cat &lt; ex13.txt
+<a name="code--ex15.sh-session-pyg.html-3"></a><span class="go">I am a fun guy.</span>
+<a name="code--ex15.sh-session-pyg.html-4"></a><span class="go">Don&#39;t you know why?</span>
+<a name="code--ex15.sh-session-pyg.html-5"></a><span class="go">Because I make poems,</span>
+<a name="code--ex15.sh-session-pyg.html-6"></a><span class="go">that make babies cry.</span>
+<a name="code--ex15.sh-session-pyg.html-7"></a><span class="gp">$</span> less &lt; ex12.txt
+<a name="code--ex15.sh-session-pyg.html-8"></a><span class="gp">$</span> less &lt; ex12.txt | cat | less
+<a name="code--ex15.sh-session-pyg.html-9"></a><span class="gp">$</span> cat ex13.txt &gt; ex15.txt
+<a name="code--ex15.sh-session-pyg.html-10"></a><span class="gp">$</span> cat ex15.txt
+<a name="code--ex15.sh-session-pyg.html-11"></a><span class="go">I am a fun guy.</span>
+<a name="code--ex15.sh-session-pyg.html-12"></a><span class="go">Don&#39;t you know why?</span>
+<a name="code--ex15.sh-session-pyg.html-13"></a><span class="go">Because I make poems,</span>
+<a name="code--ex15.sh-session-pyg.html-14"></a><span class="go">that make babies cry.</span>
+<a name="code--ex15.sh-session-pyg.html-15"></a><span class="gp">$</span>
+</pre></div><div class="highlight"><pre><a name="code--ex15-win.sh-session-pyg.html-1"></a><span class="gp">&gt;</span> <span class="nb">cd</span> ..
+<a name="code--ex15-win.sh-session-pyg.html-2"></a><span class="gp">&gt;</span> <span class="nb">cd </span>temp
+<a name="code--ex15-win.sh-session-pyg.html-3"></a><span class="gp">&gt;</span> cat ex12.txt,ex13.txt | more
+<a name="code--ex15-win.sh-session-pyg.html-4"></a><span class="gp">&gt;</span> <span class="nb">echo</span> <span class="s2">&quot;I am a new file.&quot;</span> &gt; ex15.txt
+<a name="code--ex15-win.sh-session-pyg.html-5"></a><span class="gp">&gt;</span> cat ex15.txt
+<a name="code--ex15-win.sh-session-pyg.html-6"></a><span class="go">I am a new file.</span>
+<a name="code--ex15-win.sh-session-pyg.html-7"></a><span class="gp">&gt;</span> cat ex15.txt &gt; another.txt
+<a name="code--ex15-win.sh-session-pyg.html-8"></a><span class="gp">&gt;</span> cat another.txt
+<a name="code--ex15-win.sh-session-pyg.html-9"></a><span class="go">I am a new file.</span>
+<a name="code--ex15-win.sh-session-pyg.html-10"></a><span class="gp">&gt;</span> cat ex15.txt | more
+<a name="code--ex15-win.sh-session-pyg.html-11"></a><span class="gp">&gt;</span>
+</pre></div></div>
+<div class="section" id="you-learned-this">
+<h1>You Learned This</h1>
+<p>Now we get to the cool part of the command line: redirection.  The concept is
+that you can take a command and you can change where its input and output goes.
+You use the <tt class="docutils literal">&lt;</tt> (less-than), <tt class="docutils literal">&gt;</tt> (greater-than), and <tt class="docutils literal">|</tt> (pipe)
+symbols to do this.  Here's a breakdown:</p>
+<dl class="docutils">
+<dt>$|$</dt>
+<dd>The <tt class="docutils literal">|</tt> takes the output from the command on the left, and &quot;pipes&quot; it to the command on the right.  In line 1 you see me do that.</dd>
+<dt>$&lt;$</dt>
+<dd>The <tt class="docutils literal">&lt;</tt> will take and send the input from the file on the right to the program on the left.  You see me do that in line 2. <em>This does not work in PowerShell</em>.</dd>
+<dt>$&gt;$</dt>
+<dd><p class="first">The <tt class="docutils literal">&gt;</tt> takes the output of the command on the left, then writes it</p>
+<p class="last">to the file on the right.  You see me do that on line 9.</p>
+</dd>
+<dt>$&gt;&gt;$</dt>
+<dd><p class="first">The <tt class="docutils literal">&gt;&gt;</tt> takes the output of the command on the left, then <em>appends</em> it</p>
+<p class="last">to the file on the right.</p>
+</dd>
+</dl>
+<p>There are a few more symbols, but we'll start with just these for now.</p>
+</div>
+<div class="section" id="do-more">
+<h1>Do More</h1>
+<ul class="simple">
+<li>Create some more index cards for memorizing these three symbols.  Write the symbol on one side, then what it does on the other side.  Drill these just like the other commands.</li>
+</ul>
+</div>
+    </div>
+
+    <div class="one columns" id="right-nav">
+        <center>
+        <p><a href="http://learncodethehardway.org/book/"><img src="images/48_structure.png"></a></p>
+        <p><a href="mailto:help@learncodethehardway.org"><img src="images/48_email.png"></a></p>
+        <p><a href="ex15.html#faq"><img src="images/48_faq.png"></a></p>
+        <p><a href="http://inculcate.me/school/courses/1/"><img src="images/48_video.png"></a></p>
+        </center>
+    </div>
+    <div class="twelve columns" id="footer">
+        <div class="four columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org">Copyright (C) 2010 Zed. A. Shaw</a>
+            </p>
+        </div>
+        <div class="four columns" id="footer-block">
+            <p>
+            </p>
+        </div>
+        <div class="three columns" id="footer-block">
+            <p>
+            <a href="http://learncodethehardway.org/credits.html">Credits</a>
+            </p>
+        </div>
+        <div class="one columns">
+            &nbsp;
+        </div>
+    </div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+</body>
+</html>

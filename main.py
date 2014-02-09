@@ -340,7 +340,13 @@ class InfoBooks(gtk.Window):
                         #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
 	                    
 	                    if books[3]=='html':
-							pass
+							command=['wget','-rkp','-l3','-np','-nH','--cut-dirs=1',books[4],'-P',"HTMLBOOKS/{0}/".format(books[0])]
+							print command
+							p=subprocess.Popen(command, stdout=subprocess.PIPE)
+							stdout, stderr = p.communicate()
+							print "Done"
+
+							
 	                    #	if books[4][0]=='all_links':
 		                #    	soup = BeautifulSoup(books[4][1])
 		                #    	linksonpage=soup.find_all('a') # Finds all hrefs from the html doc.

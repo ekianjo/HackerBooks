@@ -1,0 +1,941 @@
+======================================================================
+		Top Ten Reasons not to use the C shell
+======================================================================
+
+
+	Written by Bruce Barnett
+	With MAJOR help from
+	     Peter Samuelson
+	     Chris F.A. Johnson
+	     Jesse Silverman
+	     Ed Morton
+	     and of course Tom Christiansen
+
+        Updated:  
+				  September 22, 2001
+				  November 26, 2002
+				  July 12, 2004
+				  February 27, 2006
+				  October 3, 2006
+				  January 17. 2007
+				  November 22, 2007
+				  March 1, 2008
+				  June 28, 2009
+
+
+	In the late 80's, the C shell was the most popular interactive
+shell.  The Bourne shell was too "bare-bones." The Korn shell had to
+be purchased, and the Bourne Again shell wasn't created yet.
+
+	I've used the C shell for years, and on the surface it has a
+lot of good points. It has arrays (the Bourne shell only has one).  It
+has test(1), basename(1) and expr(1) built-in, while the Bourne shell
+needed external programs.  UNIX was hard enough to learn, and spending
+months to learn two shells seemed silly when the C shell seemed
+adequate for the job. So many have decided that since they were using
+the C shell for their interactive session, why not use it for writing
+scripts?
+
+		THIS IS A *BIG* MISTAKE.
+
+	Oh - it's okay for a 5-line script. The world isn't going to
+end if you use it. However, many of the posters on USENET treat it as
+such.  I've used the C shell for very large scripts and it worked fine
+in most cases. There are ugly parts, and work-arounds. But as your
+script grows in sophistication, you will need more work-arounds and
+eventually you will find yourself bashing your head against a wall
+trying to work around the problem.
+
+	I know of many people who have read Tom Christiansen's essay
+about the C shell (http://www.faqs.org/faqs/unix-faq/shell/csh-whynot/
+), and they were not really convinced. A lot of Tom's examples were
+really obscure, and frankly I've always felt Tom's argument wasn't as
+convincing as it could be.  So I decided to write my own version of
+this essay - as a gentle argument to a current C shell programmer from
+a former C shell fan.
+
+[Note - since I compare shells, it can be confusing. If the line starts
+with a "%" then I'm using the C shell. If in starts with a "$" then it
+is the Bourne shell.
+
+	      -------------------------------------
+	      Top Ten reasons not to use the C shell
+	      -------------------------------------
+
+	1. The Ad Hoc Parser
+	2. Multiple-line quoting difficult
+	3. Quoting can be confusing and inconsistent
+	4. If/while/foreach/read cannot use redirection
+	5. Getting input a line at a time
+	6. Aliases are line oriented
+	7. Limited file I/O redirection
+	8. Poor management of signals and sub-processes
+	9. Fewer ways to test for missing variables
+	10. Inconsistent use of variables and commands.
+
+
+
+
+1. The Ad Hoc Parser
+
+	The biggest problem of the C shell (and TCSH) it its ad hoc parser.
+Now this information won't make you immediately switch shells.
+But it's the biggest reason to do so. Many of the other items listed
+are based on this problem. Perhaps I should elaborate.
+
+	The parser is the code that converts the shell commands into
+variables, expressions, strings, etc. High-quality programs have a
+full-fledged parser that converts the input into tokens, verifies the
+tokens are in the right order, and then executes the tokens.  The
+Bourne shell even as an option to parse a file, but don't execute
+anything. So you can syntax check a file without executing it.
+
+	The C shell does not do this. It parses as it executes. You
+can have expressions in many types of instructions:
+
+%	if ( expression )
+%	set variable = ( expression )
+%	set variable = expression
+%	while ( expression )
+% @ var = expression
+
+	There should be a single token for expression, and the evaluation
+	of that token should be the same. They are not. You may find out
+	that
+
+%	if ( 1 )
+
+is fine, but
+
+%	if(1)
+or
+%	if (1 )
+or
+%	if ( 1)
+
+generates a syntax error. Or that the above works, if add a '!" or change "if"
+into "while", or do both, you get a syntax error. 
+
+
+	You never know when you will find a new bug.  As I write this
+(September 2001) I ported a C shell script to another UNIX system. (It
+was my .login script, okay? Sheesh!) Anyhow I got an error "Variable
+name must begin with a letter" somewhere in the dozen files used when
+I log in. I finally traced the problem down to the following "syntax"
+error:
+
+%	if (! $?variable ) ...
+
+		Which variable must begin with a letter? Give up?  Here's how to fix the error:
+
+%	if ( ! $?variable ) ...
+
+Yes - you must add a space before the "!" character to fix the
+"Variable name must begin with a letter" error. Sheesh!
+
+The examples in the manual page don't (or didn;t) mention that spaces
+are required.  In other words, I provided a perfectly valid syntax
+according to the documentation, but the parser got confused and
+generated an error that wasn't even close to the real problem. I call
+this type of error a "syntax" error.  Except that instead of the fault
+being on the user - like normal syntax errors, the fault is in the
+shell, because the parser screwed up!
+
+
+Sigh...
+
+		Here's another one. I wanted to search for a string at the end
+of a line, using grep. That is
+
+%		set var = "string"
+%		grep "$var$" < file
+
+		Most shells treat this as 
+%			 grep "string$" <file
+		Great. Does the C shell do this? As John Belushi would say, "Noooooo!"
+		Instead, we get 
+
+				 Variable name must contain alphanumeric characters.
+		Ah. So we back quote (backslash) it. 
+
+%			 grep "$var\$" <file
+		This doesn't work. The same thing happens. One work-around is
+
+%			 grep "$var"'$' <file
+
+		Sigh...
+
+	Here's another. For instance,
+
+%		if ( $?A ) set  B = $A
+
+	If variable A is defined, then set B to $A.  Sounds good. The
+problem? If A is not defined, you get "A: Undefined variable."  The
+parser is evaluating A even if that part of the code is never
+executed. 
+
+	If you want to check a Bourne shell script for syntax errors,
+use "sh -n." This doesn't execute the script. but it does check all
+errors. What a wonderful idea. Does the C shell have this feature? Of
+course not.  Errors aren't found until they are EXECUTED.  For
+instance, the code
+
+%	if ( $zero ) then
+%		while
+%		end
+%	endif
+
+will execute with no complaints. However, if $zero becomes one, then
+you get the syntax error:
+
+	while: Too few arguments.
+
+Here's another:
+
+if ( $zero ) then
+    if the C shell has a real parser - complain
+endif
+
+In other words, you can have a script that works fine for months, and
+THEN reports a syntax error if the conditions are right. Your
+customers will love this "professionalism."
+
+And here's another I just found today (October 2006).
+Create a script that has
+
+#/bin/csh -f
+if (0)
+endif
+
+
+And make sure there is no "newline" character after the endif.
+Execute this and you get the error
+		then: then/endif not found.
+Tip: Make sure there is a newline character at the end of the
+last line.  
+
+And this one (August 2008)
+
+% set a="b"
+% set c ="d"
+set: Variable name must begin with a letter.
+
+
+So adding a space before the "=" makes "d" a variable? How does this
+make any sense?
+
+Add a special character, and it becomes more unpredictable.
+This is fine
+
+% set a='$'
+
+But try this
+
+% set a="$"
+Illegal variable name.
+
+Perhaps this might make sense, because variables are evaluated in
+double quotes. But try to escape the special character:
+
+
+% set a="\$"
+Variable name must contain alphanumeric characters.
+
+However, guess what works:
+% set a=$
+
+as does
+
+% set a=\$
+
+It's just too hard to predict what will and what will not work.
+
+And we are just getting warmed up. The C shell a time bomb, gang...
+
+	Tick... Tick... Tick...
+
+
+2. Multiple-line quoting difficult
+
+
+	The C shell complaints if strings are longer than a line.
+If you are typing at a terminal, and only type one quote, it's nice to
+have an error instead of a strange prompt. However, for shell
+programming - it stinks like a bloated skunk.
+
+
+	Here is a simple 'awk' script that adds one to the first value
+of each line. I broke this simple script into three lines, because
+many awk scripts are several lines long. I could put it on one line,
+but that's not the point. Cut me some slack, okay?
+
+(Note - also - at the time I wrote this, I was using the old verison
+of AWK, that did not allow partial expressions to cross line
+boundries).
+
+	#!/bin/awk -f
+	{print $1 + \
+		2;
+	}
+
+	Calling this from a Bourne shell is simple:
+
+	#!/bin/sh
+	awk '
+	{print $1 + \
+		2;
+	}
+	'
+
+	They look the SAME! What a novel concept. Now look at the C
+shell version.
+
+	#!/bin/csh -f
+	 awk '{print $1 + \\
+	 	2 ;\
+	 }'
+
+
+	An extra backslash is needed. One line has two backslashes, and the
+second has one. Suppose you want to set the output to a variable.
+Sounds simple? Perhaps. Look how it changes:
+
+	#!/bin/csh -f
+	set a = `echo 7 |  awk '{print $1 + \\\
+		 2 ;\\
+	 }'`
+
+	Now you need three backslashes!  And the second line only has two.
+Keeping track of those backslashes can drive you crazy when you have
+large awk and sed scripts. And you can't simply cut and paste scripts
+from different shells - if you use the C shell. Sometimes I start
+writing an AWK script, like
+
+#!/bin/awk -f
+BEGIN {A=123;}
+etc...
+
+And if I want to convert this to a shell script (because I want to
+specify the value of 123 as an argument), I simply replace the first line with an invocation to the shell:
+
+#!/bin/sh
+awk '
+BEGIN {A=123;}
+'
+etc.
+
+If I used the C shell, I'd have to add a \ before the end of each line.
+
+
+	Also note that if you WANT to include a newline in a string,
+strange things happen:
+%	set a = 'a \
+	b'
+%	echo $a
+	a  b
+
+	The newline goes away. Suppose you really want a newline in
+the string. Will another backslash work?
+
+%	set a = 'a \\
+	b'
+%	echo $a
+	a \  b
+
+	That didn't work. Suppose you decide to quote the variable:
+
+%	set a = 'a \
+	b'
+%	echo "$a"
+	Unmatched ".
+
+	Syntax error!? How bizarre.  There is a solution - use the :q
+quote modifier.
+
+%	set a = 'a \
+	b'
+%	echo $a:q
+	a
+	b
+
+	This can get VERY complicated when you want to make aliases
+include backslash characters. More on this later. Heh. Heh.
+
+
+	One more thing - normally a shell allows you to put the quotes anywhere on a line:
+	echo abc"de"fg
+is the same as
+	echo "abcdefg"
+
+That's because the quote toggles the INTERPRET/DON'T INTERPRET parser.
+However, you cannot put a quote right before the backslash if it follows a
+variable name whose value has a space. These next two lines generates
+a syntax error:
+
+%	set a = "a b"
+%	set a = $a"\
+	c"
+
+All I wanted to do was to append a "<new line>c" to the $a variable.
+It only works if the current value does NOT have a space.  
+In other words
+
+%	set a = "a_b"
+%	set a = $a"\
+	c"
+
+is fine. Changing "_" to a space causes a syntax error. Another
+surprise. That's the C shell - one never knows where the next surprise
+will be.
+
+
+3. Quoting can be confusing and inconsistent
+
+	The Bourne shell has three types of quotes:
+
+	"........" - only $, `, and \ are special.
+	'.......' - Nothing is special (this includes the backslash)
+	\. 	 - The next character is not special
+			 (Exception: a newline)
+
+	That's it. Very few exceptions. The C shell is another matter.
+    What works and what doesn't  is no longer simple and easy to understand.
+
+
+		
+
+
+As an example, look at the backslash quote. The Bourne shell uses the
+backslash to escape everything except the newline. In the C shell, it
+also escapes the backslash and the dollar sign. Suppose you want to enclose 
+$HOME in double quotes. Try typing:
+
+%	echo "$HOME"
+	/home/barnett
+
+
+Logic tells us to put a backslash in front. So we try
+
+%	echo "\$HOME"
+	\/home/barnett
+
+Sigh. 
+So there is no way to escape a variable in a double quote. What about
+single quotes? 
+
+%		echo '$HOME'
+	$HOME
+
+works fine. But here's another exception.
+
+%		echo MONEY$
+		MONEY$
+%		echo 'MONEY$'
+		MONEY$
+%		echo "MONEY$"
+		Illegal variable name.
+
+
+The last one is illegal. So adding double quotes CAUSES a syntax error.
+
+With single quotes, "!" character is special, as is
+the "~" character.  Using single quotes (the strong quotes) the
+command
+
+%	echo '!1'
+	1: Event not found.
+
+will give you the error
+
+
+
+A backslash is needed because the single quotes won't quote the
+exclamation mark.  On some versions of the C shell,
+
+		echo hi!
+
+works, but
+
+		echo 'hi!'
+
+doesn't. A backslash is required in front:
+
+		echo 'hi\!'
+
+or if you wanted to put a ! before the word:
+
+		echo '\!hi'
+
+Now suppose you type
+
+%	set a = "~"
+%	echo $a
+	/home/barnett
+%	echo '$a'
+	$a
+%	echo "$a"
+    ~
+
+The echo commands output THREE different values depending on the quotes.
+So no matter what type of quotes you use, there are exceptions.
+Those exceptions can drive you mad.
+
+And then there's dealing with spaces.
+
+If you call a C shell script, and pass it an argument with a space:
+
+%	myscript "a b" c
+
+Now guess what the following script will print.
+
+	#!/bin/csh -f
+	echo $#
+	set b = ( $* )
+	echo $#b
+
+	It prints "2" and then "3". A simple = does not copy a variable
+correctly if there are spaces involved. Double quotes don't help.
+It's time to use the fourth form of quoting - which is only useful
+when displaying (not set) the value:
+
+%	set b = ( $*:q )
+
+
+Here's another. Let's saw you had nested backticks.
+Some shells use $(program1 $(program2)) to allow this.
+The C shell does not, so you have to use nested backticks.
+I would expect this to be
+		`program1 \`program2\` `
+but  what works is the illogical
+		`program1 ``program2``
+
+
+
+	Got it? It gets worse. Try to pass back-slashes to an alias
+You need billions and billions of them. Okay. I exaggerate.
+A little. But look at Dan Bernstein's two aliases used to get quoting
+correct in aliases:
+
+%	alias quote "/bin/sed -e 's/\\!/\\\\\!/g' \\
+	-e  's/'\\\''/'\\\'\\\\\\\'\\\''/g' \\
+	-e 's/^/'\''/' \\
+	-e 's/"\$"/'\''/'"
+%	alias makealias "quote | /bin/sed 's/^/alias \!:1 /' \!:2*"
+
+You use this to make sure you get quotes correctly specified in aliases.
+
+	Larry Wall calls this backslashitis. What a royal pain.
+	Tick.. Tick.. Tick..
+
+4. If/while/foreach/read cannot use redirection
+
+   The Bourne shell allows complex commands to be combined with pipes.
+   The C shell doesn't. Suppose you want to choose an argument to grep.
+   Example:
+
+%	if ( $a ) then
+%	   grep xxx
+%	else
+%	   grep yyy
+%	endif
+
+	No problem as long as the text you are grepping is piped into the
+script. But what if you want to create a stream of data in the script?
+(i.e. using a pipe).  Suppose you change the first line to be
+
+%	cat $file | if ($a ) then
+
+	Guess what? The file $file is COMPLETELY ignored. Instead, the
+script use standard input of the script, even though you used a pipe on that line.
+The only standard input the "if" command
+can use MUST be specified outside of the script. Therefore what can be
+done in one Bourne shell file has to be done in several C shell
+scripts - because a single script can't be used. The 'while' command
+is the same way. For instance the following command outputs the time
+with hyphens between the numbers instead of colons:
+
+$	date | tr ':' ' ' | while read a b c d e f g
+$	do
+$	echo The time is  $d-$e-$f
+$	done
+
+	You can use < as well as pipes. In other words, *ANY* command in
+the Bourne shell can have the data-stream redirected. That's because it
+has a REAL parser [rimshot].
+
+	Speaking of which... The Bourne shell allows you to combine
+several lines onto a single line as long as semicolons are placed
+between. This includes complex commands. For example - the following
+is perfectly fine with the Bourne shell:
+
+$	if  true;then grep a;else grep b; fi
+
+	This has several advantages. Commands in a makefile - see
+make(1) - have to be on one line. Trying to put a C shell "if" command
+in a makefile is painful.  Also - if your shell allows you to recall
+and edit previous commands, then you can use complex commands and edit
+them. The C shell allows you to repeat only the first part of a
+complex command, like the single line with the "if" statement. It's
+much nicer recalling and editing the entire complex command. But
+that's for interactive shells, and outside the scope of this essay.
+
+5. Getting input a line at a time
+
+	Suppose you want to read one line from a file. This simple
+task is very difficult for the C shell. The C shell provides one way
+to read a line:
+
+%	set ans = $<
+
+	The trouble is - this ALWAYS reads from standard input.  If a
+terminal is attached to standard input, then it reads from the
+terminal.  If a file is attached to the script, then it reads the
+file.
+
+	But what do you do if you want to specify the filename in the
+middle of the script?  You can use "head -1" to get a line. but how do
+you read the next line? You can create a temporary file, and read and
+delete the first line. How ugly and extremely inefficient. On a scale
+of 1 to 10, it scores -1000.
+
+	Now what if you want to read a file, and ask the user
+something during this?  As an example - suppose you want to read a
+list of filenames from a pipe, and ask the user what to do with some of
+them? Can't do this with the C shell - $< reads from standard input. Always.
+The Bourne shell does allow this. Simply use
+
+$	read ans </dev/tty
+
+to read from a terminal, and
+
+$	read ans
+
+to read from a pipe (which can be created in the script). Also - what
+if you want to have a script read from STDIN, create some data in the
+middle of the script, and use $< to read from the new file. Can't do
+it.  There is no way to do
+
+		set ans = $< <newfile
+or
+		set ans = $< </dev/tty
+or
+		echo ans | set ans = $<
+
+  $< is only STDIN, and cannot change for the duration of the script.
+The workaround usually means creating several smaller scripts instead
+of one script. 
+
+
+6. Aliases are line oriented
+
+	Aliases MUST be one line. However, the "if" WANTS to be on
+multiple lines, and quoting multiple lines is a pain. Clearly the work
+of a masochist. You can get around this if you bash your head enough,
+or else ask someone else with a soft spot for the C shell:
+
+%	alias X 'eval "if (\!* =~ 'Y') then \\
+	      echo yes \\
+	      else \\
+	      echo no \\
+	      endif"'
+
+	Notice that the "eval" command was needed. The Bourne shell
+function is more flexible than aliases, simpler and can easily fit on
+one line if you wish.
+
+$	X() { if [ "$1" = "Y" ]; then  echo yes; else echo no; fi;}
+
+
+If you can write a Bourne shell script, you can write a function.
+Same syntax.  There is no need to use special "\!:1" arguments, extra
+shell processes, special quoting, multiple backslashes, etc.  I'm
+SOOOO tired of hitting my head against a wall.
+
+Functions allow you to simplify scripts. Anything more sophisticated
+than an alias that would require function requires a separate csh
+script/file.
+
+Tick..Tick..Tick..
+
+7. Limited file I/O redirection
+
+	The C shell has one mechanism to specify standard output and
+standard error, and a second to combine them into one stream. It can
+be directed to a file or to a pipe.
+
+	That's all you can do. Period. That's it. End of story.
+
+	It's true that for 90% to 99% of the scripts this is all you need to
+do. However, the Bourne shell can do much much more:
+
+	You can close standard output, or standard error.
+	You can redirect either or both to any file.
+	You can merge output streams
+	You can create new streams
+
+	As an example, it's easy to send standard error to a file, and
+leave standard output alone. But the C shell can't do this very well.
+
+	Tom Christiansen gives several examples in his essay.
+I suggest you read his examples. See
+http://www.faqs.org/faqs/unix-faq/shell/csh-whynot/
+
+
+8. Poor management of signals and subprocesses
+
+	The C shell has very limited signal and process management.
+
+	Good software can be stopped gracefully. If an error occurs,
+or a signal is sent to it, the script should clean up all temporary
+files. The C shell has one signal trap:
+
+%	onintr label
+
+	To ignore all signals, use
+
+%	onintr -
+
+	The C shell can be used to catch all signals, or ignore all signals.
+All or none. That's the choice. That's not good enough.
+
+	Many programs have (or need) sophisticated signal handling. Sending a
+-HUP signal might cause the program to re-read configuration
+files. Sending a -USR1 signal may cause the program to turn debug mode
+on and off. And sending -TERM should cause the program to
+terminate. The Bourne shell can have this control. The C shell cannot.
+
+	Have you ever had a script launch several sub-processes and then
+try to stop them when you realized you make a mistake?  You can kill
+the main script with a Control-C, but the background processes are
+still running. You have to use "ps" to find the other processes and
+kill them one at a time. That's the best the C shell can do. The
+Bourne shell can do better. Much better.
+
+	A good programmer makes sure all of the child processes are
+killed when the parent is killed.  Here is a fragment of a Bourne
+shell program that launches three child processes, and passes a -HUP
+signal to all of them so they can restart.
+
+$	PIDS=
+$	program1 & PIDS="$PIDS $!"
+$	program2 & PIDS="$PIDS $!"
+$	program3 & PIDS="$PIDS $!"
+$	trap "kill -1 $PIDS" 1
+
+If the program wanted to exit on signal 15, and echo its process ID, a
+second signal handler can be added by adding:
+
+$	trap "echo PID $$ terminated;kill -TERM $PIDS;exit" 15
+
+You can also wait for those processes to terminate using the wait
+command:
+
+$	wait "$PIDS"
+
+	Notice you have precise control over which children you are
+waiting for. The C shell waits for all child processes. Again - all or
+none - those are your choices. But that's not good enough.  Here is an
+example that executes three processes. If they don't finish in 30
+seconds, they are terminated - an easy job for the Bourne shell:
+
+$	MYID=$$
+$	PIDS=
+$	(sleep 30; kill -1 $MYID) &
+$	(sleep 5;echo A) & PIDS="$PIDS $!"
+$	(sleep 10;echo B) & PIDS="$PIDS $!"
+$	(sleep 50;echo C) & PIDS="$PIDS $!"
+$	trap "echo TIMEOUT;kill $PIDS" 1
+$	echo waiting for $PIDS
+$	wait $PIDS
+$	echo everything OK
+
+
+	There are several variations of this. You can have child
+processes start up in parallel, and wait for a signal for synchronization.
+
+	There is also a special "0" signal. This is the end-of-file
+condition. So the Bourne shell can easily delete temporary
+files when done:
+
+	trap "/bin/rm $tempfiles" 0
+
+	The C shell lacks this. There is no way to get the process ID
+of a child process and use it in a script. The wait command
+waits for ALL processes, not the ones your specify. It just can't
+handle the job.
+
+9. Fewer ways to test for missing variables
+
+	The C shell provides a way to test if a variable exists -
+   using the $?var name:
+
+%	if ( $?A ) then
+%	   echo variable A exists
+%	endif
+
+However, there is no simple way to determine if the variable has a
+value.  The C shell test
+
+%     if ($?A && ("$A" =~ ?*)) then
+
+Returns the error:
+
+    A: undefined variable.
+
+You can use nested "if" statements  using:
+
+%	if ( $?A ) then
+%		if ( "$A" =~ ?* ) then
+%		   # okay
+%		else
+%			echo "A exists but does not have a value"
+%		endif
+%	else
+%			echo "A does not exist"
+%	endif
+
+The Bourne shell is much easier to use. You don't need complex "if"
+commands. Test the variable while you use it:
+
+$	echo ${A?'A does not have a value'}
+
+If the variable exists with no value, no error occurs. If you want to
+add a test for the "no-value" condition, add the colon:
+
+$	echo ${A:?'A is not set or does not have a value'}
+
+Besides reporting errors, you can have default values:
+
+$	B=${A-default}
+
+You can also assign values if they are not defined:
+
+$	echo ${A=default}
+
+	These also support the ":" to test for null values.
+
+10. Inconsistent use of variables and commands.
+
+	The Bourne shell has one type of variable. The C shell has seven:
+
+	* Regular variables     - $a
+	* Wordlist variables    - $a[1]
+	* Environment variables - $A
+	* Alias arguments       - !1
+	* History arguments     - !1
+	* Sub-process variables - %1
+	* Directory variables   - ~user
+
+	These are not treated the same. For instance, you can use the
+:r modifier on regular variables, but on some systems you cannot use
+it on environment variables without getting an error. Try to get the
+process ID of a child process using the C shell:
+
+	program &
+	echo "I just created process %%"
+
+	It doesn't work. And forget using ~user variables for anything
+complicated. Can you combine the :r with history variables? No. I've
+already mentioned that quoting alias arguments is special. These
+variables and what you can do with them is not consistent.  Some have
+very specific functions. The alias and history variables use the same
+character, but have different uses.
+
+	This is also seen when you combine built-ins. If you have an
+alias "myalias" then the following lines may generate strange
+errors (as Tom has mentioned before):
+
+
+	repeat 3 myalias
+	kill -1 `cat file`
+	time | echo
+	
+	In general, using pipes, backquotes and redirection with
+built-in commands  is asking for trouble., i.e.
+
+	echo "!1"
+	set j = ( `jobs` )
+	kill -1 $PID || echo process $PID not running
+
+There are many more cases. It's hard to predict how these commands
+will interact. You THINK it should work, but when you try it, it fails.
+
+
+Here are some more examples. You can have an array in the C shell, but
+if you try add a new element, you get strange errors.
+
+% set a = ()
+% @ a[1] = 2
+@: Subscript out of range.
+
+
+
+So if you wants to add to an existing array, you have to use something like 
+        set a = ( $a 2 )
+
+Now this works 
+
+        @ arrayname[1] = 4
+
+but try to store a string in the array. 
+
+        @ arrayname[1] = "a"
+and you get
+
+        @: Badly formed number.
+
+
+Another bug - from Aleksandar Radulovic - If the last line of the C
+shell script does not have a new line character, it never gets
+exeucted.
+
+I just discoveed another odd bug with the C shell - thank's to a
+posting from "yusufm":
+
+Guess what the following script will generate
+
+        setenv A 1
+        echo $A
+        setenv A=2
+        echo $A
+        setenv B=3
+        echo $B
+        setenv B=4
+        echo $B
+
+I'm not going to tell you what the bug is, or how many there are. I
+think it's more fun to let you discover it yourself.
+
+
+I can add some more reasons. Jesse Silverman says reason #0 is that
+it's not POSIX compliant.  True. But the C shell was written before
+the standard existed. This is a historical flaw, and not a braindead
+stupid lazy dumb-ass flaw.
+
+
+		   -------------
+		   In conclusion
+		   -------------
+
+I've listed the reasons above in what I feel to be order of
+importance. You can work around many of the issues, but you have to
+consider how many hours you have to spend fighting the C shell,
+finding ways to work around the problems. It's frustrating, and
+frankly - spending some time to learn the basics of the Bourne shell
+are worth every minute. Every UNIX system has the Bourne shell or a
+super-set of it.  It's predictable, and much more flexible than the C
+shell. If you want a script that has no hidden syntax errors, properly
+cleans up after itself, and gives you precise control over the
+elements of the script, and allows you to combine several parts into a
+large script, use the Bourne shell.
+
+I found myself developing more and more bad habits over time because I
+was using the C shell. I would use 
+
+		foreach a ( `cat file` ) 
+
+instead of redirection. I would use several smaller scripts to work
+around problems in one script. And most importantly, I put off
+learning the Bourne shell for years as I struggled with the C
+shell. Don't make the same mistake I made.
+
