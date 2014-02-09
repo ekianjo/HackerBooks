@@ -63,7 +63,9 @@ import urllib, urllib2, os #os for file system operations, urllib for downloadin
 import subprocess #needed to launch separate application, in this case evince. 
 import pango #used to determine a consistant style across the different systems. 
 import httplib, socket
+import fnmatch #matching index.html file
 from hacker import *  #imports local database for books.
+import shutil #to delete recursively directory in python std library
 #from bs4 import BeautifulSoup #import bs for link extraction, for HTML books
 
 versionsoft=0.19  #global version of the soft.
@@ -125,10 +127,15 @@ class InfoBooks(gtk.Window):
 
         #set info window size attributes
         
+        
         self.set_size_request(mainwindow.winwidth-70,400)
         self.set_position(gtk.WIN_POS_CENTER)
         self.set_border_width(8)
         self.set_title(mainwindow.caca+" : Book Information")
+
+		#check if book is html or pdf
+        self.isbookhtml(mainwindow.caca)
+        print "bookishtml value is",self.bookishtml
 
         #check if book was already downloaded or not
         if self.check_book_exists():
@@ -166,6 +173,8 @@ class InfoBooks(gtk.Window):
         wins.set_right_margin(20)
         
         wins.set_pixels_inside_wrap(3)
+        
+
 
         wins.set_wrap_mode(gtk.WRAP_WORD)
         wins.set_editable(False)
@@ -218,38 +227,110 @@ class InfoBooks(gtk.Window):
         #display all
         self.show_all()
 
+
+    
+    def isbookhtml(self,bookname):
+		
+		for books in hackerbooks:
+			if books[0]==bookname:
+				if books[3]=='html':
+					self.bookishtml=True
+				else:
+					self.bookishtml=False
+					
+		#return bookishtml
+    
+
     #deletes a book from the ones already downloaded
     def delete_book(self,widget):
-    	filename=mainwindow.caca+".pdf"
-    	try:
-	    	dm= gtk.MessageDialog(self, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, "Do you really want to delete this book?")
-		if dm.run()==gtk.RESPONSE_YES:
-			dm.destroy()
-		    	os.remove(filename)
-		    	print "book was deleted"
-		    	md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You just deleted the book.")
-		    	md.run()
-		    	md.destroy()
-		    	self.readbtn.set_sensitive(False)
-		    	self.download.set_sensitive(True)
-		    	self.delete.set_sensitive(False)
-	                mainwindow.refresh_list()
-		else:
-			dm.destroy()
 		
-    	except:
-    		print "File was not deleted"
+		
+		if self.bookishtml==False:
+		
+			filename=mainwindow.caca+".pdf"
+			try:
+				dm= gtk.MessageDialog(self, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, "Do you really want to delete this book?")
+				if dm.run()==gtk.RESPONSE_YES:
+					dm.destroy()
+					os.remove(filename)
+					print "book was deleted"
+					md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You just deleted the book.")
+					md.run()
+					md.destroy()
+					self.readbtn.set_sensitive(False)
+					self.download.set_sensitive(True)
+					self.delete.set_sensitive(False)
+					mainwindow.refresh_list()
+				else:
+					dm.destroy()
+			
+			except:
+				
+				print "File was not deleted"
+				
+		else:
+			try:
+				dm= gtk.MessageDialog(self, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, "Do you really want to delete this book?")
+				if dm.run()==gtk.RESPONSE_YES:
+					dm.destroy()
+					shutil.rmtree('HTMLBOOKS/{0}'.format(mainwindow.caca))
+					md = gtk.MessageDialog(self, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, "You just deleted the book.")
+					md.run()
+					md.destroy()
+					self.readbtn.set_sensitive(False)
+					self.download.set_sensitive(True)
+					self.delete.set_sensitive(False)
+					mainwindow.refresh_list()
+				else:
+					dm.destroy()
+			
+			except:
+				
+				print "File was not deleted"
+			
 
 	#check if book exists first
     def open_book(self, widget):
     	try:
-    		#need to separate the arguments in an array to give arguments instead of a single command!!
-	    	command=["evince", "{0}.pdf".format(mainwindow.caca)]
-	    	print command
-    		subprocess.Popen(command)
-    		self.register_opened_books(mainwindow.caca)
+
+			for books in hackerbooks:
+				if books[0]==mainwindow.caca: 
+				
+					if books[3]=='html':
+						
+						if mainwindow.system_check()=="Desktop":
+						
+							rootPath = 'HTMLBOOKS/{0}/'.format(books[0])
+							pattern = 'index.html'
+							
+							#will look for index.html location in case it's not obvious... and use it after
+							for root, dirs, files in os.walk(rootPath):
+								for filename in fnmatch.filter(files, pattern):
+									#print(os.path.join(root, filename))
+									foundpath=os.path.join(root, filename)
+									
+							
+							#use xdg-open on desktop with the index.html file ! 
+							command=['xdg-open','{0}'.format(foundpath)]
+							p=subprocess.Popen(command)
+						
+						else:
+							#use thunar on Pandora at first, before PND mounting
+							print "html on Pandora"
+							command=['thunar','HTMLBOOKS/{0}/'.format(books[0])]
+							p=subprocess.Popen(command)
+						
+					else:
+						
+				
+						#need to separate the arguments in an array to give arguments instead of a single command!!
+						command=["evince", "{0}.pdf".format(mainwindow.caca)]
+						print command
+						subprocess.Popen(command)
+						self.register_opened_books(mainwindow.caca)
+						#send command here to register this book as opened
     		
-    		#send command here to register this book as opened
+    		
     		
         except:
 			print "reading did not work"
@@ -317,11 +398,22 @@ class InfoBooks(gtk.Window):
 
     #checks if the book exists in the folder where they are downloaded
     def check_book_exists(self):
-    	bookname = mainwindow.caca+".pdf"
-    	if os.path.isfile(bookname):
-    		return True
-    	else:
-    		return False
+		
+		if self.bookishtml==False:
+				
+			
+			bookname = mainwindow.caca+".pdf"
+			if os.path.isfile(bookname):
+				return True
+			else:
+				return False
+				
+		else:
+			if os.path.isdir("HTMLBOOKS/{0}".format(mainwindow.caca)):
+				return True
+			else:
+				return False
+			
 
     #downloads the book
     def downloadbook(self,widget):

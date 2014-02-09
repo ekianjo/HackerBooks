@@ -891,7 +891,7 @@ Statistics as a subject focuses on making stages 2-4 objective, rigorous, and ef
 '''
 The Git Reference site was put together by the GitHub team.
 ''',"2014"),
-('Unix/Linux tools Reference','Linux Tools','Bruce Barnett','html','http://www.grymoire.com/Unix/index.html',
+('Unix-Linux tools Reference','Linux Tools','Bruce Barnett','html','http://www.grymoire.com/Unix/index.html',
 '''
 This page includes Bruce Barnett's tutorials on UNIX shell programming and various other arcane subjects of interest to wizards.
 These tutorials were originally Solaris-specific, and originally contained a lot of references to OpenWindows. Times have changed, but I hope the basic information will still be helpful. I do try to update the information. Corrections are helpful. Please be patient.
