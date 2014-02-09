@@ -68,7 +68,7 @@ from hacker import *  #imports local database for books.
 import shutil #to delete recursively directory in python std library
 #from bs4 import BeautifulSoup #import bs for link extraction, for HTML books
 
-versionsoft=0.19  #global version of the soft.
+versionsoft=0.20  #global version of the soft.
 stillreading=[]  #captures the books already opened once at least
 
 def list_books_being_read():
