@@ -1,3 +1,0 @@
-OpenIntro Statistics
-Introduction to Reverse Engineering
-AWK Reference
