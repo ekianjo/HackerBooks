@@ -863,9 +863,29 @@ This cookbook integrates a variety of topics in probability theory and statistic
 ('Culture & Empire: Digital Revolution','Digital Culture','Pieter Hintjens','pdf','https://github.com/cultureandempire/cultureandempire.github.io/raw/master/pdf/cande-2013-11-01.pdf',
 '''
 The whole planet is getting connected, and building vast new communities. The on-line world thinks faster, and thinks different. Smart, fast, and creative, these new communities are a real challenge to old power and old money. And old money, after its War on Drugs, and War on Terror, is now launching its War on the Internet. What is going on, and where will this lead us? Pieter Hintjens, campaigner, writer, and programmer, tells all in this vast, absorbing story of the Digital Revolution.
-''','2013')
-('R Practicals Book','R','Charles DiMaggio','http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/resources/R/practicalsBookNoAns.pdf',
+''','2013'),
+('R Practicals Book','R','Charles DiMaggio','pdf','http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/resources/R/practicalsBookNoAns.pdf',
 '''
 The best way to start getting comfortable with a new language is to use it. This series of exercises reviews some of the content we’ve discussed during lecture, and introduces some other basic concepts about working with data in R. It’s important that you actively type in the commands and review the results rather than just read. Try to brieﬂy answer the questions that come up along the way. Don’t worry if everything doesn’t make a lot of sense during the earlier exercises. It will. And there’s an answer key available if you become too frustrated. '''
-,'2013')
+,'2013'),
+('Introduction to Reverse Engineering','Reverse Engineering','Dennis Yurichev','pdf','http://yurichev.com/writings/RE_for_beginners-en.pdf',
+'''
+Q: Should one learn to understand assembly language these days?
+A: Yes: in order to have deeper understanding of the internals and to debug your software better and faster.
+Q: Should one learn to write in assembly language these days?
+A: Unless one writes low-level OS6 code, probably no.
+Q: But what about writing highly optimized routines?
+A: No, modern C/C++ compilers do this job better.
+Q: Should I learn microprocessor internals?
+A: Modern CPU7-s are very complex. If you do not plan to write highly optimized code or if you do not work on compiler’s code generator then you may still learn internals in bare outlines. 8. At the same time, in order to understand and analyze compiled code it is enough to know only ISA9, register’s descriptions, i.e., the “outside” part of a CPU that is available to an application programmer.
+''','2014'),
+('OpenIntro Statistics','Statistics','David M. Diez (more)','pdf','https://dl.dropboxusercontent.com/s/tokfd9t86rbbstp/os2.pdf?dl=1&token_hash=AAGbVmzSU7kH6VyPtF9sdMO52pXTjVTBAO-UOuJoYexMgw',
+'''
+Scientists seek to answer questions using rigorous methods and careful observations. These observations – collected from the likes of field notes, surveys, and experiments – form the backbone of a statistical investigation and are called data. Statistics is the study of how best to collect, analyze, and draw conclusions from data. It is helpful to put statistics in the context of a general process of investigation: 
+1. Identify a question or problem.
+2. Collect relevant data on the topic.
+3. Analyze the data.
+4. Form a conclusion.
+Statistics as a subject focuses on making stages 2-4 objective, rigorous, and efficient. That is, statistics has three primary components: How best can we collect data? How should it be analyzed? And what can we infer from the analysis?
+''','2012')
 ]
