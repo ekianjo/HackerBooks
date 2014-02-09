@@ -64,7 +64,7 @@ import subprocess #needed to launch separate application, in this case evince.
 import pango #used to determine a consistant style across the different systems. 
 import httplib, socket
 from hacker import *  #imports local database for books.
-from bs4 import BeautifulSoup #import bs for link extraction, for HTML books
+#from bs4 import BeautifulSoup #import bs for link extraction, for HTML books
 
 versionsoft=0.19  #global version of the soft.
 stillreading=[]  #captures the books already opened once at least
@@ -340,13 +340,14 @@ class InfoBooks(gtk.Window):
                         #TODO: ALLOW FOR HTML FILES AS WELL SINCE MANY BOOKS DONT HAVE PDF
 	                    
 	                    if books[3]=='html':
-	                    	if books[4][0]=='all_links':
-		                    	soup = BeautifulSoup(books[4][1])
-		                    	linksonpage=soup.find_all('a') # Finds all hrefs from the html doc.
+							pass
+	                    #	if books[4][0]=='all_links':
+		                #    	soup = BeautifulSoup(books[4][1])
+		                #    	linksonpage=soup.find_all('a') # Finds all hrefs from the html doc.
 		                    	
-		                    	for eachlink in linksonpage:
-		                    		os.makedirs(books[0])
-		                    		urllib.urlretrieve(eachlink,****name to fix****,reporthook=self.myReportHook)
+		                #    	for eachlink in linksonpage:
+		                #    		os.makedirs(books[0])
+		                #    		urllib.urlretrieve(eachlink,****name to fix****,reporthook=self.myReportHook)
 	                    			#split the name with / and get last string ? potentially...
 	                    	
 	                    
