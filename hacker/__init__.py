@@ -923,10 +923,10 @@ If you work hard, take your time, and build these skills, you will learn to code
 ('Djen of Django','Django','Agiliq','html','http://agiliq.com/books/djenofdjango/',
 '''
 This book shows through several examples how to build applications with Django.
-''','2010'),
-('Ruby on Rails Tutorial','Ruby on Rails','Michael Hartl','html','http://ruby.railstutorial.org/ruby-on-rails-tutorial-book',
-'''
-Welcome to the Ruby on Rails Tutorial. The goal of this book is to be the best answer to the question, “If I want to learn web development with Ruby on Rails, where should I start?” By the time you finish the Ruby on Rails Tutorial, you will have all the skills you need to develop and deploy your own custom web applications with Rails. You will also be ready to benefit from the many more advanced books, blogs, and screencasts that are part of the thriving Rails educational ecosystem. Finally, since the Ruby on Rails Tutorial uses Rails 4, the knowledge you gain here represents the state of the art in web development.
-''','2013')
+''','2010')#,
+#('Ruby on Rails Tutorial','Ruby on Rails','Michael Hartl','html','http://ruby.railstutorial.org/ruby-on-rails-tutorial-book',
+#'''
+#"Welcome to the Ruby on Rails Tutorial. The goal of this book is to be the best answer to the question, “If I want to learn web development with Ruby on Rails, where should I start?” By the time you finish the Ruby on Rails Tutorial, you will have all the skills you need to develop and deploy your own custom web applications with Rails. You will also be ready to benefit from the many more advanced books, blogs, and screencasts that are part of the thriving Rails educational ecosystem. Finally, since the Ruby on Rails Tutorial uses Rails 4, the knowledge you gain here represents the state of the art in web development.
+#''','2013')
 
 ]
