@@ -908,9 +908,17 @@ This book is a quick super fast course in using the command line. It is intended
 ''','2010'),
 ('Programming in Lua','Lua','Roberto Ierusalimschy','html','http://www.lua.org/pil/',
 '''
- This book is a detailed and authoritative introduction to all aspects of Lua programming written by Lua's chief architect.
+This book is a detailed and authoritative introduction to all aspects of Lua programming written by Lua's chief architect.
 
 Programming in Lua gives a solid base for any programmer who wants to use Lua. It covers all aspects of Lua—from the basics to its API with C—explaining how to make good use of its features and giving numerous code examples. The book is targeted at people with some programming background, but it does not assume any prior knowledge about Lua or other scripting languages. 
-''','2013')
+''','2013'),
+('Learn Python the Hard Way','Python','Zed A Shaw','html','http://learnpythonthehardway.org/book/',
+'''
+This simple book is meant to get you started in programming. The title says it's the hard way to learn to write code but it's actually not. It's only the "hard" way because it uses a technique called instruction. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.
+
+This book instructs you in Python by slowly building and establishing skills through techniques like practice and memorization, then applying them to increasingly difficult problems. By the end of the book you will have the tools needed to begin learning more complex programming topics. I like to tell people that my book gives you your "programming black belt." What this means is that you know the basics well enough to now start learning programming.
+
+If you work hard, take your time, and build these skills, you will learn to code.
+''','2010')
 
 ]
