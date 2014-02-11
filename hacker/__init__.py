@@ -905,6 +905,12 @@ This book is suitable for classroom use as a general introduction to programming
 ('The Command Line Crash Course','Command Line','Zed A Shaw','html','http://learncodethehardway.org/cli/book/index.html',
 '''
 This book is a quick super fast course in using the command line. It is intended to be done rapidly in about a day or two, and not meant to teach you advanced shell usage.
-''','2010')
+''','2010'),
+('Programming in Lua','Lua','Roberto Ierusalimschy','html','http://www.lua.org/pil/',
+'''
+ This book is a detailed and authoritative introduction to all aspects of Lua programming written by Lua's chief architect.
+
+Programming in Lua gives a solid base for any programmer who wants to use Lua. It covers all aspects of Lua—from the basics to its API with C—explaining how to make good use of its features and giving numerous code examples. The book is targeted at people with some programming background, but it does not assume any prior knowledge about Lua or other scripting languages. 
+''','2013')
 
 ]
